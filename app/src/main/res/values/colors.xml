@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#c8ce0a</color>
-    <color name="colorPrimaryDark">#c8ce0a</color>
+    <color name="colorPrimary">@color/themeColor</color>
+    <color name="colorPrimaryDark">@color/themeColor</color>
     <color name="colorAccent">@color/themeColor</color>
     <color name="yellow">#FFea01</color>
 
 
-    <color name="themeColor">#ffea01</color>
+    <color name="themeColor">#113474</color>
     <color name="blackColor">#000000</color>
     <color name="clicked">#538291</color>
     <color name="white">#ffffff</color>

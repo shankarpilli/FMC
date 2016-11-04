@@ -6,11 +6,11 @@ import android.os.Bundle;
 import com.versatilemobitech.fmc.R;
 
 
-public class DashboardActivity extends Activity {
+public class SignupActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_registration);
     }
 }
