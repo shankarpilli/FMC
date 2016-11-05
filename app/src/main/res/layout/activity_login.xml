@@ -50,17 +50,21 @@
                             android:layout_height="@dimen/_30dp"
                             android:layout_gravity="center"
                             android:src="@drawable/login_icon"/>
-
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                             android:id="@+id/et_user_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
+                        android:singleLine="true"
                             android:layout_marginLeft="@dimen/_5dp"
                             android:background="@android:color/transparent"
                             android:hint="@string/username"
                             android:maxLines="1"
                             android:textSize="@dimen/_18sp"/>
+</android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
                 <ImageView
@@ -83,17 +87,21 @@
                             android:layout_height="@dimen/_30dp"
                             android:layout_gravity="center"
                             android:src="@drawable/password_icon"/>
-
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                             android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
+                        android:singleLine="true"
                             android:layout_marginLeft="@dimen/_5dp"
                             android:background="@android:color/transparent"
                             android:hint="@string/password"
                             android:maxLines="1"
                             android:textSize="@dimen/_18sp"/>
+</android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
                 <ImageView
