@@ -16,7 +16,7 @@ import com.versatilemobitech.fmc.R;
  * Created by Rev's Nani on 04-11-2016.
  */
 
-public class LoginActivity extends Activity implements View.OnClickListener{
+public class LoginActivity extends Activity implements View.OnClickListener {
 
     private RelativeLayout rly_main;
 
@@ -47,24 +47,24 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
     private void setUI() {
 
-         rly_main = (RelativeLayout)findViewById(R.id.rly_main);
+        rly_main = (RelativeLayout) findViewById(R.id.rly_main);
 
-        ll_login = (LinearLayout)findViewById(R.id.ll_login);
-        ll_user_name = (LinearLayout)findViewById(R.id.ll_user_name);
-        ll_password = (LinearLayout)findViewById(R.id.ll_password);
+        ll_login = (LinearLayout) findViewById(R.id.ll_login);
+        ll_user_name = (LinearLayout) findViewById(R.id.ll_user_name);
+        ll_password = (LinearLayout) findViewById(R.id.ll_password);
 
-        iv_login_logo = (ImageView)findViewById(R.id.iv_login_logo);
-        iv_user_name = (ImageView)findViewById(R.id.iv_user_name);
-        iv_user_line = (ImageView)findViewById(R.id.iv_user_line);
-        iv_password = (ImageView)findViewById(R.id.iv_password);
-        iv_pwd_line = (ImageView)findViewById(R.id.iv_pwd_line);
+        iv_login_logo = (ImageView) findViewById(R.id.iv_login_logo);
+        iv_user_name = (ImageView) findViewById(R.id.iv_user_name);
+        iv_user_line = (ImageView) findViewById(R.id.iv_user_line);
+        iv_password = (ImageView) findViewById(R.id.iv_password);
+        iv_pwd_line = (ImageView) findViewById(R.id.iv_pwd_line);
 
-        et_user_name = (EditText)findViewById(R.id.et_user_name);
-        et_password = (EditText)findViewById(R.id.et_password);
+        et_user_name = (EditText) findViewById(R.id.et_user_name);
+        et_password = (EditText) findViewById(R.id.et_password);
 
-        tv_forgot_password = (TextView)findViewById(R.id.tv_forgot_password);
-        tv_login = (TextView)findViewById(R.id.tv_login);
-        tv_sign_up = (TextView)findViewById(R.id.tv_sign_up);
+        tv_forgot_password = (TextView) findViewById(R.id.tv_forgot_password);
+        tv_login = (TextView) findViewById(R.id.tv_login);
+        tv_sign_up = (TextView) findViewById(R.id.tv_sign_up);
 
         tv_forgot_password.setOnClickListener(this);
         tv_login.setOnClickListener(this);
@@ -73,21 +73,21 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-switch (v.getId()){
-    case R.id.tv_forgot_password:
-        Intent mIntentForgotPassword = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-        startActivity(mIntentForgotPassword);
-        break;
-    case R.id.tv_login:
-        Intent intentDashboard = new Intent(LoginActivity.this, DashboardActivity.class);
-        startActivity(intentDashboard);
-        finish();
-        break;
-    case R.id.tv_sign_up:
-        Intent mIntentSignup = new Intent(LoginActivity.this, SignupActivity.class);
-        startActivity(mIntentSignup);
-        break;
-}
+        switch (v.getId()) {
+            case R.id.tv_forgot_password:
+                Intent mIntentForgotPassword = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(mIntentForgotPassword);
+                break;
+            case R.id.tv_login:
+                Intent intentDashboard = new Intent(LoginActivity.this, DashboardActivity.class);
+                startActivity(intentDashboard);
+                finish();
+                break;
+            case R.id.tv_sign_up:
+                Intent mIntentSignup = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(mIntentSignup);
+                break;
+        }
     }
 }
 
