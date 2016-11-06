@@ -26,7 +26,6 @@
     <string name="contact_number">Contact Number</string>
     <string name="business_mail">Business e-Mail Id</string>
     <string name="personal_mail">Personal e-Mail Id</string>
-    <string name="company_name">Company Name</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
 
@@ -38,5 +37,12 @@
     <string name="home">Home</string>
     <string name="events">Events</string>
     <string name="history">History</string>
+
+    <string name="post_your_topic">Post Your Topic</string>
+    <string name="your_name">Your Name</string>
+    <string name="what_is_on_your_mind">What is on your mind?</string>
+    <string name="post">Post</string>
+    <string name="company_name">Company Name</string>
+    <string name="place_time_date">Place Time Date</string>
 
 </resources>

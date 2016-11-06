@@ -138,8 +138,6 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             case 11:
                 Utility.navigateDashBoardFragment(new LogoutFragment(), LogoutFragment.TAG, null, DashboardActivity.this);
                 break;
-            case 12:
-                break;
         }
     }
 
