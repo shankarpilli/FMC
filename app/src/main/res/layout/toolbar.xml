@@ -28,7 +28,7 @@
             android:src="@drawable/side_menu_icon" />
 
         <TextView
-            android:id="@+id/txt_our_tour"
+            android:id="@+id/txt_fmc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10dp"

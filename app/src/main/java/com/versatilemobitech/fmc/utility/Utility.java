@@ -435,4 +435,19 @@ public class Utility {
         builderSingle.show();
     }
 
+    /*SIDE MENU_ITEMS NAMES*/
+    public static String[] getSideMenuItemsListName() {
+        return new String[]{"Home", "Welcome Message", "History", "Member Directory", "Knowledge Partners",
+                "Awards", "Gallery", "Events", "Editorials", "Contacts Us", "Logout"};
+    }
+
+    /*SIDE MENU_ITEMS IMAGES*/
+    public static int[] getSideMenuItemsListIcons() {
+        return new int[]{R.drawable.home_icon, R.drawable.welcome_message_icon,
+                R.drawable.history_icon, R.drawable.member_directory_icon, R.drawable.knowledge_partners_icon,
+                R.drawable.awards_icon, R.drawable.gallery_icon, R.drawable.events_icon,
+                R.drawable.editorials_icon, R.drawable.contacts_us_icon, R.drawable.logout_icon
+        };
+    }
+
 }

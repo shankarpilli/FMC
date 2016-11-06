@@ -34,4 +34,9 @@
     <string name="chennai">Chennai</string>
     <string name="bangalore">Bangalore</string>
     <string name="pune">Pune</string>
+
+    <string name="home">Home</string>
+    <string name="events">Events</string>
+    <string name="history">History</string>
+
 </resources>
