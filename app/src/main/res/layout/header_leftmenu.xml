@@ -11,7 +11,7 @@
         android:id="@+id/img_user_image"
         android:layout_width="@dimen/_100dp"
         android:layout_height="@dimen/_100dp"
-        android:layout_centerInParent="true"
+        android:contentDescription="@string/app_name"
         android:layout_marginTop="@dimen/_15dp"
         android:src="@drawable/avatar_image" />
 

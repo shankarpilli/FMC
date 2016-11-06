@@ -15,9 +15,17 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.adapters.LeftMenuAdapter;
+import com.versatilemobitech.fmc.fragments.AwardsFragment;
+import com.versatilemobitech.fmc.fragments.ContactsUsFragment;
+import com.versatilemobitech.fmc.fragments.EditorialsFragment;
 import com.versatilemobitech.fmc.fragments.EventsFragment;
+import com.versatilemobitech.fmc.fragments.GalleryFragment;
 import com.versatilemobitech.fmc.fragments.HistoryFragment;
 import com.versatilemobitech.fmc.fragments.HomeFragment;
+import com.versatilemobitech.fmc.fragments.KnowledgePartnersFragment;
+import com.versatilemobitech.fmc.fragments.LogoutFragment;
+import com.versatilemobitech.fmc.fragments.MemberDirectorFragment;
+import com.versatilemobitech.fmc.fragments.WelcomeFragment;
 import com.versatilemobitech.fmc.models.LeftMenuModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
@@ -101,26 +109,34 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 Utility.navigateDashBoardFragment(new HomeFragment(), HomeFragment.TAG, null, DashboardActivity.this);
                 break;
             case 2:
+                Utility.navigateDashBoardFragment(new WelcomeFragment(), HomeFragment.TAG, null, DashboardActivity.this);
                 break;
             case 3:
                 Utility.navigateDashBoardFragment(new HistoryFragment(), HistoryFragment.TAG, null, DashboardActivity.this);
                 break;
             case 4:
+                Utility.navigateDashBoardFragment(new MemberDirectorFragment(), MemberDirectorFragment.TAG, null, DashboardActivity.this);
                 break;
             case 5:
+                Utility.navigateDashBoardFragment(new KnowledgePartnersFragment(), KnowledgePartnersFragment.TAG, null, DashboardActivity.this);
                 break;
             case 6:
+                Utility.navigateDashBoardFragment(new AwardsFragment(), AwardsFragment.TAG, null, DashboardActivity.this);
                 break;
             case 7:
+                Utility.navigateDashBoardFragment(new GalleryFragment(), GalleryFragment.TAG, null, DashboardActivity.this);
                 break;
             case 8:
                 Utility.navigateDashBoardFragment(new EventsFragment(), EventsFragment.TAG, null, DashboardActivity.this);
                 break;
             case 9:
+                Utility.navigateDashBoardFragment(new EditorialsFragment(), EditorialsFragment.TAG, null, DashboardActivity.this);
                 break;
             case 10:
+                Utility.navigateDashBoardFragment(new ContactsUsFragment(), ContactsUsFragment.TAG, null, DashboardActivity.this);
                 break;
             case 11:
+                Utility.navigateDashBoardFragment(new LogoutFragment(), LogoutFragment.TAG, null, DashboardActivity.this);
                 break;
             case 12:
                 break;

@@ -23,8 +23,10 @@
             android:id="@+id/iv_left_drawer_icon"
             android:layout_width="23dp"
             android:layout_height="23dp"
+            android:contentDescription="@string/app_name"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_10dp"
             android:src="@drawable/side_menu_icon" />
 
         <TextView
@@ -34,6 +36,7 @@
             android:layout_marginLeft="@dimen/_10dp"
             android:layout_marginStart="@dimen/_10dp"
             android:layout_toRightOf="@+id/iv_left_drawer_icon"
+            android:layout_toEndOf="@+id/iv_left_drawer_icon"
             android:text="@string/app_name"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_18sp"
