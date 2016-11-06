@@ -4,46 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
+
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50dp"
         android:background="@color/themeColor">
+
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_centerInParent="true"
+            android:layout_width="@dimen/_30dp"
+            android:layout_height="@dimen/_30dp"
             android:layout_alignParentLeft="true"
-            android:layout_width="@dimen/_40dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/_5dp"
             android:padding="@dimen/_5dp"
-            android:layout_height="@dimen/_40dp"
-            android:src="@drawable/back_icon"
-            />
+            android:src="@drawable/back_icon" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/txt_sign_up"
             android:layout_centerInParent="true"
-            android:gravity="center"
             android:layout_marginLeft="@dimen/_10dp"
-            android:textColor="@color/white"
             android:layout_toRightOf="@+id/iv_back"
-            android:textSize="@dimen/_25dp"/>
+            android:gravity="center"
+            android:text="@string/txt_sign_up"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_25dp" />
     </RelativeLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
 
         <LinearLayout
             android:id="@+id/ll_sign_up"
             android:layout_width="match_parent"
-            android:singleLine="true"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/_15dp"
             android:layout_marginRight="@dimen/_15dp"
             android:layout_marginTop="@dimen/_25dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:singleLine="true">
 
             <LinearLayout
                 android:id="@+id/ll_first_name"
@@ -59,19 +63,21 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/login_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edt_first_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:singleLine="true"
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/first_name"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -96,11 +102,12 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/login_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
-                        android:singleLine="true"
                         android:id="@+id/edt_last_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -109,6 +116,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/last_name"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -133,12 +141,13 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/company_name" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edt_company_name"
-                        android:singleLine="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
@@ -146,6 +155,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/company_name"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -170,19 +180,21 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="bottom"
                     android:src="@drawable/mail_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edt_business_mail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:singleLine="true"
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/business_mail"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -207,19 +219,21 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="bottom"
                     android:src="@drawable/mail_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edt_personal_mail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:singleLine="true"
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/personal_mail"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -244,21 +258,23 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/mobile_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edt_contact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:singleLine="true"
-                        android:inputType="phone"
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/contact_number"
+                        android:inputType="phone"
                         android:maxLength="10"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -283,21 +299,23 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/mobile_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edt_alternate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:singleLine="true"
-                        android:inputType="phone"
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/alternate_contact_number"
+                        android:inputType="phone"
                         android:maxLength="10"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -322,19 +340,21 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/location_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edt_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:singleLine="true"
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/current_location"
                         android:maxLines="1"
+                        android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -359,22 +379,24 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/password_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/edt_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:singleLine="true"
-                    android:layout_marginLeft="@dimen/_5dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:textSize="@dimen/_18sp" />
-</android.support.design.widget.TextInputLayout>
+
+                    <EditText
+                        android:id="@+id/edt_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/_5dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_18sp" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <ImageView
@@ -397,22 +419,24 @@
                     android:layout_height="@dimen/_30dp"
                     android:layout_gravity="center"
                     android:src="@drawable/password_icon" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/edt_c_pwd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:layout_gravity="bottom"
-                    android:layout_marginLeft="@dimen/_5dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/confirm_password"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:textSize="@dimen/_18sp" />
-</android.support.design.widget.TextInputLayout>
+
+                    <EditText
+                        android:id="@+id/edt_c_pwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/_5dp"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/confirm_password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_18sp" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <ImageView
@@ -437,24 +461,27 @@
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:src="@drawable/camera" />
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_toLeftOf="@+id/iv_right_profile_pic"
-                    android:layout_toRightOf="@+id/iv_left_profile_pic"
-                    android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/edt_profile_pic"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:singleLine="true"
-                    android:focusable="false"
-                    android:layout_marginLeft="@dimen/_5dp"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/profile_picture"
-                    android:maxLines="1"
-                    android:textSize="@dimen/_18sp" />
-</android.support.design.widget.TextInputLayout>
+                    android:layout_toLeftOf="@+id/iv_right_profile_pic"
+                    android:layout_toRightOf="@+id/iv_left_profile_pic">
+
+                    <EditText
+                        android:id="@+id/edt_profile_pic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/_5dp"
+                        android:background="@android:color/transparent"
+                        android:focusable="false"
+                        android:hint="@string/profile_picture"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_18sp" />
+                </android.support.design.widget.TextInputLayout>
+
                 <ImageView
                     android:id="@+id/iv_right_profile_pic"
                     android:layout_width="@dimen/_20dp"
@@ -484,8 +511,8 @@
                 android:id="@+id/ll_check_boxes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="4"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="4">
 
                 <LinearLayout
                     android:id="@+id/ll_hyd"
@@ -493,17 +520,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:id="@+id/cb_hyd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+
                     <TextView
                         android:id="@+id/tv_hyd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_13sp"
+                        android:text="@string/hyderabad"
                         android:textColor="@color/themeColor"
-                        android:text="@string/hyderabad"/>
+                        android:textSize="@dimen/_13sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -512,53 +541,61 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:id="@+id/cb_chennai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+
                     <TextView
                         android:id="@+id/tv_chennai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_13sp"
+                        android:text="@string/chennai"
                         android:textColor="@color/themeColor"
-                        android:text="@string/chennai"/>
+                        android:textSize="@dimen/_13sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_bangalore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:id="@+id/cb_bangalore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+
                     <TextView
                         android:id="@+id/tv_bangalore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_13sp"
+                        android:text="@string/bangalore"
                         android:textColor="@color/themeColor"
-                        android:text="@string/bangalore"/>
+                        android:textSize="@dimen/_13sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_pune"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:id="@+id/cb_pune"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
+
                     <TextView
                         android:id="@+id/tv_pune"
                         android:layout_width="wrap_content"
-                        android:textSize="@dimen/_13sp"
-                        android:textColor="@color/themeColor"
                         android:layout_height="wrap_content"
-                        android:text="@string/pune"/>
+                        android:text="@string/pune"
+                        android:textColor="@color/themeColor"
+                        android:textSize="@dimen/_13sp" />
                 </LinearLayout>
             </LinearLayout>
 
