@@ -5,13 +5,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.adapters.GalleryFolderAdapter;
+import com.versatilemobitech.fmc.adapters.GalleryViewAdapter;
 import com.versatilemobitech.fmc.models.GalleryFolderModel;
+import com.versatilemobitech.fmc.models.GalleryViewModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
@@ -19,14 +20,14 @@ import java.util.ArrayList;
 /**
  * Created by Shankar Pilli on 11/07/2016
  */
-public class GalleryFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class GalleryViewFragment extends Fragment {
     public static final String TAG = "GalleryFragment";
     private DashboardActivity mParent;
     private View rootView;
 
     private GridView grid_view;
-    private GalleryFolderAdapter galleryFolderAdapter;
-    private ArrayList<GalleryFolderModel> galleryFolderModels;
+    private GalleryViewAdapter galleryViewAdapter;
+    private ArrayList<GalleryViewModel> galleryViewModels;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.gallery));
+        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.gallery_view));
         rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
         initUI();
         return rootView;
@@ -46,16 +47,8 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
 
     private void initUI() {
         grid_view = (GridView) rootView.findViewById(R.id.grid_view);
-        galleryFolderModels = new ArrayList<>();
-        galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), galleryFolderModels);
-        grid_view.setAdapter(galleryFolderAdapter);
-        grid_view.setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("position", 0);
-        Utility.navigateDashBoardFragment(new GalleryViewFragment(), GalleryViewFragment.TAG, bundle, mParent);
+        galleryViewModels = new ArrayList<>();
+        galleryViewAdapter = new GalleryViewAdapter(getActivity(), galleryViewModels);
+        grid_view.setAdapter(galleryViewAdapter);
     }
 }

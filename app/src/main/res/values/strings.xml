@@ -77,5 +77,6 @@
     <string name="site">www.fmc.com</string>
     <string name="follow_us">Follow Us</string>
     <string name="share_app"><u>Share App</u></string>
+    <string name="gallery_view">Gallery View</string>
 
 </resources>
