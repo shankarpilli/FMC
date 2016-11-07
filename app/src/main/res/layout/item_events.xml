@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="@dimen/_5dp"
+        android:background="@drawable/drawable_login_layout"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5dp"
+            android:text="Meeting on GHMC elections"
+            android:textColor="@color/themeColor"
+            android:textSize="@dimen/_18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="@dimen/_5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10dp"
+                    android:text="Hyderabad"
+                    android:textColor="@color/themeColor"
+                    android:textSize="@dimen/_16sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_more_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_more_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_10dp"
+                        android:text="More Details"
+                        android:textColor="@color/themeColor"
+                        android:textSize="@dimen/_16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_down"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@+id/tv_more_details"
+                        android:src="@drawable/down" />
+
+                    <ImageView
+                        android:id="@+id/iv_up"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerInParent="true"
+                        android:layout_toRightOf="@+id/tv_more_details"
+                        android:src="@drawable/up"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:layout_weight="0.6"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_accept"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_10dp"
+                        android:background="@color/themeColor"
+                        android:gravity="center"
+                        android:text="Accept"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_decline"
+                        android:layout_width="120dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_10dp"
+                        android:background="@color/themeColor"
+                        android:gravity="center"
+                        android:text="Decline"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_more_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <VideoView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1dp"
+                android:background="@color/themeColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Venue"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text=": "
+                    android:gravity="right"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:id="@+id/tv_venu"
+                    android:layout_width="@dimen/_0dp"
+                    android:textColor="@color/themeColor"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
+                    android:text="Hyderabad"
+                    android:textSize="@dimen/_16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/themeColor"
+                    android:layout_weight="1"
+                    android:text="Organized By"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text=": "
+                    android:gravity="right"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:id="@+id/tv_organized_by"
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:layout_weight="1.7"
+                    android:text="Hyderabad"
+                    android:textSize="@dimen/_16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Contact"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text=": "
+                    android:gravity="right"
+                    android:textColor="@color/themeColor"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:id="@+id/tv_contact"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/themeColor"
+                    android:layout_weight="1.7"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:text="Hyderabad"
+                    android:textSize="@dimen/_16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="chief Guest"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text=": "
+                    android:gravity="right"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+android:id="@+id/tv_chief_guest"
+                    android:layout_width="@dimen/_0dp"
+                    android:textColor="@color/themeColor"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
+                    android:text="Hyderabad"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Date Of Event"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/themeColor"
+                    android:text=": "
+                    android:gravity="right"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:id="@+id/date_event"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:textColor="@color/themeColor"
+                    android:text="03-06-2016       9:00 AM"
+                    android:textSize="@dimen/_16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/_5dp"
+                android:weightSum="3">
+
+                <TextView
+                    android:textColor="@color/themeColor"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Details"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/themeColor"
+                    android:layout_weight="0.3"
+                    android:text=": "
+                    android:gravity="right"
+                    android:textSize="@dimen/_16sp" />
+                <TextView
+                    android:layout_width="@dimen/_0dp"
+                    android:textColor="@color/themeColor"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:id="@+id/tv_details"
+                    android:text="this meeting for launching the app"
+                    android:textSize="@dimen/_16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
