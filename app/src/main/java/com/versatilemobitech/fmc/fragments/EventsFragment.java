@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.github.mikephil.charting.charts.PieChart;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.adapters.EventsAdapter;
@@ -26,7 +27,8 @@ public class EventsFragment extends Fragment {
     private View rootView;
     private ListView lv_events;
 
-private EventsAdapter mEventsAdapter=null;
+
+    private EventsAdapter mEventsAdapter = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,16 +48,17 @@ private EventsAdapter mEventsAdapter=null;
 
     private void initUI() {
 
-        lv_events = (ListView)rootView.findViewById(R.id.lv_events);
-ArrayList<EventsModel> models = eventModels();
-    mEventsAdapter = new EventsAdapter(mParent,models);
+
+        lv_events = (ListView) rootView.findViewById(R.id.lv_events);
+        ArrayList<EventsModel> models = eventModels();
+        mEventsAdapter = new EventsAdapter(mParent, models);
         lv_events.setAdapter(mEventsAdapter);
     }
 
     private ArrayList<EventsModel> eventModels() {
         ArrayList<EventsModel> mList = new ArrayList<>();
 
-        for(int i=0;i<5;i++){
+        for (int i = 0; i < 5; i++) {
             EventsModel mEventsModel = new EventsModel();
             mEventsModel.setmChiefGuest("sri.k. tharaka ramarao");
             mEventsModel.setmContact("90322793265");

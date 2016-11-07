@@ -9,15 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:padding="@dimen/_5dp"
         android:background="@drawable/drawable_login_layout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/_5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_5dp"
-            android:text="Meeting on GHMC elections"
+            android:text="@string/meeting_on_ghmc_elections"
             android:textColor="@color/themeColor"
             android:textSize="@dimen/_18sp" />
 
@@ -30,15 +30,16 @@
             <LinearLayout
                 android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.9"
                 android:orientation="vertical"
                 android:padding="@dimen/_5dp">
 
                 <TextView
+                    android:id="@+id/tv_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_10dp"
-                    android:text="Hyderabad"
+                    android:text="@string/location"
                     android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
 
@@ -78,19 +79,37 @@
             <LinearLayout
                 android:layout_width="@dimen/_0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:weightSum="1">
+                android:layout_weight="1.1"
+                android:weightSum="1.1">
 
-                <ImageView
-                    android:layout_width="@dimen/_0dp"
+                <FrameLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.4" />
+                    android:layout_weight="0.6">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_events"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/tv_balance_days"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="3dp"
+                        android:text="@string/tv_balance_days"
+                        android:textColor="@color/themeColor"
+                        android:textSize="12sp" />
+                </FrameLayout>
+
 
                 <LinearLayout
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/_10dp"
-                    android:layout_weight="0.6"
+                    android:layout_weight="0.5"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -102,7 +121,7 @@
                         android:layout_margin="@dimen/_10dp"
                         android:background="@color/themeColor"
                         android:gravity="center"
-                        android:text="Accept"
+                        android:text="@string/accept"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16sp" />
 
@@ -114,7 +133,7 @@
                         android:layout_margin="@dimen/_10dp"
                         android:background="@color/themeColor"
                         android:gravity="center"
-                        android:text="Decline"
+                        android:text="@string/decline"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16sp" />
                 </LinearLayout>
@@ -126,10 +145,10 @@
             android:id="@+id/ll_more_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
-            <VideoView
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1dp"
                 android:background="@color/themeColor" />
@@ -143,31 +162,35 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:textColor="@color/themeColor"
+                    android:id="@+id/tv_venu_lable"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Venue"
-                    android:textSize="@dimen/_16sp" />
-                <TextView
+                    android:text="@string/venue"
                     android:textColor="@color/themeColor"
+                    android:textSize="@dimen/_16sp" />
+
+                <TextView
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:text=": "
                     android:gravity="right"
+                    android:text=": "
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
+
                 <TextView
                     android:id="@+id/tv_venu"
                     android:layout_width="@dimen/_0dp"
-                    android:textColor="@color/themeColor"
-                    android:singleLine="true"
-                    android:maxLines="1"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.7"
-                    android:text="Hyderabad"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/location"
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,31 +200,35 @@
                 android:weightSum="3">
 
                 <TextView
+                    android:id="@+id/tv_organized_by_label"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/themeColor"
                     android:layout_weight="1"
-                    android:text="Organized By"
-                    android:textSize="@dimen/_16sp" />
-                <TextView
+                    android:text="@string/organized_by"
                     android:textColor="@color/themeColor"
+                    android:textSize="@dimen/_16sp" />
+
+                <TextView
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:text=": "
                     android:gravity="right"
+                    android:text=": "
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
+
                 <TextView
                     android:id="@+id/tv_organized_by"
-                    android:textColor="@color/themeColor"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:maxLines="1"
                     android:layout_weight="1.7"
-                    android:text="Hyderabad"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/location"
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -211,31 +238,35 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:textColor="@color/themeColor"
+                    android:id="@+id/tv_contact_lable"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Contact"
+                    android:text="@string/contact"
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
+
                 <TextView
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:text=": "
                     android:gravity="right"
+                    android:text=": "
                     android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
+
                 <TextView
                     android:id="@+id/tv_contact"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/themeColor"
                     android:layout_weight="1.7"
-                    android:singleLine="true"
                     android:maxLines="1"
-                    android:text="Hyderabad"
+                    android:singleLine="true"
+                    android:text="@string/contact"
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -245,31 +276,35 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:textColor="@color/themeColor"
+                    android:id="@+id/tv_chief_guest_lable"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="chief Guest"
-                    android:textSize="@dimen/_16sp" />
-                <TextView
+                    android:text="@string/chief_guest"
                     android:textColor="@color/themeColor"
+                    android:textSize="@dimen/_16sp" />
+
+                <TextView
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:text=": "
                     android:gravity="right"
-                    android:textSize="@dimen/_16sp" />
-                <TextView
-android:id="@+id/tv_chief_guest"
-                    android:layout_width="@dimen/_0dp"
+                    android:text=": "
                     android:textColor="@color/themeColor"
+                    android:textSize="@dimen/_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_chief_guest"
+                    android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.7"
-                    android:text="Hyderabad"
-                    android:singleLine="true"
                     android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/chief_guest"
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -279,31 +314,35 @@ android:id="@+id/tv_chief_guest"
                 android:weightSum="3">
 
                 <TextView
-                    android:textColor="@color/themeColor"
+                    android:id="@+id/tv_date_of_event"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Date Of Event"
+                    android:text="@string/date_of_event"
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
+
                 <TextView
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:textColor="@color/themeColor"
-                    android:text=": "
                     android:gravity="right"
+                    android:text=": "
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
+
                 <TextView
-                    android:id="@+id/date_event"
+                    android:id="@+id/tv_date_event"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.7"
-                    android:singleLine="true"
                     android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/date_of_event"
                     android:textColor="@color/themeColor"
-                    android:text="03-06-2016       9:00 AM"
                     android:textSize="@dimen/_16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -313,29 +352,32 @@ android:id="@+id/tv_chief_guest"
                 android:weightSum="3">
 
                 <TextView
-                    android:textColor="@color/themeColor"
+                    android:id="@+id/tv_details_lable"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Details"
+                    android:text="@string/details"
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
+
                 <TextView
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/themeColor"
                     android:layout_weight="0.3"
-                    android:text=": "
                     android:gravity="right"
-                    android:textSize="@dimen/_16sp" />
-                <TextView
-                    android:layout_width="@dimen/_0dp"
+                    android:text=": "
                     android:textColor="@color/themeColor"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.7"
-                    android:singleLine="true"
-                    android:maxLines="1"
+                    android:textSize="@dimen/_16sp" />
+
+                <TextView
                     android:id="@+id/tv_details"
-                    android:text="this meeting for launching the app"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.7"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="@string/this_meeting_for_launching_the_app"
+                    android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />
             </LinearLayout>
 

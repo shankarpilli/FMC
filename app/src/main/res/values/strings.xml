@@ -55,4 +55,17 @@
     <string name="company_name">Company Name</string>
     <string name="place_time_date">Place Time Date</string>
 
+    <string name="meeting_on_ghmc_elections">Meeting on GHMC elections</string>
+    <string name="location">Hyderabad</string>
+    <string name="tv_balance_days">3 Days To\nGo</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="venue">Venue</string>
+    <string name="organized_by">Organized By</string>
+    <string name="contact">Contact</string>
+    <string name="chief_guest">chief Guest</string>
+    <string name="date_of_event">Date Of Event</string>
+    <string name="details">Details</string>
+    <string name="this_meeting_for_launching_the_app">this meeting for launching the app</string>
+
 </resources>
