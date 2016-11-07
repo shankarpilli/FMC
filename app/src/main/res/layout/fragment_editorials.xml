@@ -1,13 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.versatilemobitech.fmc.fragments.EditorialsFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/ll_editorials"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Editorils" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
-</FrameLayout>
+</LinearLayout>

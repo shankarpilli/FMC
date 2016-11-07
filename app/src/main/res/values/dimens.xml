@@ -73,10 +73,10 @@
     <dimen name="_18sp">18sp</dimen>
     <dimen name="_19sp">19sp</dimen>
     <dimen name="_20sp">20sp</dimen>
+    <dimen name="_25sp">25sp</dimen>
     <dimen name="_30sp">30sp</dimen>
     <dimen name="_35sp">35sp</dimen>
 
-    <dimen name="_25sp">25sp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
