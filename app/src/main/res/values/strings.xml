@@ -37,6 +37,14 @@
     <string name="home">Home</string>
     <string name="events">Events</string>
     <string name="history">History</string>
+    <string name="welcome_message">Welcome Message</string>
+    <string name="member_directory">Member Directory</string>
+    <string name="knowledge_partners">Knowledge Partners</string>
+    <string name="awards">Awards</string>
+    <string name="gallery">Gallery</string>
+    <string name="editorials">Editorials</string>
+    <string name="contacts_us">Contacts Us</string>
+    <string name="logout">Logout</string>
 
     <string name="post_your_topic">Post Your Topic</string>
     <string name="your_name">Your Name</string>

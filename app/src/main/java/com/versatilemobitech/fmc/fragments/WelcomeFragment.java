@@ -12,7 +12,7 @@ import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.utility.Utility;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Shankar Pilli on 11/07/2016
  */
 public class WelcomeFragment extends Fragment {
     public static final String TAG = "WelcomeFragment";
@@ -29,7 +29,7 @@ public class WelcomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.events));
+        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.welcome_message));
         rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
         initUI();
         return rootView;
