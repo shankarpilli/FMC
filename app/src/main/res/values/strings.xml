@@ -71,4 +71,10 @@
     <string name="search">Search</string>
     <string name="category">Category</string>
 
+    <string name="address">Address</string>
+    <string name="fmc_mail_id">fmc@fmc.in</string>
+    <string name="site">www.fmc.com</string>
+    <string name="follow_us">Follow Us</string>
+    <string name="share_app"><u>Share App</u></string>
+
 </resources>
