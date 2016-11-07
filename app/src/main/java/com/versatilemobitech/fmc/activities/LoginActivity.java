@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.utility.Utility;
 
 /**
  * Created by Rev's Nani on 04-11-2016.
@@ -69,6 +70,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         tv_forgot_password.setOnClickListener(this);
         tv_login.setOnClickListener(this);
         tv_sign_up.setOnClickListener(this);
+
+        setTypeFace();
+    }
+
+    private void setTypeFace() {
+        et_user_name.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        et_password.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_forgot_password.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_login.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_sign_up.setTypeface(Utility.setTypeFaceRobotoRegular(this));
     }
 
     @Override

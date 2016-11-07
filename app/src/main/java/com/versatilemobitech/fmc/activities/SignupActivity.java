@@ -96,20 +96,45 @@ public class SignupActivity extends Activity implements View.OnClickListener {
         iv_right_profile_pic = (ImageView) findViewById(R.id.iv_right_profile_pic);
         iv_back = (ImageView) findViewById(R.id.iv_back);
 
-        edt_first_name = (EditText)findViewById(R.id.edt_first_name);
-        edt_last_name = (EditText)findViewById(R.id.edt_last_name);
-        edt_company = (EditText)findViewById(R.id.edt_company_name);
-        edt_business = (EditText)findViewById(R.id.edt_business_mail);
-        edt_personal = (EditText)findViewById(R.id.edt_personal_mail);
-        edt_contact = (EditText)findViewById(R.id.edt_contact);
-        edt_alternate = (EditText)findViewById(R.id.edt_alternate);
-        edt_location = (EditText)findViewById(R.id.edt_location);
-        edt_password = (EditText)findViewById(R.id.edt_password);
-        edt_c_pwd = (EditText)findViewById(R.id.edt_c_pwd);
+        edt_first_name = (EditText) findViewById(R.id.edt_first_name);
+        edt_last_name = (EditText) findViewById(R.id.edt_last_name);
+        edt_company = (EditText) findViewById(R.id.edt_company_name);
+        edt_business = (EditText) findViewById(R.id.edt_business_mail);
+        edt_personal = (EditText) findViewById(R.id.edt_personal_mail);
+        edt_contact = (EditText) findViewById(R.id.edt_contact);
+        edt_alternate = (EditText) findViewById(R.id.edt_alternate);
+        edt_location = (EditText) findViewById(R.id.edt_location);
+        edt_password = (EditText) findViewById(R.id.edt_password);
+        edt_c_pwd = (EditText) findViewById(R.id.edt_c_pwd);
 
         iv_right_profile_pic.setOnClickListener(this);
         iv_back.setOnClickListener(this);
         txt_sign_up.setOnClickListener(this);
+
+        setTypeFace();
+    }
+
+    private void setTypeFace() {
+        cb_hyd.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        cb_chennai.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        cb_bangalore.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        cb_pune.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_interested_location.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_hyd.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_chennai.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_pune.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_bangalore.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        txt_sign_up.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_first_name.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_last_name.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_company.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_business.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_personal.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_contact.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_alternate.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_location.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_c_pwd.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        edt_password.setTypeface(Utility.setTypeFaceRobotoRegular(this));
     }
 
     @Override
@@ -151,10 +176,9 @@ public class SignupActivity extends Activity implements View.OnClickListener {
             isValied = false;
         } else if (Utility.isValueNullOrEmpty(edt_c_pwd.getText().toString().trim())) {
             isValied = false;
-        } else if (cb_hyd.isChecked()!=true && cb_pune.isChecked()!=true && cb_chennai.isChecked()!=true && cb_bangalore.isChecked()!=true) {
+        } else if (cb_hyd.isChecked() != true && cb_pune.isChecked() != true && cb_chennai.isChecked() != true && cb_bangalore.isChecked() != true) {
             isValied = false;
-        }
-        else {
+        } else {
             isValied = true;
         }
         return isValied;
