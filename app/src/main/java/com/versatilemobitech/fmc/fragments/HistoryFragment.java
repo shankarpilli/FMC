@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
@@ -19,6 +20,8 @@ public class HistoryFragment extends Fragment {
     public static final String TAG = "HistoryFragment";
     private DashboardActivity mParent;
     private View rootView;
+
+    private LinearLayout ll_history;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,12 @@ public class HistoryFragment extends Fragment {
     }
 
     private void initUI() {
+        ll_history = (LinearLayout) rootView.findViewById(R.id.ll_history);
 
+        for (int i = 0; i < 10; i++) {
+            LinearLayout layout_list_header = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.
+                    history_item, null);
+            ll_history.addView(layout_list_header);
+        }
     }
 }

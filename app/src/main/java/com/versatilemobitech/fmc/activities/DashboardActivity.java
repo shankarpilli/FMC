@@ -152,7 +152,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                                             .getBackStackEntryCount() - 1);
                     String tagName = backEntry.getName();
                     if (!tagName.equals(HomeFragment.TAG)) {
-                        onBackPressed();
+                        mDrawerLayout.openDrawer(GravityCompat.START);
                     } else {
                         mDrawerLayout.openDrawer(GravityCompat.START);
                     }

@@ -14,5 +14,7 @@
     <color name="dark_gray_color">#c1bebe</color>
     <color name="txt_hint_color">#c0c0c0</color>
     <color name="light_orange">#ea861c</color>
+    <color name="gray">#39393a</color>
+
 
 </resources>
