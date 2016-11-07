@@ -14,6 +14,7 @@
         android:padding="@dimen/_5dp">
 
         <TextView
+            android:id="@+id/tv_meeting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_5dp"
@@ -98,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:padding="3dp"
+                        android:padding="@dimen/_3dp"
                         android:text="@string/tv_balance_days"
                         android:textColor="@color/themeColor"
                         android:textSize="12sp" />
@@ -171,6 +172,7 @@
                     android:textSize="@dimen/_16sp" />
 
                 <TextView
+                    android:id="@+id/tv_lable_one"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
@@ -209,6 +211,7 @@
                     android:textSize="@dimen/_16sp" />
 
                 <TextView
+                    android:id="@+id/tv_lable_two"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
@@ -247,6 +250,7 @@
                     android:textSize="@dimen/_16sp" />
 
                 <TextView
+                    android:id="@+id/tv_lable_three"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
@@ -285,6 +289,7 @@
                     android:textSize="@dimen/_16sp" />
 
                 <TextView
+                    android:id="@+id/tv_lable_four"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
@@ -314,7 +319,7 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:id="@+id/tv_date_of_event"
+                    android:id="@+id/tv_date_event_label"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -323,6 +328,7 @@
                     android:textSize="@dimen/_16sp" />
 
                 <TextView
+                    android:id="@+id/tv_lable_five"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
@@ -361,6 +367,7 @@
                     android:textSize="@dimen/_16sp" />
 
                 <TextView
+                    android:id="@+id/tv_lable_six"
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"

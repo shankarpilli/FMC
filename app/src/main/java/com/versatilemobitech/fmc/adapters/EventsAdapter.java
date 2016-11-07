@@ -71,17 +71,75 @@ public class EventsAdapter extends BaseAdapter {
         mEventsModel = (EventsModel) getItem(position);
         mListEventsHolder.iv_down = (ImageView) convertView.findViewById(R.id.iv_down);
         mListEventsHolder.iv_up = (ImageView) convertView.findViewById(R.id.iv_up);
-        mListEventsHolder.tv_more_details = (TextView) convertView.findViewById(R.id.tv_more_details);
         mListEventsHolder.ll_more_details = (LinearLayout) convertView.findViewById(R.id.ll_more_details);
         mListEventsHolder.rl_more_details = (RelativeLayout) convertView.findViewById(R.id.rl_more_details);
         mListEventsHolder.pie_events = (PieChart) convertView.findViewById(R.id.pie_events);
 
+        mListEventsHolder.tv_more_details = (TextView) convertView.findViewById(R.id.tv_more_details);
+        mListEventsHolder.tv_more_details.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         mListEventsHolder.tv_venu = (TextView) convertView.findViewById(R.id.tv_venu);
+        mListEventsHolder.tv_venu.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         mListEventsHolder.tv_organized_by = (TextView) convertView.findViewById(R.id.tv_organized_by);
+        mListEventsHolder.tv_organized_by.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         mListEventsHolder.tv_contact = (TextView) convertView.findViewById(R.id.tv_contact);
+        mListEventsHolder.tv_contact.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         mListEventsHolder.tv_chief_guest = (TextView) convertView.findViewById(R.id.tv_chief_guest);
+        mListEventsHolder.tv_chief_guest.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         mListEventsHolder.tv_date_event = (TextView) convertView.findViewById(R.id.tv_date_event);
+        mListEventsHolder.tv_date_event.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         mListEventsHolder.tv_details = (TextView) convertView.findViewById(R.id.tv_details);
+        mListEventsHolder.tv_details.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_lable_one = (TextView) convertView.findViewById(R.id.tv_lable_one);
+        mListEventsHolder.tv_lable_one.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_lable_two = (TextView) convertView.findViewById(R.id.tv_lable_one);
+        mListEventsHolder.tv_lable_two.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_lable_three = (TextView) convertView.findViewById(R.id.tv_lable_three);
+        mListEventsHolder.tv_lable_three.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_lable_four = (TextView) convertView.findViewById(R.id.tv_lable_four);
+        mListEventsHolder.tv_lable_four.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_lable_five = (TextView) convertView.findViewById(R.id.tv_lable_five);
+        mListEventsHolder.tv_lable_five.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_lable_six = (TextView) convertView.findViewById(R.id.tv_lable_six);
+        mListEventsHolder.tv_lable_six.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_venu_lable = (TextView) convertView.findViewById(R.id.tv_venu_lable);
+        mListEventsHolder.tv_venu_lable.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_details_lable = (TextView) convertView.findViewById(R.id.tv_details_lable);
+        mListEventsHolder.tv_details_lable.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_organized_by_label = (TextView) convertView.findViewById(R.id.tv_organized_by_label);
+        mListEventsHolder.tv_organized_by_label.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_contact_lable = (TextView) convertView.findViewById(R.id.tv_contact_lable);
+        mListEventsHolder.tv_contact_lable.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_chief_guest_lable = (TextView) convertView.findViewById(R.id.tv_chief_guest_lable);
+        mListEventsHolder.tv_chief_guest_lable.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_date_event_label = (TextView) convertView.findViewById(R.id.tv_date_event_label);
+        mListEventsHolder.tv_date_event_label.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_accept = (TextView) convertView.findViewById(R.id.tv_accept);
+        mListEventsHolder.tv_accept.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_decline = (TextView) convertView.findViewById(R.id.tv_decline);
+        mListEventsHolder.tv_decline.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        mListEventsHolder.tv_balance_days = (TextView) convertView.findViewById(R.id.tv_balance_days);
+        mListEventsHolder.tv_balance_days.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
         mListEventsHolder.tv_venu.setText("" + mEventsModel.getmVenue());
         mListEventsHolder.tv_organized_by.setText("" + mEventsModel.getmOrganizedBy());
@@ -158,5 +216,23 @@ public class EventsAdapter extends BaseAdapter {
         private TextView tv_chief_guest;
         private TextView tv_date_event;
         private TextView tv_details;
+
+        private TextView tv_lable_one;
+        private TextView tv_lable_two;
+        private TextView tv_lable_three;
+        private TextView tv_lable_four;
+        private TextView tv_lable_five;
+        private TextView tv_lable_six;
+
+        private TextView tv_date_event_label;
+        private TextView tv_venu_lable;
+        private TextView tv_organized_by_label;
+        private TextView tv_contact_lable;
+        private TextView tv_chief_guest_lable;
+        private TextView tv_details_lable;
+
+        private TextView tv_accept;
+        private TextView tv_decline;
+        private TextView tv_balance_days;
     }
 }
