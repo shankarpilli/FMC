@@ -1,23 +1,32 @@
 package com.versatilemobitech.fmc.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.LinearLayout;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.adapters.GalleryFolderAdapter;
+import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
+import java.util.ArrayList;
 
+/**
+ * Created by Shankar Pilli on 11/07/2016
+ */
 public class GalleryFragment extends Fragment {
     public static final String TAG = "GalleryFragment";
     private DashboardActivity mParent;
     private View rootView;
 
+    private GridView grid_view;
+    private GalleryFolderAdapter galleryFolderAdapter;
+    private ArrayList<GalleryFolderModel> galleryFolderModels;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +37,7 @@ public class GalleryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.events));
+        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.gallery));
         rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
         initUI();
         return rootView;
@@ -36,6 +45,9 @@ public class GalleryFragment extends Fragment {
     }
 
     private void initUI() {
-
+        grid_view = (GridView) rootView.findViewById(R.id.grid_view);
+        galleryFolderModels = new ArrayList<>();
+        galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), galleryFolderModels);
+        grid_view.setAdapter(galleryFolderAdapter);
     }
 }

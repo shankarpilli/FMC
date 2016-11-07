@@ -70,6 +70,7 @@
 
     <string name="search">Search</string>
     <string name="category">Category</string>
+    <string name="folder_name">Folder Name</string>
 
     <string name="address">Address</string>
     <string name="fmc_mail_id">fmc@fmc.in</string>
