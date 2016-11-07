@@ -28,6 +28,7 @@
         android:id="@+id/list_home_left_drawer"
         android:layout_width="280dp"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         android:dividerHeight="@dimen/_0dp"
         android:divider="@null"
         android:layout_gravity="left|start"

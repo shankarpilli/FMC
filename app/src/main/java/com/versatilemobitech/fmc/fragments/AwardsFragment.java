@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.versatilemobitech.fmc.R;
@@ -17,8 +18,8 @@ public class AwardsFragment extends Fragment {
     public static final String TAG = "AwardsFragment";
     private DashboardActivity mParent;
     private View rootView;
-private AwardsAdapter mAwardsAdapter;
-private GridView grid;
+    private AwardsAdapter mAwardsAdapter;
+    private GridView grid;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,17 @@ private GridView grid;
 
     private void initUI() {
 
-        grid = (GridView)rootView.findViewById(R.id.grid);
+        grid = (GridView) rootView.findViewById(R.id.grid);
         mAwardsAdapter = new AwardsAdapter(mParent);
         grid.setAdapter(mAwardsAdapter);
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle mBun = new Bundle();
+                mBun.putInt("position", position);
+                Utility.navigateDashBoardFragment(new AwardsDetailFragment(), AwardsDetailFragment.TAG, mBun, mParent);
+            }
+        });
+
     }
 }
