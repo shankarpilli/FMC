@@ -68,4 +68,6 @@
     <string name="details">Details</string>
     <string name="this_meeting_for_launching_the_app">this meeting for launching the app</string>
 
+    <string name="search">Search</string>
+
 </resources>
