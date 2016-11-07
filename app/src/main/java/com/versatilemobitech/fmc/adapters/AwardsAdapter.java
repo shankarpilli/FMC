@@ -48,7 +48,6 @@ private Context mContext;
             grid = new View(mContext);
             grid = inflater.inflate(R.layout.item_gallery, null);
             GalleryHolder mGalleryHolder = new GalleryHolder();
-            /*convertView.setTag(mGalleryHolder);*/
 
         } else {
             grid = (View) convertView;
