@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -450,4 +451,15 @@ public class Utility {
         };
     }
 
+    public static Typeface setTypeFaceRobotoBold(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "Roboto-Bold.ttf");
+    }
+
+    public static Typeface setTypeFaceRobotoItalic(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "Roboto-Italic.ttf");
+    }
+
+    public static Typeface setTypeFaceRobotoRegular(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
+    }
 }
