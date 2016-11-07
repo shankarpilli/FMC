@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.LeftMenuModel;
+import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,7 @@ public class LeftMenuAdapter extends BaseAdapter {
             mLeftMenuItemHolder = new LeftMenuItemHolder();
             mLeftMenuItemHolder.txt_left_drawer_text = (TextView) convertView.findViewById(R.id.txt_left_drawer_text);
             mLeftMenuItemHolder.img_left_drawer_icon = (ImageView) convertView.findViewById(R.id.img_left_drawer_icon);
+            mLeftMenuItemHolder.txt_left_drawer_text.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             convertView.setTag(mLeftMenuItemHolder);
         } else {
             mLeftMenuItemHolder = (LeftMenuItemHolder) convertView.getTag();

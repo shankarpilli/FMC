@@ -84,6 +84,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         ImageView img_user_image = (ImageView) layout_list_header.findViewById(R.id.img_user_image);
         TextView txt_name = (TextView) layout_list_header.findViewById(R.id.txt_name);
         TextView txt_user_designation = (TextView) layout_list_header.findViewById(R.id.txt_user_designation);
+
+        txt_name.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        txt_user_designation.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         list_home_left_drawer.addHeaderView(layout_list_header);
 
         list_home_left_drawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
