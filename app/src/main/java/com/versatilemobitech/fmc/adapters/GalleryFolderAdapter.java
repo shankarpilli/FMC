@@ -12,6 +12,7 @@ import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.models.LeftMenuModel;
+import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -56,6 +57,8 @@ public class GalleryFolderAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.gallery_folder_item,
                     null);
             mGalleryFolderHolder = new GalleryFolderHolder();
+            mGalleryFolderHolder.txt_folder_name = (TextView) convertView.findViewById(R.id.txt_folder_name);
+            mGalleryFolderHolder.txt_folder_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             convertView.setTag(mGalleryFolderHolder);
         } else {
             mGalleryFolderHolder = (GalleryFolderHolder) convertView.getTag();
@@ -67,7 +70,6 @@ public class GalleryFolderAdapter extends BaseAdapter {
     }
 
     private class GalleryFolderHolder {
-        private TextView txt_left_drawer_text;
-        private ImageView img_left_drawer_icon;
+        private TextView txt_folder_name;
     }
 }

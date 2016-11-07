@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.versatilemobitech.fmc.R;
@@ -25,6 +26,7 @@ public class MemberDirectorFragment extends Fragment {
     private DashboardActivity mParent;
     private View rootView;
 
+    private EditText edt_search;
     private ListView ll_search;
     private MembersAdapter membersAdapter;
     private ArrayList<MembersModel> membersModels;
@@ -47,8 +49,10 @@ public class MemberDirectorFragment extends Fragment {
     }
 
     private void initUI() {
+        edt_search = (EditText) rootView.findViewById(R.id.edt_search);
         ll_search = (ListView) rootView.findViewById(R.id.ll_search);
         membersAdapter = new MembersAdapter(getActivity(), membersModels);
         ll_search.setAdapter(membersAdapter);
+        edt_search.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
     }
 }

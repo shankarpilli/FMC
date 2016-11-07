@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
@@ -47,6 +48,8 @@ public class KnowledgePartnersFragment extends Fragment {
             LinearLayout layout_list_header = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.
                     knowledge_patners_item, null);
             LinearLayout ll_items = (LinearLayout) layout_list_header.findViewById(R.id.ll_items);
+            TextView txt_category = (TextView) layout_list_header.findViewById(R.id.txt_category);
+            txt_category.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
 
             LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8f);
             LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 4f);
@@ -57,6 +60,8 @@ public class KnowledgePartnersFragment extends Fragment {
 
             for (int j = 0; j < 2; j++) {
                 LinearLayout ll = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.knowledge_item, null);
+                TextView txt_accept = (TextView) ll.findViewById(R.id.txt_accept);
+                txt_accept.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
                 ll.setLayoutParams(lp2);
                 linearLayoutHead.addView(ll);
             }

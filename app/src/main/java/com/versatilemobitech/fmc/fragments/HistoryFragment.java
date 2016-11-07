@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
@@ -45,6 +46,10 @@ public class HistoryFragment extends Fragment {
         for (int i = 0; i < 10; i++) {
             LinearLayout layout_list_header = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.
                     history_item, null);
+            TextView txt_header = (TextView) layout_list_header.findViewById(R.id.txt_header);
+            TextView txt_description = (TextView) layout_list_header.findViewById(R.id.txt_description);
+            txt_description.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+            txt_header.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
             ll_history.addView(layout_list_header);
         }
     }

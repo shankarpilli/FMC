@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.EditorialsModel;
 import com.versatilemobitech.fmc.models.MembersModel;
+import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -55,8 +56,13 @@ public class EditorialsAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.editorials_item,
                     null);
             mEditorialsItemHolder = new EditorialsItemHolder();
-            mEditorialsItemHolder.txt_left_drawer_text = (TextView) convertView.findViewById(R.id.txt_left_drawer_text);
-            mEditorialsItemHolder.img_left_drawer_icon = (ImageView) convertView.findViewById(R.id.img_left_drawer_icon);
+            mEditorialsItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
+            mEditorialsItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);
+            mEditorialsItemHolder.txt_your_name = (TextView) convertView.findViewById(R.id.txt_your_name);
+
+            mEditorialsItemHolder.txt_your_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mEditorialsItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mEditorialsItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             convertView.setTag(mEditorialsItemHolder);
         } else {
             mEditorialsItemHolder = (EditorialsItemHolder) convertView.getTag();
@@ -68,7 +74,8 @@ public class EditorialsAdapter extends BaseAdapter {
     }
 
     private class EditorialsItemHolder {
-        private TextView txt_left_drawer_text;
-        private ImageView img_left_drawer_icon;
+        private TextView txt_your_name;
+        private TextView txt_company;
+        private TextView txt_time_date;
     }
 }

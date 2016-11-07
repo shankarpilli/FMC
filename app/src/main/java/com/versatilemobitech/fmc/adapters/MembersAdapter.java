@@ -12,6 +12,7 @@ import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.models.LeftMenuModel;
 import com.versatilemobitech.fmc.models.MembersModel;
+import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -56,8 +57,12 @@ public class MembersAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.member_search_item,
                     null);
             mMembersItemHolder = new MembersItemHolder();
-            mMembersItemHolder.txt_left_drawer_text = (TextView) convertView.findViewById(R.id.txt_left_drawer_text);
-            mMembersItemHolder.img_left_drawer_icon = (ImageView) convertView.findViewById(R.id.img_left_drawer_icon);
+            mMembersItemHolder.txt_your_name = (TextView) convertView.findViewById(R.id.txt_your_name);
+            mMembersItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);
+
+            mMembersItemHolder.txt_your_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mMembersItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
             convertView.setTag(mMembersItemHolder);
         } else {
             mMembersItemHolder = (MembersItemHolder) convertView.getTag();
@@ -69,7 +74,7 @@ public class MembersAdapter extends BaseAdapter {
     }
 
     private class MembersItemHolder {
-        private TextView txt_left_drawer_text;
-        private ImageView img_left_drawer_icon;
+        private TextView txt_your_name;
+        private TextView txt_company;
     }
 }
