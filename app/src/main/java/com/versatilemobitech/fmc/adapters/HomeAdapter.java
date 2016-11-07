@@ -6,11 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.HomeDataModel;
-import com.versatilemobitech.fmc.models.LeftMenuModel;
 
 import java.util.ArrayList;
 
@@ -50,24 +50,30 @@ public class HomeAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        LeftMenuItemHolder mLeftMenuItemHolder = null;
+        HomeItemHolder mHomeItemHolder = null;
 
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.home_data_item,
                     null);
-            mLeftMenuItemHolder = new LeftMenuItemHolder();
-            convertView.setTag(mLeftMenuItemHolder);
+            mHomeItemHolder = new HomeItemHolder();
+            mHomeItemHolder.ll_comments = (LinearLayout) convertView.findViewById(R.id.ll_comments);
+            convertView.setTag(mHomeItemHolder);
         } else {
-            mLeftMenuItemHolder = (LeftMenuItemHolder) convertView.getTag();
+            mHomeItemHolder = (HomeItemHolder) convertView.getTag();
         }
 
         HomeDataModel leftMenuModel = (HomeDataModel) getItem(position);
 
+        LinearLayout layout_list_header = (LinearLayout) mLayoutInflater.inflate(R.layout.
+                home_comment_item, null);
+        mHomeItemHolder.ll_comments.addView(layout_list_header);
+
         return convertView;
     }
 
-    private class LeftMenuItemHolder {
+    private class HomeItemHolder {
         private TextView txt_left_drawer_text;
         private ImageView img_left_drawer_icon;
+        private LinearLayout ll_comments;
     }
 }

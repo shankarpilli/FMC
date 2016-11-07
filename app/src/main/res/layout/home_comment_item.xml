@@ -10,8 +10,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/_70dp"
-            android:layout_height="@dimen/_70dp"
+            android:layout_width="@dimen/_50dp"
+            android:layout_height="@dimen/_50dp"
             android:layout_marginLeft="@dimen/_5dp"
             android:layout_marginTop="@dimen/_5dp"
             android:src="@drawable/avatar_image" />
@@ -39,7 +39,7 @@
                     android:layout_marginTop="@dimen/_5dp"
                     android:text="@string/your_name"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_25sp" />
+                    android:textSize="@dimen/_20sp" />
 
                 <TextView
                     android:id="@+id/txt_company"
@@ -56,58 +56,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10dp"
-                android:text="@string/place_time_date" />
+                android:text="@string/place_time_date"
+                android:textSize="@dimen/_12sp" />
+
+            <TextView
+                android:id="@+id/txt_comment_post_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_5dp"
+                android:text="@string/no_internet_msg"
+                android:textSize="@dimen/_12sp" />
+
+            <TextView
+                android:id="@+id/txt_reply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_5dp"
+                android:text="@string/reply"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/_18sp" />
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/txt_post_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_5dp"
-        android:text="@string/no_internet_msg" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_150dp"
-        android:layout_marginBottom="@dimen/_5dp"
-        android:layout_marginTop="@dimen/_5dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/star_banner" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5dp"
-        android:background="@drawable/drawable_login_layout"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="@string/comment"
-            android:inputType="text|textNoSuggestions"
-            android:maxLines="2"
-            android:paddingLeft="@dimen/_5dp"
-            android:textSize="@dimen/_18sp" />
-
-        <ImageView
-            android:layout_width="@dimen/_28dp"
-            android:layout_height="@dimen/_23dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_margin="@dimen/_5dp"
-            android:layout_marginBottom="@dimen/_5dp"
-            android:layout_marginTop="@dimen/_5dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/camera" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_comments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" />
 
 </LinearLayout>

@@ -45,6 +45,8 @@
     <string name="editorials">Editorials</string>
     <string name="contacts_us">Contacts Us</string>
     <string name="logout">Logout</string>
+    <string name="comment">Comment</string>
+    <string name="reply">Reply</string>
 
     <string name="post_your_topic">Post Your Topic</string>
     <string name="your_name">Your Name</string>
