@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.adapters.AwardsDetailListAdapter;
+import com.versatilemobitech.fmc.utility.Utility;
 
 
 public class AwardsDetailFragment extends Fragment {
@@ -29,6 +30,7 @@ public class AwardsDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mParent.txt_fmc.setText("2016");
+        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         rootView = inflater.inflate(R.layout.fragment_awards_item, container, false);
         initUI();
         return rootView;

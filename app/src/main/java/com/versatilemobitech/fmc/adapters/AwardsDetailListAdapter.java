@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.models.EventsModel;
+import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -69,6 +70,11 @@ public class AwardsDetailListAdapter extends BaseAdapter {
         mAwardsListHolder.iv_view_details = (ImageView)convertView.findViewById(R.id.iv_view_details);
         mAwardsListHolder.ll_detail_view = (LinearLayout) convertView.findViewById(R.id.ll_detail_view);
 
+        mAwardsListHolder.tv_company_name = (TextView) convertView.findViewById(R.id.tv_company_name);
+        mAwardsListHolder.tv_company_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mAwardsListHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
+        mAwardsListHolder.tv_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         return convertView;
     }
 
@@ -78,5 +84,8 @@ public class AwardsDetailListAdapter extends BaseAdapter {
 
        private ImageView iv_view_details;
        private LinearLayout ll_detail_view;
+
+        private TextView tv_company_name;
+        private TextView tv_name;
     }
 }

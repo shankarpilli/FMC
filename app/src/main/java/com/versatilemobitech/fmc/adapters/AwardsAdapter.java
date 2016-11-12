@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.utility.Utility;
 
 /**
  * Created by Manikanta on 11/7/2016.
@@ -41,22 +42,28 @@ private Context mContext;
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View grid;
+        GalleryHolder mGalleryHolder = null;
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
             grid = new View(mContext);
             grid = inflater.inflate(R.layout.item_gallery, null);
-            GalleryHolder mGalleryHolder = new GalleryHolder();
+            mGalleryHolder = new GalleryHolder();
 
         } else {
             grid = (View) convertView;
         }
 
+        mGalleryHolder.tv_award_year = (TextView)grid.findViewById(R.id.tv_award_year);
+        mGalleryHolder.tv_award_year.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         return grid;
     }
 
-    private class GalleryHolder{
+   private class GalleryHolder{
+
+        private TextView tv_award_year;
 
     }
 }
