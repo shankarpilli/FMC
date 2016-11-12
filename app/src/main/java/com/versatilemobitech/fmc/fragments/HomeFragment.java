@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
@@ -60,6 +62,12 @@ public class HomeFragment extends Fragment {
                 LayoutParams.MATCH_PARENT, pixels);
         params.setMargins(15, 15, 15, 15);
         layout_list_header.setLayoutParams(params);
+        TextView tv_post = (TextView)layout_list_header.findViewById(R.id.tv_post);
+        tv_post.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
+        TextView txt_post_your_topic = (TextView)layout_list_header.findViewById(R.id.txt_post_your_topic);
+        txt_post_your_topic.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
+        EditText et_what_is_on_u_mind = (EditText) layout_list_header.findViewById(R.id.et_what_is_on_u_mind);
+        et_what_is_on_u_mind.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         list_view.addHeaderView(layout_list_header);
     }
 }
