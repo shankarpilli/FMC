@@ -5,8 +5,8 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="@dimen/_80dp"
-        android:layout_height="@dimen/_80dp"
+        android:layout_width="@dimen/_70dp"
+        android:layout_height="@dimen/_70dp"
         android:layout_marginLeft="@dimen/_5dp"
         android:layout_marginTop="@dimen/_5dp"
         android:src="@drawable/avatar_image" />
@@ -14,8 +14,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_10dp"
-        android:layout_marginStart="@dimen/_10dp"
+        android:layout_marginLeft="@dimen/_5dp"
+        android:layout_marginStart="@dimen/_5dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -26,7 +26,7 @@
             android:layout_marginTop="@dimen/_5dp"
             android:text="@string/first_name"
             android:textColor="@color/blackColor"
-            android:textSize="@dimen/_20sp" />
+            android:textSize="@dimen/_18sp" />
 
         <TextView
             android:id="@+id/txt_company"
@@ -35,7 +35,7 @@
             android:layout_marginTop="@dimen/_5dp"
             android:text="@string/company_name"
             android:textColor="@color/gray"
-            android:textSize="@dimen/_15sp" />
+            android:textSize="@dimen/_14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
