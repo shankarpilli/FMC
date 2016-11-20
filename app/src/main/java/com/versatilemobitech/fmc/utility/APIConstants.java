@@ -14,7 +14,9 @@ public class APIConstants {
         GET, POST, MULTIPART_GET, MULTIPART_POST, DELETE, PUT, PATCH
     }
 
-    public static final String BASE_URL = "";
+    public static final String BASE_URL = "http://facilitymanagementcouncil.com/admin/service/";
+    public static final String REGISTRATION_URL = BASE_URL + "registration";
+    public static final String LOGIN_URL = BASE_URL + "login";
 
 
 }

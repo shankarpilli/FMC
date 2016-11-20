@@ -1,8 +1,9 @@
 package com.versatilemobitech.fmc.activities;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -11,13 +12,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.models.LoginModel;
+import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.LoginParser;
+import com.versatilemobitech.fmc.utility.APIConstants;
+import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
+
+import java.util.LinkedHashMap;
 
 /**
  * Created by Rev's Nani on 04-11-2016.
  */
 
-public class LoginActivity extends Activity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, IAsyncCaller {
 
     private RelativeLayout rly_main;
 
@@ -37,12 +47,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private TextView tv_forgot_password;
     private TextView tv_login;
     private TextView tv_sign_up;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        context = this;
         setUI();
     }
 
@@ -90,14 +101,65 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 startActivity(mIntentForgotPassword);
                 break;
             case R.id.tv_login:
-                Intent intentDashboard = new Intent(LoginActivity.this, DashboardActivity.class);
-                startActivity(intentDashboard);
-                finish();
+                if (isValid()) {
+                    LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+                    paramMap.put("username", et_user_name.getText().toString());
+                    paramMap.put("password", et_password.getText().toString());
+                    LoginParser mParser = new LoginParser();
+                    if (Utility.isNetworkAvailable(context)) {
+                        ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(context, Utility.getResourcesString(context,
+                                R.string.please_wait), true,
+                                APIConstants.LOGIN_URL, paramMap,
+                                APIConstants.REQUEST_TYPE.POST, this, mParser);
+                        Utility.execute(serverIntractorAsync);
+                    } else {
+                        Utility.showSettingDialog(
+                                context,
+                                context.getResources().getString(
+                                        R.string.no_internet_msg),
+                                context.getResources().getString(
+                                        R.string.no_internet_title),
+                                Utility.NO_INTERNET_CONNECTION).show();
+                    }
+
+                }
                 break;
             case R.id.tv_sign_up:
                 Intent mIntentSignup = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(mIntentSignup);
                 break;
+        }
+    }
+
+    private boolean isValid() {
+        boolean isValidated = false;
+        if (Utility.isValueNullOrEmpty(et_user_name.getText().toString().trim())) {
+            Utility.setSnackBarEnglish(LoginActivity.this, et_user_name, "Please enter user name");
+            et_user_name.requestFocus();
+        } else if (!et_user_name.getText().toString().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z]+)*(\\.[A-Za-z]{2,})$")) {
+            Utility.setSnackBarEnglish(LoginActivity.this, et_user_name, "Please enter valid user name");
+            et_user_name.requestFocus();
+        } else if (Utility.isValueNullOrEmpty(et_password.getText().toString().trim())) {
+            Utility.setSnackBarEnglish(LoginActivity.this, et_password, "Please enter password");
+            et_password.requestFocus();
+        } else {
+            isValidated = true;
+        }
+        return isValidated;
+    }
+
+    @Override
+    public void onComplete(Model model) {
+        if (model != null) {
+            if (model.isStatus()) {
+                if (model instanceof LoginModel) {
+                    LoginModel loginModel = (LoginModel) model;
+                    Utility.setSharedPrefStringData(context, Constants.USER_ID, loginModel.getUser_id());
+                    Utility.setSharedPrefStringData(context, Constants.LOGIN_NAME, loginModel.getName());
+                    Intent mIntentSignup = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(mIntentSignup);
+                }
+            }
         }
     }
 }
