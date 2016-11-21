@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -52,6 +55,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -198,7 +202,7 @@ public class Utility {
         SnackBar snackBarIconTitle = new SnackBar();
         snackBarIconTitle.view(mView)
                 .text(message, "OK")
-                .textColors(Color.BLACK, Color.BLACK)
+                .textColors(Color.WHITE, Color.WHITE)
                 .backgroundColor(parent.getResources().getColor(R.color.themeColor))
                 .duration(SnackBar.SnackBarDuration.LONG);
         snackBarIconTitle.show();
@@ -466,5 +470,19 @@ public class Utility {
     public static Typeface setTypeFace_fontawesome(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
     }
+
+    public static Bitmap getRotatedBitmap(int rotation, String mPath) {
+        File f = new File(mPath);
+        Bitmap mBitMap = BitmapFactory.decodeFile(f.getAbsolutePath());
+        if (rotation != 0) {
+            Bitmap oldBitmap = mBitMap;
+            Matrix matrix = new Matrix();
+            matrix.postRotate(rotation);
+            mBitMap = Bitmap.createBitmap(oldBitmap, 0, 0, oldBitmap.getWidth(), oldBitmap.getHeight(), matrix, false);
+            oldBitmap.recycle();
+        }
+        return mBitMap;
+    }
+
 
 }

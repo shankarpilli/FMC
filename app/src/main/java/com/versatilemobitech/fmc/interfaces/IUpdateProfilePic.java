@@ -5,6 +5,6 @@ package com.versatilemobitech.fmc.interfaces;
  */
 public interface IUpdateProfilePic {
 
-    void updateProfilePic(String bitmap);
+    void updateProfilePic(String bitmap, String path);
 
 }

@@ -1,18 +1,17 @@
 package com.versatilemobitech.fmc.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -25,8 +24,15 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.designs.MaterialDialog;
 import com.versatilemobitech.fmc.interfaces.IUpdateProfilePic;
+import com.versatilemobitech.fmc.models.LoginModel;
 import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.models.SignUpModel;
+import com.versatilemobitech.fmc.parsers.SignUpParser;
+import com.versatilemobitech.fmc.permissions.Permissions;
+import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.ImageUtility;
 import com.versatilemobitech.fmc.utility.Utility;
@@ -171,6 +177,48 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         edt_location.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         edt_c_pwd.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         edt_password.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+
+        if (Utility.isMarshmallowOS()) {
+            Permissions.getInstance().setActivity(this);
+            CheckForPermissions(this, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+    }
+
+    private void CheckForPermissions(final Context mContext, final String... mPermisons) {
+        // A request for two permissions
+        Permissions.getInstance().requestPermissions(new Permissions.IOnPermissionResult() {
+            @Override
+            public void onPermissionResult(Permissions.ResultSet resultSet) {
+
+                if (resultSet.isPermissionGranted(Manifest.permission.CAMERA) &&
+                        resultSet.isPermissionGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    // setUi();
+                } else {
+                    final MaterialDialog denyDialog = new MaterialDialog(mContext, Permissions.TITLE,
+                            Permissions.MESSAGE);
+                    //Positive
+                    denyDialog.setAcceptButton("RE-TRY");
+                    denyDialog.setOnAcceptButtonClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            CheckForPermissions(mContext, mPermisons);
+                        }
+                    });
+                    denyDialog.show();
+                }
+            }
+
+            @Override
+            public void onRationaleRequested(Permissions.IOnRationaleProvided callback, String... permissions) {
+                Permissions.getInstance().showRationaleInDialog(Permissions.TITLE,
+                        Permissions.MESSAGE, "RE-TRY", callback);
+            }
+        }, mPermisons);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
     }
 
     @Override
@@ -206,6 +254,12 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                         } else if (cb_bangalore.isChecked() != true) {
                             paramMap.put("interested_location", "Bangalore");
                         }
+                        SignUpParser mParser = new SignUpParser();
+                        ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(context, Utility.getResourcesString(context,
+                                R.string.please_wait), true,
+                                APIConstants.REGISTRATION_URL, paramMap,
+                                APIConstants.REQUEST_TYPE.POST, this, mParser);
+                        Utility.execute(serverIntractorAsync);
 
                     } else {
                         Utility.showSettingDialog(
@@ -271,6 +325,9 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         } else if (Utility.isValueNullOrEmpty(edt_c_pwd.getText().toString().trim())) {
             Utility.setSnackBarEnglish(SignupActivity.this, edt_c_pwd, "Please enter confirm password");
             edt_c_pwd.requestFocus();
+        } else if (!edt_password.getText().toString().trim().equalsIgnoreCase(edt_c_pwd.getText().toString().trim())) {
+            Utility.setSnackBarEnglish(SignupActivity.this, edt_c_pwd, "Passwords not matched");
+            edt_c_pwd.requestFocus();
         } else if (Utility.isValueNullOrEmpty(mImageSelected)) {
             Utility.setSnackBarEnglish(SignupActivity.this, edt_profile_pic, "Please upload your profile pic");
         } else if (cb_hyd.isChecked() != true && cb_pune.isChecked() != true && cb_chennai.isChecked() != true && cb_bangalore.isChecked() != true) {
@@ -283,7 +340,16 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onComplete(Model model) {
-
+        if (model != null) {
+            if (model.isStatus()) {
+                if (model instanceof SignUpModel) {
+                    SignUpModel loginModel = (SignUpModel) model;
+                    Utility.setSharedPrefStringData(context, Constants.LOGIN_NAME, loginModel.getName());
+                    Intent mIntentSignup = new Intent(SignupActivity.this, DashboardActivity.class);
+                    startActivity(mIntentSignup);
+                }
+            }
+        }
     }
 
     @Override
@@ -393,9 +459,10 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
     }*/
 
     @Override
-    public void updateProfilePic(String bitmap) {
+    public void updateProfilePic(String bitmap, String path) {
         if (bitmap != null) {
             mImageSelected = bitmap;
+            edt_profile_pic.setText("" + path);
         }
     }
 }

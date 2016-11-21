@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/_15dp"
             android:layout_marginRight="@dimen/_15dp"
-            android:layout_marginTop="@dimen/_25dp"
+            android:layout_marginTop="@dimen/_15dp"
             android:orientation="vertical"
             android:singleLine="true">
 
@@ -76,6 +76,7 @@
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/first_name"
+                        android:inputType="text|textNoSuggestions"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
@@ -115,6 +116,7 @@
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/last_name"
+                        android:inputType="text|textNoSuggestions"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
@@ -154,6 +156,7 @@
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/company_name"
+                        android:inputType="text|textNoSuggestions"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
@@ -193,6 +196,7 @@
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/business_mail"
+                        android:inputType="textEmailAddress|textNoSuggestions"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
@@ -232,6 +236,7 @@
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/personal_mail"
+                        android:inputType="textEmailAddress|textNoSuggestions"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
@@ -353,6 +358,7 @@
                         android:layout_marginLeft="@dimen/_5dp"
                         android:background="@android:color/transparent"
                         android:hint="@string/current_location"
+                        android:inputType="text|textNoSuggestions"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/_18sp" />
@@ -478,6 +484,7 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:hint="@string/profile_picture"
+                        android:inputType="text|textNoSuggestions"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textSize="@dimen/_18sp" />

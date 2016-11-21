@@ -36,7 +36,7 @@ public class CropActivity extends BaseActivity implements View.OnClickListener {
     private void setUI() {
 
         Bundle bundle = getIntent().getExtras();
-        String imagePath = bundle.getString("image_path");
+        final String imagePath = bundle.getString("image_path");
         mForm = bundle.getString("from");
         /*TITLE*/
         TextView txt_registration_title = (TextView) findViewById(R.id.txt_registration_title);
@@ -55,7 +55,9 @@ public class CropActivity extends BaseActivity implements View.OnClickListener {
         final CropImageView mCropView = (CropImageView) findViewById(R.id.iv_crop_view);
         assert mCropView != null;
         mCropView.setCropMode(CropImageView.CropMode.CIRCLE_SQUARE);
-        mCropView.setImageBitmap(getBitmap(imagePath));
+        Bitmap mBitmap = Utility.getRotatedBitmap(0, imagePath);
+        mCropView.setImageBitmap(mBitmap);
+
 
 
          /*BUTTON CROP*/
@@ -72,7 +74,7 @@ public class CropActivity extends BaseActivity implements View.OnClickListener {
                 String temp = Base64.encodeToString(b, Base64.DEFAULT);
 
                 if (mForm.equalsIgnoreCase("RegistrationActivity")) {
-                    SignupActivity.getInstance().updateProfilePic(temp);
+                    SignupActivity.getInstance().updateProfilePic(temp, imagePath);
                 }
                 finish();
             }

@@ -88,5 +88,6 @@
 
     <string name="txt_cd">empty</string>
     <string name="icon_left_arrow">&#xf060;</string>
+    <string name="txt_accept">Accept</string>
 
 </resources>
