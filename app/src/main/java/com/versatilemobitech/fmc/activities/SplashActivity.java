@@ -12,7 +12,7 @@ import com.versatilemobitech.fmc.utility.Constants;
 /**
  * Created by Shankar Pilli on 20-10-2016.
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

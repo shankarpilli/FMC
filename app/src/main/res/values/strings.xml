@@ -81,4 +81,12 @@
 
     <string name="date_time">25th Sep, 2016       10.30AM</string>
 
+    <string name="txt_choose_photo">Choose Photo</string>
+    <string name="txt_take_photo">Take Photo</string>
+    <string name="txt_crop">Crop</string>
+    <string name="txt_cancel">Cancel</string>
+
+    <string name="txt_cd">empty</string>
+    <string name="icon_left_arrow">&#xf060;</string>
+
 </resources>

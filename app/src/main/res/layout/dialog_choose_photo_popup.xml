@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/txt_shr_popup_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_20dp"
+        android:layout_marginStart="@dimen/_20dp"
+        android:gravity="center_vertical"
+        android:padding="@dimen/_10dp"
+        android:text="@string/txt_choose_photo"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/txt_default_size" />
+
+    <LinearLayout
+        android:id="@+id/ll_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/share_pop_imageView"
+            android:contentDescription="@string/txt_cd"
+            android:src="@drawable/icon_img_camera" />
+
+        <TextView
+            android:id="@+id/tv_take_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:text="@string/txt_take_photo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_default_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/share_pop_imageView"
+            android:contentDescription="@string/txt_cd"
+            android:src="@drawable/icon_from_gallery" />
+
+        <TextView
+            android:id="@+id/tv_choose_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:text="Choose from Gallery"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_default_size"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            style="@style/share_pop_imageView"
+            android:contentDescription="@string/txt_cd"
+            android:src="@drawable/icon_delete" />
+
+        <TextView
+            android:id="@+id/tv_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginStart="@dimen/_10dp"
+            android:text="@string/txt_cancel"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_default_size"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+
+</LinearLayout>

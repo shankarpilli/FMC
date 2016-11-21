@@ -27,7 +27,7 @@ import java.util.LinkedHashMap;
  * Created by Rev's Nani on 04-11-2016.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, IAsyncCaller {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, IAsyncCaller {
 
     private RelativeLayout rly_main;
 
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_login);
         context = this;
         setUI();

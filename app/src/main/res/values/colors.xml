@@ -16,6 +16,8 @@
     <color name="light_orange">#ea861c</color>
     <color name="gray">#39393a</color>
     <color name="themeColor_fifty_percent">#BF113474</color>
+    <color name="black">#000000</color>
 
+    <color name="very_dark_gray">#444444</color>
 
 </resources>
