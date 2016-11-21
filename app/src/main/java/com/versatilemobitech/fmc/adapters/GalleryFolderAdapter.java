@@ -35,12 +35,12 @@ public class GalleryFolderAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         //return galleryFolderModels.size();
-        return 10;
+        return galleryFolderModels.size();
     }
 
     @Override
     public GalleryFolderModel getItem(int position) {
-        return null;
+        return galleryFolderModels.get(position);
     }
 
     @Override

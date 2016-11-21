@@ -1,5 +1,6 @@
 package com.versatilemobitech.fmc.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,15 +12,23 @@ import android.widget.GridView;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.adapters.GalleryFolderAdapter;
+import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.models.GalleryFolderModel;
+import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.LoginParser;
+import com.versatilemobitech.fmc.parsers.PhotoAlbumsParser;
+import com.versatilemobitech.fmc.utility.APIConstants;
+import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Shankar Pilli on 11/07/2016
  */
-public class GalleryFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class GalleryFragment extends Fragment implements AdapterView.OnItemClickListener,IAsyncCaller {
     public static final String TAG = "GalleryFragment";
     private DashboardActivity mParent;
     private View rootView;
@@ -46,16 +55,51 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
 
     private void initUI() {
         grid_view = (GridView) rootView.findViewById(R.id.grid_view);
-        galleryFolderModels = new ArrayList<>();
-        galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), galleryFolderModels);
-        grid_view.setAdapter(galleryFolderAdapter);
         grid_view.setOnItemClickListener(this);
+
+        getGalleryFromApi("1");
     }
 
+    public void getGalleryFromApi(String mPageNumber) {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+
+        PhotoAlbumsParser mPhotoAlbumsParser = new PhotoAlbumsParser();
+        if (Utility.isNetworkAvailable(mParent)) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
+                    R.string.please_wait), true,
+                    APIConstants.PHOTO_ALBUMS + mPageNumber, paramMap,
+                    APIConstants.REQUEST_TYPE.GET, this, mPhotoAlbumsParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    mParent,
+                    mParent.getResources().getString(
+                            R.string.no_internet_msg),
+                    mParent.getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
+        }
+    }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Bundle bundle = new Bundle();
         bundle.putInt("position", 0);
         Utility.navigateDashBoardFragment(new GalleryViewFragment(), GalleryViewFragment.TAG, bundle, mParent);
     }
+
+    @Override
+    public void onComplete(Model model) {
+        if (model != null) {
+            if (model.isStatus()) {
+                if (model instanceof GalleryFolderModel) {
+                    GalleryFolderModel mGalleryFolderModel = (GalleryFolderModel) model;
+
+                    galleryFolderModels = mGalleryFolderModel.getmList();
+                    galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), galleryFolderModels);
+                    grid_view.setAdapter(galleryFolderAdapter);
+                }
+            }
+        }
+    }
+
 }

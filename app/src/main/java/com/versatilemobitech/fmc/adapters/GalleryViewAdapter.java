@@ -33,12 +33,12 @@ public class GalleryViewAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         //return galleryViewModels.size();
-        return 10;
+        return galleryViewModels.size();
     }
 
     @Override
-    public GalleryFolderModel getItem(int position) {
-        return null;
+    public GalleryViewModel getItem(int position) {
+        return galleryViewModels.get(position);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class GalleryViewAdapter extends BaseAdapter {
             mGalleryViewHolder = (GalleryViewHolder) convertView.getTag();
         }
 
-        GalleryFolderModel leftMenuModel = (GalleryFolderModel) getItem(position);
+        GalleryViewModel leftMenuModel = (GalleryViewModel) getItem(position);
 
         return convertView;
     }
