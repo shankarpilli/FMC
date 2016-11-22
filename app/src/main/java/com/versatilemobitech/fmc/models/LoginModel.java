@@ -5,14 +5,23 @@ package com.versatilemobitech.fmc.models;
  */
 public class LoginModel extends Model {
     private String user_id;
-    private String name;
+    private String user_name;
+    private String key;
 
-    public String getName() {
-        return name;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getUser_id() {

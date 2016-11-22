@@ -12,7 +12,9 @@ public class Constants {
     public static final boolean logMessageOnOrOff = true;
 
     public static final String USER_ID = "USER_ID";
+    public static final String USER_KEY = "USER_KEY";
     public static final String LOGIN_NAME = "LOGIN_NAME";
+    public static final String LOGIN_PASSWORD = "LOGIN_PASSWORD";
 
     public static final int FROM_GALLERY_ID = 690;
     public static final int FROM_CAMERA_ID = 689;

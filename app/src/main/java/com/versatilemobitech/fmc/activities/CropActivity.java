@@ -3,6 +3,7 @@ package com.versatilemobitech.fmc.activities;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -55,7 +56,7 @@ public class CropActivity extends BaseActivity implements View.OnClickListener {
         final CropImageView mCropView = (CropImageView) findViewById(R.id.iv_crop_view);
         assert mCropView != null;
         mCropView.setCropMode(CropImageView.CropMode.CIRCLE_SQUARE);
-        Bitmap mBitmap = Utility.getRotatedBitmap(0, imagePath);
+        Bitmap mBitmap = getRotatedBitmap(0, imagePath);
         mCropView.setImageBitmap(mBitmap);
 
 
@@ -93,6 +94,37 @@ public class CropActivity extends BaseActivity implements View.OnClickListener {
         });
 
     }
+
+
+    public static Bitmap getRotatedBitmap(int rotation, String mPath) {
+        File f = new File(mPath);
+        Bitmap mBitMap = BitmapFactory.decodeFile(f.getAbsolutePath());
+
+        int width = mBitMap.getWidth();
+        int height = mBitMap.getHeight();
+
+        /*ULTRA HEIGHT RESOLUTION IMAGE */
+        if (width > 1920 && height > 1080) {
+
+            if (width > height)
+                mBitMap = Bitmap.createScaledBitmap(mBitMap, 1920, 1080, false);
+            else
+                mBitMap = Bitmap.createScaledBitmap(mBitMap, 1080, 1920, false);
+
+            Bitmap oldBitmap = mBitMap;
+            Matrix matrix = new Matrix();
+            matrix.postRotate(rotation);
+            mBitMap = Bitmap.createBitmap(oldBitmap, 0, 0, oldBitmap.getWidth(), oldBitmap.getHeight(), matrix, false);
+        } else if (rotation != 0) {
+            Bitmap oldBitmap = mBitMap;
+            Matrix matrix = new Matrix();
+            matrix.postRotate(rotation);
+            mBitMap = Bitmap.createBitmap(oldBitmap, 0, 0, oldBitmap.getWidth(), oldBitmap.getHeight(), matrix, false);
+            oldBitmap.recycle();
+        }
+        return mBitMap;
+    }
+
 
     @Override
     public void onClick(View v) {

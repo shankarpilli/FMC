@@ -19,13 +19,14 @@ public class LoginParser implements Parser {
             mLoginModel.setStatus(true);
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                mLoginModel.setMessage(jsonObject.optString("success"));
+                mLoginModel.setMessage(jsonObject.optString("msg"));
                 mLoginModel.setUser_id(jsonObject.optString("user_id"));
-                mLoginModel.setName(jsonObject.optString("name"));
+                mLoginModel.setUser_name(jsonObject.optString("user_name"));
+                mLoginModel.setKey(jsonObject.optString("key"));
             } catch (Exception e) {
                 mLoginModel.setStatus(false);
             }
         }
-        return null;
+        return mLoginModel;
     }
 }

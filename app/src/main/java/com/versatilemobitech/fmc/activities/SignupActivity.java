@@ -344,7 +344,8 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
             if (model.isStatus()) {
                 if (model instanceof SignUpModel) {
                     SignUpModel loginModel = (SignUpModel) model;
-                    Utility.setSharedPrefStringData(context, Constants.LOGIN_NAME, loginModel.getName());
+                    Utility.setSharedPrefStringData(context, Constants.LOGIN_NAME, loginModel.getUsername());
+                    Utility.setSharedPrefStringData(context, Constants.LOGIN_PASSWORD, edt_password.getText().toString());
                     Intent mIntentSignup = new Intent(SignupActivity.this, DashboardActivity.class);
                     startActivity(mIntentSignup);
                 }

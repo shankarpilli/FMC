@@ -63,6 +63,7 @@
                             android:layout_marginLeft="@dimen/_5dp"
                             android:background="@android:color/transparent"
                             android:hint="@string/username"
+                            android:text="ss@ss.com"
                             android:maxLines="1"
                             android:singleLine="true"
                             android:textSize="@dimen/_18sp" />
@@ -103,6 +104,7 @@
                             android:background="@android:color/transparent"
                             android:hint="@string/password"
                             android:maxLines="1"
+                            android:text="sandy0210"
                             android:singleLine="true"
                             android:textSize="@dimen/_18sp" />
                     </android.support.design.widget.TextInputLayout>

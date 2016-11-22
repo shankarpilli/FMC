@@ -155,7 +155,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 if (model instanceof LoginModel) {
                     LoginModel loginModel = (LoginModel) model;
                     Utility.setSharedPrefStringData(context, Constants.USER_ID, loginModel.getUser_id());
-                    Utility.setSharedPrefStringData(context, Constants.LOGIN_NAME, loginModel.getName());
+                    Utility.setSharedPrefStringData(context, Constants.LOGIN_NAME, et_user_name.getText().toString());
+                    Utility.setSharedPrefStringData(context, Constants.LOGIN_PASSWORD, et_password.getText().toString());
+                    Utility.setSharedPrefStringData(context, Constants.USER_KEY, loginModel.getKey());
                     Intent mIntentSignup = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(mIntentSignup);
                 }
