@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.utility.Constants;
+import com.versatilemobitech.fmc.utility.Utility;
 
 
 /**
@@ -23,9 +24,15 @@ public class SplashActivity extends BaseActivity {
         Runnable action = new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                if (Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(SplashActivity.this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP))) {
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         };
         mSplashHandler.postDelayed(action, Constants.SPLASH_TIME_OUT);

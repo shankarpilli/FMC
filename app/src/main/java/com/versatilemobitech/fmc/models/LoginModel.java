@@ -7,6 +7,7 @@ public class LoginModel extends Model {
     private String user_id;
     private String user_name;
     private String key;
+    private String company_name;
 
     public String getUser_name() {
         return user_name;
@@ -30,5 +31,13 @@ public class LoginModel extends Model {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
     }
 }

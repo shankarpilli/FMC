@@ -22,6 +22,7 @@ public class LoginParser implements Parser {
                 mLoginModel.setMessage(jsonObject.optString("msg"));
                 mLoginModel.setUser_id(jsonObject.optString("user_id"));
                 mLoginModel.setUser_name(jsonObject.optString("user_name"));
+                mLoginModel.setCompany_name(jsonObject.optString("company_name"));
                 mLoginModel.setKey(jsonObject.optString("key"));
             } catch (Exception e) {
                 mLoginModel.setStatus(false);
