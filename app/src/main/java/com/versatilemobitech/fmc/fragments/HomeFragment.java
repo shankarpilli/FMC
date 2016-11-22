@@ -52,8 +52,29 @@ public class HomeFragment extends Fragment {
     private void initUI() {
         homeDataModels = new ArrayList<>();
         list_view = (ListView) rootView.findViewById(R.id.list_view);
-        homeAdapter = new HomeAdapter(getActivity(), homeDataModels);
-        list_view.setAdapter(homeAdapter);
+        /*homeAdapter = new HomeAdapter(getActivity(), homeDataModels);
+        list_view.setAdapter(homeAdapter);*/
+
+        getHomeFeeds();
+
+
+    }
+
+    private void getHomeFeeds() {
+        if (Utility.isNetworkAvailable(getActivity())) {
+
+        } else {
+            Utility.showSettingDialog(
+                    getActivity(),
+                    getActivity().getResources().getString(
+                            R.string.no_internet_msg),
+                    getActivity().getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
+        }
+    }
+
+    private void setListHeader() {
         LinearLayout layout_list_header = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.
                 home_post_your_topic, null);
         final float scale = this.getResources().getDisplayMetrics().density;
@@ -62,9 +83,9 @@ public class HomeFragment extends Fragment {
                 LayoutParams.MATCH_PARENT, pixels);
         params.setMargins(15, 15, 15, 15);
         layout_list_header.setLayoutParams(params);
-        TextView tv_post = (TextView)layout_list_header.findViewById(R.id.tv_post);
+        TextView tv_post = (TextView) layout_list_header.findViewById(R.id.tv_post);
         tv_post.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        TextView txt_post_your_topic = (TextView)layout_list_header.findViewById(R.id.txt_post_your_topic);
+        TextView txt_post_your_topic = (TextView) layout_list_header.findViewById(R.id.txt_post_your_topic);
         txt_post_your_topic.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         EditText et_what_is_on_u_mind = (EditText) layout_list_header.findViewById(R.id.et_what_is_on_u_mind);
         et_what_is_on_u_mind.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));

@@ -27,6 +27,7 @@ import com.versatilemobitech.fmc.fragments.LogoutFragment;
 import com.versatilemobitech.fmc.fragments.MemberDirectorFragment;
 import com.versatilemobitech.fmc.fragments.WelcomeFragment;
 import com.versatilemobitech.fmc.models.LeftMenuModel;
+import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
@@ -86,7 +87,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         TextView txt_user_designation = (TextView) layout_list_header.findViewById(R.id.txt_user_designation);
 
         txt_name.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        txt_name.setText(Utility.getSharedPrefStringData(DashboardActivity.this, Constants.LOGIN_NAME));
         txt_user_designation.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        txt_user_designation.setText(Utility.getSharedPrefStringData(DashboardActivity.this, Constants.COMPANY_NAME));
         list_home_left_drawer.addHeaderView(layout_list_header);
 
         list_home_left_drawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
