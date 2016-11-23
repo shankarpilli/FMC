@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/no_posts_found"
-        android:textColor="@color/thickgray"
-        android:textSize="@dimen/sp_size_fifteen" />
+        android:textColor="@color/very_dark_gray"
+        android:textSize="@dimen/_15sp" />
 
 </LinearLayout>
