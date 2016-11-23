@@ -143,10 +143,10 @@ public class EventsAdapter extends BaseAdapter {
 
         mListEventsHolder.tv_venu.setText("" + mEventsModel.getmVenue());
         mListEventsHolder.tv_organized_by.setText("" + mEventsModel.getmOrganizedBy());
-        mListEventsHolder.tv_contact.setText("" + mEventsModel.getmContact());
+    /*    mListEventsHolder.tv_contact.setText("" + mEventsModel.getmContact());
         mListEventsHolder.tv_chief_guest.setText("" + mEventsModel.getmChiefGuest());
         mListEventsHolder.tv_date_event.setText("" + mEventsModel.getmDateOfEvent());
-        mListEventsHolder.tv_details.setText("" + mEventsModel.getmDetails());
+        mListEventsHolder.tv_details.setText("" + mEventsModel.getmDetails());*/
 
         final ListEventsHolder finalMListEventsHolder = mListEventsHolder;
 

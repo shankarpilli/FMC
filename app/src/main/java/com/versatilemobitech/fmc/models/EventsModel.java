@@ -1,18 +1,43 @@
 package com.versatilemobitech.fmc.models;
 
+import java.util.ArrayList;
+
 /**
  * Created by Rev's Nani on 06-11-2016.
  */
 
 public class EventsModel extends Model {
 
+
+private String mTotalNumberOfPosts;
+private String mEventTitle;
 private String mVenue;
 private String mOrganizedBy;
-private String mContact;
-private String mChiefGuest;
-private String mDateOfEvent;
-private String mDetails;
+private String mContactPersonName;
+private String mContactInfo;
+private String mEventDateTime;
+private String mPostedDate;
+private String mFullDetails;
+private int mResponse;
 private boolean visible;
+
+    ArrayList<EventsModel> mEventsModelList;
+
+    public String getmTotalNumberOfPosts() {
+        return mTotalNumberOfPosts;
+    }
+
+    public void setmTotalNumberOfPosts(String mTotalNumberOfPosts) {
+        this.mTotalNumberOfPosts = mTotalNumberOfPosts;
+    }
+
+    public String getmEventTitle() {
+        return mEventTitle;
+    }
+
+    public void setmEventTitle(String mEventTitle) {
+        this.mEventTitle = mEventTitle;
+    }
 
     public String getmVenue() {
         return mVenue;
@@ -30,36 +55,52 @@ private boolean visible;
         this.mOrganizedBy = mOrganizedBy;
     }
 
-    public String getmContact() {
-        return mContact;
+    public String getmContactPersonName() {
+        return mContactPersonName;
     }
 
-    public void setmContact(String mContact) {
-        this.mContact = mContact;
+    public void setmContactPersonName(String mContactPersonName) {
+        this.mContactPersonName = mContactPersonName;
     }
 
-    public String getmChiefGuest() {
-        return mChiefGuest;
+    public String getmContactInfo() {
+        return mContactInfo;
     }
 
-    public void setmChiefGuest(String mChiefGuest) {
-        this.mChiefGuest = mChiefGuest;
+    public void setmContactInfo(String mContactInfo) {
+        this.mContactInfo = mContactInfo;
     }
 
-    public String getmDateOfEvent() {
-        return mDateOfEvent;
+    public String getmEventDateTime() {
+        return mEventDateTime;
     }
 
-    public void setmDateOfEvent(String mDateOfEvent) {
-        this.mDateOfEvent = mDateOfEvent;
+    public void setmEventDateTime(String mEventDateTime) {
+        this.mEventDateTime = mEventDateTime;
     }
 
-    public String getmDetails() {
-        return mDetails;
+    public String getmPostedDate() {
+        return mPostedDate;
     }
 
-    public void setmDetails(String mDetails) {
-        this.mDetails = mDetails;
+    public void setmPostedDate(String mPostedDate) {
+        this.mPostedDate = mPostedDate;
+    }
+
+    public String getmFullDetails() {
+        return mFullDetails;
+    }
+
+    public void setmFullDetails(String mFullDetails) {
+        this.mFullDetails = mFullDetails;
+    }
+
+    public int getmResponse() {
+        return mResponse;
+    }
+
+    public void setmResponse(int mResponse) {
+        this.mResponse = mResponse;
     }
 
     public boolean isVisible() {
@@ -68,5 +109,13 @@ private boolean visible;
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public ArrayList<EventsModel> getmEventsModelList() {
+        return mEventsModelList;
+    }
+
+    public void setmEventsModelList(ArrayList<EventsModel> mEventsModelList) {
+        this.mEventsModelList = mEventsModelList;
     }
 }

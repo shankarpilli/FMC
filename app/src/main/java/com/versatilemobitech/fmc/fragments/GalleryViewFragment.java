@@ -81,7 +81,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller {
         if (Utility.isNetworkAvailable(mParent)) {
             ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
                     R.string.please_wait), true,
-                    APIConstants.PHOTO_ALBUMS + "/" + mAlbumId + "/" + mPageNumber, paramMap,
+                    APIConstants.PHOTO_GALLERY + "/" + mAlbumId + "/" + mPageNumber, paramMap,
                     APIConstants.REQUEST_TYPE.GET, this, mGalleryViewParser);
             Utility.execute(serverIntractorAsync);
         } else {
