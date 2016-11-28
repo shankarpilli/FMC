@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
@@ -34,6 +35,7 @@ public class GalleryFragment extends Fragment implements IAsyncCaller {
     private View rootView;
 
     private GridView grid_view;
+    private TextView tv_no_images;
     private GalleryFolderAdapter galleryFolderAdapter;
     private ArrayList<GalleryFolderModel> galleryFolderModels;
 
@@ -55,6 +57,7 @@ public class GalleryFragment extends Fragment implements IAsyncCaller {
 
     private void initUI() {
         grid_view = (GridView) rootView.findViewById(R.id.grid_view);
+        tv_no_images = (TextView) rootView.findViewById(R.id.tv_no_images);
         /*grid_view.setOnItemClickListener(this);*/
 
         getGalleryFromApi("1");
@@ -93,9 +96,13 @@ public class GalleryFragment extends Fragment implements IAsyncCaller {
             if (model.isStatus()) {
                 if (model instanceof GalleryFolderModel) {
                     GalleryFolderModel mGalleryFolderModel = (GalleryFolderModel) model;
-
-                    galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), mGalleryFolderModel.getmList());
-                    grid_view.setAdapter(galleryFolderAdapter);
+                    if (mGalleryFolderModel.getmList() != null && mGalleryFolderModel.getmList().size() != 0) {
+                        tv_no_images.setVisibility(View.GONE);
+                        galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), mGalleryFolderModel.getmList());
+                        grid_view.setAdapter(galleryFolderAdapter);
+                    } else {
+                        tv_no_images.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         }

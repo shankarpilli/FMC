@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
@@ -33,6 +34,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller {
     private View rootView;
 
     private GridView grid_view;
+    private TextView tv_no_images;
     private GalleryViewAdapter galleryViewAdapter;
     private ArrayList<GalleryViewModel> galleryViewModels;
 
@@ -63,7 +65,8 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller {
 
     private void initUI() {
         grid_view = (GridView) rootView.findViewById(R.id.grid_view);
-        getGalleryFromApi("1", "1");
+        tv_no_images = (TextView) rootView.findViewById(R.id.tv_no_images);
+        getGalleryFromApi(albumId, "1");
        /* galleryViewModels = new ArrayList<>();
         galleryViewAdapter = new GalleryViewAdapter(getActivity(), galleryViewModels);
         grid_view.setAdapter(galleryViewAdapter);*/
@@ -75,10 +78,14 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller {
             if (model.isStatus()) {
                 if (model instanceof GalleryViewModel) {
                     GalleryViewModel mGalleryViewModel = (GalleryViewModel) model;
-
-                    galleryViewModels = mGalleryViewModel.getmList();
-                    galleryViewAdapter = new GalleryViewAdapter(getActivity(), galleryViewModels);
-                    grid_view.setAdapter(galleryViewAdapter);
+                    if (mGalleryViewModel.getmList() == null || mGalleryViewModel.getmList().size() == 0) {
+                        tv_no_images.setVisibility(View.VISIBLE);
+                    } else {
+                        tv_no_images.setVisibility(View.GONE);
+                        galleryViewModels = mGalleryViewModel.getmList();
+                        galleryViewAdapter = new GalleryViewAdapter(getActivity(), galleryViewModels);
+                        grid_view.setAdapter(galleryViewAdapter);
+                    }
                 }
             }
         }
