@@ -28,7 +28,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by Shankar Pilli on 11/07/2016
  */
-public class GalleryFragment extends Fragment implements AdapterView.OnItemClickListener,IAsyncCaller {
+public class GalleryFragment extends Fragment implements IAsyncCaller {
     public static final String TAG = "GalleryFragment";
     private DashboardActivity mParent;
     private View rootView;
@@ -55,7 +55,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
 
     private void initUI() {
         grid_view = (GridView) rootView.findViewById(R.id.grid_view);
-        grid_view.setOnItemClickListener(this);
+        /*grid_view.setOnItemClickListener(this);*/
 
         getGalleryFromApi("1");
     }
@@ -80,12 +80,12 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
                     Utility.NO_INTERNET_CONNECTION).show();
         }
     }
-    @Override
+   /* @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Bundle bundle = new Bundle();
         bundle.putInt("position", 0);
         Utility.navigateDashBoardFragment(new GalleryViewFragment(), GalleryViewFragment.TAG, bundle, mParent);
-    }
+    }*/
 
     @Override
     public void onComplete(Model model) {
@@ -94,8 +94,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
                 if (model instanceof GalleryFolderModel) {
                     GalleryFolderModel mGalleryFolderModel = (GalleryFolderModel) model;
 
-                    galleryFolderModels = mGalleryFolderModel.getmList();
-                    galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), galleryFolderModels);
+                    galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), mGalleryFolderModel.getmList());
                     grid_view.setAdapter(galleryFolderAdapter);
                 }
             }

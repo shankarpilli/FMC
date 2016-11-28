@@ -8,9 +8,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.models.GalleryViewModel;
+import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -55,18 +57,23 @@ public class GalleryViewAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.gallery_view_item,
                     null);
             mGalleryViewHolder = new GalleryViewHolder();
+            mGalleryViewHolder.iv_item_gallery = (ImageView) convertView.findViewById(R.id.iv_item_gallery);
             convertView.setTag(mGalleryViewHolder);
         } else {
             mGalleryViewHolder = (GalleryViewHolder) convertView.getTag();
         }
 
-        GalleryViewModel leftMenuModel = (GalleryViewModel) getItem(position);
+        GalleryViewModel mGalleryViewModel = (GalleryViewModel) getItem(position);
+
+        Picasso.with(mContext)
+                .load(mGalleryViewModel.getImage_path())
+                .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
+                .into(mGalleryViewHolder.iv_item_gallery);
 
         return convertView;
     }
 
     private class GalleryViewHolder {
-        private TextView txt_left_drawer_text;
-        private ImageView img_left_drawer_icon;
+        private ImageView iv_item_gallery;
     }
 }

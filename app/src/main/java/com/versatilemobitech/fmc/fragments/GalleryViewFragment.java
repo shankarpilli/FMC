@@ -1,5 +1,6 @@
 package com.versatilemobitech.fmc.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,16 +36,25 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller {
     private GalleryViewAdapter galleryViewAdapter;
     private ArrayList<GalleryViewModel> galleryViewModels;
 
+    private String albumId;
+    private String albumName;
+    private int mPosition;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mParent = (DashboardActivity) getActivity();
+
+        Bundle mBundle = getArguments();
+        albumId = mBundle.getString("albumId");
+        albumName = mBundle.getString("albumName");
+        mPosition = mBundle.getInt("position");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.gallery_view));
+        mParent.txt_fmc.setText(albumName);
         rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
         initUI();
         return rootView;
@@ -53,7 +63,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller {
 
     private void initUI() {
         grid_view = (GridView) rootView.findViewById(R.id.grid_view);
-        getGalleryFromApi("1","1");
+        getGalleryFromApi("1", "1");
        /* galleryViewModels = new ArrayList<>();
         galleryViewAdapter = new GalleryViewAdapter(getActivity(), galleryViewModels);
         grid_view.setAdapter(galleryViewAdapter);*/
@@ -81,7 +91,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller {
         if (Utility.isNetworkAvailable(mParent)) {
             ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
                     R.string.please_wait), true,
-                    APIConstants.PHOTO_GALLERY + "/" + mAlbumId + "/" + mPageNumber, paramMap,
+                    APIConstants.PHOTO_GALLERY + mAlbumId + "/" + mPageNumber, paramMap,
                     APIConstants.REQUEST_TYPE.GET, this, mGalleryViewParser);
             Utility.execute(serverIntractorAsync);
         } else {

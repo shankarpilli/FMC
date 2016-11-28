@@ -4,6 +4,7 @@
     android:layout_height="@dimen/_220dp">
 
     <ImageView
+        android:id="@+id/iv_item_gallery"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_220dp"
         android:layout_gravity="center"

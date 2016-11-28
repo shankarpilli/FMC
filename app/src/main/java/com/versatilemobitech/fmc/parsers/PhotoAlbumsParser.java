@@ -29,20 +29,21 @@ public class PhotoAlbumsParser implements Parser {
                     JSONArray mArray = jsonObject.getJSONArray("album_details");
                     ArrayList<GalleryFolderModel> mList = new ArrayList<>();
                     for(int i = 0;i<mArray.length();i++) {
-                        mGalleryFolderModel = new GalleryFolderModel();
+                        GalleryFolderModel mmGalleryFolderModel = new GalleryFolderModel();
                         JSONObject mObj = (JSONObject) mArray.get(i);
-                        mGalleryFolderModel.setAlbum_name(mObj.optString("album_name"));
-                        mGalleryFolderModel.setAlbum_image_path(mObj.optString("album_image_path"));
-                        mGalleryFolderModel.setPhoto_album_id(mObj.optString("photo_album_id"));
+                        mmGalleryFolderModel.setAlbum_name(mObj.optString("album_name"));
+                        mmGalleryFolderModel.setAlbum_image_path(mObj.optString("album_image_path"));
+                        mmGalleryFolderModel.setPhoto_album_id(mObj.optString("photo_album_id"));
 
-                        mList.add(mGalleryFolderModel);
+                        mList.add(mmGalleryFolderModel);
                     }
+                    mGalleryFolderModel.setmList(mList);
 
                 }
             } catch (Exception e) {
                 mGalleryFolderModel.setStatus(false);
             }
         }
-        return null;
+        return mGalleryFolderModel;
     }
 }

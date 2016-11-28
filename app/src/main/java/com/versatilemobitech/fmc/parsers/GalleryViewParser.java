@@ -31,18 +31,19 @@ public class GalleryViewParser implements Parser {
                     ArrayList<GalleryViewModel> mList = new ArrayList<>();
                     for(int i = 0;i<mArray.length();i++) {
                         JSONObject mObj = (JSONObject) mArray.get(i);
-                        mGalleryViewModel = new GalleryViewModel();
+                        GalleryViewModel mmGalleryViewModel = new GalleryViewModel();
 
-                        mGalleryViewModel.setImage_path(mObj.optString("image_path"));
-                        mGalleryViewModel.setPhoto_id(mObj.optString("photo_id"));
-                        mList.add(mGalleryViewModel);
+                        mmGalleryViewModel.setImage_path(mObj.optString("image_path"));
+                        mmGalleryViewModel.setPhoto_id(mObj.optString("photo_id"));
+                        mList.add(mmGalleryViewModel);
                     }
+                    mGalleryViewModel.setmList(mList);
 
                 }
             } catch (Exception e) {
                 mGalleryViewModel.setStatus(false);
             }
         }
-        return null;
+        return mGalleryViewModel;
     }
 }
