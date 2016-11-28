@@ -1,6 +1,7 @@
 package com.versatilemobitech.fmc.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import com.versatilemobitech.fmc.models.EventsModel;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.parsers.GalleryViewParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
+import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class EventsFragment extends Fragment implements IAsyncCaller {
 
         lv_events = (ListView) rootView.findViewById(R.id.lv_events);
 
-        getEventsFromApi("1","10");
+        getEventsFromApi("1",Utility.getSharedPrefStringData(mParent, Constants.USER_ID));
       /*  ArrayList<EventsModel> models = eventModels();
         mEventsAdapter = new EventsAdapter(mParent, models);
         lv_events.setAdapter(mEventsAdapter);*/
@@ -89,7 +91,7 @@ public class EventsFragment extends Fragment implements IAsyncCaller {
         if (Utility.isNetworkAvailable(mParent)) {
             ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
                     R.string.please_wait), true,
-                    APIConstants.EVENTS + "/" + mPageNumber + "/" + mUserId, paramMap,
+                    APIConstants.EVENTS + mPageNumber + "/" + mUserId, paramMap,
                     APIConstants.REQUEST_TYPE.GET, this, mGalleryViewParser);
             Utility.execute(serverIntractorAsync);
         } else {

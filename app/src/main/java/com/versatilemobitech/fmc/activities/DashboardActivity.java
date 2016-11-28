@@ -1,5 +1,6 @@
 package com.versatilemobitech.fmc.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -142,9 +143,23 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 Utility.navigateDashBoardFragment(new ContactsUsFragment(), ContactsUsFragment.TAG, null, DashboardActivity.this);
                 break;
             case 11:
-                Utility.navigateDashBoardFragment(new LogoutFragment(), LogoutFragment.TAG, null, DashboardActivity.this);
+/*                Utility.navigateDashBoardFragment(new LogoutFragment(), LogoutFragment.TAG, null, DashboardActivity.this);*/
+                logOut();
+
+
                 break;
         }
+    }
+
+    private void logOut() {
+        Utility.setSharedPrefStringData(this, Constants.USER_ID, "");
+        Utility.setSharedPrefStringData(this, Constants.LOGIN_NAME, "");
+        Utility.setSharedPrefStringData(this, Constants.LOGIN_PASSWORD, "");
+        Utility.setSharedPrefStringData(this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP, "");
+        Utility.setSharedPrefStringData(this, Constants.USER_KEY, "");
+        Utility.setSharedPrefStringData(this, Constants.COMPANY_NAME, "");
+        Intent mIntent = new Intent(DashboardActivity.this,LoginActivity.class);
+        startActivity(mIntent);
     }
 
     @Override
