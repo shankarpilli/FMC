@@ -78,6 +78,9 @@ public class EventsAdapter extends BaseAdapter {
         mListEventsHolder.tv_more_details = (TextView) convertView.findViewById(R.id.tv_more_details);
         mListEventsHolder.tv_more_details.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
+        mListEventsHolder.tv_event_title = (TextView) convertView.findViewById(R.id.tv_event_title);
+        mListEventsHolder.tv_event_title.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         mListEventsHolder.tv_venu = (TextView) convertView.findViewById(R.id.tv_venu);
         mListEventsHolder.tv_venu.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
@@ -141,8 +144,6 @@ public class EventsAdapter extends BaseAdapter {
         mListEventsHolder.tv_balance_days = (TextView) convertView.findViewById(R.id.tv_balance_days);
         mListEventsHolder.tv_balance_days.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
-        mListEventsHolder.tv_venu.setText("" + mEventsModel.getmVenue());
-        mListEventsHolder.tv_organized_by.setText("" + mEventsModel.getmOrganizedBy());
     /*    mListEventsHolder.tv_contact.setText("" + mEventsModel.getmContact());
         mListEventsHolder.tv_chief_guest.setText("" + mEventsModel.getmChiefGuest());
         mListEventsHolder.tv_date_event.setText("" + mEventsModel.getmDateOfEvent());
@@ -170,7 +171,20 @@ public class EventsAdapter extends BaseAdapter {
 
             }
         });
+
+        setData(mListEventsHolder);
         return convertView;
+    }
+
+    private void setData(ListEventsHolder mListEventsHolder) {
+        mListEventsHolder.tv_event_title.setText(mEventsModel.getEvent_title());
+
+        mListEventsHolder.tv_venu.setText(mEventsModel.getVenue());
+        mListEventsHolder.tv_organized_by.setText(mEventsModel.getOrganized_by());
+        mListEventsHolder.tv_contact.setText(mEventsModel.getContact());
+        mListEventsHolder.tv_chief_guest.setText(mEventsModel.getChief_guest());
+        mListEventsHolder.tv_date_event.setText(mEventsModel.getDate_of_event());
+        mListEventsHolder.tv_details.setText(mEventsModel.getDetails());
     }
 
     private void setDataToPieChart(ListEventsHolder mListEventsHolder, PieChart pie_events, int EntryOne, int EntryTwo) {
@@ -234,5 +248,6 @@ public class EventsAdapter extends BaseAdapter {
         private TextView tv_accept;
         private TextView tv_decline;
         private TextView tv_balance_days;
+        private TextView tv_event_title;
     }
 }

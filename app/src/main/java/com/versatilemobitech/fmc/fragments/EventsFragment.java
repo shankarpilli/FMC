@@ -17,6 +17,7 @@ import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.models.EventsModel;
 import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.EventsParser;
 import com.versatilemobitech.fmc.parsers.GalleryViewParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Constants;
@@ -87,12 +88,12 @@ public class EventsFragment extends Fragment implements IAsyncCaller {
     public void getEventsFromApi(String mPageNumber, String mUserId) {
         LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
 
-        GalleryViewParser mGalleryViewParser = new GalleryViewParser();
+        EventsParser mEventsParser = new EventsParser();
         if (Utility.isNetworkAvailable(mParent)) {
             ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
                     R.string.please_wait), true,
                     APIConstants.EVENTS + mPageNumber + "/" + mUserId, paramMap,
-                    APIConstants.REQUEST_TYPE.GET, this, mGalleryViewParser);
+                    APIConstants.REQUEST_TYPE.GET, this, mEventsParser);
             Utility.execute(serverIntractorAsync);
         } else {
             Utility.showSettingDialog(

@@ -10,15 +10,16 @@ public class EventsModel extends Model {
 
 
 private String mTotalNumberOfPosts;
-private String mEventTitle;
-private String mVenue;
-private String mOrganizedBy;
-private String mContactPersonName;
-private String mContactInfo;
-private String mEventDateTime;
-private String mPostedDate;
-private String mFullDetails;
-private int mResponse;
+private String event_title;
+private String venue;
+private String organized_by;
+private String contact;
+private String chief_guest;
+private String date_of_event;
+private String details;
+private String event_id;
+private String datetime;
+private int response;
 private boolean visible;
 
     ArrayList<EventsModel> mEventsModelList;
@@ -31,76 +32,84 @@ private boolean visible;
         this.mTotalNumberOfPosts = mTotalNumberOfPosts;
     }
 
-    public String getmEventTitle() {
-        return mEventTitle;
+    public String getEvent_title() {
+        return event_title;
     }
 
-    public void setmEventTitle(String mEventTitle) {
-        this.mEventTitle = mEventTitle;
+    public void setEvent_title(String event_title) {
+        this.event_title = event_title;
     }
 
-    public String getmVenue() {
-        return mVenue;
+    public String getVenue() {
+        return venue;
     }
 
-    public void setmVenue(String mVenue) {
-        this.mVenue = mVenue;
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
-    public String getmOrganizedBy() {
-        return mOrganizedBy;
+    public String getOrganized_by() {
+        return organized_by;
     }
 
-    public void setmOrganizedBy(String mOrganizedBy) {
-        this.mOrganizedBy = mOrganizedBy;
+    public void setOrganized_by(String organized_by) {
+        this.organized_by = organized_by;
     }
 
-    public String getmContactPersonName() {
-        return mContactPersonName;
+    public String getContact() {
+        return contact;
     }
 
-    public void setmContactPersonName(String mContactPersonName) {
-        this.mContactPersonName = mContactPersonName;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public String getmContactInfo() {
-        return mContactInfo;
+    public String getChief_guest() {
+        return chief_guest;
     }
 
-    public void setmContactInfo(String mContactInfo) {
-        this.mContactInfo = mContactInfo;
+    public void setChief_guest(String chief_guest) {
+        this.chief_guest = chief_guest;
     }
 
-    public String getmEventDateTime() {
-        return mEventDateTime;
+    public String getDate_of_event() {
+        return date_of_event;
     }
 
-    public void setmEventDateTime(String mEventDateTime) {
-        this.mEventDateTime = mEventDateTime;
+    public void setDate_of_event(String date_of_event) {
+        this.date_of_event = date_of_event;
     }
 
-    public String getmPostedDate() {
-        return mPostedDate;
+    public String getDetails() {
+        return details;
     }
 
-    public void setmPostedDate(String mPostedDate) {
-        this.mPostedDate = mPostedDate;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
-    public String getmFullDetails() {
-        return mFullDetails;
+    public String getEvent_id() {
+        return event_id;
     }
 
-    public void setmFullDetails(String mFullDetails) {
-        this.mFullDetails = mFullDetails;
+    public void setEvent_id(String event_id) {
+        this.event_id = event_id;
     }
 
-    public int getmResponse() {
-        return mResponse;
+    public String getDatetime() {
+        return datetime;
     }
 
-    public void setmResponse(int mResponse) {
-        this.mResponse = mResponse;
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    public int getResponse() {
+        return response;
+    }
+
+    public void setResponse(int response) {
+        this.response = response;
     }
 
     public boolean isVisible() {

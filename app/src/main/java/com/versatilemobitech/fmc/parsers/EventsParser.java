@@ -31,20 +31,22 @@ public class EventsParser implements Parser {
                     ArrayList<EventsModel> mEventsModelList = new ArrayList<>();
                     for(int i = 0;i<mArray.length();i++){
                         JSONObject mJObj = (JSONObject) mArray.get(i);
-                        mEventsModel = new EventsModel();
+                        EventsModel mmEventsModel = new EventsModel();
 
-                        mEventsModel.setmEventTitle(mJObj.optString("event_title"));
-                        mEventsModel.setmVenue(mJObj.optString("venue"));
-                        mEventsModel.setmOrganizedBy(mJObj.optString("organized_by"));
-                        mEventsModel.setmContactPersonName(mJObj.optString("contat_person_name"));
-                        mEventsModel.setmContactInfo(mJObj.optString("conact_info"));
-                        mEventsModel.setmEventDateTime(mJObj.optString("event_date_time"));
-                        mEventsModel.setmPostedDate(mJObj.optString("posted_date"));
-                        mEventsModel.setmFullDetails(mJObj.optString("full_details"));
-                        mEventsModel.setmResponse(mJObj.optInt("response"));
+                        mmEventsModel.setEvent_title(mJObj.optString("event_title"));
+                        mmEventsModel.setVenue(mJObj.optString("venue"));
+                        mmEventsModel.setOrganized_by(mJObj.optString("organized_by"));
+                        mmEventsModel.setContact(mJObj.optString("contact"));
+                        mmEventsModel.setChief_guest(mJObj.optString("chief_guest"));
+                        mmEventsModel.setDate_of_event(mJObj.optString("date_of_event"));
+                        mmEventsModel.setDetails("details");
+                        mmEventsModel.setEvent_id(mJObj.optString("event_id"));
+                        mmEventsModel.setDatetime(mJObj.optString("datetime"));
+                        mmEventsModel.setResponse(mJObj.optInt("response"));
 
-                        mEventsModelList.add(mEventsModel);
+                        mEventsModelList.add(mmEventsModel);
                     }
+                    mEventsModel.setmEventsModelList(mEventsModelList);
                 }
 
             } catch (Exception e) {
