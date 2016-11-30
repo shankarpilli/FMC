@@ -22,6 +22,6 @@
         android:paddingTop="@dimen/_5dp"
         android:text="@string/folder_name"
         android:textColor="@color/white"
-        android:textSize="@dimen/_25sp" />
+        android:textSize="@dimen/_20sp" />
 
 </RelativeLayout>
