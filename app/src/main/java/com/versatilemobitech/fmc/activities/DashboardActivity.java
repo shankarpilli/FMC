@@ -116,7 +116,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 Utility.navigateDashBoardFragment(new HomeFragment(), HomeFragment.TAG, null, DashboardActivity.this);
                 break;
             case 2:
-                Utility.navigateDashBoardFragment(new WelcomeFragment(), HomeFragment.TAG, null, DashboardActivity.this);
+                Utility.navigateDashBoardFragment(new WelcomeFragment(), WelcomeFragment.TAG, null, DashboardActivity.this);
                 break;
             case 3:
                 Utility.navigateDashBoardFragment(new HistoryFragment(), HistoryFragment.TAG, null, DashboardActivity.this);

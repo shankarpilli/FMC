@@ -13,23 +13,36 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.adapters.GalleryFolderAdapter;
 import com.versatilemobitech.fmc.adapters.HomeAdapter;
+import com.versatilemobitech.fmc.adapters.NoPostFoundAdapter;
+import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.models.GalleryFolderModel;
+import com.versatilemobitech.fmc.models.GetPostsModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
+import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.GetPostsParser;
+import com.versatilemobitech.fmc.parsers.PhotoAlbumsParser;
+import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Shankar Pilli on 11/06/2016
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements IAsyncCaller {
 
     public static final String TAG = "HomeFragment";
     private DashboardActivity mParent;
     private View rootView;
 
     private ListView list_view;
+    private TextView tv_no_posts;
     private HomeAdapter homeAdapter;
+    private NoPostFoundAdapter noPostFoundAdapter;
     private ArrayList<HomeDataModel> homeDataModels;
 
     @Override
@@ -52,17 +65,25 @@ public class HomeFragment extends Fragment {
     private void initUI() {
         homeDataModels = new ArrayList<>();
         list_view = (ListView) rootView.findViewById(R.id.list_view);
+        tv_no_posts = (TextView) rootView.findViewById(R.id.tv_no_posts);
+        noPostFoundAdapter = new NoPostFoundAdapter(mParent);
         /*homeAdapter = new HomeAdapter(getActivity(), homeDataModels);
         list_view.setAdapter(homeAdapter);*/
 
-        getHomeFeeds();
+        getHomeFeeds("1");
 
 
     }
 
-    private void getHomeFeeds() {
+    private void getHomeFeeds(String mPageNumber) {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+        GetPostsParser mGetPostsParser = new GetPostsParser();
         if (Utility.isNetworkAvailable(getActivity())) {
-
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
+                    R.string.please_wait), true,
+                    APIConstants.GET_POSTS + mPageNumber, paramMap,
+                    APIConstants.REQUEST_TYPE.GET, this, mGetPostsParser);
+            Utility.execute(serverIntractorAsync);
         } else {
             Utility.showSettingDialog(
                     getActivity(),
@@ -90,5 +111,23 @@ public class HomeFragment extends Fragment {
         EditText et_what_is_on_u_mind = (EditText) layout_list_header.findViewById(R.id.et_what_is_on_u_mind);
         et_what_is_on_u_mind.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         list_view.addHeaderView(layout_list_header);
+    }
+
+    @Override
+    public void onComplete(Model model) {
+        if (model != null) {
+            if (model.isStatus()) {
+                if (model instanceof GetPostsModel) {
+                    GetPostsModel mGetPostsModel = (GetPostsModel) model;
+                    if (mGetPostsModel.getmList() != null && mGetPostsModel.getmList().size() != 0) {
+                        //tv_no_posts.setVisibility(View.GONE);
+                    } else {
+                        //tv_no_posts.setVisibility(View.VISIBLE);
+                        list_view.setAdapter(noPostFoundAdapter);
+                        setListHeader();
+                    }
+                }
+            }
+        }
     }
 }
