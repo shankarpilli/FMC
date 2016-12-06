@@ -24,5 +24,6 @@
     <color name="dialogTxtDefaultColor">#000000</color>
     <color name="btnDefaultColor">#000000</color>
     <color name="dialogAccept">#1E88E5</color>
+    <color name="theme_color">#0000ee</color>
 
 </resources>
