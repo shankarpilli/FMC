@@ -37,4 +37,5 @@ public class SplashActivity extends BaseActivity {
         };
         mSplashHandler.postDelayed(action, Constants.SPLASH_TIME_OUT);
     }
+
 }
