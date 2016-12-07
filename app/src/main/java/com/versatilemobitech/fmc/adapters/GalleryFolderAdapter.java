@@ -70,7 +70,7 @@ public class GalleryFolderAdapter extends BaseAdapter {
 
         GalleryFolderModel leftMenuModel = (GalleryFolderModel) getItem(position);
 
-        mGalleryFolderHolder.txt_folder_name.setText(leftMenuModel.getAlbum_name());
+        mGalleryFolderHolder.txt_folder_name.setText(Utility.capitalizeFirstLetter(leftMenuModel.getAlbum_name()));
 
         Picasso.with(mContext)
                 .load(leftMenuModel.getAlbum_image_path())

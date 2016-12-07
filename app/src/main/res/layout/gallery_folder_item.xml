@@ -6,9 +6,9 @@
     <ImageView
         android:id="@+id/iv_gallery_item"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_220dp"
+        android:layout_height="@dimen/_165dp"
         android:layout_gravity="center"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:src="@drawable/folder_icon" />
 
     <TextView
@@ -17,7 +17,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/themeColor_fifty_percent"
+        android:ellipsize="end"
         android:gravity="center"
+        android:maxLines="1"
         android:paddingBottom="@dimen/_5dp"
         android:paddingTop="@dimen/_5dp"
         android:text="@string/folder_name"
