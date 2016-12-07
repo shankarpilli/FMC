@@ -21,6 +21,7 @@ public class APIConstants {
     public static final String PHOTO_GALLERY = BASE_URL + "photogallery/"/*{album id}/{page number}*/;
     public static final String EVENTS = BASE_URL + "events/"/*{page number}/user_id*/;
     public static final String GET_POSTS = BASE_URL + "posts/"/*{page number}/user_id*/;
+    public static final String GET_EDITORIAL = BASE_URL + "editorials/"/*{page number}*/;
 
 
 }

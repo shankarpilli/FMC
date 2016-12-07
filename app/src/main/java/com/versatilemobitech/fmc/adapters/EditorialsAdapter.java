@@ -53,15 +53,15 @@ public class EditorialsAdapter extends BaseAdapter {
         EditorialsItemHolder mEditorialsItemHolder = null;
 
         if (convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.editorials_item,
+            convertView = mLayoutInflater.inflate(R.layout.item_editorials,
                     null);
             mEditorialsItemHolder = new EditorialsItemHolder();
             mEditorialsItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
-            mEditorialsItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);
+            /*mEditorialsItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);*/
             mEditorialsItemHolder.txt_your_name = (TextView) convertView.findViewById(R.id.txt_your_name);
 
             mEditorialsItemHolder.txt_your_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mEditorialsItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            /*mEditorialsItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));*/
             mEditorialsItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             convertView.setTag(mEditorialsItemHolder);
         } else {
@@ -75,7 +75,7 @@ public class EditorialsAdapter extends BaseAdapter {
 
     private class EditorialsItemHolder {
         private TextView txt_your_name;
-        private TextView txt_company;
+        /*private TextView txt_company;*/
         private TextView txt_time_date;
     }
 }

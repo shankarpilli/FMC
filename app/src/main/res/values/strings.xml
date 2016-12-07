@@ -28,6 +28,7 @@
     <string name="business_mail">Business e-Mail Id</string>
     <string name="personal_mail">Personal e-Mail Id</string>
     <string name="first_name">First Name</string>
+    <string name="member_name">Member Name</string>
     <string name="last_name">Last Name</string>
 
     <string name="hyderabad">Hyderabad</string>
