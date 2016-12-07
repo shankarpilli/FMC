@@ -1,6 +1,5 @@
 package com.versatilemobitech.fmc.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,19 +16,16 @@ import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.models.Model;
-import com.versatilemobitech.fmc.parsers.LoginParser;
 import com.versatilemobitech.fmc.parsers.PhotoAlbumsParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
-import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
  * Created by Shankar Pilli on 11/07/2016
  */
-public class GalleryFragment extends Fragment implements IAsyncCaller {
+public class GalleryFragment extends Fragment implements IAsyncCaller, AdapterView.OnItemClickListener {
     public static final String TAG = "GalleryFragment";
     private DashboardActivity mParent;
     private View rootView;
@@ -37,7 +33,7 @@ public class GalleryFragment extends Fragment implements IAsyncCaller {
     private GridView grid_view;
     private TextView tv_no_images;
     private GalleryFolderAdapter galleryFolderAdapter;
-    private ArrayList<GalleryFolderModel> galleryFolderModels;
+    private GalleryFolderModel mGalleryFolderModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +45,9 @@ public class GalleryFragment extends Fragment implements IAsyncCaller {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.gallery));
+        if (rootView != null) {
+            return rootView;
+        }
         rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
         initUI();
         return rootView;
@@ -61,6 +60,7 @@ public class GalleryFragment extends Fragment implements IAsyncCaller {
         /*grid_view.setOnItemClickListener(this);*/
 
         getGalleryFromApi("1");
+        grid_view.setOnItemClickListener(this);
     }
 
     public void getGalleryFromApi(String mPageNumber) {
@@ -95,7 +95,7 @@ public class GalleryFragment extends Fragment implements IAsyncCaller {
         if (model != null) {
             if (model.isStatus()) {
                 if (model instanceof GalleryFolderModel) {
-                    GalleryFolderModel mGalleryFolderModel = (GalleryFolderModel) model;
+                    mGalleryFolderModel = (GalleryFolderModel) model;
                     if (mGalleryFolderModel.getmList() != null && mGalleryFolderModel.getmList().size() != 0) {
                         tv_no_images.setVisibility(View.GONE);
                         galleryFolderAdapter = new GalleryFolderAdapter(getActivity(), mGalleryFolderModel.getmList());
@@ -108,4 +108,13 @@ public class GalleryFragment extends Fragment implements IAsyncCaller {
         }
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        GalleryFolderModel mLeftMenuModel = mGalleryFolderModel.getmList().get(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        bundle.putString("albumId", mLeftMenuModel.getPhoto_album_id());
+        bundle.putString("albumName", mLeftMenuModel.getAlbum_name());
+        Utility.navigateDashBoardFragment(new GalleryViewFragment(), GalleryViewFragment.TAG, bundle, mParent);
+    }
 }

@@ -1,8 +1,6 @@
 package com.versatilemobitech.fmc.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.fragments.GalleryViewFragment;
 import com.versatilemobitech.fmc.models.GalleryFolderModel;
-import com.versatilemobitech.fmc.models.HomeDataModel;
-import com.versatilemobitech.fmc.models.LeftMenuModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
@@ -76,18 +71,6 @@ public class GalleryFolderAdapter extends BaseAdapter {
                 .load(leftMenuModel.getAlbum_image_path())
                 .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                 .into(mGalleryFolderHolder.iv_gallery_item);
-
-        final GalleryFolderModel mLeftMenuModel = leftMenuModel;
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("position", position);
-                bundle.putString("albumId", mLeftMenuModel.getPhoto_album_id());
-                bundle.putString("albumName", mLeftMenuModel.getAlbum_name());
-                Utility.navigateDashBoardFragment(new GalleryViewFragment(), GalleryViewFragment.TAG, bundle, (FragmentActivity) mContext);
-            }
-        });
         return convertView;
     }
 

@@ -91,6 +91,7 @@
     <string name="icon_left_arrow">&#xf060;</string>
     <string name="txt_accept">Accept</string>
     <string name="no_posts_in_home">No Posts In Home</string>
+    <string name="no_more_data_to_display">No more data to display</string>
 
 
 </resources>
