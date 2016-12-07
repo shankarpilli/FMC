@@ -1,20 +1,26 @@
 package com.versatilemobitech.fmc.fragments;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.adapters.GalleryViewAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.models.GalleryViewModel;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.parsers.GalleryViewParser;
@@ -27,7 +33,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by Shankar Pilli on 11/07/2016
  */
-public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener {
+public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener, AdapterView.OnItemClickListener {
     public static final String TAG = "GalleryFragment";
     private DashboardActivity mParent;
     private View rootView;
@@ -74,6 +80,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
         galleryViewAdapter = new GalleryViewAdapter(getActivity(), galleryViewModels);
         grid_view.setAdapter(galleryViewAdapter);*/
         grid_view.setOnScrollListener(this);
+        grid_view.setOnItemClickListener(this);
     }
 
     @Override
@@ -83,7 +90,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
                 if (model instanceof GalleryViewModel) {
                     GalleryViewModel mGalleryViewModel = (GalleryViewModel) model;
                     if (galleryViewModels == null) {
-                        if (mGalleryViewModel.getmList() == null){
+                        if (mGalleryViewModel.getmList() == null) {
                             tv_no_images.setVisibility(View.VISIBLE);
                             grid_view.setVisibility(View.GONE);
                         } else {
@@ -114,6 +121,20 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
                 }
             }
         }
+    }
+
+
+    /*Image full view*/
+    private void showFitDialog(String url, Context context) {
+        Dialog dialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.dialog_fitcenter);
+        dialog.setCanceledOnTouchOutside(false);
+        ImageView imageView = (ImageView) dialog.findViewById(R.id.image);
+        Picasso.with(getActivity())
+                .load(url)
+                .placeholder(Utility.getDrawable(getActivity(), R.drawable.folder_icon))
+                .into(imageView);
+        dialog.show();
     }
 
     private void setGridData() {
@@ -179,5 +200,10 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
                 }
             }
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        showFitDialog(galleryViewModels.get(position).getImage_path(), getActivity());
     }
 }
