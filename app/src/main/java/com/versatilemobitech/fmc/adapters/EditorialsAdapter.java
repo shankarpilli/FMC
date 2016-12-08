@@ -8,8 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.EditorialsModel;
+import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.models.MembersModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
@@ -31,15 +33,15 @@ public class EditorialsAdapter extends BaseAdapter {
         this.editorialsModels = editorialsModels;
     }
 
+
     @Override
     public int getCount() {
-        //return membersModels.size();
-        return 20;
+        return editorialsModels.size();
     }
 
     @Override
     public EditorialsModel getItem(int position) {
-        return null;
+        return editorialsModels.get(position);
     }
 
     @Override
@@ -48,7 +50,7 @@ public class EditorialsAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         EditorialsItemHolder mEditorialsItemHolder = null;
 
@@ -56,26 +58,36 @@ public class EditorialsAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.item_editorials,
                     null);
             mEditorialsItemHolder = new EditorialsItemHolder();
-            mEditorialsItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
-            /*mEditorialsItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);*/
             mEditorialsItemHolder.txt_your_name = (TextView) convertView.findViewById(R.id.txt_your_name);
-
+            mEditorialsItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
+            mEditorialsItemHolder.img_editorials = (ImageView) convertView.findViewById(R.id.img_editorials);
             mEditorialsItemHolder.txt_your_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            /*mEditorialsItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));*/
             mEditorialsItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             convertView.setTag(mEditorialsItemHolder);
         } else {
             mEditorialsItemHolder = (EditorialsItemHolder) convertView.getTag();
         }
 
-        EditorialsModel leftMenuModel = (EditorialsModel) getItem(position);
+        EditorialsModel editorialsModel = (EditorialsModel) getItem(position);
+
+
+        mEditorialsItemHolder.txt_your_name.setText(editorialsModel.getBook_name());
+        mEditorialsItemHolder.txt_time_date.setText(editorialsModel.getBook_description());
+
+       /* if (!Utility.isValueNullOrEmpty(editorialsModel.getBig_Image()))
+        Picasso.with(mContext)
+                .load(editorialsModel.getBig_Image())
+                .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
+                .into(mEditorialsItemHolder.img_editorials);*/
 
         return convertView;
     }
+
 
     private class EditorialsItemHolder {
         private TextView txt_your_name;
         /*private TextView txt_company;*/
         private TextView txt_time_date;
+        private ImageView img_editorials;
     }
 }

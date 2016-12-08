@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class MembersModel extends Model {
     private String mName;
+    private String last_name;
     private String mCompany;
     private String user_id;
     private String mImage;
@@ -50,5 +51,13 @@ public class MembersModel extends Model {
 
     public void setMembersModels(ArrayList<MembersModel> membersModels) {
         this.membersModels = membersModels;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 }

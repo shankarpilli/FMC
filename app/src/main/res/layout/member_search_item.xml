@@ -13,6 +13,7 @@
     android:background="@drawable/list_card_background_selector"
     android:orientation="horizontal">
     <ImageView
+        android:id="@+id/img_member"
         android:layout_width="@dimen/_70dp"
         android:layout_height="@dimen/_70dp"
         android:layout_marginLeft="@dimen/_15dp"

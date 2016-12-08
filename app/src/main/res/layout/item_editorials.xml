@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/img_editorials"
             android:layout_width="@dimen/_100dp"
             android:layout_height="@dimen/_90dp"
             android:layout_marginLeft="@dimen/_5dp"

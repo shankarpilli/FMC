@@ -26,28 +26,26 @@ public class EditorialParser implements Parser {
                 mEditorialsModel.setMessage(jsonObject.optString("msg"));
 
                 mEditorialsModel.setTotal_number_of_posts(jsonObject.optString("total_number_of_posts"));
-               /* if(jsonObject.has("event_details")){
-                    JSONArray mArray = jsonObject.getJSONArray("event_details");
-                    ArrayList<EventsModel> mEventsModelList = new ArrayList<>();
+                if(jsonObject.has("books_details")){
+                    JSONArray mArray = jsonObject.getJSONArray("books_details");
+                    ArrayList<EditorialsModel> mEditorialsModelList = new ArrayList<>();
                     for(int i = 0;i<mArray.length();i++){
                         JSONObject mJObj = (JSONObject) mArray.get(i);
-                        EventsModel mmEventsModel = new EventsModel();
+                        EditorialsModel mEditorialsModelItem = new EditorialsModel();
 
-                        mmEventsModel.setEvent_title(mJObj.optString("event_title"));
-                        mmEventsModel.setVenue(mJObj.optString("venue"));
-                        mmEventsModel.setOrganized_by(mJObj.optString("organized_by"));
-                        mmEventsModel.setContact(mJObj.optString("contact"));
-                        mmEventsModel.setChief_guest(mJObj.optString("chief_guest"));
-                        mmEventsModel.setDate_of_event(mJObj.optString("date_of_event"));
-                        mmEventsModel.setDetails("details");
-                        mmEventsModel.setEvent_id(mJObj.optString("event_id"));
-                        mmEventsModel.setDatetime(mJObj.optString("datetime"));
-                        mmEventsModel.setResponse(mJObj.optInt("response"));
+                        mEditorialsModelItem.setBook_name(mJObj.optString("book_name"));
+                        mEditorialsModelItem.setBook_path(mJObj.optString("book_path"));
+                        mEditorialsModelItem.setBook_description(mJObj.optString("book_description"));
+                        mEditorialsModelItem.setBig_Image(mJObj.optString("book_image"));
+                        mEditorialsModelItem.setSource(mJObj.optString("source"));
+                        mEditorialsModelItem.setSmall_Image(mJObj.optString("Small_Image"));
+                        mEditorialsModelItem.setBig_Image("Big_Image");
+                        mEditorialsModelItem.setBook_id(mJObj.optString("book_id"));
 
-                        mEventsModelList.add(mmEventsModel);
+                        mEditorialsModelList.add(mEditorialsModelItem);
                     }
-                    mEventsModel.setmEventsModelList(mEventsModelList);
-                }*/
+                    mEditorialsModel.setEditorialsModels(mEditorialsModelList);
+                }
 
             } catch (Exception e) {
                 mEditorialsModel.setStatus(false);
