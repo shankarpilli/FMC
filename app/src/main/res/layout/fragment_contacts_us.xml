@@ -142,13 +142,13 @@
                 android:layout_weight="1"
                 android:src="@drawable/contact_us_fb"/>
             <ImageView
-                android:id="@+id/iv_twitter"
+                android:id="@+id/iv_g_plus"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@drawable/contact_us_g_plus"/>
             <ImageView
-                android:id="@+id/iv_g_plus"
+                android:id="@+id/iv_twitter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
