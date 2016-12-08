@@ -8,6 +8,7 @@ public class LoginModel extends Model {
     private String user_name;
     private String key;
     private String company_name;
+    private String profile_pic;
 
     public String getUser_name() {
         return user_name;
@@ -39,5 +40,13 @@ public class LoginModel extends Model {
 
     public void setCompany_name(String company_name) {
         this.company_name = company_name;
+    }
+
+    public String getProfile_pic() {
+        return profile_pic;
+    }
+
+    public void setProfile_pic(String profile_pic) {
+        this.profile_pic = profile_pic;
     }
 }

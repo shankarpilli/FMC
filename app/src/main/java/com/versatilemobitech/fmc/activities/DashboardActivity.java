@@ -14,8 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.adapters.LeftMenuAdapter;
+import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.fragments.AwardsFragment;
 import com.versatilemobitech.fmc.fragments.ContactsUsFragment;
 import com.versatilemobitech.fmc.fragments.EditorialsFragment;
@@ -84,6 +86,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 LayoutParams.MATCH_PARENT, pixels);
         layout_list_header.setLayoutParams(params);
         ImageView img_user_image = (ImageView) layout_list_header.findViewById(R.id.img_user_image);
+        if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC)))
+            Picasso.with(this).load(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC)).
+                    placeholder(Utility.getDrawable(this, R.drawable.avatar_image))
+                    .transform(new CircleTransform()).into(img_user_image);
         TextView txt_name = (TextView) layout_list_header.findViewById(R.id.txt_name);
         TextView txt_user_designation = (TextView) layout_list_header.findViewById(R.id.txt_user_designation);
 
@@ -158,7 +164,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         Utility.setSharedPrefStringData(this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP, "");
         Utility.setSharedPrefStringData(this, Constants.USER_KEY, "");
         Utility.setSharedPrefStringData(this, Constants.COMPANY_NAME, "");
-        Intent mIntent = new Intent(DashboardActivity.this,LoginActivity.class);
+        Intent mIntent = new Intent(DashboardActivity.this, LoginActivity.class);
         startActivity(mIntent);
     }
 

@@ -160,6 +160,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     Utility.setSharedPrefStringData(this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP, "done");
                     Utility.setSharedPrefStringData(context, Constants.USER_KEY, loginModel.getKey());
                     Utility.setSharedPrefStringData(context, Constants.COMPANY_NAME, loginModel.getCompany_name());
+                    Utility.setSharedPrefStringData(context, Constants.PROFILE_PIC, loginModel.getProfile_pic());
                     Intent mIntentSignup = new Intent(LoginActivity.this, DashboardActivity.class);
                     startActivity(mIntentSignup);
                     finish();
