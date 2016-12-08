@@ -245,6 +245,13 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                         paramMap.put("contact_number", edt_contact.getText().toString());
                         paramMap.put("alternate_contact_number", edt_alternate.getText().toString());
                         paramMap.put("current_location", edt_location.getText().toString());
+
+                        String extension = "";
+                        int i = edt_profile_pic.getText().toString().lastIndexOf('.');
+                        if (i > 0) {
+                            extension = edt_profile_pic.getText().toString().substring(i+1);
+                        }
+                        paramMap.put("file_extension", extension);
                         if (cb_hyd.isChecked() != true) {
                             paramMap.put("interested_location", "Hyderabad");
                         } else if (cb_pune.isChecked() != true) {
