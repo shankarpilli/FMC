@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,7 +41,7 @@ public class EditorialsFragment extends Fragment implements IAsyncCaller, AbsLis
     private int aaTotalCount, aaVisibleCount, aaFirstVisibleItem;
     private boolean endScroll = false;
     private int mPageNumber = 1;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +62,20 @@ public class EditorialsFragment extends Fragment implements IAsyncCaller, AbsLis
         getEditorialDataFromApi("1");
         ll_editorials = (ListView) rootView.findViewById(R.id.ll_editorials);
         tv_no_editorials = (TextView) rootView.findViewById(R.id.tv_no_editorials);
-       // editorialsAdapter = new EditorialsAdapter(getActivity(), editorialsModels);
+        // editorialsAdapter = new EditorialsAdapter(getActivity(), editorialsModels);
         ll_editorials.setAdapter(editorialsAdapter);
         ll_editorials.setOnScrollListener(this);
+        ll_editorials.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                EditorialsModel mEditorialsModel = editorialsModels.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("from", EditorialsFragment.TAG);
+                bundle.putString("pdfUrl", mEditorialsModel.getBook_path());
+                bundle.putString("pdfTitle", mEditorialsModel.getBook_name());
+                Utility.navigateDashBoardFragment(new EditorialPdfReaderFragment(), EditorialPdfReaderFragment.TAG, bundle, mParent);
+            }
+        });
     }
 
     public void getEditorialDataFromApi(String mPageNumber) {
