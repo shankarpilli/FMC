@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
@@ -35,19 +37,19 @@ public class HomeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // return homeDataModels.size();
-        return 2;
+        return homeDataModels.size();
     }
 
     @Override
     public HomeDataModel getItem(int position) {
-        return null;
+        return homeDataModels.get(position);
     }
 
     @Override
     public long getItemId(int position) {
         return 0;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -58,6 +60,8 @@ public class HomeAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.home_data_item,
                     null);
             mHomeItemHolder = new HomeItemHolder();
+            mHomeItemHolder.post_image = (ImageView) convertView.findViewById(R.id.post_image);
+            mHomeItemHolder.image_data = (ImageView) convertView.findViewById(R.id.image_data);
             mHomeItemHolder.txt_name = (TextView) convertView.findViewById(R.id.txt_name);
             mHomeItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);
             mHomeItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
@@ -76,9 +80,27 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder = (HomeItemHolder) convertView.getTag();
         }
 
-        HomeDataModel leftMenuModel = (HomeDataModel) getItem(position);
+        HomeDataModel mHomeDataModel = (HomeDataModel) getItem(position);
 
-        LinearLayout layout_list_header = (LinearLayout) mLayoutInflater.inflate(R.layout.
+        mHomeItemHolder.txt_name.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getFirst_name())
+                + " " + Utility.capitalizeFirstLetter(mHomeDataModel.getLast_name()));
+        mHomeItemHolder.txt_company.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));
+        mHomeItemHolder.txt_post_message.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getPost_text()));
+        if (!Utility.isValueNullOrEmpty(mHomeDataModel.getProfile_pic()))
+            Picasso.with(mContext)
+                    .load(mHomeDataModel.getProfile_pic()).transform(new CircleTransform())
+                    .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
+                    .into(mHomeItemHolder.post_image);
+        if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()))
+            Picasso.with(mContext)
+                    .load(mHomeDataModel.getPost_image()).transform(new CircleTransform())
+                    .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
+                    .into(mHomeItemHolder.image_data);
+        else
+            mHomeItemHolder.image_data.setVisibility(View.GONE);
+        /*mHomeItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));*/
+
+        /*LinearLayout layout_list_header = (LinearLayout) mLayoutInflater.inflate(R.layout.
                 home_comment_item, null);
         mHomeItemHolder.txt_comment_name = (TextView) layout_list_header.findViewById(R.id.txt_comment_name);
         mHomeItemHolder.txt_comment_company = (TextView) layout_list_header.findViewById(R.id.txt_comment_company);
@@ -92,21 +114,23 @@ public class HomeAdapter extends BaseAdapter {
         mHomeItemHolder.txt_comment_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
         mHomeItemHolder.txt_reply.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
-        mHomeItemHolder.ll_comments.addView(layout_list_header);
+        mHomeItemHolder.ll_comments.addView(layout_list_header);*/
 
         return convertView;
     }
 
     private class HomeItemHolder {
+        private ImageView post_image;
         private TextView txt_name;
         private TextView txt_company;
         private TextView txt_time_date;
         private TextView txt_post_message;
-        private TextView txt_comment_name;
+        private ImageView image_data;
+        /*private TextView txt_comment_name;
         private TextView txt_comment_company;
         private TextView txt_comment_time_date;
         private TextView txt_comment_post_message;
-        private TextView txt_reply;
+        private TextView txt_reply;*/
         private EditText edt_comment;
         private LinearLayout ll_comments;
     }

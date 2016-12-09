@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -32,7 +33,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by Shankar Pilli on 11/06/2016
  */
-public class HomeFragment extends Fragment implements IAsyncCaller {
+public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener {
 
     public static final String TAG = "HomeFragment";
     private DashboardActivity mParent;
@@ -46,6 +47,11 @@ public class HomeFragment extends Fragment implements IAsyncCaller {
     private boolean isDocSelected;
     private boolean isPdfSelected;
     private boolean isImgSelected;
+
+
+    private int aaTotalCount, aaVisibleCount, aaFirstVisibleItem;
+    private boolean endScroll = false;
+    private int mPageNumber = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,6 @@ public class HomeFragment extends Fragment implements IAsyncCaller {
     }
 
     private void initUI() {
-        homeDataModels = new ArrayList<>();
         list_view = (ListView) rootView.findViewById(R.id.list_view);
         tv_no_posts = (TextView) rootView.findViewById(R.id.tv_no_posts);
         noPostFoundAdapter = new NoPostFoundAdapter(mParent);
@@ -73,7 +78,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller {
         list_view.setAdapter(homeAdapter);*/
 
         getHomeFeeds("1");
-
+        list_view.setOnScrollListener(this);
 
     }
 
@@ -156,19 +161,91 @@ public class HomeFragment extends Fragment implements IAsyncCaller {
         return isValidated;
     }
 
+
     @Override
     public void onComplete(Model model) {
         if (model != null) {
             if (model.isStatus()) {
                 if (model instanceof GetPostsModel) {
                     GetPostsModel mGetPostsModel = (GetPostsModel) model;
-                    if (mGetPostsModel.getmList() != null && mGetPostsModel.getmList().size() != 0) {
-                        //tv_no_posts.setVisibility(View.GONE);
+                    if (homeDataModels == null) {
+                        if (mGetPostsModel.getmList() == null) {
+                            /*tv_no_posts.setVisibility(View.VISIBLE);
+                            list_view.setVisibility(View.GONE);*/
+                            list_view.setAdapter(noPostFoundAdapter);
+                            setListHeader();
+                        } else {
+                            tv_no_posts.setVisibility(View.GONE);
+                            list_view.setVisibility(View.VISIBLE);
+                            if (homeDataModels == null) {
+                                homeDataModels = new ArrayList<HomeDataModel>();
+                            }
+                            homeDataModels.addAll(mGetPostsModel.getmList());
+                            if (homeAdapter == null) {
+                                setListData();
+                            }
+                        }
                     } else {
-                        //tv_no_posts.setVisibility(View.VISIBLE);
-                        list_view.setAdapter(noPostFoundAdapter);
-                        setListHeader();
+                        list_view.setVisibility(View.VISIBLE);
+                        tv_no_posts.setVisibility(View.GONE);
+                        if (mGetPostsModel.getmList() != null && mGetPostsModel.getmList().size() > 0) {
+                            homeDataModels.addAll(mGetPostsModel.getmList());
+                            if (homeAdapter == null) {
+                                setListData();
+                            } else {
+                                homeAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            endScroll = true;
+                        }
                     }
+                }
+            }
+        }
+    }
+
+    private void setListData() {
+        homeAdapter = new HomeAdapter(getActivity(), homeDataModels);
+        list_view.setAdapter(homeAdapter);
+        setListHeader();
+    }
+
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (scrollState == SCROLL_STATE_IDLE) {
+            isScrollCompleted();
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        aaTotalCount = totalItemCount;
+        aaVisibleCount = visibleItemCount;
+        aaFirstVisibleItem = firstVisibleItem;
+    }
+
+    private void isScrollCompleted() {
+        if (aaTotalCount == (aaFirstVisibleItem + aaVisibleCount) && !endScroll) {
+            if (Utility.isNetworkAvailable(getActivity())) {
+                mPageNumber = mPageNumber + 1;
+                getHomeFeeds("" + mPageNumber);
+                Utility.showLog("mPageNumber", "mPageNumber : " + mPageNumber);
+            } else {
+                Utility.showSettingDialog(
+                        getActivity(),
+                        getActivity().getResources().getString(
+                                R.string.no_internet_msg),
+                        getActivity().getResources().getString(
+                                R.string.no_internet_title),
+                        Utility.NO_INTERNET_CONNECTION).show();
+            }
+        } else {
+            if (list_view.getAdapter() != null) {
+                if (list_view.getLastVisiblePosition() == list_view.getAdapter().getCount() - 1 &&
+                        list_view.getChildAt(list_view.getChildCount() - 1).getBottom() <= list_view.getHeight()) {
+                    Utility.showToastMessage(getActivity(), Utility.getResourcesString(getActivity(),
+                            R.string.no_more_data_to_display));
                 }
             }
         }

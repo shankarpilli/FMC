@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class GetPostsModel extends Model {
     private String total_number_of_posts;
-    private ArrayList<GetPostsModel> mList;
+    private ArrayList<HomeDataModel> mList;
 
     public String getTotal_number_of_posts() {
         return total_number_of_posts;
@@ -17,11 +17,11 @@ public class GetPostsModel extends Model {
         this.total_number_of_posts = total_number_of_posts;
     }
 
-    public ArrayList<GetPostsModel> getmList() {
+    public ArrayList<HomeDataModel> getmList() {
         return mList;
     }
 
-    public void setmList(ArrayList<GetPostsModel> mList) {
+    public void setmList(ArrayList<HomeDataModel> mList) {
         this.mList = mList;
     }
 }

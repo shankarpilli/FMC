@@ -2,8 +2,8 @@ package com.versatilemobitech.fmc.parsers;
 
 import android.content.Context;
 
-import com.versatilemobitech.fmc.models.GalleryViewModel;
 import com.versatilemobitech.fmc.models.GetPostsModel;
+import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.models.Model;
 
 import org.json.JSONArray;
@@ -20,26 +20,30 @@ public class GetPostsParser implements Parser {
     public Model parseResponse(String response, Context context) {
         GetPostsModel mGetPostsModel = new GetPostsModel();
         if (response != null) {
-            mGetPostsModel.setStatus(true);
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                mGetPostsModel.setMessage(jsonObject.optString("success"));
+                mGetPostsModel.setStatus(true);
+                if (jsonObject.has("success")){
+                    mGetPostsModel.setMessage(jsonObject.optString("success"));
+                }
 
-                mGetPostsModel.setTotal_number_of_posts(jsonObject.optString("total_number_of_posts"));
-                /*if(jsonObject.has("gallery_details")){
-                    JSONArray mArray = jsonObject.getJSONArray("gallery_details");
-                    ArrayList<GalleryViewModel> mList = new ArrayList<>();
-                    for(int i = 0;i<mArray.length();i++) {
+                if (jsonObject.has("posts_details")) {
+                    JSONArray mArray = jsonObject.getJSONArray("posts_details");
+                    ArrayList<HomeDataModel> mList = new ArrayList<>();
+                    for (int i = 0; i < mArray.length(); i++) {
                         JSONObject mObj = (JSONObject) mArray.get(i);
-                        GalleryViewModel mmGalleryViewModel = new GalleryViewModel();
-
-                        mmGalleryViewModel.setImage_path(mObj.optString("image_path"));
-                        mmGalleryViewModel.setPhoto_id(mObj.optString("photo_id"));
-                        mList.add(mmGalleryViewModel);
+                        HomeDataModel mHomeDataModel = new HomeDataModel();
+                        mHomeDataModel.setPost_text(mObj.optString("post_text"));
+                        mHomeDataModel.setUser_id(mObj.optString("user_id"));
+                        mHomeDataModel.setPost_id(mObj.optString("post_id"));
+                        mHomeDataModel.setFirst_name(mObj.optString("first_name"));
+                        mHomeDataModel.setLast_name(mObj.optString("last_name"));
+                        mHomeDataModel.setCompany_name(mObj.optString("company_name"));
+                        mHomeDataModel.setProfile_pic(mObj.optString("profile_pic"));
+                        mList.add(mHomeDataModel);
                     }
-                    mGalleryViewModel.setmList(mList);
-
-                }*/
+                    mGetPostsModel.setmList(mList);
+                }
             } catch (Exception e) {
                 mGetPostsModel.setStatus(false);
             }
