@@ -1,6 +1,7 @@
 package com.versatilemobitech.fmc.adapters;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
+import com.versatilemobitech.fmc.fragments.HomeFragment;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
@@ -24,14 +27,18 @@ import java.util.ArrayList;
 public class HomeAdapter extends BaseAdapter {
 
     private Context mContext;
+    private DashboardActivity dashboardActivity;
     private LayoutInflater mLayoutInflater;
     private ArrayList<HomeDataModel> homeDataModels;
+    private Fragment fragment;
 
 
-    public HomeAdapter(Context context, ArrayList<HomeDataModel> homeDataModels) {
+    public HomeAdapter(DashboardActivity dashboardActivity, Context context, Fragment fragment, ArrayList<HomeDataModel> homeDataModels) {
         mContext = context;
+        this.dashboardActivity = dashboardActivity;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.homeDataModels = homeDataModels;
+        this.fragment = fragment;
     }
 
 
@@ -65,6 +72,7 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder.txt_name = (TextView) convertView.findViewById(R.id.txt_name);
             mHomeItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);
             mHomeItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
+            mHomeItemHolder.txt_send = (TextView) convertView.findViewById(R.id.txt_send);
             mHomeItemHolder.txt_post_message = (TextView) convertView.findViewById(R.id.txt_post_message);
             mHomeItemHolder.edt_comment = (EditText) convertView.findViewById(R.id.edt_comment);
             mHomeItemHolder.ll_comments = (LinearLayout) convertView.findViewById(R.id.ll_comments);
@@ -74,6 +82,7 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.edt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_send.setTypeface(Utility.setTypeFace_fontawesome(mContext));
 
             convertView.setTag(mHomeItemHolder);
         } else {
@@ -98,6 +107,20 @@ public class HomeAdapter extends BaseAdapter {
                     .into(mHomeItemHolder.image_data);
         else
             mHomeItemHolder.image_data.setVisibility(View.GONE);
+
+        final HomeItemHolder finalMHomeItemHolder = mHomeItemHolder;
+        mHomeItemHolder.txt_send.setTag("" + position);
+        mHomeItemHolder.txt_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Utility.isValueNullOrEmpty(finalMHomeItemHolder.edt_comment.getText().toString())) {
+                    Utility.setSnackBarEnglish(dashboardActivity, finalMHomeItemHolder.edt_comment, "Please Enter comment");
+                } else {
+                    int po = Integer.parseInt(view.getTag().toString());
+                    ((HomeFragment) fragment).commentOnPost(po, finalMHomeItemHolder.edt_comment.getText().toString());
+                }
+            }
+        });
         /*mHomeItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));*/
 
         /*LinearLayout layout_list_header = (LinearLayout) mLayoutInflater.inflate(R.layout.
@@ -125,6 +148,7 @@ public class HomeAdapter extends BaseAdapter {
         private TextView txt_company;
         private TextView txt_time_date;
         private TextView txt_post_message;
+        private TextView txt_send;
         private ImageView image_data;
         /*private TextView txt_comment_name;
         private TextView txt_comment_company;

@@ -18,9 +18,11 @@ import com.versatilemobitech.fmc.adapters.HomeAdapter;
 import com.versatilemobitech.fmc.adapters.NoPostFoundAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.models.CommentsModel;
 import com.versatilemobitech.fmc.models.GetPostsModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.CommentsParser;
 import com.versatilemobitech.fmc.parsers.GetPostsParser;
 import com.versatilemobitech.fmc.parsers.PostDataParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
@@ -199,17 +201,42 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                             endScroll = true;
                         }
                     }
+                } else if (model instanceof CommentsModel) {
+                    CommentsModel mCommentsModel = (CommentsModel) model;
+                    Utility.showToastMessage(mParent, "Success" + mCommentsModel.getMessage());
                 }
             }
         }
     }
 
     private void setListData() {
-        homeAdapter = new HomeAdapter(getActivity(), homeDataModels);
+        homeAdapter = new HomeAdapter(mParent, getActivity(), this, homeDataModels);
         list_view.setAdapter(homeAdapter);
         setListHeader();
     }
 
+    public void commentOnPost(int position, String message) {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+        paramMap.put("post_id", homeDataModels.get(position).getPost_id());
+        paramMap.put("user_id", Utility.getSharedPrefStringData(getActivity(), Constants.USER_ID));
+        paramMap.put("comment", message);
+        CommentsParser mCommentsParser = new CommentsParser();
+        if (Utility.isNetworkAvailable(getActivity())) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
+                    R.string.please_wait), true,
+                    APIConstants.POST_COMMENT, paramMap,
+                    APIConstants.REQUEST_TYPE.POST, this, mCommentsParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    getActivity(),
+                    getActivity().getResources().getString(
+                            R.string.no_internet_msg),
+                    getActivity().getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
+        }
+    }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
