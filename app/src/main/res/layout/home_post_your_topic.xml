@@ -75,6 +75,7 @@
                     android:src="@drawable/home_post_image" />
 
                 <LinearLayout
+                    android:id="@+id/ll_post"
                     android:layout_width="@dimen/_80dp"
                     android:layout_height="@dimen/_25dp"
                     android:layout_marginLeft="@dimen/_5dp"

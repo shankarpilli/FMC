@@ -13,18 +13,17 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
-import com.versatilemobitech.fmc.adapters.GalleryFolderAdapter;
 import com.versatilemobitech.fmc.adapters.HomeAdapter;
 import com.versatilemobitech.fmc.adapters.NoPostFoundAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
-import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.models.GetPostsModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.parsers.GetPostsParser;
-import com.versatilemobitech.fmc.parsers.PhotoAlbumsParser;
+import com.versatilemobitech.fmc.parsers.PostDataParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
+import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
@@ -44,6 +43,9 @@ public class HomeFragment extends Fragment implements IAsyncCaller {
     private HomeAdapter homeAdapter;
     private NoPostFoundAdapter noPostFoundAdapter;
     private ArrayList<HomeDataModel> homeDataModels;
+    private boolean isDocSelected;
+    private boolean isPdfSelected;
+    private boolean isImgSelected;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,13 +106,54 @@ public class HomeFragment extends Fragment implements IAsyncCaller {
                 LayoutParams.MATCH_PARENT, pixels);
         params.setMargins(15, 15, 15, 15);
         layout_list_header.setLayoutParams(params);
+        LinearLayout ll_post = (LinearLayout) layout_list_header.findViewById(R.id.ll_post);
         TextView tv_post = (TextView) layout_list_header.findViewById(R.id.tv_post);
         tv_post.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         TextView txt_post_your_topic = (TextView) layout_list_header.findViewById(R.id.txt_post_your_topic);
         txt_post_your_topic.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        EditText et_what_is_on_u_mind = (EditText) layout_list_header.findViewById(R.id.et_what_is_on_u_mind);
+        final EditText et_what_is_on_u_mind = (EditText) layout_list_header.findViewById(R.id.et_what_is_on_u_mind);
         et_what_is_on_u_mind.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         list_view.addHeaderView(layout_list_header);
+        ll_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isValidFields(et_what_is_on_u_mind)) {
+                    postFeed(et_what_is_on_u_mind);
+                }
+            }
+        });
+    }
+
+    private void postFeed(EditText et_what_is_on_u_mind) {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+        paramMap.put("post_text", "" + et_what_is_on_u_mind.getText().toString());
+        paramMap.put("user_id", Utility.getSharedPrefStringData(getActivity(), Constants.USER_ID));
+        PostDataParser mPostDataParser = new PostDataParser();
+        if (Utility.isNetworkAvailable(getActivity())) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
+                    R.string.please_wait), true,
+                    APIConstants.SAVE_POST, paramMap,
+                    APIConstants.REQUEST_TYPE.POST, this, mPostDataParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    getActivity(),
+                    getActivity().getResources().getString(
+                            R.string.no_internet_msg),
+                    getActivity().getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
+        }
+    }
+
+    private boolean isValidFields(EditText et_what_is_on_u_mind) {
+        boolean isValidated = false;
+        if (Utility.isValueNullOrEmpty(et_what_is_on_u_mind.getText().toString().trim()) && !isDocSelected && !isImgSelected && !isPdfSelected) {
+            Utility.setSnackBarEnglish(mParent, et_what_is_on_u_mind, "Please enter what is on ur mind");
+        } else {
+            isValidated = true;
+        }
+        return isValidated;
     }
 
     @Override
