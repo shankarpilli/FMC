@@ -3,6 +3,8 @@ package com.versatilemobitech.fmc.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 
 /**
  * Created by Shankar Pilli on 11/07/2016
@@ -68,6 +71,28 @@ public class MemberDirectorFragment extends Fragment implements IAsyncCaller, Ab
         ll_search = (ListView) rootView.findViewById(R.id.ll_search);
         ll_search.setAdapter(membersAdapter);
         edt_search.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        tv_no_members.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+
+
+        edt_search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                Utility.showLog("CharSequence", "CharSequence" + arg0);
+                membersAdapter.getFilter().filter(arg0);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                          int arg3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+
+            }
+        });
+
         getMembersData("1");
     }
 
