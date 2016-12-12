@@ -249,7 +249,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                         String extension = "";
                         int i = edt_profile_pic.getText().toString().lastIndexOf('.');
                         if (i > 0) {
-                            extension = edt_profile_pic.getText().toString().substring(i+1);
+                            extension = edt_profile_pic.getText().toString().substring(i + 1);
                         }
                         paramMap.put("file_extension", extension);
                         if (cb_hyd.isChecked() != true) {
@@ -356,6 +356,8 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                     Utility.setSharedPrefStringData(this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP, "done");
                     Utility.setSharedPrefStringData(context, Constants.COMPANY_NAME, mSignUpModel.getCompany_name());
                     Utility.setSharedPrefStringData(context, Constants.PROFILE_PIC, mSignUpModel.getProfile_pic());
+                    Utility.setSharedPrefStringData(context, Constants.USER_NAME, Utility.capitalizeFirstLetter(mSignUpModel.getFirst_name()) + " " +
+                            Utility.capitalizeFirstLetter(mSignUpModel.getLast_name()));
                     Intent mIntentSignup = new Intent(SignupActivity.this, DashboardActivity.class);
                     startActivity(mIntentSignup);
                     finish();

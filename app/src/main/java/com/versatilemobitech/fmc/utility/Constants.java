@@ -18,6 +18,7 @@ public class Constants {
     public static final String LOGIN_PASSWORD = "LOGIN_PASSWORD";
     public static final String COMPANY_NAME = "COMPANY_NAME";
     public static final String PROFILE_PIC = "PROFILE_PIC";
+    public static final String USER_NAME= "USER_NAME";
 
     public static final int FROM_GALLERY_ID = 690;
     public static final int FROM_CAMERA_ID = 689;

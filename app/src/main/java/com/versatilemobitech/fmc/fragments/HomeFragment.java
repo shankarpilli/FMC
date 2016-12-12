@@ -19,6 +19,7 @@ import com.versatilemobitech.fmc.adapters.NoPostFoundAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.models.CommentsModel;
+import com.versatilemobitech.fmc.models.GetPostsCommentModel;
 import com.versatilemobitech.fmc.models.GetPostsModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.models.Model;
@@ -29,8 +30,12 @@ import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 
 /**
  * Created by Shankar Pilli on 11/06/2016
@@ -54,6 +59,9 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     private int aaTotalCount, aaVisibleCount, aaFirstVisibleItem;
     private boolean endScroll = false;
     private int mPageNumber = 1;
+
+    private int mCommtedPostion = -1;
+    private String mCommtedMessage = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -204,9 +212,37 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                 } else if (model instanceof CommentsModel) {
                     CommentsModel mCommentsModel = (CommentsModel) model;
                     Utility.showToastMessage(mParent, mCommentsModel.getMessage());
+                    GetPostsCommentModel getPostsCommentModel = new GetPostsCommentModel();
+                    getPostsCommentModel.setProfile_pic(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC));
+                    getPostsCommentModel.setFirst_name("" + Utility.getSharedPrefStringData(getActivity(), Constants.USER_NAME));
+                    getPostsCommentModel.setLast_name("");
+                    getPostsCommentModel.setDatetime("" + parseDOB());
+                    getPostsCommentModel.setCompany_name("" + Utility.getSharedPrefStringData(getActivity(), Constants.COMPANY_NAME));
+                    getPostsCommentModel.setComment("" + mCommtedMessage);
+                    homeDataModels.get(mCommtedPostion).getGetPostsCommentModels().add(getPostsCommentModel);
+                    homeAdapter.notifyDataSetChanged();
                 }
             }
         }
+    }
+
+
+    /*private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "dd MMM, YYYY HH:mm a", Locale.getDefault());
+        Date date = new Date();
+        String s = dateFormat.format(date);
+        return s;
+    }*/
+
+    public String parseDOB() {
+        Calendar c = Calendar.getInstance();
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        //SimpleDateFormat formatShort = new SimpleDateFormat("dd MMM, YYYY hh:mm", Locale.getDefault());
+        //SimpleDateFormat df = new SimpleDateFormat("dd MMM, YYYY");
+        String formattedDate = df.format(c.getTime());
+        return formattedDate;
     }
 
     private void setListData() {
@@ -216,6 +252,8 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     }
 
     public void commentOnPost(int position, String message) {
+        mCommtedPostion = position;
+        mCommtedMessage = message;
         LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
         paramMap.put("post_id", homeDataModels.get(position).getPost_id());
         paramMap.put("user_id", Utility.getSharedPrefStringData(getActivity(), Constants.USER_ID));

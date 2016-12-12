@@ -75,6 +75,7 @@
                 android:layout_marginLeft="@dimen/_10dp"
                 android:layout_marginTop="@dimen/_5dp"
                 android:text="@string/reply"
+                android:visibility="gone"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_18sp" />
         </LinearLayout>
