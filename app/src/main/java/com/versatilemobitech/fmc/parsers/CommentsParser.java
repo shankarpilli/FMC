@@ -20,10 +20,10 @@ public class CommentsParser implements Parser {
             mCommentsModel.setStatus(true);
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                mCommentsModel.setMessage(jsonObject.optString("msg"));
-                mCommentsModel.setUser_id(jsonObject.optString("user_id"));
+                mCommentsModel.setMessage(jsonObject.optString("message"));
+                /*mCommentsModel.setUser_id(jsonObject.optString("user_id"));
                 mCommentsModel.setPost_id(jsonObject.optString("post_id"));
-                mCommentsModel.setComment(jsonObject.optString("comment"));
+                mCommentsModel.setComment(jsonObject.optString("comment"));*/
             } catch (Exception e) {
                 mCommentsModel.setStatus(false);
             }

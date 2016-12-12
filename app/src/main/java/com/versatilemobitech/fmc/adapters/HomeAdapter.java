@@ -16,6 +16,7 @@ import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.fragments.HomeFragment;
+import com.versatilemobitech.fmc.models.GetPostsCommentModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
@@ -122,22 +123,31 @@ public class HomeAdapter extends BaseAdapter {
             }
         });
         /*mHomeItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));*/
+        Utility.showLog("getGetPostsCommentModels().size()", "" + mHomeDataModel.getGetPostsCommentModels().size());
+        mHomeItemHolder.ll_comments.removeAllViews();
+        for (int i = 0; i < mHomeDataModel.getGetPostsCommentModels().size(); i++) {
+            GetPostsCommentModel getPostsCommentModel = mHomeDataModel.getGetPostsCommentModels().get(i);
+            LinearLayout layout_list_header = (LinearLayout) mLayoutInflater.inflate(R.layout.
+                    home_comment_item, null);
+            TextView txt_comment_name = (TextView) layout_list_header.findViewById(R.id.txt_comment_name);
+            TextView txt_comment_company = (TextView) layout_list_header.findViewById(R.id.txt_comment_company);
+            TextView txt_comment_time_date = (TextView) layout_list_header.findViewById(R.id.txt_comment_time_date);
+            TextView txt_comment_post_message = (TextView) layout_list_header.findViewById(R.id.txt_comment_post_message);
+            TextView txt_reply = (TextView) layout_list_header.findViewById(R.id.txt_reply);
 
-        /*LinearLayout layout_list_header = (LinearLayout) mLayoutInflater.inflate(R.layout.
-                home_comment_item, null);
-        mHomeItemHolder.txt_comment_name = (TextView) layout_list_header.findViewById(R.id.txt_comment_name);
-        mHomeItemHolder.txt_comment_company = (TextView) layout_list_header.findViewById(R.id.txt_comment_company);
-        mHomeItemHolder.txt_comment_time_date = (TextView) layout_list_header.findViewById(R.id.txt_comment_time_date);
-        mHomeItemHolder.txt_comment_post_message = (TextView) layout_list_header.findViewById(R.id.txt_comment_post_message);
-        mHomeItemHolder.txt_reply = (TextView) layout_list_header.findViewById(R.id.txt_reply);
+            txt_comment_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            txt_comment_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            txt_comment_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            txt_comment_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            txt_reply.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
-        mHomeItemHolder.txt_comment_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-        mHomeItemHolder.txt_comment_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-        mHomeItemHolder.txt_comment_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-        mHomeItemHolder.txt_comment_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-        mHomeItemHolder.txt_reply.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            txt_comment_name.setText(getPostsCommentModel.getFirst_name());
+            txt_comment_company.setText(getPostsCommentModel.getCompany_name());
+            txt_comment_time_date.setText(getPostsCommentModel.getDatetime());
+            txt_comment_post_message.setText(getPostsCommentModel.getComment());
 
-        mHomeItemHolder.ll_comments.addView(layout_list_header);*/
+            mHomeItemHolder.ll_comments.addView(layout_list_header);
+        }
 
         return convertView;
     }
@@ -150,11 +160,6 @@ public class HomeAdapter extends BaseAdapter {
         private TextView txt_post_message;
         private TextView txt_send;
         private ImageView image_data;
-        /*private TextView txt_comment_name;
-        private TextView txt_comment_company;
-        private TextView txt_comment_time_date;
-        private TextView txt_comment_post_message;
-        private TextView txt_reply;*/
         private EditText edt_comment;
         private LinearLayout ll_comments;
     }

@@ -14,7 +14,7 @@ public class HomeDataModel extends Model {
     private String last_name;
     private String company_name;
     private String profile_pic;
-    private ArrayList<CommentsModel> commentsModels;
+    private ArrayList<GetPostsCommentModel> getPostsCommentModels;
 
     public String getPost_text() {
         return post_text;
@@ -40,12 +40,12 @@ public class HomeDataModel extends Model {
         this.post_id = post_id;
     }
 
-    public ArrayList<CommentsModel> getCommentsModels() {
-        return commentsModels;
+    public ArrayList<GetPostsCommentModel> getGetPostsCommentModels() {
+        return getPostsCommentModels;
     }
 
-    public void setCommentsModels(ArrayList<CommentsModel> commentsModels) {
-        this.commentsModels = commentsModels;
+    public void setGetPostsCommentModels(ArrayList<GetPostsCommentModel> getPostsCommentModels) {
+        this.getPostsCommentModels = getPostsCommentModels;
     }
 
     public String getFirst_name() {

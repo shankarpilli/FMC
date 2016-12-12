@@ -203,7 +203,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                     }
                 } else if (model instanceof CommentsModel) {
                     CommentsModel mCommentsModel = (CommentsModel) model;
-                    Utility.showToastMessage(mParent, "Success" + mCommentsModel.getMessage());
+                    Utility.showToastMessage(mParent, mCommentsModel.getMessage());
                 }
             }
         }
