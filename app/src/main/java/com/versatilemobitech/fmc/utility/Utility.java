@@ -482,6 +482,9 @@ public class Utility {
     public static Typeface setTypeFace_fontawesome(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
     }
+    public static Typeface setTypeFace_matirealicons(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "matireal_icons_regular.ttf");
+    }
 
     public static Bitmap getRotatedBitmap(int rotation, String mPath) {
         File f = new File(mPath);

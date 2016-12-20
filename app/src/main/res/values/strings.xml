@@ -79,6 +79,7 @@
     <string name="site">www.fmc.com</string>
     <string name="follow_us">Follow Us</string>
     <string name="share_app"><u>Share App</u></string>
+    <string name="share"><u>Share</u></string>
     <string name="gallery_view">Gallery View</string>
 
     <string name="date_time">25th Sep, 2016       10.30AM</string>
@@ -91,6 +92,8 @@
     <string name="txt_cd">empty</string>
     <string name="icon_left_arrow">&#xf060;</string>
     <string name="fa_paper_plane">&#xf1d8;</string>
+    <string name="share_icon">&#xE895;</string>
+    <string name="comment_icon">&#xE0CB;</string>
     <string name="txt_accept">Accept</string>
     <string name="no_posts_in_home">No Posts In Home</string>
     <string name="no_more_data_to_display">No more data to display</string>

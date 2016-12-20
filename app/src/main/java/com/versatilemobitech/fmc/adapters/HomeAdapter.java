@@ -73,17 +73,35 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder.txt_name = (TextView) convertView.findViewById(R.id.txt_name);
             mHomeItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);
             mHomeItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
-            mHomeItemHolder.txt_send = (TextView) convertView.findViewById(R.id.txt_send);
+
+            mHomeItemHolder.txt_total_comments = (TextView) convertView.findViewById(R.id.txt_total_comments);
+            mHomeItemHolder.txt_comment = (TextView) convertView.findViewById(R.id.txt_comment);
+            mHomeItemHolder.txt_share = (TextView) convertView.findViewById(R.id.txt_share);
+            mHomeItemHolder.txt_sub_name = (TextView) convertView.findViewById(R.id.txt_share);
+            /*mHomeItemHolder.txt_send = (TextView) convertView.findViewById(R.id.txt_send);*/
             mHomeItemHolder.txt_post_message = (TextView) convertView.findViewById(R.id.txt_post_message);
-            mHomeItemHolder.edt_comment = (EditText) convertView.findViewById(R.id.edt_comment);
+
+            mHomeItemHolder.txt_share_icon = (TextView) convertView.findViewById(R.id.txt_share_icon);
+            mHomeItemHolder.txt_comment_icon = (TextView) convertView.findViewById(R.id.txt_comment_icon);
+
+/*            mHomeItemHolder.edt_comment = (EditText) convertView.findViewById(R.id.edt_comment);*/
             mHomeItemHolder.ll_comments = (LinearLayout) convertView.findViewById(R.id.ll_comments);
 
             mHomeItemHolder.txt_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.edt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_send.setTypeface(Utility.setTypeFace_fontawesome(mContext));
+            /*mHomeItemHolder.edt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));*/
+            mHomeItemHolder.txt_sub_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+            mHomeItemHolder.txt_total_comments.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            /*mHomeItemHolder.txt_send.setTypeface(Utility.setTypeFace_fontawesome(mContext));*/
+
+            mHomeItemHolder.txt_share_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
+            mHomeItemHolder.txt_comment_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
 
             convertView.setTag(mHomeItemHolder);
         } else {
@@ -110,7 +128,7 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder.image_data.setVisibility(View.GONE);
 
         final HomeItemHolder finalMHomeItemHolder = mHomeItemHolder;
-        mHomeItemHolder.txt_send.setTag("" + position);
+       /* mHomeItemHolder.txt_send.setTag("" + position);
         mHomeItemHolder.txt_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,10 +139,15 @@ public class HomeAdapter extends BaseAdapter {
                     ((HomeFragment) fragment).commentOnPost(po, finalMHomeItemHolder.edt_comment.getText().toString());
                 }
             }
-        });
-        /*mHomeItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));*/
+        });*/
+        mHomeItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));
         Utility.showLog("getGetPostsCommentModels().size()", "" + mHomeDataModel.getGetPostsCommentModels().size());
-        mHomeItemHolder.ll_comments.removeAllViews();
+        if(mHomeDataModel.getGetPostsCommentModels().size()==1){
+            mHomeItemHolder.txt_total_comments.setText(""+mHomeDataModel.getGetPostsCommentModels().size()+" comment");
+        }else {
+            mHomeItemHolder.txt_total_comments.setText(""+mHomeDataModel.getGetPostsCommentModels().size()+" comments");
+        }
+       /* mHomeItemHolder.ll_comments.removeAllViews();
         for (int i = 0; i < mHomeDataModel.getGetPostsCommentModels().size(); i++) {
             GetPostsCommentModel getPostsCommentModel = mHomeDataModel.getGetPostsCommentModels().get(i);
             LinearLayout layout_list_header = (LinearLayout) mLayoutInflater.inflate(R.layout.
@@ -147,7 +170,7 @@ public class HomeAdapter extends BaseAdapter {
             txt_comment_post_message.setText(getPostsCommentModel.getComment());
 
             mHomeItemHolder.ll_comments.addView(layout_list_header);
-        }
+        }*/
 
         return convertView;
     }
@@ -158,9 +181,15 @@ public class HomeAdapter extends BaseAdapter {
         private TextView txt_company;
         private TextView txt_time_date;
         private TextView txt_post_message;
-        private TextView txt_send;
+        private TextView txt_total_comments;
+        private TextView txt_comment;
+        private TextView txt_share;
+        private TextView txt_sub_name;
+        /*private TextView txt_send;*/
+        private TextView txt_share_icon;
+        private TextView txt_comment_icon;
         private ImageView image_data;
-        private EditText edt_comment;
+/*        private EditText edt_comment;*/
         private LinearLayout ll_comments;
     }
 }
