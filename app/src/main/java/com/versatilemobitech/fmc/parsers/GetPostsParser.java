@@ -41,6 +41,7 @@ public class GetPostsParser implements Parser {
                         mHomeDataModel.setLast_name(mObj.optString("last_name"));
                         mHomeDataModel.setCompany_name(mObj.optString("company_name"));
                         mHomeDataModel.setProfile_pic(mObj.optString("profile_pic"));
+                        mHomeDataModel.setPost_image(mObj.optString("post_image"));
                         JSONArray jsonCommentsArray = mObj.optJSONArray("comments");
                         ArrayList<GetPostsCommentModel> mGetPostsCommentModelList = new ArrayList<>();
                         for (int j = 0; j < jsonCommentsArray.length(); j++) {

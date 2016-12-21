@@ -22,4 +22,9 @@ public class Constants {
 
     public static final int FROM_GALLERY_ID = 690;
     public static final int FROM_CAMERA_ID = 689;
+
+    public static final int FROM_HOME_GALLERY_ID = 691;
+    public static final int FROM_HOME_CAMERA_ID = 692;
+    public static final int FROM_HOME_DOC = 693;
+    public static final int FROM_HOME_PDF = 694;
 }

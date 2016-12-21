@@ -119,7 +119,7 @@ public class HomeAdapter extends BaseAdapter {
                     .load(mHomeDataModel.getProfile_pic()).transform(new CircleTransform())
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(mHomeItemHolder.post_image);
-        if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()))
+        if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()) && mHomeDataModel.getPost_image().contains(".jpg"))
             Picasso.with(mContext)
                     .load(mHomeDataModel.getPost_image()).transform(new CircleTransform())
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
@@ -142,10 +142,10 @@ public class HomeAdapter extends BaseAdapter {
         });*/
         mHomeItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));
         Utility.showLog("getGetPostsCommentModels().size()", "" + mHomeDataModel.getGetPostsCommentModels().size());
-        if(mHomeDataModel.getGetPostsCommentModels().size()==1){
-            mHomeItemHolder.txt_total_comments.setText(""+mHomeDataModel.getGetPostsCommentModels().size()+" comment");
-        }else {
-            mHomeItemHolder.txt_total_comments.setText(""+mHomeDataModel.getGetPostsCommentModels().size()+" comments");
+        if (mHomeDataModel.getGetPostsCommentModels().size() == 1) {
+            mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getGetPostsCommentModels().size() + " comment");
+        } else {
+            mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getGetPostsCommentModels().size() + " comments");
         }
        /* mHomeItemHolder.ll_comments.removeAllViews();
         for (int i = 0; i < mHomeDataModel.getGetPostsCommentModels().size(); i++) {
@@ -189,7 +189,7 @@ public class HomeAdapter extends BaseAdapter {
         private TextView txt_share_icon;
         private TextView txt_comment_icon;
         private ImageView image_data;
-/*        private EditText edt_comment;*/
+        /*        private EditText edt_comment;*/
         private LinearLayout ll_comments;
     }
 }

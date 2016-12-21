@@ -1,7 +1,11 @@
 package com.versatilemobitech.fmc.activities;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -31,8 +35,10 @@ import com.versatilemobitech.fmc.fragments.MemberDirectorFragment;
 import com.versatilemobitech.fmc.fragments.WelcomeFragment;
 import com.versatilemobitech.fmc.models.LeftMenuModel;
 import com.versatilemobitech.fmc.utility.Constants;
+import com.versatilemobitech.fmc.utility.ImageUtility;
 import com.versatilemobitech.fmc.utility.Utility;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -206,4 +212,30 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             }
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.FROM_HOME_CAMERA_ID) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                String selectedImgPath = ImageUtility.saveBitmap(DashboardActivity.this, bitmap);
+                HomeFragment.getInstance().updateProfilePic(selectedImgPath);
+            }
+
+        } else if (requestCode == Constants.FROM_HOME_GALLERY_ID) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri selectedImageUri = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                    String selectedImgPath = ImageUtility.saveBitmap(DashboardActivity.this, bitmap);
+                    HomeFragment.getInstance().updateProfilePic(selectedImgPath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

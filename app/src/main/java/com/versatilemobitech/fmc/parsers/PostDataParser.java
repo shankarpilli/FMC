@@ -20,7 +20,7 @@ public class PostDataParser implements Parser {
             mPostDataModel.setStatus(true);
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                mPostDataModel.setMessage(jsonObject.optString("msg"));
+                mPostDataModel.setMessage(jsonObject.optString("message"));
                 mPostDataModel.setUser_id(jsonObject.optString("user_id"));
                 mPostDataModel.setPost_text(jsonObject.optString("post_text"));
                 mPostDataModel.setPost_image(jsonObject.optString("post_image"));

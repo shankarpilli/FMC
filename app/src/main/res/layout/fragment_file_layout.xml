@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_choose_file"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40dp"
+        android:gravity="center"
+        android:paddingBottom="@dimen/_5dp"
+        android:paddingTop="@dimen/_5dp"
+        android:text="@string/choose_doc_file"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_18sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_05dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/txt_no_files_found"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/no_doc_found"
+            android:textSize="@dimen/_18sp"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/list_files"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+</LinearLayout>

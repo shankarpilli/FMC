@@ -94,10 +94,12 @@
     <string name="fa_paper_plane">&#xf1d8;</string>
     <string name="share_icon">&#xE895;</string>
     <string name="comment_icon">&#xE0CB;</string>
+    <string name="delete_icon">&#xE92B;</string>
     <string name="txt_accept">Accept</string>
     <string name="no_posts_in_home">No Posts In Home</string>
     <string name="no_more_data_to_display">No more data to display</string>
 
-
+    <string name="choose_doc_file">Choose Doc File</string>
+    <string name="no_doc_found">No Doc Found</string>
 
 </resources>

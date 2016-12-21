@@ -476,7 +476,7 @@ public class Utility {
     }
 
     public static Typeface setTypeFaceRobotoRegular(Context context) {
-        return Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
+        return Typeface.createFromAsset(context.getAssets(), "cambria.ttf");
     }
 
     public static Typeface setTypeFace_fontawesome(Context context) {
