@@ -19,9 +19,11 @@ import com.versatilemobitech.fmc.utility.Utility;
 public class AwardsAdapter extends BaseAdapter {
 
 private Context mContext;
+    private LayoutInflater mLayoutInflater;
 
     public AwardsAdapter(Context mParent) {
         mContext = mParent;
+        mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -41,24 +43,22 @@ private Context mContext;
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View grid;
         GalleryHolder mGalleryHolder = null;
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         if (convertView == null) {
-            grid = new View(mContext);
-            grid = inflater.inflate(R.layout.item_gallery, null);
+            convertView = mLayoutInflater.inflate(R.layout.item_gallery,
+                    null);
             mGalleryHolder = new GalleryHolder();
+            mGalleryHolder.tv_award_year = (TextView)convertView.findViewById(R.id.tv_award_year);
+            mGalleryHolder.tv_award_year.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            convertView.setTag(mGalleryHolder);
+/*            grid = inflater.inflate(R.layout.item_gallery, null);*/
 
         } else {
-            grid = (View) convertView;
+            mGalleryHolder = (GalleryHolder) convertView.getTag();
         }
 
-        mGalleryHolder.tv_award_year = (TextView)grid.findViewById(R.id.tv_award_year);
-        mGalleryHolder.tv_award_year.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
-        return grid;
+        return convertView;
     }
 
    private class GalleryHolder{
