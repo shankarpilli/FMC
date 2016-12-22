@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ListView
         android:id="@+id/ll_knowledge_partners"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:dividerHeight="@dimen/_0dp"
+        android:visibility="visible" />
 
-</android.support.v4.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/tv_no_knowledge_partners"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Knowledge Partners"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_25sp"
+        android:visibility="gone" />
+</RelativeLayout>
