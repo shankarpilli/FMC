@@ -14,7 +14,8 @@ public class HomeDataModel extends Model {
     private String last_name;
     private String company_name;
     private String profile_pic;
-    private ArrayList<GetPostsCommentModel> getPostsCommentModels;
+    private int comments_count;
+    //private ArrayList<GetPostsCommentModel> getPostsCommentModels;
 
     public String getPost_text() {
         return post_text;
@@ -40,13 +41,13 @@ public class HomeDataModel extends Model {
         this.post_id = post_id;
     }
 
-    public ArrayList<GetPostsCommentModel> getGetPostsCommentModels() {
+    /*public ArrayList<GetPostsCommentModel> getGetPostsCommentModels() {
         return getPostsCommentModels;
     }
 
     public void setGetPostsCommentModels(ArrayList<GetPostsCommentModel> getPostsCommentModels) {
         this.getPostsCommentModels = getPostsCommentModels;
-    }
+    }*/
 
     public String getFirst_name() {
         return first_name;
@@ -86,5 +87,13 @@ public class HomeDataModel extends Model {
 
     public void setPost_image(String post_image) {
         this.post_image = post_image;
+    }
+
+    public int getComments_count() {
+        return comments_count;
+    }
+
+    public void setComments_count(int comments_count) {
+        this.comments_count = comments_count;
     }
 }

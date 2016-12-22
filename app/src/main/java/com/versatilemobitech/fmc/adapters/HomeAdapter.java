@@ -127,7 +127,6 @@ public class HomeAdapter extends BaseAdapter {
         else
             mHomeItemHolder.image_data.setVisibility(View.GONE);
 
-        final HomeItemHolder finalMHomeItemHolder = mHomeItemHolder;
        /* mHomeItemHolder.txt_send.setTag("" + position);
         mHomeItemHolder.txt_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,11 +140,10 @@ public class HomeAdapter extends BaseAdapter {
             }
         });*/
         mHomeItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));
-        Utility.showLog("getGetPostsCommentModels().size()", "" + mHomeDataModel.getGetPostsCommentModels().size());
-        if (mHomeDataModel.getGetPostsCommentModels().size() == 1) {
-            mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getGetPostsCommentModels().size() + " comment");
+        if (mHomeDataModel.getComments_count() == 1) {
+            mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getComments_count() + " comment");
         } else {
-            mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getGetPostsCommentModels().size() + " comments");
+            mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getComments_count() + " comments");
         }
        /* mHomeItemHolder.ll_comments.removeAllViews();
         for (int i = 0; i < mHomeDataModel.getGetPostsCommentModels().size(); i++) {

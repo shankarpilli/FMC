@@ -263,10 +263,14 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
         paramMap.put("post_text", "" + et_what_is_on_u_mind.getText().toString());
         paramMap.put("user_id", Utility.getSharedPrefStringData(getActivity(), Constants.USER_ID));
-        paramMap.put("post_image", mEncodedImage);
-        paramMap.put("image_extension", mImgpathExtenstion);
-        paramMap.put("doc_extension", mDoc_extension);
-        paramMap.put("post_doc", mEncodedDoc);
+        if (!Utility.isValueNullOrEmpty(mImgpathExtenstion)) {
+            paramMap.put("post_image", mEncodedImage);
+            paramMap.put("image_extension", mImgpathExtenstion);
+        }
+        if (!Utility.isValueNullOrEmpty(mDoc_extension)) {
+            paramMap.put("doc_extension", mDoc_extension);
+            paramMap.put("post_doc", mEncodedDoc);
+        }
         PostDataParser mPostDataParser = new PostDataParser();
         if (Utility.isNetworkAvailable(getActivity())) {
             ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
@@ -343,7 +347,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                     getPostsCommentModel.setDatetime("" + parseDOB());
                     getPostsCommentModel.setCompany_name("" + Utility.getSharedPrefStringData(getActivity(), Constants.COMPANY_NAME));
                     getPostsCommentModel.setComment("" + mCommtedMessage);
-                    homeDataModels.get(mCommtedPostion).getGetPostsCommentModels().add(getPostsCommentModel);
+                    //homeDataModels.get(mCommtedPostion).getGetPostsCommentModels().add(getPostsCommentModel);
                     homeAdapter.notifyDataSetChanged();
                 } else if (model instanceof PostDataModel) {
                     PostDataModel postDataModel = (PostDataModel) model;

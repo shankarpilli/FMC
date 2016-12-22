@@ -42,7 +42,8 @@ public class GetPostsParser implements Parser {
                         mHomeDataModel.setCompany_name(mObj.optString("company_name"));
                         mHomeDataModel.setProfile_pic(mObj.optString("profile_pic"));
                         mHomeDataModel.setPost_image(mObj.optString("post_image"));
-                        JSONArray jsonCommentsArray = mObj.optJSONArray("comments");
+                        mHomeDataModel.setComments_count(mObj.optInt("comments_count"));
+                        /*JSONArray jsonCommentsArray = mObj.optJSONArray("comments");
                         ArrayList<GetPostsCommentModel> mGetPostsCommentModelList = new ArrayList<>();
                         for (int j = 0; j < jsonCommentsArray.length(); j++) {
                             JSONObject mCommentObj = (JSONObject) jsonCommentsArray.get(j);
@@ -55,7 +56,7 @@ public class GetPostsParser implements Parser {
                             getPostsCommentModel.setDatetime(mCommentObj.optString("datetime"));
                             mGetPostsCommentModelList.add(getPostsCommentModel);
                         }
-                        mHomeDataModel.setGetPostsCommentModels(mGetPostsCommentModelList);
+                        mHomeDataModel.setGetPostsCommentModels(mGetPostsCommentModelList);*/
                         mList.add(mHomeDataModel);
                     }
                     mGetPostsModel.setmList(mList);
