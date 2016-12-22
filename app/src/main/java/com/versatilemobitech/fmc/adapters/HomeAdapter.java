@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
+import com.versatilemobitech.fmc.fragments.DetailViewFragment;
 import com.versatilemobitech.fmc.fragments.FileChooseFragment;
 import com.versatilemobitech.fmc.fragments.WebViewFragment;
 import com.versatilemobitech.fmc.models.HomeDataModel;
@@ -59,7 +60,7 @@ public class HomeAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         HomeItemHolder mHomeItemHolder = null;
 
@@ -152,6 +153,18 @@ public class HomeAdapter extends BaseAdapter {
                 Utility.navigateDashBoardFragment(new WebViewFragment(), WebViewFragment.TAG, bundle, dashboardActivity);
             }
         });
+
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("post_id", homeDataModels.get(position).getPost_id());
+                Utility.navigateDashBoardFragment(new DetailViewFragment(), DetailViewFragment.TAG, bundle, dashboardActivity);
+            }
+        });
+
+
         return convertView;
     }
 

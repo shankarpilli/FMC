@@ -337,18 +337,6 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                             endScroll = true;
                         }
                     }
-                } else if (model instanceof CommentsModel) {
-                    CommentsModel mCommentsModel = (CommentsModel) model;
-                    Utility.showToastMessage(mParent, mCommentsModel.getMessage());
-                    GetPostsCommentModel getPostsCommentModel = new GetPostsCommentModel();
-                    getPostsCommentModel.setProfile_pic(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC));
-                    getPostsCommentModel.setFirst_name("" + Utility.getSharedPrefStringData(getActivity(), Constants.USER_NAME));
-                    getPostsCommentModel.setLast_name("");
-                    getPostsCommentModel.setDatetime("" + parseDOB());
-                    getPostsCommentModel.setCompany_name("" + Utility.getSharedPrefStringData(getActivity(), Constants.COMPANY_NAME));
-                    getPostsCommentModel.setComment("" + mCommtedMessage);
-                    //homeDataModels.get(mCommtedPostion).getGetPostsCommentModels().add(getPostsCommentModel);
-                    homeAdapter.notifyDataSetChanged();
                 } else if (model instanceof PostDataModel) {
                     PostDataModel postDataModel = (PostDataModel) model;
                     Utility.showToastMessage(mParent, postDataModel.getMessage() + " , Update Once Admin Approve");
@@ -368,15 +356,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         return s;
     }*/
 
-    public String parseDOB() {
-        Calendar c = Calendar.getInstance();
 
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-        //SimpleDateFormat formatShort = new SimpleDateFormat("dd MMM, YYYY hh:mm", Locale.getDefault());
-        //SimpleDateFormat df = new SimpleDateFormat("dd MMM, YYYY");
-        String formattedDate = df.format(c.getTime());
-        return formattedDate;
-    }
 
     private void setListData() {
         homeAdapter = new HomeAdapter(mParent, getActivity(), this, homeDataModels);

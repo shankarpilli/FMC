@@ -26,4 +26,5 @@ public class APIConstants {
     public static final String SAVE_POST = BASE_URL + "savepost";
     public static final String POST_COMMENT = BASE_URL + "postcomment";
     public static final String KNOWLEDGE_PARTNERS = BASE_URL + "knowledgepartners/"/*{page number}*/;
+    public static final String POST_DETAILS = BASE_URL + "postdetails/"/*{post_id}*/;
 }
