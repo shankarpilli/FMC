@@ -101,7 +101,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         TextView txt_name = (TextView) layout_list_header.findViewById(R.id.txt_name);
         TextView txt_user_designation = (TextView) layout_list_header.findViewById(R.id.txt_user_designation);
 
-        txt_name.setTypeface(Utility.setTypeFaceRobotoBold(this));
+        txt_name.setTypeface(Utility.setTypeCambriaBoldRegular(this));
         txt_name.setText(Utility.getSharedPrefStringData(DashboardActivity.this, Constants.LOGIN_NAME));
         txt_user_designation.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         txt_user_designation.setText(Utility.getSharedPrefStringData(DashboardActivity.this, Constants.COMPANY_NAME));

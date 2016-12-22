@@ -46,6 +46,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private TextView tv_forgot_password;
     private TextView tv_login;
     private TextView tv_sign_up;
+    private TextView txt_new_user;
     private Context context;
 
     @Override
@@ -77,6 +78,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         tv_forgot_password = (TextView) findViewById(R.id.tv_forgot_password);
         tv_login = (TextView) findViewById(R.id.tv_login);
         tv_sign_up = (TextView) findViewById(R.id.tv_sign_up);
+        txt_new_user = (TextView) findViewById(R.id.txt_new_user);
 
         tv_forgot_password.setOnClickListener(this);
         tv_login.setOnClickListener(this);
@@ -91,6 +93,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         tv_forgot_password.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         tv_login.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         tv_sign_up.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        txt_new_user.setTypeface(Utility.setTypeFaceRobotoRegular(this));
     }
 
     @Override

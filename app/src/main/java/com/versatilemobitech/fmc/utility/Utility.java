@@ -491,6 +491,10 @@ public class Utility {
         return Typeface.createFromAsset(context.getAssets(), "matireal_icons_regular.ttf");
     }
 
+    public static Typeface setTypeCambriaBoldRegular(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "cambriabold.ttf");
+    }
+
     public static Bitmap getRotatedBitmap(int rotation, String mPath) {
         File f = new File(mPath);
         Bitmap mBitMap = BitmapFactory.decodeFile(f.getAbsolutePath());
