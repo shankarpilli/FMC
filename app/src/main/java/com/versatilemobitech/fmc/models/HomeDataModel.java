@@ -1,13 +1,13 @@
 package com.versatilemobitech.fmc.models;
 
-import java.util.ArrayList;
-
 /**
  * Created by Shankar on 11/6/2016.
  */
 public class HomeDataModel extends Model {
     private String post_text;
     private String post_image;
+    private String post_doc;
+    private String doc_extension;
     private String user_id;
     private String post_id;
     private String first_name;
@@ -15,7 +15,7 @@ public class HomeDataModel extends Model {
     private String company_name;
     private String profile_pic;
     private int comments_count;
-    //private ArrayList<GetPostsCommentModel> getPostsCommentModels;
+    private String datetime;
 
     public String getPost_text() {
         return post_text;
@@ -40,14 +40,6 @@ public class HomeDataModel extends Model {
     public void setPost_id(String post_id) {
         this.post_id = post_id;
     }
-
-    /*public ArrayList<GetPostsCommentModel> getGetPostsCommentModels() {
-        return getPostsCommentModels;
-    }
-
-    public void setGetPostsCommentModels(ArrayList<GetPostsCommentModel> getPostsCommentModels) {
-        this.getPostsCommentModels = getPostsCommentModels;
-    }*/
 
     public String getFirst_name() {
         return first_name;
@@ -95,5 +87,29 @@ public class HomeDataModel extends Model {
 
     public void setComments_count(int comments_count) {
         this.comments_count = comments_count;
+    }
+
+    public String getPost_doc() {
+        return post_doc;
+    }
+
+    public void setPost_doc(String post_doc) {
+        this.post_doc = post_doc;
+    }
+
+    public String getDoc_extension() {
+        return doc_extension;
+    }
+
+    public void setDoc_extension(String doc_extension) {
+        this.doc_extension = doc_extension;
+    }
+
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
     }
 }
