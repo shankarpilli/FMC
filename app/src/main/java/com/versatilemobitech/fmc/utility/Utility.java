@@ -2,6 +2,7 @@ package com.versatilemobitech.fmc.utility;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -27,6 +29,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -39,6 +42,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.adapters.SpinnerAdapter;
 import com.versatilemobitech.fmc.customviews.SnackBar;
 import com.versatilemobitech.fmc.models.SpinnerModel;
@@ -482,6 +486,7 @@ public class Utility {
     public static Typeface setTypeFace_fontawesome(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "fontawesome-webfont.ttf");
     }
+
     public static Typeface setTypeFace_matirealicons(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "matireal_icons_regular.ttf");
     }
@@ -507,6 +512,7 @@ public class Utility {
             return context.getResources().getDrawable(id);
         }
     }
+
     public static void UILpicLoading(ImageView ivImageView, String ImageUrl, final ProgressBar progressBar, int placeholder) {
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()
@@ -550,5 +556,37 @@ public class Utility {
         return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
     }
 
+    public static Dialog showProgressDialog(DashboardActivity baseActivity, String text, boolean cancelable) {
+        Dialog mDialog = new Dialog(baseActivity);
+        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        LayoutInflater mInflater = LayoutInflater.from(baseActivity);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        View layout = mInflater.inflate(R.layout.custom_progressbar, null);
+        mDialog.setContentView(layout);
 
+        TextView tvProgressMessage = (TextView) layout.findViewById(R.id.tvProgressMessage);
+        tvProgressMessage.setTypeface(setTypeFace_setTypeFace_proximanova_regular(baseActivity));
+
+        if (text.equals(""))
+            tvProgressMessage.setVisibility(View.GONE);
+        else
+            tvProgressMessage.setText(text);
+
+        if (baseActivity.progressDialog != null) {
+            baseActivity.progressDialog.dismiss();
+            baseActivity.progressDialog = null;
+        }
+
+        baseActivity.progressDialog = mDialog;
+
+        mDialog.setCancelable(cancelable);
+        mDialog.setCanceledOnTouchOutside(cancelable);
+        mDialog.show();
+
+        return mDialog;
+    }
+
+    public static Typeface setTypeFace_setTypeFace_proximanova_regular(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "proximanova-regular-webfont.ttf");
+    }
 }

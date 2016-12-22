@@ -1,6 +1,7 @@
 package com.versatilemobitech.fmc.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
+import com.versatilemobitech.fmc.fragments.FileChooseFragment;
+import com.versatilemobitech.fmc.fragments.WebViewFragment;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
@@ -138,6 +141,17 @@ public class HomeAdapter extends BaseAdapter {
         } else {
             mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getComments_count() + " comments");
         }
+
+        mHomeItemHolder.image_doc.setTag(position);
+        mHomeItemHolder.image_doc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tagPosition = (int) view.getTag();
+                Bundle bundle = new Bundle();
+                bundle.putString("file_url", homeDataModels.get(tagPosition).getPost_doc());
+                Utility.navigateDashBoardFragment(new WebViewFragment(), WebViewFragment.TAG, bundle, dashboardActivity);
+            }
+        });
         return convertView;
     }
 

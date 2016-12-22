@@ -1,6 +1,7 @@
 package com.versatilemobitech.fmc.activities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -48,6 +49,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     public static ImageView iv_left_drawer_icon;
     public static TextView txt_fmc;
     private ArrayList<LeftMenuModel> leftMenuList;
+    public Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
