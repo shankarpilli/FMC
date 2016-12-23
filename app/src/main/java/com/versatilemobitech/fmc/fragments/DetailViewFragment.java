@@ -1,8 +1,10 @@
 package com.versatilemobitech.fmc.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,6 +126,7 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
         getDetailViewData();
 
         txt_send.setOnClickListener(this);
+        txt_share.setOnClickListener(this);
     }
 
     private void getDetailViewData() {
@@ -255,11 +258,39 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
 
     }
 
+
+    private void showShareDialog(String data, String link) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT,
+                "FM Council");
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(new StringBuilder()
+                .append(data)
+                .append('\n')
+                .append(link)
+                .toString()));
+        getActivity().startActivity(Intent.createChooser(shareIntent, "Share Using"));
+    }
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.txt_send:
                 commentOnPost();
+                break;
+            case R.id.txt_share:
+                if (!Utility.isValueNullOrEmpty(detailDataModel.getPost_image()) &&
+                        (detailDataModel.getPost_image().contains(".jpg") || detailDataModel.getPost_image().contains(".png"))) {
+                    showShareDialog(detailDataModel.getPost_text(), detailDataModel.getPost_image());
+                } else if (!Utility.isValueNullOrEmpty(detailDataModel.getPost_doc()) && detailDataModel.getDoc_extension().equalsIgnoreCase("pdf")) {
+                    showShareDialog(detailDataModel.getPost_text(), detailDataModel.getPost_doc());
+                } else if (!Utility.isValueNullOrEmpty(detailDataModel.getPost_doc()) && (detailDataModel.getDoc_extension().equalsIgnoreCase("doc")
+                        || detailDataModel.getDoc_extension().equalsIgnoreCase("docx"))) {
+                    showShareDialog(detailDataModel.getPost_text(), detailDataModel.getPost_doc());
+                } else {
+                    showShareDialog(detailDataModel.getPost_text(), "");
+                }
                 break;
         }
     }

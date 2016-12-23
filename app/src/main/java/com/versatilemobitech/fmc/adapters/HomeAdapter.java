@@ -1,8 +1,10 @@
 package com.versatilemobitech.fmc.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -164,8 +166,39 @@ public class HomeAdapter extends BaseAdapter {
             }
         });
 
+        mHomeItemHolder.txt_share.setTag(position);
+        mHomeItemHolder.txt_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int tagPosition = (int) view.getTag();
+                if (!Utility.isValueNullOrEmpty(homeDataModels.get(tagPosition).getPost_image()) &&
+                        (homeDataModels.get(tagPosition).getPost_image().contains(".jpg") || homeDataModels.get(tagPosition).getPost_image().contains(".png"))) {
+                    showShareDialog(homeDataModels.get(tagPosition).getPost_text(), homeDataModels.get(tagPosition).getPost_image());
+                } else if (!Utility.isValueNullOrEmpty(homeDataModels.get(tagPosition).getPost_doc()) && homeDataModels.get(tagPosition).getDoc_extension().equalsIgnoreCase("pdf")) {
+                    showShareDialog(homeDataModels.get(tagPosition).getPost_text(), homeDataModels.get(tagPosition).getPost_doc());
+                } else if (!Utility.isValueNullOrEmpty(homeDataModels.get(tagPosition).getPost_doc()) && (homeDataModels.get(tagPosition).getDoc_extension().equalsIgnoreCase("doc")
+                        || homeDataModels.get(tagPosition).getDoc_extension().equalsIgnoreCase("docx"))) {
+                    showShareDialog(homeDataModels.get(tagPosition).getPost_text(), homeDataModels.get(tagPosition).getPost_doc());
+                } else {
+                    showShareDialog(homeDataModels.get(tagPosition).getPost_text(), "");
+                }
+            }
+        });
 
         return convertView;
+    }
+
+    private void showShareDialog(String data, String link) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT,
+                "FM Council");
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(new StringBuilder()
+                .append(data)
+                .append('\n')
+                .append(link)
+                .toString()));
+        mContext.startActivity(Intent.createChooser(shareIntent, "Share Using"));
     }
 
     private class HomeItemHolder {
