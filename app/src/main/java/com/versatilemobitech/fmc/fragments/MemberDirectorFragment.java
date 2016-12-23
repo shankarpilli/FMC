@@ -59,6 +59,7 @@ public class MemberDirectorFragment extends Fragment implements IAsyncCaller, Ab
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.member_directory));
+        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_member_director, container, false);
         initUI();
         return rootView;

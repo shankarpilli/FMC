@@ -52,6 +52,7 @@ public class EditorialsFragment extends Fragment implements IAsyncCaller, AbsLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.editorials));
+        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_editorials, container, false);
         initUI();
         return rootView;
@@ -71,7 +72,7 @@ public class EditorialsFragment extends Fragment implements IAsyncCaller, AbsLis
                 EditorialsModel mEditorialsModel = editorialsModels.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putString("from", EditorialsFragment.TAG);
-                bundle.putString("pdfUrl", mEditorialsModel.getBook_path());
+                bundle.putString("file_url", mEditorialsModel.getBook_path());
                 bundle.putString("pdfTitle", mEditorialsModel.getBook_name());
                 Utility.navigateDashBoardFragment(new EditorialPdfReaderFragment(), EditorialPdfReaderFragment.TAG, bundle, mParent);
             }

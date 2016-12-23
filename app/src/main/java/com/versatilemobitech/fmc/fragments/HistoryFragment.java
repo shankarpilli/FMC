@@ -34,6 +34,7 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.history));
+        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_history, container, false);
         initUI();
         return rootView;

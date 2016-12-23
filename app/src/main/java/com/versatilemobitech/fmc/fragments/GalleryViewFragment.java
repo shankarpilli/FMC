@@ -66,6 +66,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mParent.txt_fmc.setText(albumName);
+        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
         initUI();
         return rootView;

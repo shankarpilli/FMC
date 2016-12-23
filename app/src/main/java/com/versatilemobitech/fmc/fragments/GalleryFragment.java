@@ -53,6 +53,7 @@ public class GalleryFragment extends Fragment implements IAsyncCaller, AdapterVi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.gallery));
+        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         if (rootView != null) {
             return rootView;
         }
