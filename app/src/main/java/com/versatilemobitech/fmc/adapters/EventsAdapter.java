@@ -1,10 +1,14 @@
 package com.versatilemobitech.fmc.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.graphics.ColorUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,18 +21,24 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
-import com.versatilemobitech.fmc.fragments.EventsFragment;
+import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.models.EventResponseModel;
 import com.versatilemobitech.fmc.models.EventsModel;
+import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.EventsResponseParser;
+import com.versatilemobitech.fmc.utility.APIConstants;
+import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Rev's Nani on 06-11-2016.
  */
 
-public class EventsAdapter extends BaseAdapter {
+public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
@@ -171,9 +181,92 @@ public class EventsAdapter extends BaseAdapter {
 
             }
         });
+        mListEventsHolder.tv_accept.setTag(position);
+        mListEventsHolder.tv_accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int selectedPosition = (int) view.getTag();
+                showConformationDialog("Accept", mEventsModelList.get(selectedPosition).getEvent_id());
+            }
+        });
+
+        mListEventsHolder.tv_decline.setTag(position);
+        mListEventsHolder.tv_decline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int selectedPosition = (int) view.getTag();
+                showConformationDialog("Decline", mEventsModelList.get(selectedPosition).getEvent_id());
+            }
+        });
 
         setData(mListEventsHolder);
         return convertView;
+    }
+
+    private void showConformationDialog(final String response, final String event_id) {
+        final Dialog dialogEventConfirmation = new Dialog(mContext);
+        dialogEventConfirmation.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialogEventConfirmation.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogEventConfirmation.setContentView(R.layout.dialog_events_confromation);
+        //dialogEventConfirmation.getWindow().setGravity(Gravity.BOTTOM);
+        dialogEventConfirmation.setCanceledOnTouchOutside(true);
+        //dialogEventConfirmation.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialogEventConfirmation.getWindow().setBackgroundDrawable(new
+                ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView txt_dialog_message = (TextView) dialogEventConfirmation.findViewById(R.id.txt_dialog_message);
+        TextView tv_yes = (TextView) dialogEventConfirmation.findViewById(R.id.tv_yes);
+        TextView tv_no = (TextView) dialogEventConfirmation.findViewById(R.id.tv_no);
+
+        if (response.equalsIgnoreCase("Accept")) {
+            txt_dialog_message.setText("" + Utility.getResourcesString(mContext, R.string.are_you_sure_you_want_to_attend_the_event));
+        } else {
+            txt_dialog_message.setText("" + Utility.getResourcesString(mContext, R.string.are_you_sure_you_want_to_decline_the_event));
+        }
+        txt_dialog_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        tv_yes.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        tv_no.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postYourResponseOnWeb(response, event_id);
+                dialogEventConfirmation.dismiss();
+            }
+        });
+
+        tv_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogEventConfirmation.dismiss();
+            }
+        });
+
+        dialogEventConfirmation.show();
+    }
+
+    private void postYourResponseOnWeb(String response, String event_id) {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+        paramMap.put("user_id", Utility.getSharedPrefStringData(mContext, Constants.USER_ID));
+        paramMap.put("event_id", event_id);
+        paramMap.put("response_text", response);
+
+        EventsResponseParser mEventsResponseParser = new EventsResponseParser();
+        if (Utility.isNetworkAvailable(mContext)) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mContext, Utility.getResourcesString(mContext,
+                    R.string.please_wait), true,
+                    APIConstants.EVENT_RESPONSE, paramMap,
+                    APIConstants.REQUEST_TYPE.POST, this, mEventsResponseParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    mContext,
+                    mContext.getResources().getString(
+                            R.string.no_internet_msg),
+                    mContext.getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
+        }
     }
 
     private void setData(ListEventsHolder mListEventsHolder) {
@@ -212,6 +305,18 @@ public class EventsAdapter extends BaseAdapter {
         //for remove square color box
         Legend legend_right = mListEventsHolder.pie_events.getLegend();
         legend_right.setEnabled(false);
+    }
+
+    @Override
+    public void onComplete(Model model) {
+        if (model != null) {
+            if (model.isStatus()) {
+                if (model instanceof EventResponseModel) {
+                    EventResponseModel mEventResponseModel = (EventResponseModel) model;
+                    Utility.showToastMessage(mContext, mEventResponseModel.getMessage());
+                }
+            }
+        }
     }
 
 

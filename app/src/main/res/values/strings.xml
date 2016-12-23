@@ -101,5 +101,9 @@
 
     <string name="choose_doc_file">Choose Doc File</string>
     <string name="no_doc_found">No Doc Found</string>
+    <string name="are_you_sure_you_want_to_attend_the_event">Are you sure you want to attend the event</string>
+    <string name="are_you_sure_you_want_to_decline_the_event">Are you sure you want to decline the event</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>
