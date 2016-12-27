@@ -32,6 +32,7 @@
         android:paddingLeft="@dimen/_10dp">
 
         <ImageView
+            android:id="@+id/iv_user_profile_pic"
             android:layout_width="@dimen/_100dp"
             android:layout_height="@dimen/_100dp"
             android:src="@drawable/avatar_image" />

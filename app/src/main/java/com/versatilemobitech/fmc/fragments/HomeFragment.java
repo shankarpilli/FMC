@@ -26,12 +26,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.adapters.HomeAdapter;
 import com.versatilemobitech.fmc.adapters.NoPostFoundAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.designs.MaterialDialog;
 import com.versatilemobitech.fmc.interfaces.IUpdateSelectedPic;
 import com.versatilemobitech.fmc.models.CommentsModel;
@@ -213,6 +215,11 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         TextView tv_post = (TextView) layout_list_header.findViewById(R.id.tv_post);
         txt_path = (TextView) layout_list_header.findViewById(R.id.txt_path);
         txt_close = (TextView) layout_list_header.findViewById(R.id.txt_close);
+        ImageView iv_user_profile_pic = (ImageView) layout_list_header.findViewById(R.id.iv_user_profile_pic);
+        if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)))
+            Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
+                    placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image))
+                    .transform(new CircleTransform()).into(iv_user_profile_pic);
         ImageView img_doc = (ImageView) layout_list_header.findViewById(R.id.img_doc);
         ImageView img_post = (ImageView) layout_list_header.findViewById(R.id.img_post);
         ImageView img_pdf = (ImageView) layout_list_header.findViewById(R.id.img_pdf);
