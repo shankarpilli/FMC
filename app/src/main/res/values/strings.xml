@@ -20,7 +20,7 @@
     <string name="confirm_password">Confirm Password</string>
 
     <string name="txt_sign_up">Sign Up</string>
-    <string name="interested_location">Interested Location</string>
+    <string name="interested_location">please select interested location</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="current_location">Current Location</string>
     <string name="alternate_contact_number">Alternate Contact Number</string>
