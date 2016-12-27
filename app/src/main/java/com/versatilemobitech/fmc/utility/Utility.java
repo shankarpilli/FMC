@@ -458,8 +458,8 @@ public class Utility {
 
     /*SIDE MENU_ITEMS NAMES*/
     public static String[] getSideMenuItemsListName() {
-        return new String[]{"Home", "Welcome Message", "History", "Member Directory", "Knowledge Partners",
-                "Awards", "Gallery", "Events", "Editorials", "Contacts Us", "Logout"};
+        return new String[]{"Home", "Welcome Message", "History", "Member Directory", "Vendor Partners",
+                "Awards", "Gallery", "Events", "Editorials", "Contact Us", "Logout"};
     }
 
     /*SIDE MENU_ITEMS IMAGES*/

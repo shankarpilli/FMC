@@ -169,6 +169,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     startActivity(mIntentSignup);
                     finish();
                 }
+            } else {
+                Utility.showToastMessage(LoginActivity.this,"Invalid User name (or) Password");
             }
         }
     }

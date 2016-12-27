@@ -16,15 +16,19 @@ public class LoginParser implements Parser {
     public Model parseResponse(String response, Context context) {
         LoginModel mLoginModel = new LoginModel();
         if (response != null) {
-            mLoginModel.setStatus(true);
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                mLoginModel.setMessage(jsonObject.optString("msg"));
-                mLoginModel.setUser_id(jsonObject.optString("user_id"));
-                mLoginModel.setUser_name(jsonObject.optString("user_name"));
-                mLoginModel.setCompany_name(jsonObject.optString("company_name"));
-                mLoginModel.setKey(jsonObject.optString("key"));
-                mLoginModel.setProfile_pic(jsonObject.optString("profile_pic"));
+                if(jsonObject.has("status")&&!jsonObject.opt("status").equals("error")) {
+                    mLoginModel.setStatus(true);
+                    mLoginModel.setMessage(jsonObject.optString("msg"));
+                    mLoginModel.setUser_id(jsonObject.optString("user_id"));
+                    mLoginModel.setUser_name(jsonObject.optString("user_name"));
+                    mLoginModel.setCompany_name(jsonObject.optString("company_name"));
+                    mLoginModel.setKey(jsonObject.optString("key"));
+                    mLoginModel.setProfile_pic(jsonObject.optString("profile_pic"));
+                }else {
+                    mLoginModel.setStatus(false);
+                }
             } catch (Exception e) {
                 mLoginModel.setStatus(false);
             }

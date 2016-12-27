@@ -65,7 +65,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_home_layout);
         assert mDrawerLayout != null;
-        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+/*        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);*/
         Utility.navigateDashBoardFragment(new HomeFragment(), HomeFragment.TAG, null, DashboardActivity.this);
         iv_left_drawer_icon.setOnClickListener(this);
         setLeftMenuData();
