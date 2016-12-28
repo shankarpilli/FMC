@@ -30,8 +30,7 @@ import com.versatilemobitech.fmc.fragments.EventsFragment;
 import com.versatilemobitech.fmc.fragments.GalleryFragment;
 import com.versatilemobitech.fmc.fragments.HistoryFragment;
 import com.versatilemobitech.fmc.fragments.HomeFragment;
-import com.versatilemobitech.fmc.fragments.KnowledgePartnersFragment;
-import com.versatilemobitech.fmc.fragments.LogoutFragment;
+import com.versatilemobitech.fmc.fragments.VendorPartnersFragment;
 import com.versatilemobitech.fmc.fragments.MemberDirectorFragment;
 import com.versatilemobitech.fmc.fragments.WelcomeFragment;
 import com.versatilemobitech.fmc.models.LeftMenuModel;
@@ -139,7 +138,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 Utility.navigateDashBoardFragment(new MemberDirectorFragment(), MemberDirectorFragment.TAG, null, DashboardActivity.this);
                 break;
             case 5:
-                Utility.navigateDashBoardFragment(new KnowledgePartnersFragment(), KnowledgePartnersFragment.TAG, null, DashboardActivity.this);
+                Utility.navigateDashBoardFragment(new VendorPartnersFragment(), VendorPartnersFragment.TAG, null, DashboardActivity.this);
                 break;
             case 6:
                 Utility.navigateDashBoardFragment(new AwardsFragment(), AwardsFragment.TAG, null, DashboardActivity.this);

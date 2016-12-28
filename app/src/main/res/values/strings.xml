@@ -41,11 +41,11 @@
     <string name="history">History</string>
     <string name="welcome_message">Welcome Message</string>
     <string name="member_directory">Member Directory</string>
-    <string name="knowledge_partners">Knowledge Partners</string>
+    <string name="vendor_partners">Vendor partners</string>
     <string name="awards">Awards</string>
     <string name="gallery">Gallery</string>
     <string name="editorials">Editorials</string>
-    <string name="contacts_us">Contacts Us</string>
+    <string name="contacts_us">Contact Us</string>
     <string name="logout">Logout</string>
     <string name="comment">Comment</string>
     <string name="reply">Reply</string>
