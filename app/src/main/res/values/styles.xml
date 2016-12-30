@@ -65,5 +65,9 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+    
+    <style name="NavigationStyle">
+        <item name="android:listPreferredItemHeightSmall">140dp</item>
+    </style>
 
 </resources>
