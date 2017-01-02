@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.utility.Utility;
 
 /**
@@ -19,7 +20,7 @@ import com.versatilemobitech.fmc.utility.Utility;
 public class HistoryFragment extends Fragment {
 
     public static final String TAG = "HistoryFragment";
-    private DashboardActivity mParent;
+    private HomeActivity mParent;
     private View rootView;
 
     private LinearLayout ll_history;
@@ -27,14 +28,17 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (DashboardActivity) getActivity();
+        mParent = (HomeActivity) getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.history));
-        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+/*        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.history));
+        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));*/
+        mParent.getSupportActionBar().setHomeButtonEnabled(true);
+        mParent.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mParent.toolbar.setTitle(Utility.getResourcesString(getActivity(), R.string.history));
         rootView = inflater.inflate(R.layout.fragment_history, container, false);
         initUI();
         return rootView;
