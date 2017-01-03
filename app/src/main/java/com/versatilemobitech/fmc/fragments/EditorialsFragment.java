@@ -12,8 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.EditorialsAdapter;
+import com.versatilemobitech.fmc.adapters.HomeAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.models.EditorialsModel;
@@ -31,7 +32,7 @@ import java.util.LinkedHashMap;
 public class EditorialsFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener {
 
     public static final String TAG = "EditorialsFragment";
-    private DashboardActivity mParent;
+    private HomeActivity mParent;
     private View rootView;
     private ListView ll_editorials;
     private TextView tv_no_editorials;
@@ -45,14 +46,14 @@ public class EditorialsFragment extends Fragment implements IAsyncCaller, AbsLis
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (DashboardActivity) getActivity();
+        mParent = (HomeActivity) getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.editorials));
-        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.editorials));
+        //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_editorials, container, false);
         initUI();
         return rootView;

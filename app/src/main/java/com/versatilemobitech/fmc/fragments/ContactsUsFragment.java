@@ -2,7 +2,6 @@ package com.versatilemobitech.fmc.fragments;
 
 
 import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.designs.MaterialDialog;
 import com.versatilemobitech.fmc.permissions.Permissions;
 import com.versatilemobitech.fmc.utility.Utility;
@@ -31,7 +30,7 @@ import java.util.List;
 public class ContactsUsFragment extends Fragment implements View.OnClickListener {
 
     public static final String TAG = "ContactsUsFragment";
-    private DashboardActivity mParent;
+    private HomeActivity mParent;
     private View rootView;
 
     private LinearLayout ll_share;
@@ -58,14 +57,14 @@ public class ContactsUsFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (DashboardActivity) getActivity();
+        mParent = (HomeActivity) getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.contacts_us));
-        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.contacts_us));
+        //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_contacts_us, container, false);
         initUI();
         return rootView;

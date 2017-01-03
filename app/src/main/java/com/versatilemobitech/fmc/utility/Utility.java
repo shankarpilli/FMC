@@ -24,7 +24,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +41,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.SpinnerAdapter;
 import com.versatilemobitech.fmc.customviews.SnackBar;
 import com.versatilemobitech.fmc.models.SpinnerModel;
@@ -72,12 +71,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -560,7 +556,7 @@ public class Utility {
         return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
     }
 
-    public static Dialog showProgressDialog(DashboardActivity baseActivity, String text, boolean cancelable) {
+    public static Dialog showProgressDialog(HomeActivity baseActivity, String text, boolean cancelable) {
         Dialog mDialog = new Dialog(baseActivity);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         LayoutInflater mInflater = LayoutInflater.from(baseActivity);

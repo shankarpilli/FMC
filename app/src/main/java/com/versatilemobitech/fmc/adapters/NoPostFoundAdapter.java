@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.utility.Utility;
 
 /**
@@ -18,9 +18,9 @@ public class NoPostFoundAdapter extends BaseAdapter {
     private View view = null;
     private PrivateHolder holder;
     private LayoutInflater mInflater;
-    private DashboardActivity dashBoardActivity;
+    private HomeActivity dashBoardActivity;
 
-    public NoPostFoundAdapter(DashboardActivity dashBoardActivity) {
+    public NoPostFoundAdapter(HomeActivity dashBoardActivity) {
         this.dashBoardActivity = dashBoardActivity;
         mInflater = (LayoutInflater) dashBoardActivity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

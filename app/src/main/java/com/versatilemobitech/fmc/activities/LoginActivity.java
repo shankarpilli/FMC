@@ -165,12 +165,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     Utility.setSharedPrefStringData(context, Constants.COMPANY_NAME, loginModel.getCompany_name());
                     Utility.setSharedPrefStringData(context, Constants.PROFILE_PIC, loginModel.getProfile_pic());
                     Utility.setSharedPrefStringData(context, Constants.USER_NAME, loginModel.getUser_name());
-                    Intent mIntentSignup = new Intent(LoginActivity.this, DashboardActivity.class);
+                    Intent mIntentSignup = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(mIntentSignup);
                     finish();
                 }
             } else {
-                Utility.showToastMessage(LoginActivity.this,"Invalid User name (or) Password");
+                Utility.showToastMessage(LoginActivity.this, "Invalid User name (or) Password");
             }
         }
     }

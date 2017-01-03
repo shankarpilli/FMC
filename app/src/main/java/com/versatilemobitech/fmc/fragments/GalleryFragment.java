@@ -11,13 +11,11 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.GalleryFolderAdapter;
-import com.versatilemobitech.fmc.adapters.GalleryViewAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.models.GalleryFolderModel;
-import com.versatilemobitech.fmc.models.GalleryViewModel;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.parsers.PhotoAlbumsParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
@@ -31,7 +29,7 @@ import java.util.LinkedHashMap;
  */
 public class GalleryFragment extends Fragment implements IAsyncCaller, AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
     public static final String TAG = "GalleryFragment";
-    private DashboardActivity mParent;
+    private HomeActivity mParent;
     private View rootView;
 
     private GridView grid_view;
@@ -46,14 +44,14 @@ public class GalleryFragment extends Fragment implements IAsyncCaller, AdapterVi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (DashboardActivity) getActivity();
+        mParent = (HomeActivity) getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.gallery));
-        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.gallery));
+        //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         if (rootView != null) {
             return rootView;
         }

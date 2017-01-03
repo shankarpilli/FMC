@@ -27,7 +27,6 @@ import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.designs.MaterialDialog;
 import com.versatilemobitech.fmc.interfaces.IUpdateProfilePic;
-import com.versatilemobitech.fmc.models.LoginModel;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.models.SignUpModel;
 import com.versatilemobitech.fmc.parsers.SignUpParser;
@@ -358,7 +357,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                     Utility.setSharedPrefStringData(context, Constants.PROFILE_PIC, mSignUpModel.getProfile_pic());
                     Utility.setSharedPrefStringData(context, Constants.USER_NAME, Utility.capitalizeFirstLetter(mSignUpModel.getFirst_name()) + " " +
                             Utility.capitalizeFirstLetter(mSignUpModel.getLast_name()));
-                    Intent mIntentSignup = new Intent(SignupActivity.this, DashboardActivity.class);
+                    Intent mIntentSignup = new Intent(SignupActivity.this, HomeActivity.class);
                     startActivity(mIntentSignup);
                     finish();
                 }

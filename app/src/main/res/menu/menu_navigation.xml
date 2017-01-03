@@ -3,69 +3,47 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
-            android:title="Home"
-            android:icon="@drawable/home_icon"/>
+            android:icon="@drawable/home_icon"
+            android:title="Home" />
         <item
             android:id="@+id/welcome_message"
-            android:title="Welcome Message"
-            android:icon="@drawable/welcome_message_icon"/>
+            android:icon="@drawable/welcome_message_icon"
+            android:title="Welcome Message" />
         <item
             android:id="@+id/history"
-            android:title="History"
-            android:icon="@drawable/history_icon"/>
+            android:icon="@drawable/history_icon"
+            android:title="History" />
         <item
             android:id="@+id/member_directory"
-            android:title="Member Directory"
-            android:icon="@drawable/member_directory_icon"/>
+            android:icon="@drawable/member_directory_icon"
+            android:title="Member Directory" />
         <item
             android:id="@+id/vendor_partners"
-            android:title="Vendor Partners"
-            android:icon="@drawable/knowledge_partners_icon"/>
+            android:icon="@drawable/knowledge_partners_icon"
+            android:title="Vendor Partners" />
         <item
             android:id="@+id/awards"
-            android:title="Awards"
-            android:icon="@drawable/awards_icon"/>
+            android:icon="@drawable/awards_icon"
+            android:title="Awards" />
         <item
             android:id="@+id/gallery"
-            android:title="Gallery"
-            android:icon="@drawable/icon_from_gallery"/>
+            android:icon="@drawable/icon_from_gallery"
+            android:title="Gallery" />
         <item
             android:id="@+id/events"
-            android:title="Events"
-            android:icon="@drawable/events_icon"/>
+            android:icon="@drawable/events_icon"
+            android:title="Events" />
         <item
             android:id="@+id/editorials"
-            android:title="Editorials"
-            android:icon="@drawable/editorials_icon"/>
+            android:icon="@drawable/editorials_icon"
+            android:title="Editorials" />
         <item
             android:id="@+id/contact_us"
-            android:title="Contact Us"
-            android:icon="@drawable/contacts_us_icon"/>
+            android:icon="@drawable/contacts_us_icon"
+            android:title="Contact Us" />
         <item
             android:id="@+id/logout"
-            android:title="Logout"
-            android:icon="@drawable/logout_icon"/>
+            android:icon="@drawable/logout_icon"
+            android:title="Logout" />
     </group>
 </menu>
-
-    <!--<?xml version="1.0" encoding="utf-8"?>
-    <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <group android:checkableBehavior="single">
-            <item
-                android:id="@+id/home"
-                android:title="Home"
-                android:icon="@drawable/home_icon"/>
-            <item
-                android:id="@+id/settings"
-                android:title="Settings"
-                android:icon="@drawable/history_icon"/>
-            <item
-                android:id="@+id/trash"
-                android:title="Trash"
-                android:icon="@drawable/knowledge_partners_icon"/>
-            <item
-                android:id="@+id/logout"
-                android:title="Logout"
-                android:icon="@drawable/logout_icon"/>
-        </group>
-    </menu>-->

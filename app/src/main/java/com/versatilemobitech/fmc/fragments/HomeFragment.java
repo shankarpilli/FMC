@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
@@ -28,7 +27,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.HomeAdapter;
 import com.versatilemobitech.fmc.adapters.NoPostFoundAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
@@ -36,8 +35,6 @@ import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.designs.MaterialDialog;
 import com.versatilemobitech.fmc.interfaces.IUpdateSelectedPic;
-import com.versatilemobitech.fmc.models.CommentsModel;
-import com.versatilemobitech.fmc.models.GetPostsCommentModel;
 import com.versatilemobitech.fmc.models.GetPostsModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.models.Model;
@@ -55,9 +52,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.LinkedHashMap;
 
 /**
@@ -66,7 +61,7 @@ import java.util.LinkedHashMap;
 public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener, IUpdateSelectedPic, View.OnClickListener {
 
     public static final String TAG = "HomeFragment";
-    private DashboardActivity mParent;
+    private HomeActivity mParent;
     private View rootView;
 
     private ListView list_view;
@@ -111,15 +106,14 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (DashboardActivity) getActivity();
+        mParent = (HomeActivity) getActivity();
         iUpdateSelectedPic = this;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.home));
-        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.home));
         if (rootView != null) {
             return rootView;
         }
@@ -216,10 +210,13 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         txt_path = (TextView) layout_list_header.findViewById(R.id.txt_path);
         txt_close = (TextView) layout_list_header.findViewById(R.id.txt_close);
         ImageView iv_user_profile_pic = (ImageView) layout_list_header.findViewById(R.id.iv_user_profile_pic);
-        if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)))
+        /*if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)))
             Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
                     placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image))
-                    .transform(new CircleTransform()).into(iv_user_profile_pic);
+                    .transform(new CircleTransform()).into(iv_user_profile_pic);*/
+        if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)))
+            Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
+                    placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image)).into(iv_user_profile_pic);
         ImageView img_doc = (ImageView) layout_list_header.findViewById(R.id.img_doc);
         ImageView img_post = (ImageView) layout_list_header.findViewById(R.id.img_post);
         ImageView img_pdf = (ImageView) layout_list_header.findViewById(R.id.img_pdf);
@@ -362,7 +359,6 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         String s = dateFormat.format(date);
         return s;
     }*/
-
 
 
     private void setListData() {

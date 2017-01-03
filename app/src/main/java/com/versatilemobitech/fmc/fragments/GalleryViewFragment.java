@@ -11,16 +11,14 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.GalleryViewAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
-import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.models.GalleryViewModel;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.parsers.GalleryViewParser;
@@ -35,7 +33,7 @@ import java.util.LinkedHashMap;
  */
 public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener, AdapterView.OnItemClickListener {
     public static final String TAG = "GalleryFragment";
-    private DashboardActivity mParent;
+    private HomeActivity mParent;
     private View rootView;
 
     private GridView grid_view;
@@ -54,7 +52,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (DashboardActivity) getActivity();
+        mParent = (HomeActivity) getActivity();
 
         Bundle mBundle = getArguments();
         albumId = mBundle.getString("albumId");
@@ -65,8 +63,8 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(albumName);
-        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        mParent.getSupportActionBar().setTitle(albumName);
+        //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
         initUI();
         return rootView;

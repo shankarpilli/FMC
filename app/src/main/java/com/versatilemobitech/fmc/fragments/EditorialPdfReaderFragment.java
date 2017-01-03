@@ -12,7 +12,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.utility.Utility;
 
 /**
@@ -20,7 +20,7 @@ import com.versatilemobitech.fmc.utility.Utility;
  */
 public class EditorialPdfReaderFragment extends Fragment {
     public static final String TAG = "WebViewFragment";
-    private DashboardActivity mParent;
+    private HomeActivity mParent;
     private View rootView;
     private WebView mWebView;
     private String url;
@@ -30,7 +30,7 @@ public class EditorialPdfReaderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (DashboardActivity) getActivity();
+        mParent = (HomeActivity) getActivity();
         Bundle bundle = getArguments();
         url = bundle.getString("file_url");
         pdf_title = bundle.getString("pdfTitle");
@@ -40,8 +40,8 @@ public class EditorialPdfReaderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText(Utility.getResourcesString(getActivity(), R.string.editorials));
-        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.editorials));
+        //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_webview, container, false);
         initUI();
         return rootView;

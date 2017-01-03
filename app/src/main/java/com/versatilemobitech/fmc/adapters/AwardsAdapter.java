@@ -8,11 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
 import com.versatilemobitech.fmc.models.AwardDetailsModel;
-import com.versatilemobitech.fmc.models.GalleryFolderModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;

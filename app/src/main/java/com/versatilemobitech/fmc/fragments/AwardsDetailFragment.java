@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.AwardsDetailListAdapter;
 import com.versatilemobitech.fmc.utility.Utility;
 
 
 public class AwardsDetailFragment extends Fragment {
     public static final String TAG = "AwardsDetailFragment";
-    private DashboardActivity mParent;
+    private HomeActivity mParent;
     private View rootView;
     private ListView lv_awards;
     private AwardsDetailListAdapter mAwardsListAdapter;
@@ -23,14 +23,14 @@ public class AwardsDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (DashboardActivity) getActivity();
+        mParent = (HomeActivity) getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.txt_fmc.setText("2016");
-        mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
+        mParent.getSupportActionBar().setTitle("2016");
+        //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         rootView = inflater.inflate(R.layout.fragment_awards_item, container, false);
         initUI();
         return rootView;

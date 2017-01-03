@@ -14,10 +14,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
-import com.versatilemobitech.fmc.activities.DashboardActivity;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.fragments.DetailViewFragment;
-import com.versatilemobitech.fmc.fragments.FileChooseFragment;
 import com.versatilemobitech.fmc.fragments.WebViewFragment;
 import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.utility.Utility;
@@ -30,13 +29,13 @@ import java.util.ArrayList;
 public class HomeAdapter extends BaseAdapter {
 
     private Context mContext;
-    private DashboardActivity dashboardActivity;
+    private HomeActivity dashboardActivity;
     private LayoutInflater mLayoutInflater;
     private ArrayList<HomeDataModel> homeDataModels;
     private Fragment fragment;
 
 
-    public HomeAdapter(DashboardActivity dashboardActivity, Context context, Fragment fragment, ArrayList<HomeDataModel> homeDataModels) {
+    public HomeAdapter(HomeActivity dashboardActivity, Context context, Fragment fragment, ArrayList<HomeDataModel> homeDataModels) {
         mContext = context;
         this.dashboardActivity = dashboardActivity;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
