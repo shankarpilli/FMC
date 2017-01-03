@@ -149,8 +149,8 @@ public class ContactsUsFragment extends Fragment implements View.OnClickListener
             case R.id.iv_mail:
             case R.id.tv_mail:
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto", "daduvainaveenkumar@gmail.com", null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ourtour");
+                        "mailto", "m.srinivas91@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "FM Council");
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
                 break;
             case R.id.iv_mobile:
