@@ -372,7 +372,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         dialogCompleted.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialogCompleted.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogCompleted.setContentView(R.layout.dialog_signup_completed);
-        dialogCompleted.setCanceledOnTouchOutside(true);
+        dialogCompleted.setCanceledOnTouchOutside(false);
         dialogCompleted.getWindow().setBackgroundDrawable(new
                 ColorDrawable(android.graphics.Color.TRANSPARENT));
 
