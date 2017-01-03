@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
+import com.versatilemobitech.fmc.customviews.RoundedCornersTransformation;
 import com.versatilemobitech.fmc.fragments.DetailViewFragment;
 import com.versatilemobitech.fmc.fragments.WebViewFragment;
 import com.versatilemobitech.fmc.models.HomeDataModel;
@@ -112,14 +113,14 @@ public class HomeAdapter extends BaseAdapter {
         mHomeItemHolder.txt_post_message.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getPost_text()));
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getProfile_pic()))
             Picasso.with(mContext)
-                    .load(mHomeDataModel.getProfile_pic()).transform(new CircleTransform())
+                    .load(mHomeDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(10,1))
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(mHomeItemHolder.post_image);
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()) && (mHomeDataModel.getPost_image().contains(".jpg") || mHomeDataModel.getPost_image().contains(".png"))) {
             mHomeItemHolder.image_data.setVisibility(View.VISIBLE);
             mHomeItemHolder.image_doc.setVisibility(View.GONE);
             Picasso.with(mContext)
-                    .load(mHomeDataModel.getPost_image()).transform(new CircleTransform())
+                    .load(mHomeDataModel.getPost_image())
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(mHomeItemHolder.image_data);
         } else if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_doc()) && mHomeDataModel.getDoc_extension().equalsIgnoreCase("pdf")) {

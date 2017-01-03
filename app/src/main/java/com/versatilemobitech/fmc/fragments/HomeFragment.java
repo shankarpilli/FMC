@@ -33,6 +33,7 @@ import com.versatilemobitech.fmc.adapters.NoPostFoundAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
+import com.versatilemobitech.fmc.customviews.RoundedCornersTransformation;
 import com.versatilemobitech.fmc.designs.MaterialDialog;
 import com.versatilemobitech.fmc.interfaces.IUpdateSelectedPic;
 import com.versatilemobitech.fmc.models.GetPostsModel;
@@ -216,7 +217,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                     .transform(new CircleTransform()).into(iv_user_profile_pic);*/
         if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)))
             Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
-                    placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image)).into(iv_user_profile_pic);
+                    placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image)).transform(new RoundedCornersTransformation(10,1)).into(iv_user_profile_pic);
         ImageView img_doc = (ImageView) layout_list_header.findViewById(R.id.img_doc);
         ImageView img_post = (ImageView) layout_list_header.findViewById(R.id.img_post);
         ImageView img_pdf = (ImageView) layout_list_header.findViewById(R.id.img_pdf);
