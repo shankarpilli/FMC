@@ -7,7 +7,7 @@ package com.versatilemobitech.fmc.utility;
 public class Constants {
 
     public static final String APP_PREF = "FMC_Pref";
-    public static int SPLASH_TIME_OUT = 2000;
+    public static int SPLASH_TIME_OUT = 3000;
 
     public static final boolean logMessageOnOrOff = true;
     public static final String PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP = "iSAppSignInOrSignup";
