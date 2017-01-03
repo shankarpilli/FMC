@@ -90,7 +90,7 @@ public class FileChooseFragment extends Fragment implements AdapterView.OnItemCl
             for (int i = 0; i < FileList.length; i++) {
 
                 if (FileList[i].isDirectory()) {
-                    search_Dir(FileList[i]);
+                    search_DocDir(FileList[i]);
                 } else {
                     if (FileList[i].getName().endsWith(mSelected) || FileList[i].getName().endsWith(".docx")) {
                         fileList.add(FileList[i]);
