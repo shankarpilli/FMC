@@ -45,6 +45,13 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
     private ArrayList<EventsModel> mEventsModelList;
     private EventsModel mEventsModel;
 
+
+    private ImageView iv_up_new_item;
+    private ImageView iv_down_new_item;
+    private LinearLayout ll_more_details_new_item;
+    private TextView tv_more_details_new_item;
+    private int mClickedPosition = -1;
+
     public EventsAdapter(Context mParent, ArrayList<EventsModel> models) {
         this.mContext = mParent;
         this.mEventsModelList = models;
@@ -159,24 +166,55 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         mListEventsHolder.tv_date_event.setText("" + mEventsModel.getmDateOfEvent());
         mListEventsHolder.tv_details.setText("" + mEventsModel.getmDetails());*/
 
+
         final ListEventsHolder finalMListEventsHolder = mListEventsHolder;
 
         setDataToPieChart(mListEventsHolder, mListEventsHolder.pie_events, 5, 3);
+
+        mListEventsHolder.rl_more_details.setTag(position);
         mListEventsHolder.rl_more_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mEventsModel.isVisible()) {
+                int selectedPosition = (int) v.getTag();
+                if (mEventsModelList.get(selectedPosition).isVisible()) {
                     finalMListEventsHolder.iv_up.setVisibility(View.GONE);
                     finalMListEventsHolder.iv_down.setVisibility(View.VISIBLE);
                     finalMListEventsHolder.ll_more_details.setVisibility(View.GONE);
-                    mEventsModel.setVisible(false);
+                    //mEventsModel.setVisible(false);
+                    mEventsModelList.get(selectedPosition).setVisible(false);
                     finalMListEventsHolder.tv_more_details.setText("More Details");
+
+                    iv_up_new_item.setVisibility(View.GONE);
+                    iv_down_new_item.setVisibility(View.VISIBLE);
+                    ll_more_details_new_item.setVisibility(View.GONE);
+                    tv_more_details_new_item.setVisibility(View.VISIBLE);
+                    if (mClickedPosition != -1) {
+                        mEventsModelList.get(mClickedPosition).setVisible(false);
+                    }
+
                 } else {
                     finalMListEventsHolder.iv_up.setVisibility(View.VISIBLE);
                     finalMListEventsHolder.iv_down.setVisibility(View.GONE);
                     finalMListEventsHolder.ll_more_details.setVisibility(View.VISIBLE);
-                    mEventsModel.setVisible(true);
+                    //mEventsModel.setVisible(true);
+                    mEventsModelList.get(selectedPosition).setVisible(true);
                     finalMListEventsHolder.tv_more_details.setText("Less Details");
+
+                    if (iv_up_new_item != null) {
+                        iv_up_new_item.setVisibility(View.GONE);
+                        iv_down_new_item.setVisibility(View.VISIBLE);
+                        ll_more_details_new_item.setVisibility(View.GONE);
+                        tv_more_details_new_item.setVisibility(View.VISIBLE);
+                        if (mClickedPosition != -1) {
+                            mEventsModelList.get(mClickedPosition).setVisible(false);
+                        }
+                    }
+
+                    mClickedPosition = selectedPosition;
+                    iv_up_new_item = finalMListEventsHolder.iv_up;
+                    iv_down_new_item = finalMListEventsHolder.iv_down;
+                    ll_more_details_new_item = finalMListEventsHolder.ll_more_details;
+                    tv_more_details_new_item = finalMListEventsHolder.tv_more_details;
                 }
 
             }
