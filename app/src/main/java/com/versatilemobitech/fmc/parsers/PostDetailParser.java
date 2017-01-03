@@ -46,7 +46,6 @@ public class PostDetailParser implements Parser {
                         mHomeDataModel.setPost_image(mObj.optString("post_image"));
                         mHomeDataModel.setPost_doc(mObj.optString("post_doc"));
                         mHomeDataModel.setDoc_extension(mObj.optString("doc_extension"));
-                        mHomeDataModel.setPost_image(mObj.optString("post_image"));
                         mHomeDataModel.setComments_count(mObj.optInt("comments_count"));
                         mHomeDataModel.setDatetime(mObj.optString("datetime"));
                         JSONArray jsonCommentsArray = mObj.optJSONArray("comments");

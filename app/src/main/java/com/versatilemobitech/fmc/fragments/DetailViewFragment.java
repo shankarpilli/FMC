@@ -19,6 +19,7 @@ import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
+import com.versatilemobitech.fmc.customviews.RoundedCornersTransformation;
 import com.versatilemobitech.fmc.models.CommentsModel;
 import com.versatilemobitech.fmc.models.DetailDataModel;
 import com.versatilemobitech.fmc.models.DetialPostsModel;
@@ -191,14 +192,14 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
         txt_post_message.setText(Utility.capitalizeFirstLetter(detailDataModel.getPost_text()));
         if (!Utility.isValueNullOrEmpty(detailDataModel.getProfile_pic()))
             Picasso.with(mParent)
-                    .load(detailDataModel.getProfile_pic()).transform(new CircleTransform())
+                    .load(detailDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(10,1))
                     .placeholder(Utility.getDrawable(mParent, R.drawable.folder_icon))
-                    .into(image_data);
+                    .into(post_image);
         if (!Utility.isValueNullOrEmpty(detailDataModel.getPost_image()) && (detailDataModel.getPost_image().contains(".jpg") || detailDataModel.getPost_image().contains(".png"))) {
             image_data.setVisibility(View.VISIBLE);
             image_doc.setVisibility(View.GONE);
             Picasso.with(mParent)
-                    .load(detailDataModel.getPost_image()).transform(new CircleTransform())
+                    .load(detailDataModel.getPost_image())
                     .placeholder(Utility.getDrawable(mParent, R.drawable.folder_icon))
                     .into(image_data);
         } else if (!Utility.isValueNullOrEmpty(detailDataModel.getPost_doc()) && detailDataModel.getDoc_extension().equalsIgnoreCase("pdf")) {
