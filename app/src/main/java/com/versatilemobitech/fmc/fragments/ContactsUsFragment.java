@@ -160,24 +160,24 @@ public class ContactsUsFragment extends Fragment implements View.OnClickListener
                 startActivity(intentDail);
                 break;
             case R.id.iv_fb:
-                String uri = "https://www.facebook.com/ourtour.georace.1";
+                String uri = "https://www.facebook.com/versatile.mobitech/";
                 Intent fbIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 startActivity(fbIntent);
                 break;
             case R.id.iv_g_plus:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/u/0/104074863268189065180")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/105152463775757641701")));
                 break;
             case R.id.iv_linked_in:
-                Intent linkedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("linkedin://you"));
+                Intent linkedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://in.linkedin.com/in/versatilemobitech"));
                 final PackageManager packageManager = getContext().getPackageManager();
                 final List<ResolveInfo> list = packageManager.queryIntentActivities(linkedIntent, PackageManager.MATCH_DEFAULT_ONLY);
                 if (list.isEmpty()) {
-                    linkedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.linkedin.com/profile/view?id=you"));
+                    linkedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://in.linkedin.com/in/versatilemobitech"));
                 }
                 startActivity(linkedIntent);
                 break;
             case R.id.iv_twitter:
-                String mTwitterUrl = "https://twitter.com/ourtour9";
+                String mTwitterUrl = "https://twitter.com/VMobitech";
                 try {
                     Intent twitterIntent = new Intent(Intent.ACTION_VIEW,
                             Uri.parse(mTwitterUrl));
