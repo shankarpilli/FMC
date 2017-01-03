@@ -108,4 +108,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <string name="sign_up_completed_successfully">Sign up completed successfully</string>
+
 </resources>

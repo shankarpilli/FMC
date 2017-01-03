@@ -337,7 +337,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         } else if (Utility.isValueNullOrEmpty(mImageSelected)) {
             Utility.setSnackBarEnglish(SignupActivity.this, edt_profile_pic, "Please upload your profile pic");
         } else if (cb_hyd.isChecked() != true && cb_pune.isChecked() != true && cb_chennai.isChecked() != true && cb_bangalore.isChecked() != true) {
-            Utility.setSnackBarEnglish(SignupActivity.this, cb_hyd, "Please select insert location");
+            Utility.setSnackBarEnglish(SignupActivity.this, cb_hyd, "please select interested location");
         } else {
             isValidated = true;
         }
@@ -357,12 +357,41 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                     Utility.setSharedPrefStringData(context, Constants.PROFILE_PIC, mSignUpModel.getProfile_pic());
                     Utility.setSharedPrefStringData(context, Constants.USER_NAME, Utility.capitalizeFirstLetter(mSignUpModel.getFirst_name()) + " " +
                             Utility.capitalizeFirstLetter(mSignUpModel.getLast_name()));
-                    Intent mIntentSignup = new Intent(SignupActivity.this, HomeActivity.class);
+                    /*Intent mIntentSignup = new Intent(SignupActivity.this, HomeActivity.class);
                     startActivity(mIntentSignup);
-                    finish();
+                    finish();*/
+                    showCompletedDialog();
                 }
             }
         }
+    }
+
+    private void showCompletedDialog() {
+
+        final Dialog dialogCompleted = new Dialog(this);
+        dialogCompleted.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialogCompleted.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogCompleted.setContentView(R.layout.dialog_signup_completed);
+        dialogCompleted.setCanceledOnTouchOutside(true);
+        dialogCompleted.getWindow().setBackgroundDrawable(new
+                ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView txt_dialog_message = (TextView) dialogCompleted.findViewById(R.id.txt_dialog_message);
+        txt_dialog_message.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+
+        TextView tv_ok = (TextView) dialogCompleted.findViewById(R.id.tv_ok);
+        tv_ok.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntentSignup = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(mIntentSignup);
+                finish();
+                dialogCompleted.dismiss();
+            }
+        });
+        dialogCompleted.show();
     }
 
     @Override
