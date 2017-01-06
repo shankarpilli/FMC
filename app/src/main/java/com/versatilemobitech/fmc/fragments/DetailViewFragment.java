@@ -260,7 +260,7 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
     }
 
 
-    private void showShareDialog(String data, String link) {
+    /*private void showShareDialog(String data, String link) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT,
@@ -271,8 +271,20 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
                 .append(link)
                 .toString()));
         getActivity().startActivity(Intent.createChooser(shareIntent, "Share Using"));
-    }
+    }*/
 
+
+    private void showShareDialog(String data) {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT,
+                "FM Council");
+        shareIntent
+                .putExtra(
+                        Intent.EXTRA_TEXT,
+                       data);
+        startActivity(Intent.createChooser(shareIntent, "Share Using"));
+    }
 
     @Override
     public void onClick(View view) {
@@ -283,14 +295,15 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
             case R.id.txt_share:
                 if (!Utility.isValueNullOrEmpty(detailDataModel.getPost_image()) &&
                         (detailDataModel.getPost_image().contains(".jpg") || detailDataModel.getPost_image().contains(".png"))) {
-                    showShareDialog(detailDataModel.getPost_text(), detailDataModel.getPost_image());
+                    /*showShareDialog(detailDataModel.getPost_text(), detailDataModel.getPost_image());*/
+                    showShareDialog(detailDataModel.getPost_text() + " " + detailDataModel.getPost_image());
                 } else if (!Utility.isValueNullOrEmpty(detailDataModel.getPost_doc()) && detailDataModel.getDoc_extension().equalsIgnoreCase("pdf")) {
-                    showShareDialog(detailDataModel.getPost_text(), detailDataModel.getPost_doc());
+                    showShareDialog(detailDataModel.getPost_text() + " " + detailDataModel.getPost_doc());
                 } else if (!Utility.isValueNullOrEmpty(detailDataModel.getPost_doc()) && (detailDataModel.getDoc_extension().equalsIgnoreCase("doc")
                         || detailDataModel.getDoc_extension().equalsIgnoreCase("docx"))) {
-                    showShareDialog(detailDataModel.getPost_text(), detailDataModel.getPost_doc());
+                    showShareDialog(detailDataModel.getPost_text() + " " + detailDataModel.getPost_doc());
                 } else {
-                    showShareDialog(detailDataModel.getPost_text(), "");
+                    showShareDialog(detailDataModel.getPost_text());
                 }
                 break;
         }

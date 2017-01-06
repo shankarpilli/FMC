@@ -1,9 +1,13 @@
 package com.versatilemobitech.fmc.activities;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -27,8 +31,12 @@ import com.versatilemobitech.fmc.fragments.HomeFragment;
 import com.versatilemobitech.fmc.fragments.MemberDirectorFragment;
 import com.versatilemobitech.fmc.fragments.VendorPartnersFragment;
 import com.versatilemobitech.fmc.fragments.WelcomeFragment;
+import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.utility.Constants;
+import com.versatilemobitech.fmc.utility.ImageUtility;
 import com.versatilemobitech.fmc.utility.Utility;
+
+import java.io.IOException;
 
 public class HomeActivity extends BaseActivity {
 
@@ -169,5 +177,48 @@ public class HomeActivity extends BaseActivity {
         Utility.setSharedPrefStringData(this, Constants.COMPANY_NAME, "");
         Intent mIntent = new Intent(this, LoginActivity.class);
         startActivity(mIntent);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.FROM_HOME_CAMERA_ID) {
+            if (resultCode == Activity.RESULT_OK) {
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
+                HomeFragment.getInstance().updateProfilePic(selectedImgPath);
+            }
+
+        } else if (requestCode == Constants.FROM_HOME_GALLERY_ID) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri selectedImageUri = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                    String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
+                    HomeFragment.getInstance().updateProfilePic(selectedImgPath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            FragmentManager.BackStackEntry backEntry = getSupportFragmentManager()
+                    .getBackStackEntryAt(
+                            getSupportFragmentManager()
+                                    .getBackStackEntryCount() - 1);
+            String tagName = backEntry.getName();
+            if (tagName.equals(HomeFragment.TAG)) {
+                finishAffinity();
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 }

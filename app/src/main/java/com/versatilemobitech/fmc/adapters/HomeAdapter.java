@@ -113,7 +113,7 @@ public class HomeAdapter extends BaseAdapter {
         mHomeItemHolder.txt_post_message.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getPost_text()));
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getProfile_pic()))
             Picasso.with(mContext)
-                    .load(mHomeDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(10,1))
+                    .load(mHomeDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(10, 1))
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(mHomeItemHolder.post_image);
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()) && (mHomeDataModel.getPost_image().contains(".jpg") || mHomeDataModel.getPost_image().contains(".png"))) {
@@ -173,14 +173,14 @@ public class HomeAdapter extends BaseAdapter {
                 int tagPosition = (int) view.getTag();
                 if (!Utility.isValueNullOrEmpty(homeDataModels.get(tagPosition).getPost_image()) &&
                         (homeDataModels.get(tagPosition).getPost_image().contains(".jpg") || homeDataModels.get(tagPosition).getPost_image().contains(".png"))) {
-                    showShareDialog(homeDataModels.get(tagPosition).getPost_text(), homeDataModels.get(tagPosition).getPost_image());
+                    showShareDialog(homeDataModels.get(tagPosition).getPost_text() + " " + homeDataModels.get(tagPosition).getPost_image());
                 } else if (!Utility.isValueNullOrEmpty(homeDataModels.get(tagPosition).getPost_doc()) && homeDataModels.get(tagPosition).getDoc_extension().equalsIgnoreCase("pdf")) {
-                    showShareDialog(homeDataModels.get(tagPosition).getPost_text(), homeDataModels.get(tagPosition).getPost_doc());
+                    showShareDialog(homeDataModels.get(tagPosition).getPost_text() + " " + homeDataModels.get(tagPosition).getPost_doc());
                 } else if (!Utility.isValueNullOrEmpty(homeDataModels.get(tagPosition).getPost_doc()) && (homeDataModels.get(tagPosition).getDoc_extension().equalsIgnoreCase("doc")
                         || homeDataModels.get(tagPosition).getDoc_extension().equalsIgnoreCase("docx"))) {
-                    showShareDialog(homeDataModels.get(tagPosition).getPost_text(), homeDataModels.get(tagPosition).getPost_doc());
+                    showShareDialog(homeDataModels.get(tagPosition).getPost_text() + " " + homeDataModels.get(tagPosition).getPost_doc());
                 } else {
-                    showShareDialog(homeDataModels.get(tagPosition).getPost_text(), "");
+                    showShareDialog(homeDataModels.get(tagPosition).getPost_text());
                 }
             }
         });
@@ -188,18 +188,18 @@ public class HomeAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void showShareDialog(String data, String link) {
+    private void showShareDialog(String data) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_SUBJECT,
                 "FM Council");
-        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(new StringBuilder()
-                .append(data)
-                .append('\n')
-                .append(link)
-                .toString()));
+        shareIntent
+                .putExtra(
+                        Intent.EXTRA_TEXT,
+                        data);
         mContext.startActivity(Intent.createChooser(shareIntent, "Share Using"));
     }
+
 
     private class HomeItemHolder {
         private ImageView post_image;
