@@ -109,5 +109,8 @@
     <string name="no">No</string>
 
     <string name="sign_up_completed_successfully">Sign up completed successfully</string>
+    <string name="txt_contact_us">Contact us</string>
+    <string name="phone_number">040 64557484</string>
+    <string name="contact_address"> 202, 2nd floor, Shashirekha apartment, thirumalghery, thirumalghery X roads, Secundrabad, TS 500015</string>
 
 </resources>

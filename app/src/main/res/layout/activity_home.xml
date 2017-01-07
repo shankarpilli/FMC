@@ -43,7 +43,7 @@
         android:layout_gravity="start"
         android:background="@color/themeColor"
         android:fontFamily="cambria.ttf"
-        app:headerLayout="@layout/header_leftmenu"
+        app:headerLayout="@layout/header"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:menu="@menu/menu_navigation" />
