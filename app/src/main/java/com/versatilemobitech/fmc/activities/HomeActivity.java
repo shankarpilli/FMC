@@ -66,7 +66,7 @@ public class HomeActivity extends BaseActivity {
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.home:
-                        Utility.navigateDashBoardFragment(new HomeFragment(), HomeFragment.TAG, null, HomeActivity.this);
+                        Utility.navigateDashBoardFragment(new HomeFragment(), null, null, HomeActivity.this);
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.welcome_message:

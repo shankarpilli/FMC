@@ -193,22 +193,23 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
                     }
 
                 } else {
+                    if (iv_up_new_item != null) {
+                        iv_up_new_item.setVisibility(View.GONE);
+                        iv_down_new_item.setVisibility(View.VISIBLE);
+                        ll_more_details_new_item.setVisibility(View.GONE);
+                        tv_more_details_new_item.setVisibility(View.VISIBLE);
+                        tv_more_details_new_item.setText("More Details");
+                        if (mClickedPosition != -1) {
+                            mEventsModelList.get(mClickedPosition).setVisible(false);
+                        }
+                    }
+
                     finalMListEventsHolder.iv_up.setVisibility(View.VISIBLE);
                     finalMListEventsHolder.iv_down.setVisibility(View.GONE);
                     finalMListEventsHolder.ll_more_details.setVisibility(View.VISIBLE);
                     //mEventsModel.setVisible(true);
                     mEventsModelList.get(selectedPosition).setVisible(true);
                     finalMListEventsHolder.tv_more_details.setText("Less Details");
-
-                    if (iv_up_new_item != null) {
-                        iv_up_new_item.setVisibility(View.GONE);
-                        iv_down_new_item.setVisibility(View.VISIBLE);
-                        ll_more_details_new_item.setVisibility(View.GONE);
-                        tv_more_details_new_item.setVisibility(View.VISIBLE);
-                        if (mClickedPosition != -1) {
-                            mEventsModelList.get(mClickedPosition).setVisible(false);
-                        }
-                    }
 
                     mClickedPosition = selectedPosition;
                     iv_up_new_item = finalMListEventsHolder.iv_up;

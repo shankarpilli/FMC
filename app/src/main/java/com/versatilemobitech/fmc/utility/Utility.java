@@ -122,7 +122,9 @@ public class Utility {
             fragment.setArguments(bundle);
         }
         fragmentTransaction.replace(R.id.content_frame, fragment, tag);
-        fragmentTransaction.addToBackStack(tag);
+        if (tag!=null){
+            fragmentTransaction.addToBackStack(tag);
+        }
         fragmentTransaction.commit();
     }
 
