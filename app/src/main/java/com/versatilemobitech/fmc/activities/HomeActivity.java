@@ -44,6 +44,7 @@ public class HomeActivity extends BaseActivity {
     public static Toolbar toolbar;
     private NavigationView navigationView;
     public Dialog progressDialog;
+    private static long back_pressed;
 
 
     @Override
@@ -215,10 +216,21 @@ public class HomeActivity extends BaseActivity {
                                     .getBackStackEntryCount() - 1);
             String tagName = backEntry.getName();
             if (tagName.equals(HomeFragment.TAG)) {
-                finishAffinity();
+                // finishAffinity();
+                showExitDialog();
             } else {
                 super.onBackPressed();
             }
         }
+    }
+
+    private void showExitDialog() {
+        if (back_pressed + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
+        } else {
+            Utility.showToastMessage(this,
+                    "Press Back again to exit");
+        }
+        back_pressed = System.currentTimeMillis();
     }
 }
