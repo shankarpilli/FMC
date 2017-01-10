@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -228,9 +230,47 @@ public class HomeActivity extends BaseActivity {
         if (back_pressed + 2000 > System.currentTimeMillis()) {
             finishAffinity();
         } else {
-            Utility.showToastMessage(this,
-                    "Press Back again to exit");
+            showConformationDialog();
         }
         back_pressed = System.currentTimeMillis();
+    }
+
+    private void showConformationDialog() {
+        final Dialog dialogEventConfirmation = new Dialog(this);
+        dialogEventConfirmation.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialogEventConfirmation.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogEventConfirmation.setContentView(R.layout.dialog_exit_confirmation);
+        //dialogEventConfirmation.getWindow().setGravity(Gravity.BOTTOM);
+        dialogEventConfirmation.setCanceledOnTouchOutside(true);
+        //dialogEventConfirmation.getWindow().setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dialogEventConfirmation.getWindow().setBackgroundDrawable(new
+                ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        TextView txt_dialog_message = (TextView) dialogEventConfirmation.findViewById(R.id.txt_dialog_message);
+        TextView tv_yes = (TextView) dialogEventConfirmation.findViewById(R.id.tv_yes);
+        TextView tv_no = (TextView) dialogEventConfirmation.findViewById(R.id.tv_no);
+
+        txt_dialog_message.setText("" + Utility.getResourcesString(this, R.string.are_you_sure_do_you_want_to_exit));
+
+        txt_dialog_message.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_yes.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        tv_no.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+
+        tv_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogEventConfirmation.dismiss();
+                finish();
+            }
+        });
+
+        tv_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogEventConfirmation.dismiss();
+            }
+        });
+
+        dialogEventConfirmation.show();
     }
 }
