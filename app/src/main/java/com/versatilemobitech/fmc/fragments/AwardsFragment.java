@@ -46,6 +46,9 @@ public class AwardsFragment extends Fragment implements IAsyncCaller, AdapterVie
                              Bundle savedInstanceState) {
         mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.awards));
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        if (rootView!=null){
+            return rootView;
+        }
         rootView = inflater.inflate(R.layout.fragment_awards, container, false);
         initUI();
         return rootView;
