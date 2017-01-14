@@ -1,16 +1,22 @@
 package com.versatilemobitech.fmc.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.ForgotPasswordParser;
+import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Utility;
 
+import java.util.LinkedHashMap;
 
-public class ForgotPasswordActivity extends BaseActivity {
+
+public class ForgotPasswordActivity extends BaseActivity implements IAsyncCaller {
 
     private EditText etUserName;
     private TextView txtGetPassword;
@@ -35,10 +41,37 @@ public class ForgotPasswordActivity extends BaseActivity {
                 if (Utility.isValueNullOrEmpty(etUserName.getText().toString().trim())) {
                     Utility.setSnackBarEnglish(ForgotPasswordActivity.this, etUserName, "Please enter user name");
                     etUserName.requestFocus();
-                }else {
-                    finish();
+                } else {
+                    //finish();
+                    getYourPassword();
                 }
             }
         });
+    }
+
+    private void getYourPassword() {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+        paramMap.put("username", etUserName.getText().toString());
+        ForgotPasswordParser mForgotPasswordParser = new ForgotPasswordParser();
+        if (Utility.isNetworkAvailable(this)) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(this, Utility.getResourcesString(this,
+                    R.string.please_wait), true,
+                    APIConstants.FORGOT_PASSWORD+etUserName.getText().toString(), paramMap,
+                    APIConstants.REQUEST_TYPE.PUT, this, mForgotPasswordParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    this,
+                    this.getResources().getString(
+                            R.string.no_internet_msg),
+                    this.getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
+        }
+    }
+
+    @Override
+    public void onComplete(Model model) {
+
     }
 }

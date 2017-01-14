@@ -53,6 +53,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
@@ -590,5 +591,47 @@ public class Utility {
 
     public static Typeface setTypeFace_setTypeFace_proximanova_regular(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "proximanova-regular-webfont.ttf");
+    }
+
+    public static String httpPutRequestToServer(String URL, Context mContext) {
+        String userAgent = "(Android; Mobile) Chrome";
+        int TIME_OUT = 30000;
+        String data = null;
+        HttpPut httpput = new HttpPut(URL);
+        final HttpParams httpParams = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(httpParams, TIME_OUT);
+        HttpConnectionParams.setSoTimeout(httpParams, TIME_OUT);
+
+        HttpClient httpclient = new DefaultHttpClient(httpParams);
+        httpput.setHeader("User-Agent", userAgent);
+
+        httpput.setParams(httpParams);
+
+        InputStream is = null;
+        try {
+            HttpResponse response = httpclient.execute(httpput);
+            HttpEntity httpEntity = response.getEntity();
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 204) {
+                data = null;
+            }
+
+            if (statusCode == 200) {
+                is = httpEntity.getContent();
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(is, "iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    if (line.length() > 0)
+                        sb.append(line + "\n");
+                }
+                data = sb.toString();
+                is.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }

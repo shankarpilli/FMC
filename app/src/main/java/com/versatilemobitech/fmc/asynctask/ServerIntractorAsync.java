@@ -64,6 +64,16 @@ public class ServerIntractorAsync extends BaseAsynkTask {
                 }
 
                 return parseResposnse(mResponse);
+            case PUT:
+                Utility.showLog("Request URL ", mUrl);
+                Utility.showLog("Request mParams != null getParams  ", ""
+                        + Utility.getParams(mParams));
+                mResponse = Utility.httpPutRequestToServer(mUrl,
+                        mContext);
+                if (mResponse != null) {
+                    Utility.showLog("mResponse  ", mResponse);
+                }
+                return parseResposnse(mResponse);
             default:
                 return -1;
         }

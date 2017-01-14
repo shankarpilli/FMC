@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.AwardDetailsModel;
+import com.versatilemobitech.fmc.models.AwardsYearModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
@@ -22,10 +23,10 @@ public class AwardsAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private ArrayList<AwardDetailsModel> awardDetailsModels;
+    private ArrayList<AwardsYearModel> awardDetailsModels;
 
 
-    public AwardsAdapter(Context context, ArrayList<AwardDetailsModel> awardDetailsModels) {
+    public AwardsAdapter(Context context, ArrayList<AwardsYearModel> awardDetailsModels) {
         mContext = context;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.awardDetailsModels = awardDetailsModels;
@@ -37,7 +38,7 @@ public class AwardsAdapter extends BaseAdapter {
     }
 
     @Override
-    public AwardDetailsModel getItem(int position) {
+    public AwardsYearModel getItem(int position) {
         return awardDetailsModels.get(position);
     }
 
@@ -63,7 +64,7 @@ public class AwardsAdapter extends BaseAdapter {
             mAwardsHolder = (AwardsAdapter.AwardsHolder) convertView.getTag();
         }
 
-        AwardDetailsModel mAwardDetailsModel = (AwardDetailsModel) getItem(position);
+        AwardsYearModel mAwardDetailsModel = (AwardsYearModel) getItem(position);
 
         mAwardsHolder.tv_award_year.setText(""+mAwardDetailsModel.getYear());
 

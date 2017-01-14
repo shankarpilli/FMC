@@ -29,5 +29,7 @@ public class APIConstants {
     public static final String POST_DETAILS = BASE_URL + "postdetails/"/*{post_id}*/;
     public static final String EVENT_RESPONSE = BASE_URL + "eventresponse"/*{post_id}*/;
     public static final String AWARDS = BASE_URL + "awards/"/*{page number}*/;
+    public static final String AWARD_YEARS = BASE_URL + "awardyears/1"/*{page number}*/;
+    public static final String FORGOT_PASSWORD = BASE_URL + "forgotpassword/"/*{page number}*/;
 
 }
