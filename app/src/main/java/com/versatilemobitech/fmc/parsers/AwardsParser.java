@@ -38,7 +38,7 @@ public class AwardsParser implements Parser {
                         mAwardDetailsModel.setAward_doc(mJObj.optString("award_doc"));
                         mAwardDetailsModel.setAward_id(mJObj.optString("award_id"));
                         mAwardDetailsModel.setFirst_name(mJObj.optString("first_name"));
-                        mAwardDetailsModel.setLast_name("last_name");
+                        mAwardDetailsModel.setLast_name(mJObj.optString("last_name"));
                         mAwardDetailsModel.setCompany_name(mJObj.optString("company_name"));
                         mAwardDetailsModel.setProfile_pic(mJObj.optString("profile_pic"));
                         mAwardDetailsModelList.add(mAwardDetailsModel);

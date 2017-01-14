@@ -14,6 +14,7 @@ public class AwardDetailsModel {
     private String last_name;
     private String company_name;
     private String profile_pic;
+    private boolean isVisible;
 
     public String getYear() {
         return year;
@@ -85,5 +86,13 @@ public class AwardDetailsModel {
 
     public void setProfile_pic(String profile_pic) {
         this.profile_pic = profile_pic;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 }

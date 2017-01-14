@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -14,11 +14,8 @@ import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.AwardsAdapter;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
-import com.versatilemobitech.fmc.models.AwardDetailsModel;
-import com.versatilemobitech.fmc.models.AwardListModel;
 import com.versatilemobitech.fmc.models.AwardsYearModel;
 import com.versatilemobitech.fmc.models.Model;
-import com.versatilemobitech.fmc.parsers.AwardsParser;
 import com.versatilemobitech.fmc.parsers.AwardsYearParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Utility;
@@ -27,7 +24,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 
-public class AwardsFragment extends Fragment implements IAsyncCaller{
+public class AwardsFragment extends Fragment implements IAsyncCaller, AdapterView.OnItemClickListener {
 
     public static final String TAG = "AwardsFragment";
     private HomeActivity mParent;
@@ -58,7 +55,7 @@ public class AwardsFragment extends Fragment implements IAsyncCaller{
     private void initUI() {
         grid_view = (GridView) rootView.findViewById(R.id.grid_view);
         tv_no_awards = (TextView) rootView.findViewById(R.id.tv_no_awards);
-        /*grid_view.setOnItemClickListener(this);*/
+        grid_view.setOnItemClickListener(this);
 
         getAwardsFromApi();
     }
@@ -89,7 +86,7 @@ public class AwardsFragment extends Fragment implements IAsyncCaller{
         if (model != null) {
             if (model.isStatus()) {
                 if (model instanceof AwardsYearModel) {
-                    AwardsYearModel awardsYearModel = (AwardsYearModel)model;
+                    AwardsYearModel awardsYearModel = (AwardsYearModel) model;
                     awardDetailsModels = awardsYearModel.getAwardsYearModels();
                     setGridData();
                 }
@@ -100,5 +97,13 @@ public class AwardsFragment extends Fragment implements IAsyncCaller{
     private void setGridData() {
         awardsAdapter = new AwardsAdapter(getActivity(), awardDetailsModels);
         grid_view.setAdapter(awardsAdapter);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        AwardsYearModel mAwardsYearModel = awardDetailsModels.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("year", mAwardsYearModel.getYear());
+        Utility.navigateDashBoardFragment(new AwardsDetialsFragment(), AwardsDetialsFragment.TAG, bundle, mParent);
     }
 }
