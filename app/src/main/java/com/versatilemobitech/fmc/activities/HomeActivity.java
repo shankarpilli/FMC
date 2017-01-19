@@ -172,14 +172,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void logOut() {
-        Utility.setSharedPrefStringData(this, Constants.USER_ID, "");
-        Utility.setSharedPrefStringData(this, Constants.LOGIN_NAME, "");
-        Utility.setSharedPrefStringData(this, Constants.LOGIN_PASSWORD, "");
-        Utility.setSharedPrefStringData(this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP, "");
-        Utility.setSharedPrefStringData(this, Constants.USER_KEY, "");
-        Utility.setSharedPrefStringData(this, Constants.COMPANY_NAME, "");
-        Intent mIntent = new Intent(this, LoginActivity.class);
-        startActivity(mIntent);
+        showExitDialog("logOut");
     }
 
 
@@ -219,23 +212,23 @@ public class HomeActivity extends BaseActivity {
             String tagName = backEntry.getName();
             if (tagName.equals(HomeFragment.TAG)) {
                 // finishAffinity();
-                showExitDialog();
+                showExitDialog("Back");
             } else {
                 super.onBackPressed();
             }
         }
     }
 
-    private void showExitDialog() {
+    private void showExitDialog(String mFrom) {
         if (back_pressed + 2000 > System.currentTimeMillis()) {
             finishAffinity();
         } else {
-            showConformationDialog();
+            showConformationDialog(mFrom);
         }
         back_pressed = System.currentTimeMillis();
     }
 
-    private void showConformationDialog() {
+    private void showConformationDialog(final String mFrom) {
         final Dialog dialogEventConfirmation = new Dialog(this);
         dialogEventConfirmation.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialogEventConfirmation.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -250,7 +243,12 @@ public class HomeActivity extends BaseActivity {
         TextView tv_yes = (TextView) dialogEventConfirmation.findViewById(R.id.tv_yes);
         TextView tv_no = (TextView) dialogEventConfirmation.findViewById(R.id.tv_no);
 
-        txt_dialog_message.setText("" + Utility.getResourcesString(this, R.string.are_you_sure_do_you_want_to_exit));
+        if(mFrom.equals("logOut")){
+            txt_dialog_message.setTextSize(18);
+            txt_dialog_message.setText("" + Utility.getResourcesString(this, R.string.are_you_sure_do_you_want_to_logout));
+        }else{
+            txt_dialog_message.setText("" + Utility.getResourcesString(this, R.string.are_you_sure_do_you_want_to_exit));
+        }
 
         txt_dialog_message.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         tv_yes.setTypeface(Utility.setTypeFaceRobotoRegular(this));
@@ -260,6 +258,16 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 dialogEventConfirmation.dismiss();
+                if(mFrom.equals("logOut")){
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.USER_ID, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.LOGIN_NAME, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.LOGIN_PASSWORD, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.USER_KEY, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.COMPANY_NAME, "");
+                    Intent mIntent = new Intent(HomeActivity.this, LoginActivity.class);
+                    startActivity(mIntent);
+                }
                 finish();
             }
         });

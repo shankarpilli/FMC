@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_100dp"
                 android:background="@android:color/transparent"
-                android:hint="@string/what_is_on_your_mind"
+                android:hint="@string/what_is_in_your_mind"
                 android:inputType="text|textNoSuggestions|textMultiLine"
                 android:paddingLeft="@dimen/_5dp" />
 

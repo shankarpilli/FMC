@@ -54,7 +54,7 @@
 
     <string name="post_your_topic">Post Your Topic</string>
     <string name="your_name">Your Name</string>
-    <string name="what_is_on_your_mind">What is on your mind?</string>
+    <string name="what_is_in_your_mind">What is in your mind?</string>
     <string name="post">Post</string>
     <string name="company_name">Company Name</string>
     <string name="place_time_date">Place Time Date</string>
@@ -106,6 +106,7 @@
     <string name="are_you_sure_you_want_to_attend_the_event">Are you sure you want to attend the event</string>
     <string name="are_you_sure_you_want_to_decline_the_event">Are you sure you want to decline the event</string>
     <string name="are_you_sure_do_you_want_to_exit">Are you sure do you want to exit?</string>
+    <string name="are_you_sure_do_you_want_to_logout">Are you sure do you want to logout?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
