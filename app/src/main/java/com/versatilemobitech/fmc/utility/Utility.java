@@ -634,4 +634,50 @@ public class Utility {
         }
         return data;
     }
+
+    public static String httpPutRequestToServer(String URL,Object paramsList ,Context mContext) {
+        String userAgent = "(Android; Mobile) Chrome";
+        int TIME_OUT = 30000;
+        String data = null;
+        HttpPut httpput = new HttpPut(URL);
+        final HttpParams httpParams = new BasicHttpParams();
+        HttpConnectionParams.setConnectionTimeout(httpParams, TIME_OUT);
+        HttpConnectionParams.setSoTimeout(httpParams, TIME_OUT);
+
+        HttpClient httpclient = new DefaultHttpClient(httpParams);
+        httpput.setHeader("User-Agent", userAgent);
+
+        httpput.setParams(httpParams);
+
+        InputStream is = null;
+        try {
+            if (paramsList != null)
+                httpput.setEntity(new UrlEncodedFormEntity(
+                        (List<? extends NameValuePair>) paramsList));
+
+            HttpResponse response = httpclient.execute(httpput);
+            HttpEntity httpEntity = response.getEntity();
+            int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode == 204) {
+                data = null;
+            }
+
+            if (statusCode == 200) {
+                is = httpEntity.getContent();
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(is, "iso-8859-1"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    if (line.length() > 0)
+                        sb.append(line + "\n");
+                }
+                data = sb.toString();
+                is.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
 }

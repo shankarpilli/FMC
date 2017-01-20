@@ -18,24 +18,33 @@ import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
+import com.versatilemobitech.fmc.activities.LoginActivity;
+import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.designs.MaterialDialog;
+import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.ForgotPasswordParser;
 import com.versatilemobitech.fmc.permissions.Permissions;
+import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Utility;
+
+import java.util.LinkedHashMap;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChangePasswordFragment extends Fragment {
+public class ChangePasswordFragment extends Fragment implements View.OnClickListener, IAsyncCaller{
 
     public static final String TAG = "ChangePasswordFragment";
     private HomeActivity mParent;
-    private String mToolBarTitle;
     private Toolbar mToolbar;
     private View rootView;
 
 
+    private TextView tv_change_password;
     private EditText etOldPasswordl;
     private EditText etNewPasswordl;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,12 +58,11 @@ public class ChangePasswordFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.contacts_us));
+        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.change_password));
         if (mToolbar != null) {
             mToolbar.setVisibility(View.VISIBLE);
         }
         rootView = inflater.inflate(R.layout.change_password, container, false);
-        //mParent.txt_our_tour.setText("" + mToolBarTitle);
 
         InitUI(rootView);
 
@@ -64,9 +72,64 @@ public class ChangePasswordFragment extends Fragment {
 
     private void InitUI(View rootView) {
 
+        tv_change_password = (TextView) rootView.findViewById(R.id.tv_change_password);
         etOldPasswordl = (EditText)rootView.findViewById(R.id.et_old_password);
         etNewPasswordl = (EditText)rootView.findViewById(R.id.et_new_password);
         etOldPasswordl.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         etNewPasswordl.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
+        tv_change_password.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
+        tv_change_password.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_change_password:
+                if (isValid()){
+                    changeYourPassword();
+                }
+                break;
+        }
+    }
+
+    private boolean isValid() {
+        boolean isValidated = false;
+        if (Utility.isValueNullOrEmpty(etOldPasswordl.getText().toString().trim())) {
+            Utility.setSnackBarEnglish(mParent, etOldPasswordl, "Please enter old password");
+            etOldPasswordl.requestFocus();
+        } else if (Utility.isValueNullOrEmpty(etNewPasswordl.getText().toString().trim())) {
+            Utility.setSnackBarEnglish(mParent, etNewPasswordl, "Please enter new password");
+            etNewPasswordl.requestFocus();
+        } else {
+            isValidated = true;
+        }
+        return isValidated;
+    }
+
+    private void changeYourPassword() {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+        paramMap.put("user_id", etOldPasswordl.getText().toString());
+        paramMap.put("password", etNewPasswordl.getText().toString());
+        ForgotPasswordParser mForgotPasswordParser = new ForgotPasswordParser();
+        if (Utility.isNetworkAvailable(getActivity())) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(getActivity(), Utility.getResourcesString(getActivity(),
+                    R.string.please_wait), true,
+                    APIConstants.CHANGE_PASSWORD, paramMap,
+                    APIConstants.REQUEST_TYPE.PUT, this, mForgotPasswordParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    getActivity(),
+                    this.getResources().getString(
+                            R.string.no_internet_msg),
+                    this.getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
+        }
+    }
+
+    @Override
+    public void onComplete(Model model) {
+
     }
 }

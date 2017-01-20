@@ -54,9 +54,9 @@ public class ServerIntractorAsync extends BaseAsynkTask {
                     mResponse = Utility.httpJsonRequest(mUrl,
                             mParams);
                 } else {*/
-                    mResponse = Utility.httpPostRequestToServerWithHeader(mUrl,
-                            Utility.getParams(mParams), mContext);
-               // }
+                mResponse = Utility.httpPostRequestToServerWithHeader(mUrl,
+                        Utility.getParams(mParams), mContext);
+                // }
                 if (mResponse != null) {
                     Utility.showLog("mResponse  ", mResponse);
                 } else {
@@ -68,8 +68,12 @@ public class ServerIntractorAsync extends BaseAsynkTask {
                 Utility.showLog("Request URL ", mUrl);
                 Utility.showLog("Request mParams != null getParams  ", ""
                         + Utility.getParams(mParams));
-                mResponse = Utility.httpPutRequestToServer(mUrl,
-                        mContext);
+                if (mUrl.contains(APIConstants.FORGOT_PASSWORD))
+                    mResponse = Utility.httpPutRequestToServer(mUrl,
+                            mContext);
+                else
+                    mResponse = Utility.httpPutRequestToServer(mUrl,Utility.getParams(mParams),
+                            mContext);
                 if (mResponse != null) {
                     Utility.showLog("mResponse  ", mResponse);
                 }

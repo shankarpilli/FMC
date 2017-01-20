@@ -31,5 +31,6 @@ public class APIConstants {
     public static final String AWARDS = BASE_URL + "awards/"/*{page number}*/;
     public static final String AWARD_YEARS = BASE_URL + "awardyears/1"/*{page number}*/;
     public static final String FORGOT_PASSWORD = BASE_URL + "forgotpassword/"/*{page number}*/;
+    public static final String CHANGE_PASSWORD = BASE_URL + "changepassword/"/*{page number}*/;
 
 }

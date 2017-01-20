@@ -53,6 +53,7 @@
     <string name="logout">Logout</string>
     <string name="comment">Comment</string>
     <string name="reply">Reply</string>
+    <string name="change_password">Change Password</string>
 
     <string name="post_your_topic">Post Your Topic</string>
     <string name="your_name">Your Name</string>
