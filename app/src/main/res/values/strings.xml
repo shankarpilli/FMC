@@ -16,6 +16,8 @@
     <string name="password">Password</string>
     <string name="get_password">Get Password</string>
     <string name="username">UserName</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
 
     <string name="confirm_password">Confirm Password</string>
 

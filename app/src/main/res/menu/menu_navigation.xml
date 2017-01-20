@@ -42,6 +42,10 @@
             android:icon="@drawable/contacts_us_icon"
             android:title="Contact Us" />
         <item
+            android:id="@+id/change_password"
+            android:icon="@drawable/iv_chang_password"
+            android:title="Change Password" />
+        <item
             android:id="@+id/logout"
             android:icon="@drawable/logout_icon"
             android:title="Logout" />

@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.fragments.AwardsFragment;
+import com.versatilemobitech.fmc.fragments.ChangePasswordFragment;
 import com.versatilemobitech.fmc.fragments.ContactsUsFragment;
 import com.versatilemobitech.fmc.fragments.EditorialsFragment;
 import com.versatilemobitech.fmc.fragments.EventsFragment;
@@ -110,6 +111,10 @@ public class HomeActivity extends BaseActivity {
                         break;
                     case R.id.logout:
                         logOut();
+                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.change_password:
+                        Utility.navigateDashBoardFragment(new ChangePasswordFragment(), ChangePasswordFragment.TAG, null, HomeActivity.this);
                         drawerLayout.closeDrawers();
                         break;
                 }
