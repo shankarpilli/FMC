@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by Shankar Pilli on 11/06/2016
  */
-public class AwardsDetialsFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener  {
+public class AwardsDetialsFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener, AdapterView.OnItemClickListener {
 
     public static final String TAG = "AwardsDetialsFragment";
     private HomeActivity mParent;
@@ -66,6 +67,7 @@ public class AwardsDetialsFragment extends Fragment implements IAsyncCaller, Abs
     private void initUI() {
         lv_awards = (ListView) rootView.findViewById(R.id.lv_awards);
         tv_no_awards = (TextView) rootView.findViewById(R.id.tv_no_awards);
+        lv_awards.setOnItemClickListener(this);
         getAwards("1");
     }
 
@@ -176,5 +178,13 @@ public class AwardsDetialsFragment extends Fragment implements IAsyncCaller, Abs
                 }
             }
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Bundle bundle = new Bundle();
+        bundle.putString("file_url", awardDetailsModels.get(i).getAward_doc());
+        bundle.putString("header", "Awards");
+        Utility.navigateDashBoardFragment(new WebViewFragment(), WebViewFragment.TAG, bundle, mParent);
     }
 }

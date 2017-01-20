@@ -24,6 +24,7 @@ public class WebViewFragment extends Fragment {
     private View rootView;
     private WebView mWebView;
     private String url;
+    private String header;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,12 +32,17 @@ public class WebViewFragment extends Fragment {
         mParent = (HomeActivity) getActivity();
         Bundle bundle = getArguments();
         url = bundle.getString("file_url");
+        if (bundle.containsKey("header")){
+            header = bundle.getString("header");
+        } else {
+            header = Utility.getResourcesString(getActivity(), R.string.home);
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.home));
+        mParent.getSupportActionBar().setTitle(header);
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_webview, container, false);
         initUI();
