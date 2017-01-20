@@ -133,7 +133,7 @@ public class HomeActivity extends BaseActivity {
         TextView txt_user_designation = (TextView) header.findViewById(R.id.txt_user_designation);
 
         txt_name.setTypeface(Utility.setTypeCambriaBoldRegular(this));
-        txt_name.setText(Utility.getSharedPrefStringData(HomeActivity.this, Constants.LOGIN_NAME));
+        txt_name.setText(Utility.capitalizeFirstLetter(Utility.getSharedPrefStringData(HomeActivity.this, Constants.USER_NAME)));
         txt_user_designation.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         txt_user_designation.setText(Utility.getSharedPrefStringData(HomeActivity.this, Constants.COMPANY_NAME));
 
