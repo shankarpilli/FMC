@@ -114,6 +114,7 @@ public class HomeActivity extends BaseActivity {
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.change_password:
+                        //drawerLayout.closeDrawers();
                         Utility.navigateDashBoardFragment(new ChangePasswordFragment(), ChangePasswordFragment.TAG, null, HomeActivity.this);
                         drawerLayout.closeDrawers();
                         break;

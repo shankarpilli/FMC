@@ -30,6 +30,7 @@
 
         <FrameLayout
             android:id="@+id/content_frame"
+            android:clickable="true"
             style="@style/match"
             android:layout_marginTop="?attr/actionBarSize" />
 

@@ -1,10 +1,6 @@
 package com.versatilemobitech.fmc.fragments;
 
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -12,19 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
-import com.versatilemobitech.fmc.activities.LoginActivity;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
-import com.versatilemobitech.fmc.designs.MaterialDialog;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.parsers.ForgotPasswordParser;
-import com.versatilemobitech.fmc.permissions.Permissions;
 import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Utility;
 
@@ -50,8 +41,6 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         super.onCreate(savedInstanceState);
         mParent = (HomeActivity) getActivity();
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-
-
     }
 
 
