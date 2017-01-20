@@ -39,7 +39,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
     private GridView grid_view;
     private TextView tv_no_images;
     private GalleryViewAdapter galleryViewAdapter;
-    private ArrayList<GalleryViewModel> galleryViewModels;
+    public static ArrayList<GalleryViewModel> galleryViewModels;
 
     private String albumId;
     private String albumName;
@@ -65,6 +65,9 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
                              Bundle savedInstanceState) {
         mParent.getSupportActionBar().setTitle(albumName);
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        if (rootView!=null){
+            return rootView;
+        }
         rootView = inflater.inflate(R.layout.fragment_gallery, container, false);
         initUI();
         return rootView;
@@ -72,6 +75,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
     }
 
     private void initUI() {
+        galleryViewModels = null;
         grid_view = (GridView) rootView.findViewById(R.id.grid_view);
         grid_view.setNumColumns(3);
         grid_view.setHorizontalSpacing(10);
@@ -206,6 +210,10 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        showFitDialog(galleryViewModels.get(position).getImage_path(), getActivity());
+        //showFitDialog(galleryViewModels.get(position).getImage_path(), getActivity());
+        Bundle bundle = new Bundle();
+        bundle.putString("albumName", albumName);
+        bundle.putInt("position", position);
+        Utility.navigateDashBoardFragment(new GalleryFullViewFragment(), GalleryFullViewFragment.TAG, bundle, mParent);
     }
 }
