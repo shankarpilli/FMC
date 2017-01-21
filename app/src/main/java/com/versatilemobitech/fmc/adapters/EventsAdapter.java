@@ -95,6 +95,9 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         mListEventsHolder.tv_more_details = (TextView) convertView.findViewById(R.id.tv_more_details);
         mListEventsHolder.tv_more_details.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
+        mListEventsHolder.tv_location = (TextView) convertView.findViewById(R.id.tv_location);
+        mListEventsHolder.tv_location.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+
         mListEventsHolder.tv_event_title = (TextView) convertView.findViewById(R.id.tv_event_title);
         mListEventsHolder.tv_event_title.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
@@ -393,5 +396,7 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         private TextView tv_decline;
         private TextView tv_balance_days;
         private TextView tv_event_title;
+
+        private TextView tv_location;
     }
 }

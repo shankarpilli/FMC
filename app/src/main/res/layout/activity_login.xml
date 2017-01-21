@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150dp"
             android:layout_marginBottom="@dimen/_25dp"
-            android:src="@drawable/login_label" />
+            android:src="@drawable/fmc_transprent_logo" />
 
         <LinearLayout
             android:id="@+id/ll_login"
