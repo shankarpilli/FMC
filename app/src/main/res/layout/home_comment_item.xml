@@ -10,6 +10,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/img_commented"
             android:layout_width="@dimen/_50dp"
             android:layout_height="@dimen/_50dp"
             android:layout_marginLeft="@dimen/_5dp"

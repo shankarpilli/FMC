@@ -243,6 +243,7 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
             TextView txt_comment_time_date = (TextView) layout_list_header.findViewById(R.id.txt_comment_time_date);
             TextView txt_comment_post_message = (TextView) layout_list_header.findViewById(R.id.txt_comment_post_message);
             TextView txt_reply = (TextView) layout_list_header.findViewById(R.id.txt_reply);
+            ImageView img_commented = (ImageView) layout_list_header.findViewById(R.id.img_commented);
 
             txt_comment_name.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
             txt_comment_company.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
@@ -250,6 +251,10 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
             txt_comment_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
             txt_reply.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
 
+            if (!Utility.isValueNullOrEmpty(getPostsCommentModel.getProfile_pic()))
+                Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
+                        placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image))
+                        .transform(new CircleTransform()).into(img_commented);
             txt_comment_name.setText(getPostsCommentModel.getFirst_name());
             txt_comment_company.setText(getPostsCommentModel.getCompany_name());
             txt_comment_time_date.setText(getPostsCommentModel.getDatetime());

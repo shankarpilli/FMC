@@ -46,7 +46,6 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,13 +55,13 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         }
         rootView = inflater.inflate(R.layout.change_password, container, false);
 
-        InitUI(rootView);
+        initUI(rootView);
 
         return rootView;
     }
 
 
-    private void InitUI(View rootView) {
+    private void initUI(View rootView) {
 
         tv_change_password = (TextView) rootView.findViewById(R.id.tv_change_password);
         etOldPasswordl = (EditText)rootView.findViewById(R.id.et_old_password);

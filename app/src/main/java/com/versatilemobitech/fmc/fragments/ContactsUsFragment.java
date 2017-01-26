@@ -56,7 +56,7 @@ public class ContactsUsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.contact_fmc, container, false);
         //mParent.txt_our_tour.setText("" + mToolBarTitle);
 
-        InitUI(rootView);
+        initUI(rootView);
 
         if (Utility.isMarshmallowOS()) {
             Permissions.getInstance().setActivity(getActivity());
@@ -97,7 +97,7 @@ public class ContactsUsFragment extends Fragment {
         }, mPermisons);
     }
 
-    private void InitUI(View rootView) {
+    private void initUI(View rootView) {
 
         TextView tv_contact_us = (TextView) rootView.findViewById(R.id.tv_contact_us);
         tv_contact_us.setTypeface(Utility.setTypeFaceRobotoBold(getActivity()));
