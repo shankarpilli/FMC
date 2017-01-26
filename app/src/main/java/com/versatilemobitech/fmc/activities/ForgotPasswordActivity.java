@@ -4,22 +4,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.models.ForgotPasswordModel;
+import com.versatilemobitech.fmc.models.LoginModel;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.parsers.ForgotPasswordParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Utility;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 public class ForgotPasswordActivity extends BaseActivity implements IAsyncCaller {
 
     private EditText etUserName;
     private TextView txtGetPassword;
+    private ForgotPasswordModel mForgotPasswordModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +70,8 @@ public class ForgotPasswordActivity extends BaseActivity implements IAsyncCaller
         if (Utility.isNetworkAvailable(this)) {
             ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(this, Utility.getResourcesString(this,
                     R.string.please_wait), true,
-                    APIConstants.FORGOT_PASSWORD+etUserName.getText().toString(), paramMap,
-                    APIConstants.REQUEST_TYPE.PUT, this, mForgotPasswordParser);
+                    APIConstants.FORGOT_PASSWORD , paramMap,
+                    APIConstants.REQUEST_TYPE.POST, this, mForgotPasswordParser);
             Utility.execute(serverIntractorAsync);
         } else {
             Utility.showSettingDialog(
@@ -72,6 +86,14 @@ public class ForgotPasswordActivity extends BaseActivity implements IAsyncCaller
 
     @Override
     public void onComplete(Model model) {
-
+        if (model != null) {
+            if (model.isStatus()) {
+                if (model instanceof ForgotPasswordModel) {
+                    mForgotPasswordModel = (ForgotPasswordModel) model;
+                    Utility.showToastMessage(this, mForgotPasswordModel.getMessage());
+                    finish();
+                }
+            }
+        }
     }
 }

@@ -19,7 +19,8 @@ public class ForgotPasswordParser implements Parser {
             mForgotPasswordModel.setStatus(true);
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                mForgotPasswordModel.setMessage(jsonObject.optString("message"));
+                mForgotPasswordModel.setMessage(jsonObject.optString("msg"));
+                mForgotPasswordModel.setStatus(true);
             } catch (Exception e) {
                 mForgotPasswordModel.setStatus(false);
             }

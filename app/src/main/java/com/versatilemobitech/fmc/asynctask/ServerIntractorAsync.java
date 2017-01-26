@@ -69,7 +69,7 @@ public class ServerIntractorAsync extends BaseAsynkTask {
                 Utility.showLog("Request mParams != null getParams  ", ""
                         + Utility.getParams(mParams));
                 if (mUrl.contains(APIConstants.FORGOT_PASSWORD))
-                    mResponse = Utility.httpPutRequestToServer(mUrl,
+                    mResponse = Utility.httpPutRequestToServer(mUrl,Utility.getParams(mParams),
                             mContext);
                 else
                     mResponse = Utility.httpPutRequestToServer(mUrl,Utility.getParams(mParams),
