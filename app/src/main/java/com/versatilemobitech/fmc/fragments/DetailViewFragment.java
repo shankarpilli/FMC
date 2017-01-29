@@ -56,7 +56,7 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
     private TextView txt_comment;
     private TextView txt_share;
     private TextView txt_sub_name;
-    private TextView txt_share_icon;
+   // private TextView txt_share_icon;
     //private TextView txt_comment_icon;
     private ImageView image_data;
 
@@ -102,7 +102,7 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
         txt_sub_name = (TextView) rootView.findViewById(R.id.txt_sub_name);
         txt_post_message = (TextView) rootView.findViewById(R.id.txt_post_message);
 
-        txt_share_icon = (TextView) rootView.findViewById(R.id.txt_share_icon);
+        //txt_share_icon = (TextView) rootView.findViewById(R.id.txt_share_icon);
         // txt_comment_icon = (TextView) rootView.findViewById(R.id.txt_comment_icon);
 
         txt_send = (TextView) rootView.findViewById(R.id.txt_send);
@@ -120,7 +120,7 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
         txt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
 
-        txt_share_icon.setTypeface(Utility.setTypeFace_matirealicons(mParent));
+        //txt_share_icon.setTypeface(Utility.setTypeFace_matirealicons(mParent));
         //txt_comment_icon.setTypeface(Utility.setTypeFace_matirealicons(mParent));
         txt_send.setTypeface(Utility.setTypeFace_fontawesome(mParent));
         edt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
@@ -190,7 +190,12 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
         txt_name.setText(Utility.capitalizeFirstLetter(detailDataModel.getFirst_name())
                 + " " + Utility.capitalizeFirstLetter(detailDataModel.getLast_name()));
         txt_company.setText(Utility.capitalizeFirstLetter(detailDataModel.getCompany_name()));
-        txt_post_message.setText(Utility.capitalizeFirstLetter(detailDataModel.getPost_text()));
+        if (Utility.isValueNullOrEmpty(detailDataModel.getPost_text())){
+            txt_post_message.setVisibility(View.GONE);
+        } else {
+            txt_post_message.setVisibility(View.VISIBLE);
+            txt_post_message.setText(Utility.capitalizeFirstLetter(detailDataModel.getPost_text()));
+        }
         if (!Utility.isValueNullOrEmpty(detailDataModel.getProfile_pic()))
             Picasso.with(mParent)
                     .load(detailDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(10,1))

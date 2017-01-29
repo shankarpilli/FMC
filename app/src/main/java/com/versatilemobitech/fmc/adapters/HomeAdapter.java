@@ -83,10 +83,10 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder.txt_sub_name = (TextView) convertView.findViewById(R.id.txt_sub_name);
             mHomeItemHolder.txt_post_message = (TextView) convertView.findViewById(R.id.txt_post_message);
 
-            mHomeItemHolder.txt_share_icon = (TextView) convertView.findViewById(R.id.txt_share_icon);
-            mHomeItemHolder.txt_comment_icon = (TextView) convertView.findViewById(R.id.txt_comment_icon);
+            //mHomeItemHolder.txt_share_icon = (TextView) convertView.findViewById(R.id.txt_share_icon);
+            //mHomeItemHolder.txt_comment_icon = (TextView) convertView.findViewById(R.id.txt_comment_icon);
 
-            mHomeItemHolder.txt_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_name.setTypeface(Utility.setTypeCambriaBoldRegular(mContext));
             mHomeItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
@@ -97,8 +97,8 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder.txt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
-            mHomeItemHolder.txt_share_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
-            mHomeItemHolder.txt_comment_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
+            //mHomeItemHolder.txt_share_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
+            //mHomeItemHolder.txt_comment_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
 
             convertView.setTag(mHomeItemHolder);
         } else {
@@ -110,7 +110,12 @@ public class HomeAdapter extends BaseAdapter {
         mHomeItemHolder.txt_name.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getFirst_name())
                 + " " + Utility.capitalizeFirstLetter(mHomeDataModel.getLast_name()));
         mHomeItemHolder.txt_company.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));
-        mHomeItemHolder.txt_post_message.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getPost_text()));
+        if (Utility.isValueNullOrEmpty(mHomeDataModel.getPost_text())){
+            mHomeItemHolder.txt_post_message.setVisibility(View.GONE);
+        } else {
+            mHomeItemHolder.txt_post_message.setVisibility(View.VISIBLE);
+            mHomeItemHolder.txt_post_message.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getPost_text()));
+        }
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getProfile_pic()))
             Picasso.with(mContext)
                     .load(mHomeDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(10, 1))
@@ -212,8 +217,8 @@ public class HomeAdapter extends BaseAdapter {
         private TextView txt_comment;
         private TextView txt_share;
         private TextView txt_sub_name;
-        private TextView txt_share_icon;
-        private TextView txt_comment_icon;
+        //private TextView txt_share_icon;
+        //private TextView txt_comment_icon;
         private ImageView image_data;
     }
 }

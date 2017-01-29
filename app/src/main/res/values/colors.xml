@@ -27,5 +27,8 @@
     <color name="btnDefaultColor">#000000</color>
     <color name="dialogAccept">#1E88E5</color>
     <color name="theme_color">#0000ee</color>
-
+    <color name="light_black">#242424</color>
+    <color name="company_name">#747474</color>
+    <color name="post_text_color">#333333</color>
+    <color name="background_home">#e5e9ec</color>
 </resources>

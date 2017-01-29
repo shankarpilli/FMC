@@ -17,8 +17,7 @@
             android:layout_margin="@dimen/_5dp"
             android:background="@drawable/list_card_background_selector"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/_5dp"
-            android:paddingTop="@dimen/_5dp">
+            android:paddingBottom="@dimen/_5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -26,7 +25,6 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_5dp"
                 android:layout_marginStart="@dimen/_5dp"
-                android:layout_marginTop="@dimen/_5dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="@dimen/_8dp">
@@ -53,6 +51,16 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/txt_company"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3dp"
+                            android:text="@string/company_name"
+                            android:textColor="@color/light_orange"
+                            android:textSize="@dimen/_18sp"
+                            android:visibility="gone" />
+
+                        <TextView
                             android:id="@+id/txt_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -60,18 +68,8 @@
                             android:layout_marginRight="@dimen/_5dp"
                             android:layout_marginTop="@dimen/_5dp"
                             android:text="@string/your_name"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_20sp" />
-
-                        <TextView
-                            android:id="@+id/txt_company"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5dp"
-                            android:text="@string/company_name"
-                            android:textColor="@color/light_orange"
-                            android:textSize="@dimen/_12sp"
-                            android:visibility="gone" />
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/_18sp" />
                     </LinearLayout>
 
                     <TextView
@@ -79,12 +77,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/company_name"
-                        android:textSize="@dimen/_16sp" />
+                        android:textColor="@color/company_name"
+                        android:textSize="@dimen/_18sp" />
 
                     <TextView
                         android:id="@+id/txt_time_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/_14sp"
+                        android:textColor="@color/company_name"
                         android:text="@string/place_time_date" />
                 </LinearLayout>
             </LinearLayout>
@@ -96,12 +97,16 @@
                 android:layout_marginLeft="@dimen/_12dp"
                 android:layout_marginStart="@dimen/_12dp"
                 android:layout_marginTop="@dimen/_3dp"
-                android:textColor="@color/black" />
+                android:textSize="@dimen/_18sp"
+                android:textColor="@color/post_text_color" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_12dp"
+                android:layout_marginLeft="@dimen/_12dp"
+                android:layout_marginRight="@dimen/_12dp"
+                android:layout_marginTop="@dimen/_12dp"
+                android:layout_marginBottom="@dimen/_5dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -116,7 +121,7 @@
                 <ImageView
                     android:id="@+id/image_data"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150dp"
+                    android:layout_height="@dimen/_175dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/star_banner"
                     android:visibility="gone" />
@@ -148,13 +153,13 @@
                 android:orientation="horizontal"
                 android:padding="@dimen/_5dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center">
 
-                    <TextView
+                   <!-- <TextView
                         android:id="@+id/txt_comment_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -163,7 +168,12 @@
                         android:padding="@dimen/_2dp"
                         android:text="@string/comment_icon"
                         android:textSize="@dimen/_16sp"
-                        android:visibility="gone" />
+                        android:visibility="gone" />-->
+
+                    <ImageView
+                        android:layout_width="@dimen/_25dp"
+                        android:layout_height="@dimen/_25dp"
+                        android:src="@drawable/comment_icon"/>
 
                     <TextView
                         android:id="@+id/txt_comment"
@@ -172,28 +182,31 @@
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="@dimen/_5dp"
                         android:layout_marginStart="@dimen/_5dp"
-                        android:layout_toEndOf="@+id/txt_comment_icon"
-                        android:layout_toRightOf="@+id/txt_comment_icon"
                         android:gravity="center"
                         android:padding="@dimen/_2dp"
                         android:text="@string/comment"
-                        android:textSize="@dimen/_16sp" />
-                </RelativeLayout>
+                        android:textSize="@dimen/_18sp" />
+                </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center">
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/txt_share_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:padding="@dimen/_2dp"
                         android:text="@string/share_icon"
-                        android:textSize="@dimen/_16sp" />
+                        android:textSize="@dimen/_16sp" />-->
+
+                    <ImageView
+                        android:layout_width="@dimen/_25dp"
+                        android:layout_height="@dimen/_25dp"
+                        android:src="@drawable/share_icon"/>
 
                     <TextView
                         android:id="@+id/txt_share"
@@ -202,13 +215,11 @@
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="@dimen/_5dp"
                         android:layout_marginStart="@dimen/_5dp"
-                        android:layout_toEndOf="@+id/txt_share_icon"
-                        android:layout_toRightOf="@+id/txt_share_icon"
                         android:gravity="center"
                         android:padding="@dimen/_2dp"
                         android:text="@string/share"
-                        android:textSize="@dimen/_16sp" />
-                </RelativeLayout>
+                        android:textSize="@dimen/_18sp" />
+                </LinearLayout>
             </LinearLayout>
 
 
