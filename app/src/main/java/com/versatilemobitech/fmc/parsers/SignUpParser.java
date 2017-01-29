@@ -18,7 +18,10 @@ public class SignUpParser implements Parser {
         if (response != null) {
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                if (jsonObject.optBoolean("status")) {
+                if (!jsonObject.optBoolean("status")) {
+                    mSignUpModel.setStatus(false);
+                    mSignUpModel.setMessage(jsonObject.optString("message"));
+                } else {
                     mSignUpModel.setStatus(true);
                     mSignUpModel.setMessage(jsonObject.optString("success"));
                     mSignUpModel.setUsername(jsonObject.optString("username"));
@@ -36,9 +39,6 @@ public class SignUpParser implements Parser {
                     mSignUpModel.setCreated_date(jsonObject.optString("created_date"));
                     mSignUpModel.setUser_id(jsonObject.optString("user_id"));
                     mSignUpModel.setModified_date(jsonObject.optString("modified_date"));
-                } else {
-                    mSignUpModel.setStatus(false);
-                    mSignUpModel.setMessage(jsonObject.optString("message"));
                 }
             } catch (Exception e) {
                 mSignUpModel.setStatus(false);

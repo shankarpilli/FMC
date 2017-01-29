@@ -49,7 +49,8 @@ public class ContactsUsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.contacts_us));
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent,
+                Utility.getResourcesString(getActivity(), R.string.contacts_us)));
         if (mToolbar != null) {
             mToolbar.setVisibility(View.VISIBLE);
         }

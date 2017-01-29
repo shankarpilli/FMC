@@ -49,7 +49,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.change_password));
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent, Utility.getResourcesString(getActivity(), R.string.change_password)));
         if (mToolbar != null) {
             mToolbar.setVisibility(View.VISIBLE);
         }

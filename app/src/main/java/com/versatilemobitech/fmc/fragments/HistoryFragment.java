@@ -33,7 +33,8 @@ public class HistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.toolbar.setTitle(Utility.getResourcesString(getActivity(), R.string.history));
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent,
+                Utility.getResourcesString(getActivity(), R.string.history)));
         rootView = inflater.inflate(R.layout.fragment_history, container, false);
         initUI();
         return rootView;

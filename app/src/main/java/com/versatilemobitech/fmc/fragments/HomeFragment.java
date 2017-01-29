@@ -114,7 +114,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.home));
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent, Utility.getResourcesString(getActivity(), R.string.home)));
         if (rootView != null) {
             return rootView;
         }

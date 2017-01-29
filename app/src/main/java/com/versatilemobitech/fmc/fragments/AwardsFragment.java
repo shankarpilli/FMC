@@ -44,7 +44,8 @@ public class AwardsFragment extends Fragment implements IAsyncCaller, AdapterVie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.awards));
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent,
+                Utility.getResourcesString(getActivity(), R.string.awards)));
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         if (rootView!=null){
             return rootView;

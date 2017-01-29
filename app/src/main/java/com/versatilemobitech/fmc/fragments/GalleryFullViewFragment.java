@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.ImageViewPagerAdapter;
+import com.versatilemobitech.fmc.utility.Utility;
 
 /**
  * Created by shankar on 1/20/17.
@@ -38,7 +39,7 @@ public class GalleryFullViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(albumName);
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent, albumName));
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_gallery_full_view, container, false);
         initUI();

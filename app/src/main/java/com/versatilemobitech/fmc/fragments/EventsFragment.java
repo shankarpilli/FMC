@@ -44,7 +44,8 @@ public class EventsFragment extends Fragment implements IAsyncCaller {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.events));
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent,
+                Utility.getResourcesString(getActivity(), R.string.events)));
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_events, container, false);
         initUI();

@@ -50,7 +50,8 @@ public class GalleryFragment extends Fragment implements IAsyncCaller, AdapterVi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(Utility.getResourcesString(getActivity(), R.string.gallery));
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent,
+                Utility.getResourcesString(getActivity(), R.string.gallery)));
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         if (rootView != null) {
             return rootView;

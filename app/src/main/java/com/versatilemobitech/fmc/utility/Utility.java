@@ -25,6 +25,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,7 @@ import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListene
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.adapters.SpinnerAdapter;
+import com.versatilemobitech.fmc.customviews.CustomTypefaceSpan;
 import com.versatilemobitech.fmc.customviews.SnackBar;
 import com.versatilemobitech.fmc.models.SpinnerModel;
 
@@ -479,7 +482,7 @@ public class Utility {
     }
 
     public static Typeface setTypeFaceRobotoRegular(Context context) {
-        return Typeface.createFromAsset(context.getAssets(), "cambria.ttf");
+        return Typeface.createFromAsset(context.getAssets(), "SourceSansPro-Regular.ttf");
     }
 
     public static Typeface setTypeFace_fontawesome(Context context) {
@@ -491,7 +494,7 @@ public class Utility {
     }
 
     public static Typeface setTypeCambriaBoldRegular(Context context) {
-        return Typeface.createFromAsset(context.getAssets(), "cambriabold.ttf");
+        return Typeface.createFromAsset(context.getAssets(), "SourceSansPro-Semibold.ttf");
     }
 
     public static Bitmap getRotatedBitmap(int rotation, String mPath) {
@@ -680,4 +683,12 @@ public class Utility {
         }
         return data;
     }
+
+    public static SpannableString setHeaderTypeface(HomeActivity homeActivity, String title){
+        Typeface font = Typeface.createFromAsset(homeActivity.getAssets(), "SourceSansPro-Regular.ttf");
+        SpannableString mNewTitle = new SpannableString(title);
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        return mNewTitle;
+    }
+
 }

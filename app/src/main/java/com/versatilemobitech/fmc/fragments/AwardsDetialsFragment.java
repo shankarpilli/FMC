@@ -57,7 +57,7 @@ public class AwardsDetialsFragment extends Fragment implements IAsyncCaller, Abs
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(""+mString);
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent, ""+mString));
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         rootView = inflater.inflate(R.layout.fragment_awards_details, container, false);
         initUI();

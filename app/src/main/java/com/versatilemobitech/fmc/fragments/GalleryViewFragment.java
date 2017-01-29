@@ -63,7 +63,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mParent.getSupportActionBar().setTitle(albumName);
+        mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent, albumName));
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
         if (rootView!=null){
             return rootView;
