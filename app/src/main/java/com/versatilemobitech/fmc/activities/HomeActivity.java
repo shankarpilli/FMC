@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +15,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -23,6 +28,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
+import com.versatilemobitech.fmc.customviews.CustomTypefaceSpan;
 import com.versatilemobitech.fmc.fragments.AwardsFragment;
 import com.versatilemobitech.fmc.fragments.ChangePasswordFragment;
 import com.versatilemobitech.fmc.fragments.ContactsUsFragment;
@@ -34,7 +40,6 @@ import com.versatilemobitech.fmc.fragments.HomeFragment;
 import com.versatilemobitech.fmc.fragments.MemberDirectorFragment;
 import com.versatilemobitech.fmc.fragments.VendorPartnersFragment;
 import com.versatilemobitech.fmc.fragments.WelcomeFragment;
-import com.versatilemobitech.fmc.models.HomeDataModel;
 import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.ImageUtility;
 import com.versatilemobitech.fmc.utility.Utility;
@@ -57,6 +62,19 @@ public class HomeActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        Menu m = navigationView.getMenu();
+        for (int i=0;i<m.size();i++) {
+            MenuItem mi = m.getItem(i);
+            SubMenu subMenu = mi.getSubMenu();
+            if (subMenu!=null && subMenu.size() >0 ) {
+                for (int j=0; j <subMenu.size();j++) {
+                    MenuItem subMenuItem = subMenu.getItem(j);
+                    applyFontToMenuItem(subMenuItem);
+                }
+            }
+            applyFontToMenuItem(mi);
+        }
+
         setSupportActionBar(toolbar);
         initNavigationDrawer();
 
@@ -181,6 +199,12 @@ public class HomeActivity extends BaseActivity {
         showExitDialog("logOut");
     }
 
+    private void applyFontToMenuItem(MenuItem mi) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "cambria.ttf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

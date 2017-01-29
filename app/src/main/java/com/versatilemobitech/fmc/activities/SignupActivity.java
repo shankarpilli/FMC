@@ -91,6 +91,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
     private TextView tv_bangalore;
     private TextView tv_pune;
     private TextView txt_sign_up;
+    private TextView txt_signup;
 
     private CheckBox cb_hyd;
     private CheckBox cb_chennai;
@@ -131,6 +132,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         tv_pune = (TextView) findViewById(R.id.tv_pune);
         tv_bangalore = (TextView) findViewById(R.id.tv_bangalore);
         txt_sign_up = (TextView) findViewById(R.id.txt_sign_up);
+        txt_signup = (TextView) findViewById(R.id.txt_signup);
 
         iv_right_profile_pic = (ImageView) findViewById(R.id.iv_right_profile_pic);
         iv_back = (ImageView) findViewById(R.id.iv_back);
@@ -176,6 +178,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         edt_location.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         edt_c_pwd.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         edt_password.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        txt_signup.setTypeface(Utility.setTypeFaceRobotoRegular(this));
 
         if (Utility.isMarshmallowOS()) {
             Permissions.getInstance().setActivity(this);
@@ -362,6 +365,8 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                     finish();*/
                     showCompletedDialog();
                 }
+            } else {
+                Utility.setSnackBarEnglish(SignupActivity.this, cb_hyd, model.getMessage());
             }
         }
     }
