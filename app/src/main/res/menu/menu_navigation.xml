@@ -20,7 +20,7 @@
         <item
             android:id="@+id/vendor_partners"
             android:icon="@drawable/knowledge_partners_icon"
-            android:title="Vendor Partners" />
+            android:title="Business Enablers" />
         <item
             android:id="@+id/awards"
             android:icon="@drawable/awards_icon"

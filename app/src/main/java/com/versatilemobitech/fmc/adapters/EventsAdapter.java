@@ -89,7 +89,7 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         mListEventsHolder.iv_down = (ImageView) convertView.findViewById(R.id.iv_down);
         mListEventsHolder.iv_up = (ImageView) convertView.findViewById(R.id.iv_up);
         mListEventsHolder.ll_more_details = (LinearLayout) convertView.findViewById(R.id.ll_more_details);
-        mListEventsHolder.rl_more_details = (RelativeLayout) convertView.findViewById(R.id.rl_more_details);
+        mListEventsHolder.rl_more_details = (LinearLayout) convertView.findViewById(R.id.rl_more_details);
         mListEventsHolder.pie_events = (PieChart) convertView.findViewById(R.id.pie_events);
 
         mListEventsHolder.tv_more_details = (TextView) convertView.findViewById(R.id.tv_more_details);
@@ -312,7 +312,7 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
     }
 
     private void setData(ListEventsHolder mListEventsHolder) {
-        mListEventsHolder.tv_event_title.setText(mEventsModel.getEvent_title());
+        mListEventsHolder.tv_event_title.setText(Utility.capitalizeFirstLetter(mEventsModel.getEvent_title()));
 
         mListEventsHolder.tv_venu.setText(mEventsModel.getVenue());
         mListEventsHolder.tv_organized_by.setText(mEventsModel.getOrganized_by());
@@ -368,7 +368,7 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         private ImageView iv_up;
         private TextView tv_more_details;
         private LinearLayout ll_more_details;
-        private RelativeLayout rl_more_details;
+        private LinearLayout rl_more_details;
         private PieChart pie_events;
 
         private TextView tv_venu;

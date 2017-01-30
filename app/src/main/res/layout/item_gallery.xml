@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/iv_item_award"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_150dp"
+            android:layout_height="@dimen/_130dp"
             android:src="@drawable/awards_item_icon" />
 
         <TextView
@@ -27,6 +27,6 @@
             android:padding="@dimen/_10dp"
             android:text="2016"
             android:textColor="@color/white"
-            android:textSize="@dimen/_20sp" />
+            android:textSize="@dimen/_17sp" />
     </LinearLayout>
 </RelativeLayout>

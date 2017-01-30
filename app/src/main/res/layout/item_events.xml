@@ -26,120 +26,116 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:layout_width="@dimen/_0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:orientation="vertical"
-                android:padding="@dimen/_5dp">
-
-                <TextView
-                    android:id="@+id/tv_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_10dp"
-                    android:text="@string/location"
-                    android:textColor="@color/themeColor"
-                    android:textSize="@dimen/_16sp" />
-
-                <RelativeLayout
-                    android:id="@+id/rl_more_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/tv_more_details"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_10dp"
-                        android:text="More Details"
-                        android:textColor="@color/themeColor"
-                        android:textSize="@dimen/_16sp" />
-
-                    <ImageView
-                        android:id="@+id/iv_down"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_centerInParent="true"
-                        android:layout_toRightOf="@+id/tv_more_details"
-                        android:src="@drawable/down" />
-
-                    <ImageView
-                        android:id="@+id/iv_up"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_centerInParent="true"
-                        android:layout_toRightOf="@+id/tv_more_details"
-                        android:src="@drawable/up"
-                        android:visibility="gone" />
-                </RelativeLayout>
-            </LinearLayout>
+            android:weightSum="100">
 
             <LinearLayout
                 android:layout_width="@dimen/_0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.1"
-                android:weightSum="1.1">
+                android:orientation="vertical"
+                android:layout_weight="40">
 
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7">
-
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pie_events"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <TextView
-                        android:id="@+id/tv_balance_days"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="@dimen/_3dp"
-                        android:text="@string/tv_balance_days"
-                        android:textColor="@color/themeColor"
-                        android:textSize="12sp" />
-                </FrameLayout>
-
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10dp"
+                    android:text="@string/location"
+                    android:textColor="@color/themeColor"
+                    android:textSize="@dimen/_15sp" />
 
                 <LinearLayout
-                    android:layout_width="@dimen/_0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="@dimen/_10dp"
-                    android:layout_weight="0.5"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:id="@+id/rl_more_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:weightSum="100">
 
                     <TextView
-                        android:id="@+id/tv_accept"
-                        android:layout_width="120dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="@dimen/_10dp"
-                        android:background="@color/themeColor"
-                        android:gravity="center"
-                        android:text="@string/accept"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sp" />
+                        android:id="@+id/tv_more_details"
+                        android:layout_width="@dimen/_0dp"
+                        android:layout_weight="85"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_10dp"
+                        android:text="More Details"
+                        android:textColor="@color/themeColor"
+                        android:textSize="@dimen/_15sp" />
 
-                    <TextView
-                        android:id="@+id/tv_decline"
-                        android:layout_width="120dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:layout_margin="@dimen/_10dp"
-                        android:background="@color/themeColor"
-                        android:gravity="center"
-                        android:text="@string/decline"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_16sp" />
+                    <ImageView
+                        android:id="@+id/iv_down"
+                        android:layout_width="@dimen/_0dp"
+                        android:layout_weight="15"
+                        android:layout_height="25dp"
+                        android:visibility="visible"
+                        android:src="@drawable/down" />
+
+                    <ImageView
+                        android:id="@+id/iv_up"
+                        android:layout_width="@dimen/_0dp"
+                        android:layout_weight="15"
+                        android:layout_height="25dp"
+                        android:src="@drawable/up"
+                        android:visibility="gone" />
+
                 </LinearLayout>
+
+
+
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="35">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pie_events"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/tv_balance_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="@dimen/_3dp"
+                    android:text="@string/tv_balance_days"
+                    android:textColor="@color/themeColor"
+                    android:textSize="12sp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/_0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_10dp"
+                android:layout_weight="25"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_accept"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_10dp"
+                    android:background="@color/themeColor"
+                    android:gravity="center"
+                    android:text="@string/accept"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sp" />
+
+                <TextView
+                    android:id="@+id/tv_decline"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_10dp"
+                    android:background="@color/themeColor"
+                    android:gravity="center"
+                    android:text="@string/decline"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
