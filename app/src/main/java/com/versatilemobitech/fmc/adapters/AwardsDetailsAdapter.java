@@ -64,7 +64,7 @@ public class AwardsDetailsAdapter extends BaseAdapter {
             mAwardsHolder.view_line = (View) convertView.findViewById(R.id.view_line);
 
             mAwardsHolder.txt_category_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mAwardsHolder.txt_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mAwardsHolder.txt_name.setTypeface(Utility.setTypeCambriaBoldRegular(mContext));
             mAwardsHolder.txt_description.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             convertView.setTag(mAwardsHolder);
         } else {
