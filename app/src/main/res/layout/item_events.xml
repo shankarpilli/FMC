@@ -377,8 +377,6 @@
                     android:layout_width="@dimen/_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.7"
-                    android:maxLines="1"
-                    android:singleLine="true"
                     android:text="@string/this_meeting_for_launching_the_app"
                     android:textColor="@color/themeColor"
                     android:textSize="@dimen/_16sp" />

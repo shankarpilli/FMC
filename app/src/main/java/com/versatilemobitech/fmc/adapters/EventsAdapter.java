@@ -52,6 +52,8 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
     private TextView tv_more_details_new_item;
     private int mClickedPosition = -1;
 
+    private int selectedPositionItem = -1;
+
     public EventsAdapter(Context mParent, ArrayList<EventsModel> models) {
         this.mContext = mParent;
         this.mEventsModelList = models;
@@ -228,7 +230,11 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
             @Override
             public void onClick(View view) {
                 int selectedPosition = (int) view.getTag();
-                showConformationDialog("Accept", mEventsModelList.get(selectedPosition).getEvent_id());
+                if (mEventsModelList.get(selectedPosition).getResponse() == 1) {
+                    Utility.showToastMessage(mContext, "You Have already responded this event");
+                } else {
+                    showConformationDialog("Accept", mEventsModelList.get(selectedPosition).getEvent_id(), selectedPosition);
+                }
             }
         });
 
@@ -237,7 +243,11 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
             @Override
             public void onClick(View view) {
                 int selectedPosition = (int) view.getTag();
-                showConformationDialog("Decline", mEventsModelList.get(selectedPosition).getEvent_id());
+                if (mEventsModelList.get(selectedPosition).getResponse() == 1) {
+                    Utility.showToastMessage(mContext, "You Have already responded this event");
+                } else {
+                    showConformationDialog("Decline", mEventsModelList.get(selectedPosition).getEvent_id(), selectedPosition);
+                }
             }
         });
 
@@ -245,7 +255,7 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         return convertView;
     }
 
-    private void showConformationDialog(final String response, final String event_id) {
+    private void showConformationDialog(final String response, final String event_id, final int selectedPosition) {
         final Dialog dialogEventConfirmation = new Dialog(mContext);
         dialogEventConfirmation.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialogEventConfirmation.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -272,6 +282,7 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         tv_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selectedPositionItem = selectedPosition;
                 postYourResponseOnWeb(response, event_id);
                 dialogEventConfirmation.dismiss();
             }
@@ -356,6 +367,10 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
                 if (model instanceof EventResponseModel) {
                     EventResponseModel mEventResponseModel = (EventResponseModel) model;
                     Utility.showToastMessage(mContext, mEventResponseModel.getMessage());
+                    EventsModel eventsModel = mEventsModelList.get(selectedPositionItem);
+                    eventsModel.setResponse(1);
+                    mEventsModelList.set(selectedPositionItem, eventsModel);
+                    notifyDataSetChanged();
                 }
             }
         }

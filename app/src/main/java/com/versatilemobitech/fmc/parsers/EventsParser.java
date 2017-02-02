@@ -39,7 +39,7 @@ public class EventsParser implements Parser {
                         mmEventsModel.setContact(mJObj.optString("contact"));
                         mmEventsModel.setChief_guest(mJObj.optString("chief_guest"));
                         mmEventsModel.setDate_of_event(mJObj.optString("date_of_event"));
-                        mmEventsModel.setDetails("details");
+                        mmEventsModel.setDetails(mJObj.optString("Details"));
                         mmEventsModel.setEvent_id(mJObj.optString("event_id"));
                         mmEventsModel.setDatetime(mJObj.optString("datetime"));
                         mmEventsModel.setResponse(mJObj.optInt("response"));
