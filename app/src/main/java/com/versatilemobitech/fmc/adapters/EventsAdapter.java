@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.graphics.ColorUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -331,6 +329,7 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         mListEventsHolder.tv_chief_guest.setText(mEventsModel.getChief_guest());
         mListEventsHolder.tv_date_event.setText(mEventsModel.getDate_of_event());
         mListEventsHolder.tv_details.setText(mEventsModel.getDetails());
+        mListEventsHolder.tv_balance_days.setText(""+Utility.getDateDiff(mEventsModel.getDate_of_event()) + " Days To\nGo");
     }
 
     private void setDataToPieChart(ListEventsHolder mListEventsHolder, PieChart pie_events, int EntryOne, int EntryTwo) {

@@ -75,10 +75,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Rev's Nani on 13-10-2016.
@@ -691,4 +697,19 @@ public class Utility {
         return mNewTitle;
     }
 
+    public static long getDateDiff(String  date){
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM,yyyy", Locale.US);
+            Date d = null;
+            d = sdf.parse(date);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(d);
+            long msDiff = cal.getTimeInMillis() - Calendar.getInstance().getTimeInMillis() ;
+            long daysDiff = TimeUnit.MILLISECONDS.toDays(msDiff);
+            return daysDiff;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
