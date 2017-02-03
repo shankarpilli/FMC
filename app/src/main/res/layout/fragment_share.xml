@@ -3,6 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/_45dp">
+        <ImageView
+            android:layout_width="@dimen/_20dp"
+            android:layout_height="@dimen/_20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_15dp"
+            android:src="@drawable/cancle_icon_share"/>
+        <TextView
+            android:id="@+id/tv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_25dp"
+            android:layout_marginStart="@dimen/_25dp"
+            android:gravity="center"
+            android:text="@string/share"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sp" />
+    </LinearLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_below="@+id/toolbar"
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/iv_user_profile_pic"
         android:layout_width="@dimen/_60dp"
@@ -87,4 +116,4 @@
                 android:textSize="@dimen/_18sp" />
         </LinearLayout>
     </RelativeLayout>
-</RelativeLayout>
+</RelativeLayout></RelativeLayout>
