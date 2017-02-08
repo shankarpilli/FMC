@@ -52,6 +52,8 @@
     <string name="contacts_us">Contact Us</string>
     <string name="logout">Logout</string>
     <string name="comment">Comment</string>
+    <string name="like">Like</string>
+    <string name="likes_this">likes this</string>
     <string name="reply">Reply</string>
     <string name="change_password">Change Password</string>
 

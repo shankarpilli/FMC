@@ -16,6 +16,39 @@
         android:paddingTop="@dimen/_5dp">
 
         <LinearLayout
+            android:id="@+id/ll_like_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/_15dp"
+            android:paddingStart="@dimen/_15dp">
+
+            <TextView
+                android:id="@+id/txt_recently_liked"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/like"
+                android:textColor="@color/recent_like_color"
+                android:textSize="@dimen/_18sp" />
+
+            <TextView
+                android:id="@+id/txt_likes_this"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5dp"
+                android:text="@string/likes_this"
+                android:textColor="@color/like_this_color"
+                android:textSize="@dimen/_18sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_like_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1dp"
+            android:background="@color/svThumbColor" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -82,7 +115,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/place_time_date"
                     android:textColor="@color/company_name"
-                    android:textSize="@dimen/_14sp" />
+                    android:textSize="@dimen/_14sp"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
 
@@ -99,10 +133,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5dp"
             android:layout_marginLeft="@dimen/_12dp"
             android:layout_marginRight="@dimen/_12dp"
             android:layout_marginTop="@dimen/_12dp"
-            android:layout_marginBottom="@dimen/_5dp"
             android:orientation="vertical">
 
             <ImageView
@@ -120,13 +154,36 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/star_banner" />
 
-            <TextView
-                android:id="@+id/txt_total_comments"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/_5dp"
-                android:text="146 Comments"
-                android:textSize="@dimen/_18sp" />
+                android:layout_marginTop="@dimen/_5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_total_likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 likes"
+                    android:textColor="@color/like_comment_color"
+                    android:textSize="@dimen/_18sp" />
+
+                <View
+                    android:layout_width="@dimen/_10dp"
+                    android:layout_height="@dimen/_10dp"
+                    android:layout_marginLeft="@dimen/_10dp"
+                    android:layout_marginRight="@dimen/_10dp"
+                    android:background="@drawable/dot" />
+
+                <TextView
+                    android:id="@+id/txt_total_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 Comments"
+                    android:textColor="@color/like_comment_color"
+                    android:textSize="@dimen/_18sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <View
@@ -140,11 +197,46 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_55dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/_5dp">
+
+            <LinearLayout
+                android:id="@+id/ll_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <!--<TextView
+                    android:id="@+id/txt_comment_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:padding="@dimen/_2dp"
+                    android:text="@string/comment_icon"
+                    android:textSize="@dimen/_18sp" />-->
+                <ImageView
+                    android:layout_width="@dimen/_22dp"
+                    android:layout_height="@dimen/_22dp"
+                    android:src="@drawable/like_icon" />
+
+                <TextView
+                    android:id="@+id/txt_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/_5dp"
+                    android:layout_marginStart="@dimen/_5dp"
+                    android:gravity="center"
+                    android:padding="@dimen/_2dp"
+                    android:text="@string/like"
+                    android:textColor="@color/like_color"
+                    android:textSize="@dimen/_15sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -162,8 +254,8 @@
                     android:text="@string/comment_icon"
                     android:textSize="@dimen/_18sp" />-->
                 <ImageView
-                    android:layout_width="@dimen/_25dp"
-                    android:layout_height="@dimen/_25dp"
+                    android:layout_width="@dimen/_22dp"
+                    android:layout_height="@dimen/_22dp"
                     android:src="@drawable/comment_icon" />
 
                 <TextView
@@ -176,7 +268,8 @@
                     android:gravity="center"
                     android:padding="@dimen/_2dp"
                     android:text="@string/comment"
-                    android:textSize="@dimen/_18sp" />
+                    android:textColor="@color/like_color"
+                    android:textSize="@dimen/_15sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -194,8 +287,8 @@
                     android:text="@string/share_icon"
                     android:textSize="@dimen/_18sp" />-->
                 <ImageView
-                    android:layout_width="@dimen/_25dp"
-                    android:layout_height="@dimen/_25dp"
+                    android:layout_width="@dimen/_22dp"
+                    android:layout_height="@dimen/_22dp"
                     android:src="@drawable/share_icon" />
 
                 <TextView
@@ -208,7 +301,8 @@
                     android:gravity="center"
                     android:padding="@dimen/_2dp"
                     android:text="@string/share"
-                    android:textSize="@dimen/_18sp" />
+                    android:textColor="@color/like_color"
+                    android:textSize="@dimen/_15sp" />
             </LinearLayout>
         </LinearLayout>
         <!-- <LinearLayout

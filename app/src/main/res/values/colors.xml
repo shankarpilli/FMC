@@ -31,4 +31,8 @@
     <color name="company_name">#747474</color>
     <color name="post_text_color">#333333</color>
     <color name="background_home">#e5e9ec</color>
+    <color name="like_color">#636363</color>
+    <color name="recent_like_color">#5b5b5b</color>
+    <color name="like_this_color">#747474</color>
+    <color name="like_comment_color">#606060</color>
 </resources>

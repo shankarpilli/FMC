@@ -503,6 +503,10 @@ public class Utility {
         return Typeface.createFromAsset(context.getAssets(), "Roboto-Bold.ttf");
     }
 
+    public static Typeface setTypeRobotoLight(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
+    }
+
     public static Bitmap getRotatedBitmap(int rotation, String mPath) {
         File f = new File(mPath);
         Bitmap mBitMap = BitmapFactory.decodeFile(f.getAbsolutePath());

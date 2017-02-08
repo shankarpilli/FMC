@@ -35,6 +35,8 @@ public class GetPostsParser implements Parser {
                         JSONObject mObj = (JSONObject) mArray.get(i);
                         HomeDataModel mHomeDataModel = new HomeDataModel();
                         mHomeDataModel.setPost_text(mObj.optString("post_text"));
+                        mHomeDataModel.setPost_like(mObj.optInt("post_like"));
+                        mHomeDataModel.setRecently_liked(mObj.optString("recently_liked"));
                         mHomeDataModel.setUser_id(mObj.optString("user_id"));
                         mHomeDataModel.setPost_id(mObj.optString("post_id"));
                         mHomeDataModel.setFirst_name(mObj.optString("first_name"));

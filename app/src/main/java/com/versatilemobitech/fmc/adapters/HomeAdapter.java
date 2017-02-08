@@ -10,31 +10,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
+import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.customviews.RoundedCornersTransformation;
 import com.versatilemobitech.fmc.fragments.DetailViewFragment;
 import com.versatilemobitech.fmc.fragments.WebViewFragment;
+import com.versatilemobitech.fmc.models.GetPostsModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
+import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.models.PostLikeModel;
+import com.versatilemobitech.fmc.parsers.PostLikeParser;
+import com.versatilemobitech.fmc.utility.APIConstants;
+import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Shankar on 11/6/2016.
  */
-public class HomeAdapter extends BaseAdapter {
+public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
 
     private Context mContext;
     private HomeActivity dashboardActivity;
     private LayoutInflater mLayoutInflater;
     private ArrayList<HomeDataModel> homeDataModels;
     private Fragment fragment;
-
+    private int mCurrentLikePosition = -1;
 
     public HomeAdapter(HomeActivity dashboardActivity, Context context, Fragment fragment, ArrayList<HomeDataModel> homeDataModels) {
         mContext = context;
@@ -78,10 +88,18 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
 
             mHomeItemHolder.txt_total_comments = (TextView) convertView.findViewById(R.id.txt_total_comments);
+            mHomeItemHolder.txt_total_likes = (TextView) convertView.findViewById(R.id.txt_total_likes);
+            mHomeItemHolder.ll_like = (LinearLayout) convertView.findViewById(R.id.ll_like);
+            mHomeItemHolder.txt_like = (TextView) convertView.findViewById(R.id.txt_like);
             mHomeItemHolder.txt_comment = (TextView) convertView.findViewById(R.id.txt_comment);
             mHomeItemHolder.txt_share = (TextView) convertView.findViewById(R.id.txt_share);
             mHomeItemHolder.txt_sub_name = (TextView) convertView.findViewById(R.id.txt_sub_name);
             mHomeItemHolder.txt_post_message = (TextView) convertView.findViewById(R.id.txt_post_message);
+
+            mHomeItemHolder.ll_like_layout = (LinearLayout) convertView.findViewById(R.id.ll_like_layout);
+            mHomeItemHolder.txt_recently_liked = (TextView) convertView.findViewById(R.id.txt_recently_liked);
+            mHomeItemHolder.txt_likes_this = (TextView) convertView.findViewById(R.id.txt_likes_this);
+            mHomeItemHolder.view_like_line = (View) convertView.findViewById(R.id.view_like_line);
 
             //mHomeItemHolder.txt_share_icon = (TextView) convertView.findViewById(R.id.txt_share_icon);
             //mHomeItemHolder.txt_comment_icon = (TextView) convertView.findViewById(R.id.txt_comment_icon);
@@ -94,8 +112,12 @@ public class HomeAdapter extends BaseAdapter {
             mHomeItemHolder.txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
             mHomeItemHolder.txt_total_comments.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_total_likes.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_comment.setTypeface(Utility.setTypeRobotoLight(mContext));
+            mHomeItemHolder.txt_share.setTypeface(Utility.setTypeRobotoLight(mContext));
+
+            mHomeItemHolder.txt_recently_liked.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_likes_this.setTypeface(Utility.setTypeRobotoLight(mContext));
 
             //mHomeItemHolder.txt_share_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
             //mHomeItemHolder.txt_comment_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
@@ -110,12 +132,22 @@ public class HomeAdapter extends BaseAdapter {
         mHomeItemHolder.txt_name.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getFirst_name())
                 + " " + Utility.capitalizeFirstLetter(mHomeDataModel.getLast_name()));
         mHomeItemHolder.txt_company.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getCompany_name()));
-        if (Utility.isValueNullOrEmpty(mHomeDataModel.getPost_text())){
+        if (Utility.isValueNullOrEmpty(mHomeDataModel.getPost_text())) {
             mHomeItemHolder.txt_post_message.setVisibility(View.GONE);
         } else {
             mHomeItemHolder.txt_post_message.setVisibility(View.VISIBLE);
             mHomeItemHolder.txt_post_message.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getPost_text()));
         }
+
+        if (Utility.isValueNullOrEmpty(mHomeDataModel.getRecently_liked())) {
+            mHomeItemHolder.ll_like_layout.setVisibility(View.GONE);
+            mHomeItemHolder.view_like_line.setVisibility(View.GONE);
+        } else {
+            mHomeItemHolder.ll_like_layout.setVisibility(View.VISIBLE);
+            mHomeItemHolder.view_like_line.setVisibility(View.VISIBLE);
+            mHomeItemHolder.txt_recently_liked.setText(Utility.capitalizeFirstLetter(mHomeDataModel.getRecently_liked()));
+        }
+
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getProfile_pic()))
             Picasso.with(mContext)
                     .load(mHomeDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(10, 1))
@@ -149,6 +181,13 @@ public class HomeAdapter extends BaseAdapter {
         } else {
             mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getComments_count() + " comments");
         }
+
+        if (mHomeDataModel.getPost_like() == 1) {
+            mHomeItemHolder.txt_total_likes.setText("" + mHomeDataModel.getPost_like() + " like");
+        } else {
+            mHomeItemHolder.txt_total_likes.setText("" + mHomeDataModel.getPost_like() + " likes");
+        }
+
 
         mHomeItemHolder.image_doc.setTag(position);
         mHomeItemHolder.image_doc.setOnClickListener(new View.OnClickListener() {
@@ -190,7 +229,43 @@ public class HomeAdapter extends BaseAdapter {
             }
         });
 
+        mHomeItemHolder.txt_like.setTypeface(Utility.setTypeRobotoLight(mContext));
+        mHomeItemHolder.ll_like.setId(position);
+        mHomeItemHolder.ll_like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = (int) view.getId();
+                mCurrentLikePosition = position;
+                String mStringId = homeDataModels.get(position).getPost_id();
+                postLike(mStringId);
+            }
+        });
+
         return convertView;
+    }
+
+    private void postLike(String post_id) {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+        paramMap.put("user_id", Utility.getSharedPrefStringData(mContext, Constants.USER_ID));
+        paramMap.put("post_id", post_id);
+        paramMap.put("like", "1");
+        PostLikeParser postLikeParser = new PostLikeParser();
+        if (Utility.isNetworkAvailable(mContext)) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mContext, Utility.getResourcesString(mContext,
+                    R.string.please_wait), true,
+                    APIConstants.POST_LIKE, paramMap,
+                    APIConstants.REQUEST_TYPE.POST, this, postLikeParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    mContext,
+                    mContext.getResources().getString(
+                            R.string.no_internet_msg),
+                    mContext.getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
+        }
+
     }
 
     private void showShareDialog(String data) {
@@ -205,6 +280,24 @@ public class HomeAdapter extends BaseAdapter {
         mContext.startActivity(Intent.createChooser(shareIntent, "Share Using"));
     }
 
+    @Override
+    public void onComplete(Model model) {
+        if (model != null) {
+            if (model.isStatus()) {
+                if (model instanceof PostLikeModel) {
+                    PostLikeModel postLikeModel = (PostLikeModel) model;
+                    Utility.showLog("mCurrentLikePosition", "" + mCurrentLikePosition);
+                    Utility.showToastMessage(mContext, postLikeModel.getMessage());
+                    Utility.showLog("Log", "" + mCurrentLikePosition);
+                    HomeDataModel homeDataModel = homeDataModels.get(mCurrentLikePosition);
+                    homeDataModel.setPost_like(homeDataModel.getPost_like() + 1);
+                    homeDataModels.set(mCurrentLikePosition, homeDataModel);
+                    notifyDataSetChanged();
+                }
+            }
+        }
+    }
+
 
     private class HomeItemHolder {
         private ImageView post_image;
@@ -214,11 +307,19 @@ public class HomeAdapter extends BaseAdapter {
         private TextView txt_time_date;
         private TextView txt_post_message;
         private TextView txt_total_comments;
+        private TextView txt_total_likes;
         private TextView txt_comment;
         private TextView txt_share;
+        private TextView txt_like;
         private TextView txt_sub_name;
         //private TextView txt_share_icon;
         //private TextView txt_comment_icon;
         private ImageView image_data;
+        private LinearLayout ll_like;
+
+        private LinearLayout ll_like_layout;
+        private TextView txt_recently_liked;
+        private TextView txt_likes_this;
+        private View view_like_line;
     }
 }

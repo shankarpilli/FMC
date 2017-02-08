@@ -6,6 +6,8 @@ package com.versatilemobitech.fmc.models;
 public class HomeDataModel extends Model {
     private String post_text;
     private String post_image;
+    private int post_like;
+    private String recently_liked;
     private String post_doc;
     private String doc_extension;
     private String user_id;
@@ -111,5 +113,21 @@ public class HomeDataModel extends Model {
 
     public void setDatetime(String datetime) {
         this.datetime = datetime;
+    }
+
+    public int getPost_like() {
+        return post_like;
+    }
+
+    public void setPost_like(int post_like) {
+        this.post_like = post_like;
+    }
+
+    public String getRecently_liked() {
+        return recently_liked;
+    }
+
+    public void setRecently_liked(String recently_liked) {
+        this.recently_liked = recently_liked;
     }
 }
