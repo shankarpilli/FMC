@@ -1,8 +1,10 @@
 package com.versatilemobitech.fmc.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ import java.util.ArrayList;
  * Created by Shankar on 12/21/2016.
  */
 
-public class FileChooseFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class FileChooseFragment extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     public static final String TAG = "FileChooseFragment";
     private HomeActivity mParent;
@@ -40,11 +42,14 @@ public class FileChooseFragment extends Fragment implements AdapterView.OnItemCl
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mParent = (HomeActivity) getActivity();
-        mSelected = getArguments().getString("file");
+        setContentView(R.layout.fragment_file_layout);
+        //mParent = (HomeActivity) getActivity();
+        //mSelected = getArguments().getString("file");
+        mSelected = getIntent().getStringExtra("file");
+        initUI();
     }
 
-    @Override
+    /*@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent,
@@ -54,14 +59,14 @@ public class FileChooseFragment extends Fragment implements AdapterView.OnItemCl
         initUI();
         return rootView;
 
-    }
+    }*/
 
     private void initUI() {
-        list_files = (ListView) rootView.findViewById(R.id.list_files);
-        txt_no_files_found = (TextView) rootView.findViewById(R.id.txt_no_files_found);
-        txt_choose_file = (TextView) rootView.findViewById(R.id.txt_choose_file);
-        txt_no_files_found.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
-        txt_choose_file.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        list_files = (ListView) findViewById(R.id.list_files);
+        txt_no_files_found = (TextView) findViewById(R.id.txt_no_files_found);
+        txt_choose_file = (TextView) findViewById(R.id.txt_choose_file);
+        txt_no_files_found.setTypeface(Utility.setTypeFaceRobotoRegular(this));
+        txt_choose_file.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         txt_no_files_found.setVisibility(View.GONE);
 
         File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
@@ -69,14 +74,18 @@ public class FileChooseFragment extends Fragment implements AdapterView.OnItemCl
             txt_choose_file.setText("Choose Pdf File");
             txt_no_files_found.setText("No Pdf Found");
             fileArrayList = search_Dir(dir);
-        } else {
+        } else if (mSelected.equalsIgnoreCase(".doc")) {
             txt_choose_file.setText("Choose Doc File");
             txt_no_files_found.setText("No Doc Found");
             fileArrayList = search_DocDir(dir);
+        } else {
+            txt_choose_file.setText("Choose File");
+            txt_no_files_found.setText("No File Found");
+            fileArrayList = search_DirALL(dir);
         }
 
         if (fileArrayList != null && fileArrayList.size() > 0) {
-            fileChooseAdapter = new FileChooseAdapter(mParent, fileArrayList, mSelected);
+            fileChooseAdapter = new FileChooseAdapter(this, fileArrayList, mSelected);
             list_files.setAdapter(fileChooseAdapter);
         } else {
             list_files.setVisibility(View.GONE);
@@ -108,9 +117,28 @@ public class FileChooseFragment extends Fragment implements AdapterView.OnItemCl
             for (int i = 0; i < FileList.length; i++) {
 
                 if (FileList[i].isDirectory()) {
-                    search_Dir(FileList[i]);
+                    search_DocDir(FileList[i]);
                 } else {
-                    if (FileList[i].getName().endsWith(mSelected)) {
+                    if (FileList[i].getName().endsWith(mSelected) || FileList[i].getName().endsWith(".docx")) {
+                        fileList.add(FileList[i]);
+                    }
+                }
+            }
+        }
+        return fileList;
+    }
+
+    public ArrayList<File> search_DirALL(File dir) {File FileList[] = dir.listFiles();
+        if (FileList != null) {
+            for (int i = 0; i < FileList.length; i++) {
+
+                if (FileList[i].isDirectory()) {
+                    search_DocDir(FileList[i]);
+                } else {
+                    if (FileList[i].getName().endsWith(mSelected)
+                            || FileList[i].getName().endsWith(".docx")
+                            || FileList[i].getName().endsWith(".pdf")
+                            ) {
                         fileList.add(FileList[i]);
                     }
                 }
@@ -124,9 +152,12 @@ public class FileChooseFragment extends Fragment implements AdapterView.OnItemCl
         if (mSelected.equalsIgnoreCase(".pdf")) {
             HomeFragment.getInstance().updatePdf(fileArrayList.get(i));
             mParent.onBackPressed();
+        } else if (mSelected.equalsIgnoreCase(".doc")) {
+            HomeFragment.getInstance().updateDoc(fileArrayList.get(i));
+            finish();
         } else {
             HomeFragment.getInstance().updateDoc(fileArrayList.get(i));
-            mParent.onBackPressed();
+            finish();
         }
     }
 }

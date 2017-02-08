@@ -488,7 +488,7 @@ public class Utility {
     }
 
     public static Typeface setTypeFaceRobotoRegular(Context context) {
-        return Typeface.createFromAsset(context.getAssets(), "SourceSansPro-Regular.ttf");
+        return Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf");
     }
 
     public static Typeface setTypeFace_fontawesome(Context context) {
@@ -500,7 +500,7 @@ public class Utility {
     }
 
     public static Typeface setTypeCambriaBoldRegular(Context context) {
-        return Typeface.createFromAsset(context.getAssets(), "SourceSansPro-Semibold.ttf");
+        return Typeface.createFromAsset(context.getAssets(), "Roboto-Bold.ttf");
     }
 
     public static Bitmap getRotatedBitmap(int rotation, String mPath) {
@@ -691,7 +691,7 @@ public class Utility {
     }
 
     public static SpannableString setHeaderTypeface(HomeActivity homeActivity, String title){
-        Typeface font = Typeface.createFromAsset(homeActivity.getAssets(), "SourceSansPro-Regular.ttf");
+        Typeface font = Typeface.createFromAsset(homeActivity.getAssets(), "Roboto-Regular.ttf");
         SpannableString mNewTitle = new SpannableString(title);
         mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         return mNewTitle;

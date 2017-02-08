@@ -64,7 +64,7 @@ public class FileChooseAdapter extends BaseAdapter {
         }
 
         File file = (File) getItem(position);
-        mFileChooseHolder.txt_left_drawer_text.setText("SS" + file.getName());
+        mFileChooseHolder.txt_left_drawer_text.setText("" + file.getName());
 
         return convertView;
     }

@@ -6,10 +6,10 @@
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:visibility="visible"
+        android:layout_height="wrap_content"
         android:divider="@null"
-        android:layout_height="wrap_content" />
+        android:scrollbars="none"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/tv_no_posts"
@@ -17,7 +17,18 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/no_posts_in_home"
+
         android:textColor="@color/black"
         android:textSize="@dimen/_25sp"
         android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/fab"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/_16dp"
+        android:src="@drawable/floating_icon" />
+
 </RelativeLayout>

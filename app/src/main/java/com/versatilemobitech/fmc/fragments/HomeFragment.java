@@ -97,6 +97,9 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     private int mCommtedPostion = -1;
     private String mCommtedMessage = "";
 
+    private ImageView fab;
+    private Dialog dialogCompleted;
+
 
     private static IUpdateSelectedPic iUpdateSelectedPic;
 
@@ -126,6 +129,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
 
     private void initUI() {
         list_view = (ListView) rootView.findViewById(R.id.list_view);
+        fab = (ImageView) rootView.findViewById(R.id.fab);
         tv_no_posts = (TextView) rootView.findViewById(R.id.tv_no_posts);
         noPostFoundAdapter = new NoPostFoundAdapter(mParent);
         /*homeAdapter = new HomeAdapter(getActivity(), homeDataModels);
@@ -133,6 +137,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
 
         getHomeFeeds("1");
         list_view.setOnScrollListener(this);
+        fab.setOnClickListener(this);
 
         if (Utility.isMarshmallowOS()) {
             Permissions.getInstance().setActivity(getActivity());
@@ -194,75 +199,6 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         }
     }
 
-    private void setListHeader() {
-        layout_list_header = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.
-                home_post_your_topic, null);
-        final float scale = this.getResources().getDisplayMetrics().density;
-        int pixels = (int) (Integer.parseInt("170") * scale + 0.5f);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.
-                LayoutParams.MATCH_PARENT, pixels);
-        params.setMargins(15, 15, 15, 15);
-        layout_list_header.setLayoutParams(params);
-
-        LinearLayout ll_post = (LinearLayout) layout_list_header.findViewById(R.id.ll_post);
-        ll_file_layout = (LinearLayout) layout_list_header.findViewById(R.id.ll_file_layout);
-        ll_file_layout.setVisibility(View.GONE);
-        TextView tv_post = (TextView) layout_list_header.findViewById(R.id.tv_post);
-        txt_path = (TextView) layout_list_header.findViewById(R.id.txt_path);
-        txt_close = (TextView) layout_list_header.findViewById(R.id.txt_close);
-        ImageView iv_user_profile_pic = (ImageView) layout_list_header.findViewById(R.id.iv_user_profile_pic);
-        /*if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)))
-            Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
-                    placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image))
-                    .transform(new CircleTransform()).into(iv_user_profile_pic);*/
-        if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)))
-            Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
-                    placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image)).transform(new RoundedCornersTransformation(10,1)).into(iv_user_profile_pic);
-        ImageView img_doc = (ImageView) layout_list_header.findViewById(R.id.img_doc);
-        ImageView img_post = (ImageView) layout_list_header.findViewById(R.id.img_post);
-        ImageView img_pdf = (ImageView) layout_list_header.findViewById(R.id.img_pdf);
-        tv_post.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        TextView txt_post_your_topic = (TextView) layout_list_header.findViewById(R.id.txt_post_your_topic);
-        txt_post_your_topic.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        txt_path.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        txt_close.setTypeface(Utility.setTypeFace_matirealicons(mParent));
-        txt_close.setOnClickListener(this);
-        et_what_is_on_u_mind = (EditText) layout_list_header.findViewById(R.id.et_what_is_on_u_mind);
-        et_what_is_on_u_mind.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        list_view.addHeaderView(layout_list_header);
-        ll_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isValidFields(et_what_is_on_u_mind)) {
-                    postFeed(et_what_is_on_u_mind);
-                }
-            }
-        });
-
-        img_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showSelectPhotoDialog();
-            }
-        });
-        img_doc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("file", ".doc");
-                Utility.navigateDashBoardFragment(new FileChooseFragment(), FileChooseFragment.TAG, bundle, mParent);
-            }
-        });
-        img_pdf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("file", ".pdf");
-                Utility.navigateDashBoardFragment(new FileChooseFragment(), FileChooseFragment.TAG, bundle, mParent);
-            }
-        });
-    }
-
 
     private void postFeed(EditText et_what_is_on_u_mind) {
         LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
@@ -316,7 +252,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                             /*tv_no_posts.setVisibility(View.VISIBLE);
                             list_view.setVisibility(View.GONE);*/
                             list_view.setAdapter(noPostFoundAdapter);
-                            setListHeader();
+                            //setListHeader();
                         } else {
                             tv_no_posts.setVisibility(View.GONE);
                             list_view.setVisibility(View.VISIBLE);
@@ -344,8 +280,8 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                     }
                 } else if (model instanceof PostDataModel) {
                     PostDataModel postDataModel = (PostDataModel) model;
-                    Utility.showToastMessage(mParent, postDataModel.getMessage() + " , Update Once Admin Approve");
-                    et_what_is_on_u_mind.setText("");
+                    Utility.showToastMessage(mParent, postDataModel.getMessage());
+                    //et_what_is_on_u_mind.setText("");
                     removeSelectedFile();
                 }
             }
@@ -365,7 +301,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     private void setListData() {
         homeAdapter = new HomeAdapter(mParent, getActivity(), this, homeDataModels);
         list_view.setAdapter(homeAdapter);
-        setListHeader();
+        //setListHeader();
     }
 
     public void commentOnPost(int position, String message) {
@@ -518,12 +454,6 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         txt_close.setVisibility(View.VISIBLE);
         txt_path.setText("Selected Image Path: " + path);
 
-        final float scale = this.getResources().getDisplayMetrics().density;
-        int pixels = (int) (Integer.parseInt("220") * scale + 0.5f);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.
-                LayoutParams.MATCH_PARENT, pixels);
-        params.setMargins(15, 15, 15, 15);
-        layout_list_header.setLayoutParams(params);
     }
 
     @Override
@@ -545,14 +475,14 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         ll_file_layout.setVisibility(View.VISIBLE);
         txt_path.setVisibility(View.VISIBLE);
         txt_close.setVisibility(View.VISIBLE);
-        txt_path.setText("Selected Doc Path: " + path);
+        txt_path.setText("Selected File Path: " + path);
 
-        final float scale = this.getResources().getDisplayMetrics().density;
+        /*final float scale = this.getResources().getDisplayMetrics().density;
         int pixels = (int) (Integer.parseInt("220") * scale + 0.5f);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.
                 LayoutParams.MATCH_PARENT, pixels);
         params.setMargins(15, 15, 15, 15);
-        layout_list_header.setLayoutParams(params);
+        layout_list_header.setLayoutParams(params);*/
     }
 
     @Override
@@ -576,12 +506,12 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         txt_close.setVisibility(View.VISIBLE);
         txt_path.setText("Selected Pdf Path: " + path);
 
-        final float scale = this.getResources().getDisplayMetrics().density;
+        /*final float scale = this.getResources().getDisplayMetrics().density;
         int pixels = (int) (Integer.parseInt("220") * scale + 0.5f);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.
                 LayoutParams.MATCH_PARENT, pixels);
         params.setMargins(15, 15, 15, 15);
-        layout_list_header.setLayoutParams(params);
+        layout_list_header.setLayoutParams(params);*/
     }
 
     public static String convertFileToByteArray(File f) {
@@ -610,9 +540,83 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
             case R.id.txt_close:
                 removeSelectedFile();
                 break;
+            case R.id.fab:
+                openPostDialog();
+                break;
         }
     }
 
+    private void openPostDialog(){
+        dialogCompleted = new Dialog(getActivity());
+        dialogCompleted.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialogCompleted.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogCompleted.setContentView(R.layout.fragment_share);
+        dialogCompleted.setCanceledOnTouchOutside(false);
+        dialogCompleted.getWindow().setBackgroundDrawable(new
+                ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialogCompleted.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        TextView tv_share = (TextView) dialogCompleted.findViewById(R.id.tv_share);
+        tv_share.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        ImageView iv_user_profile_pic = (ImageView) dialogCompleted.findViewById(R.id.iv_user_profile_pic);
+        if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)))
+            Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
+                    placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image)).transform(new CircleTransform()).into(iv_user_profile_pic);
+
+        ImageView img_close = (ImageView) dialogCompleted.findViewById(R.id.img_close);
+        img_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogCompleted.cancel();
+            }
+        });
+
+        ll_file_layout = (LinearLayout) dialogCompleted.findViewById(R.id.ll_file_layout);
+        txt_path = (TextView) dialogCompleted.findViewById(R.id.txt_path);
+        txt_close = (TextView) dialogCompleted.findViewById(R.id.txt_close);
+        txt_close.setTypeface(Utility.setTypeFace_matirealicons(mParent));
+        txt_close.setOnClickListener(this);
+
+        TextView tv_post = (TextView) dialogCompleted.findViewById(R.id.tv_post);
+        et_what_is_on_u_mind = (EditText) dialogCompleted.findViewById(R.id.et_what_is_on_u_mind);
+        ImageView iv_camera = (ImageView) dialogCompleted.findViewById(R.id.iv_camera);
+        ImageView iv_linked_in = (ImageView) dialogCompleted.findViewById(R.id.iv_linked_in);
+        et_what_is_on_u_mind.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        tv_post.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        txt_path.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+
+        tv_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isValidFields(et_what_is_on_u_mind)) {
+                    postFeed(et_what_is_on_u_mind);
+                }
+            }
+        });
+        iv_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSelectPhotoDialog();
+            }
+        });
+        iv_linked_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), FileChooseFragment.class);
+                intent.putExtra("file", ".all");
+                startActivity(intent);
+
+               /* Bundle bundle = new Bundle();
+                bundle.putString("file", ".all");
+                Utility.navigateDashBoardFragment(new FileChooseFragment(), FileChooseFragment.TAG, bundle, mParent);*/
+            }
+        });
+
+
+        dialogCompleted.show();
+
+    }
     private void removeSelectedFile() {
         isImgSelected = false;
         isDocSelected = false;
@@ -630,11 +634,8 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         ll_file_layout.setVisibility(View.GONE);
         txt_close.setVisibility(View.GONE);
 
-        final float scale = this.getResources().getDisplayMetrics().density;
-        int pixels = (int) (Integer.parseInt("170") * scale + 0.5f);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.
-                LayoutParams.MATCH_PARENT, pixels);
-        params.setMargins(15, 15, 15, 15);
-        layout_list_header.setLayoutParams(params);
+        if (dialogCompleted.isShowing()){
+            dialogCompleted.cancel();
+        }
     }
 }
