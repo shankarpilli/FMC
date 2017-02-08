@@ -18,9 +18,8 @@ public class SignUpParser implements Parser {
         if (response != null) {
             try {
                 JSONObject jsonObject = new JSONObject(response);
-                String mStatus  = jsonObject.getString("status");
 
-                if (mStatus.equalsIgnoreCase("false")) {
+                if (!jsonObject.getBoolean("status")) {
                     mSignUpModel.setStatus(false);
                     mSignUpModel.setMessage(jsonObject.optString("message"));
                 } else {
