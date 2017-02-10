@@ -634,8 +634,8 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         ll_file_layout.setVisibility(View.GONE);
         txt_close.setVisibility(View.GONE);
 
-        if (dialogCompleted.isShowing()){
+        /*if (dialogCompleted.isShowing()){
             dialogCompleted.cancel();
-        }
+        }*/
     }
 }
