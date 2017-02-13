@@ -12,6 +12,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -59,7 +60,8 @@ import java.util.LinkedHashMap;
 /**
  * Created by Shankar Pilli on 11/06/2016
  */
-public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener, IUpdateSelectedPic, View.OnClickListener {
+public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener,
+        IUpdateSelectedPic, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static final String TAG = "HomeFragment";
     private HomeActivity mParent;
@@ -99,6 +101,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
 
     private ImageView fab;
     private Dialog dialogCompleted;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     private static IUpdateSelectedPic iUpdateSelectedPic;
@@ -129,6 +132,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
 
     private void initUI() {
         list_view = (ListView) rootView.findViewById(R.id.list_view);
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_refresh_layout);
         fab = (ImageView) rootView.findViewById(R.id.fab);
         tv_no_posts = (TextView) rootView.findViewById(R.id.tv_no_posts);
         noPostFoundAdapter = new NoPostFoundAdapter(mParent);
@@ -138,12 +142,23 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         getHomeFeeds("1");
         list_view.setOnScrollListener(this);
         fab.setOnClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         if (Utility.isMarshmallowOS()) {
             Permissions.getInstance().setActivity(getActivity());
             CheckForPermissions(getActivity(), Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
+    }
+
+    @Override
+    public void onRefresh() {
+        homeDataModels = null;
+        homeAdapter = null;
+        list_view.setAdapter(null);
+        endScroll = false;
+        mPageNumber = 1;
+        getHomeFeeds("1");
     }
 
     private void CheckForPermissions(final Context mContext, final String... mPermisons) {
@@ -246,6 +261,10 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         if (model != null) {
             if (model.isStatus()) {
                 if (model instanceof GetPostsModel) {
+                    if (swipeRefreshLayout.isRefreshing()) {
+                        swipeRefreshLayout.setRefreshing(false);
+                        //listStarFeeds.clear();
+                    }
                     GetPostsModel mGetPostsModel = (GetPostsModel) model;
                     if (homeDataModels == null) {
                         if (mGetPostsModel.getmList() == null) {
@@ -546,7 +565,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         }
     }
 
-    private void openPostDialog(){
+    private void openPostDialog() {
         dialogCompleted = new Dialog(getActivity());
         dialogCompleted.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialogCompleted.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -617,6 +636,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         dialogCompleted.show();
 
     }
+
     private void removeSelectedFile() {
         isImgSelected = false;
         isDocSelected = false;
