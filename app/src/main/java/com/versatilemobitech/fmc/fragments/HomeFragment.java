@@ -301,7 +301,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
                     PostDataModel postDataModel = (PostDataModel) model;
                     Utility.showToastMessage(mParent, postDataModel.getMessage());
                     //et_what_is_on_u_mind.setText("");
-                    removeSelectedFile();
+                    removeSelectedFileDialog();
                 }
             }
         }
@@ -657,5 +657,27 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         /*if (dialogCompleted.isShowing()){
             dialogCompleted.cancel();
         }*/
+    }
+
+    private void removeSelectedFileDialog() {
+        isImgSelected = false;
+        isDocSelected = false;
+        isPdfSelected = false;
+
+        mImgpath = "";
+        mDocpath = "";
+        mPdfpath = "";
+
+        mImgpathExtenstion = "";
+        mEncodedImage = "";
+
+        txt_path.setText("");
+        txt_path.setVisibility(View.GONE);
+        ll_file_layout.setVisibility(View.GONE);
+        txt_close.setVisibility(View.GONE);
+
+        if (dialogCompleted.isShowing()){
+            dialogCompleted.cancel();
+        }
     }
 }
