@@ -258,7 +258,7 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
             txt_reply.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
 
             if (!Utility.isValueNullOrEmpty(getPostsCommentModel.getProfile_pic()))
-                Picasso.with(getActivity()).load(Utility.getSharedPrefStringData(getActivity(), Constants.PROFILE_PIC)).
+                Picasso.with(getActivity()).load(getPostsCommentModel.getProfile_pic()).
                         placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image))
                         .transform(new CircleTransform()).into(img_commented);
             txt_comment_name.setText(getPostsCommentModel.getFirst_name());

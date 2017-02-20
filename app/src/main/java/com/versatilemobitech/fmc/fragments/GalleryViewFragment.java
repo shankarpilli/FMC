@@ -81,7 +81,7 @@ public class GalleryViewFragment extends Fragment implements IAsyncCaller, AbsLi
         grid_view.setHorizontalSpacing(10);
         grid_view.setVerticalSpacing(10);
         tv_no_images = (TextView) rootView.findViewById(R.id.tv_no_images);
-        getGalleryFromApi(albumId, "1");
+        getGalleryFromApi( "1", albumId);
        /* galleryViewModels = new ArrayList<>();
         galleryViewAdapter = new GalleryViewAdapter(getActivity(), galleryViewModels);
         grid_view.setAdapter(galleryViewAdapter);*/
