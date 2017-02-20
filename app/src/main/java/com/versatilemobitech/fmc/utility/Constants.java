@@ -27,4 +27,9 @@ public class Constants {
     public static final int FROM_HOME_CAMERA_ID = 692;
     public static final int FROM_HOME_DOC = 693;
     public static final int FROM_HOME_PDF = 694;
+    public static final String DEVICE_TOKEN = "FMC_DEVICE_TOKEN";
+    public static final String IS_PUSH_ALLOW = "IS_PUSH_ALLOW";
+
+    public static final String KEY_FCM_TOKEN = "KEY_FCM_TOKEN";
+    public static final String KEY_TOKEN_RECEIVER = "KEY_TOKEN_RECEIVER";
 }
