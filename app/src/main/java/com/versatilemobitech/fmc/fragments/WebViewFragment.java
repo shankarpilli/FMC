@@ -14,6 +14,9 @@ import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.utility.Utility;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Created by Manoj on 12/22/2016.
  */
@@ -66,13 +69,19 @@ public class WebViewFragment extends Fragment {
             mWebView.setWebChromeClient(new WebChromeClient());
             mWebView.setVerticalScrollBarEnabled(true);
             mWebView.setHorizontalScrollBarEnabled(true);
+            mWebView.clearCache(true);
             mWebView.setWebViewClient(new WebViewClient() {
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view,
                                                         String url) {
                     if (url.endsWith(".pdf") || url.endsWith(".doc") || url.endsWith(".docx")) {
                         String googleDocs = "https://docs.google.com/viewer?url=";
-                        view.loadUrl(googleDocs + url);
+                        //view.loadUrl(googleDocs + url);
+                        try {
+                            view.loadUrl(googleDocs + URLEncoder.encode(url, "utf-8"));
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         if (mParent.progressDialog != null) {
                             Utility.showProgressDialog(mParent, "Loading...", false);

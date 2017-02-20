@@ -1,6 +1,7 @@
 package com.versatilemobitech.fmc.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,14 @@ public class KnowledgePartnersAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private ArrayList<KnowledgePartnerItemModel> knowledgePartnerItemModels;
+    private Typeface typeface;
 
 
     public KnowledgePartnersAdapter(Context context, ArrayList<KnowledgePartnerItemModel> knowledgePartnerItemModels) {
         mContext = context;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.knowledgePartnerItemModels = knowledgePartnerItemModels;
+        typeface = Utility.setTypeFaceRobotoRegular(mContext);
     }
 
 
@@ -60,7 +63,7 @@ public class KnowledgePartnersAdapter extends BaseAdapter {
             mKnowledgePartnersItemHolder = new KnowledgePartnersItemHolder();
             mKnowledgePartnersItemHolder.ll_items = (LinearLayout) convertView.findViewById(R.id.ll_items);
             mKnowledgePartnersItemHolder.txt_category = (TextView) convertView.findViewById(R.id.txt_category);
-            mKnowledgePartnersItemHolder.txt_category.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mKnowledgePartnersItemHolder.txt_category.setTypeface(typeface);
             convertView.setTag(mKnowledgePartnersItemHolder);
         } else {
             mKnowledgePartnersItemHolder = (KnowledgePartnersItemHolder) convertView.getTag();
@@ -70,7 +73,8 @@ public class KnowledgePartnersAdapter extends BaseAdapter {
         mKnowledgePartnersItemHolder.txt_category.setText(knowledgePartnerItemModel.getCategory_name());
 
 
-        LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 8f);
+        LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT, 8f);
         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 4f);
         lp2.setMargins(15, 15, 15, 15);
 
@@ -93,7 +97,7 @@ public class KnowledgePartnersAdapter extends BaseAdapter {
                     .load(knowledgePartnerItemModel.getPartnersModels().get(j).getPartner_logo()).transform(new CircleTransform())
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(img_knowledge);
-            txt_partner.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            txt_partner.setTypeface(typeface);
             txt_partner.setText("" + knowledgePartnerItemModel.getPartnersModels().get(j).getPartner_name());
             ll.setLayoutParams(lp2);
             linearLayout.addView(ll);

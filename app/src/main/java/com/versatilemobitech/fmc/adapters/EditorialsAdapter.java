@@ -74,11 +74,11 @@ public class EditorialsAdapter extends BaseAdapter {
         mEditorialsItemHolder.txt_your_name.setText(editorialsModel.getBook_name());
         mEditorialsItemHolder.txt_time_date.setText(editorialsModel.getBook_description());
 
-       /* if (!Utility.isValueNullOrEmpty(editorialsModel.getBig_Image()))
+        if (!Utility.isValueNullOrEmpty(editorialsModel.getBig_Image()))
         Picasso.with(mContext)
                 .load(editorialsModel.getBig_Image())
                 .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
-                .into(mEditorialsItemHolder.img_editorials);*/
+                .into(mEditorialsItemHolder.img_editorials);
 
         return convertView;
     }

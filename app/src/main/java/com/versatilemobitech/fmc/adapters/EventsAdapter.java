@@ -2,6 +2,7 @@ package com.versatilemobitech.fmc.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.graphics.ColorUtils;
 import android.view.LayoutInflater;
@@ -51,12 +52,13 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
     private int mClickedPosition = -1;
 
     private int selectedPositionItem = -1;
+    private Typeface typeface;
 
     public EventsAdapter(Context mParent, ArrayList<EventsModel> models) {
         this.mContext = mParent;
         this.mEventsModelList = models;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
+        typeface = Utility.setTypeFaceRobotoRegular(mContext);
     }
 
     @Override
@@ -93,76 +95,76 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         mListEventsHolder.pie_events = (PieChart) convertView.findViewById(R.id.pie_events);
 
         mListEventsHolder.tv_more_details = (TextView) convertView.findViewById(R.id.tv_more_details);
-        mListEventsHolder.tv_more_details.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_more_details.setTypeface(typeface);
 
         mListEventsHolder.tv_location = (TextView) convertView.findViewById(R.id.tv_location);
-        mListEventsHolder.tv_location.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_location.setTypeface(typeface);
 
         mListEventsHolder.tv_event_title = (TextView) convertView.findViewById(R.id.tv_event_title);
-        mListEventsHolder.tv_event_title.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_event_title.setTypeface(typeface);
 
         mListEventsHolder.tv_venu = (TextView) convertView.findViewById(R.id.tv_venu);
-        mListEventsHolder.tv_venu.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_venu.setTypeface(typeface);
 
         mListEventsHolder.tv_organized_by = (TextView) convertView.findViewById(R.id.tv_organized_by);
-        mListEventsHolder.tv_organized_by.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_organized_by.setTypeface(typeface);
 
         mListEventsHolder.tv_contact = (TextView) convertView.findViewById(R.id.tv_contact);
-        mListEventsHolder.tv_contact.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_contact.setTypeface(typeface);
 
         mListEventsHolder.tv_chief_guest = (TextView) convertView.findViewById(R.id.tv_chief_guest);
-        mListEventsHolder.tv_chief_guest.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_chief_guest.setTypeface(typeface);
 
         mListEventsHolder.tv_date_event = (TextView) convertView.findViewById(R.id.tv_date_event);
-        mListEventsHolder.tv_date_event.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_date_event.setTypeface(typeface);
 
         mListEventsHolder.tv_details = (TextView) convertView.findViewById(R.id.tv_details);
-        mListEventsHolder.tv_details.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_details.setTypeface(typeface);
 
         mListEventsHolder.tv_lable_one = (TextView) convertView.findViewById(R.id.tv_lable_one);
-        mListEventsHolder.tv_lable_one.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_lable_one.setTypeface(typeface);
 
         mListEventsHolder.tv_lable_two = (TextView) convertView.findViewById(R.id.tv_lable_one);
-        mListEventsHolder.tv_lable_two.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_lable_two.setTypeface(typeface);
 
         mListEventsHolder.tv_lable_three = (TextView) convertView.findViewById(R.id.tv_lable_three);
-        mListEventsHolder.tv_lable_three.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_lable_three.setTypeface(typeface);
 
         mListEventsHolder.tv_lable_four = (TextView) convertView.findViewById(R.id.tv_lable_four);
-        mListEventsHolder.tv_lable_four.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_lable_four.setTypeface(typeface);
 
         mListEventsHolder.tv_lable_five = (TextView) convertView.findViewById(R.id.tv_lable_five);
-        mListEventsHolder.tv_lable_five.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_lable_five.setTypeface(typeface);
 
         mListEventsHolder.tv_lable_six = (TextView) convertView.findViewById(R.id.tv_lable_six);
-        mListEventsHolder.tv_lable_six.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_lable_six.setTypeface(typeface);
 
         mListEventsHolder.tv_venu_lable = (TextView) convertView.findViewById(R.id.tv_venu_lable);
-        mListEventsHolder.tv_venu_lable.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_venu_lable.setTypeface(typeface);
 
         mListEventsHolder.tv_details_lable = (TextView) convertView.findViewById(R.id.tv_details_lable);
-        mListEventsHolder.tv_details_lable.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_details_lable.setTypeface(typeface);
 
         mListEventsHolder.tv_organized_by_label = (TextView) convertView.findViewById(R.id.tv_organized_by_label);
-        mListEventsHolder.tv_organized_by_label.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_organized_by_label.setTypeface(typeface);
 
         mListEventsHolder.tv_contact_lable = (TextView) convertView.findViewById(R.id.tv_contact_lable);
-        mListEventsHolder.tv_contact_lable.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_contact_lable.setTypeface(typeface);
 
         mListEventsHolder.tv_chief_guest_lable = (TextView) convertView.findViewById(R.id.tv_chief_guest_lable);
-        mListEventsHolder.tv_chief_guest_lable.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_chief_guest_lable.setTypeface(typeface);
 
         mListEventsHolder.tv_date_event_label = (TextView) convertView.findViewById(R.id.tv_date_event_label);
-        mListEventsHolder.tv_date_event_label.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_date_event_label.setTypeface(typeface);
 
         mListEventsHolder.tv_accept = (TextView) convertView.findViewById(R.id.tv_accept);
-        mListEventsHolder.tv_accept.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_accept.setTypeface(typeface);
 
         mListEventsHolder.tv_decline = (TextView) convertView.findViewById(R.id.tv_decline);
-        mListEventsHolder.tv_decline.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_decline.setTypeface(typeface);
 
         mListEventsHolder.tv_balance_days = (TextView) convertView.findViewById(R.id.tv_balance_days);
-        mListEventsHolder.tv_balance_days.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        mListEventsHolder.tv_balance_days.setTypeface(typeface);
 
     /*    mListEventsHolder.tv_contact.setText("" + mEventsModel.getmContact());
         mListEventsHolder.tv_chief_guest.setText("" + mEventsModel.getmChiefGuest());
@@ -273,9 +275,9 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         } else {
             txt_dialog_message.setText("" + Utility.getResourcesString(mContext, R.string.are_you_sure_you_want_to_decline_the_event));
         }
-        txt_dialog_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-        tv_yes.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-        tv_no.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+        txt_dialog_message.setTypeface(typeface);
+        tv_yes.setTypeface(typeface);
+        tv_no.setTypeface(typeface);
 
         tv_yes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,7 +331,8 @@ public class EventsAdapter extends BaseAdapter implements IAsyncCaller {
         mListEventsHolder.tv_chief_guest.setText(mEventsModel.getChief_guest());
         mListEventsHolder.tv_date_event.setText(mEventsModel.getDate_of_event());
         mListEventsHolder.tv_details.setText(mEventsModel.getDetails());
-        mListEventsHolder.tv_balance_days.setText(""+Utility.getDateDiff(mEventsModel.getDate_of_event()) + " Days To\nGo");
+        mListEventsHolder.tv_location.setText(Utility.capitalizeFirstLetter(mEventsModel.getVenue()));
+        mListEventsHolder.tv_balance_days.setText("" + Utility.getDateDiff(mEventsModel.getDate_of_event()) + " Days To\nGo");
     }
 
     private void setDataToPieChart(ListEventsHolder mListEventsHolder, PieChart pie_events, int EntryOne, int EntryTwo) {

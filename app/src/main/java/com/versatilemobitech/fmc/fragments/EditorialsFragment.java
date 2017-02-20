@@ -55,6 +55,9 @@ public class EditorialsFragment extends Fragment implements IAsyncCaller, AbsLis
         mParent.getSupportActionBar().setTitle(Utility.setHeaderTypeface(mParent,
                 Utility.getResourcesString(getActivity(), R.string.editorials)));
         //mParent.txt_fmc.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        if (rootView != null) {
+            return rootView;
+        }
         rootView = inflater.inflate(R.layout.fragment_editorials, container, false);
         initUI();
         return rootView;
