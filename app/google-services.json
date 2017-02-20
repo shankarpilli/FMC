@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "765944666415",
-    "firebase_url": "https://zone6-training.firebaseio.com",
-    "project_id": "zone6-training",
-    "storage_bucket": "zone6-training.appspot.com"
+    "project_number": "742324111507",
+    "firebase_url": "https://fm-council.firebaseio.com",
+    "project_id": "fm-council",
+    "storage_bucket": "fm-council.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:765944666415:android:9d14d31d287f77a1",
+        "mobilesdk_app_id": "1:742324111507:android:554b3153abcf99ae",
         "android_client_info": {
           "package_name": "com.versatilemobitech.fmc"
         }
       },
       "oauth_client": [
         {
-          "client_id": "765944666415-cj13fdhu5fltvn855mes1g6c7n37u8l3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.versatilemobitech.fmc",
-            "certificate_hash": "CA2C96D805F251D1F4FC255611B4136DAE22D3F6"
-          }
-        },
-        {
-          "client_id": "765944666415-g50qra8ptastf4qccor5n4vvgs2l02s8.apps.googleusercontent.com",
+          "client_id": "742324111507-il06vt4d1khsse6r0qnidp5e0mhdnocj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBHGKUEgrME7SRQ80CPKcwlPdkIPOmV14U"
+          "current_key": "AIzaSyA3l15eDFVnKumtbruBVGoe5Q7YttYdYKs"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "765944666415-g50qra8ptastf4qccor5n4vvgs2l02s8.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
