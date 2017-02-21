@@ -1,8 +1,8 @@
 package com.versatilemobitech.fmc.activities;
 
 
-import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -13,7 +13,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
  * Created by Manikanta on 11/28/2016.
  */
 
-public class FMCAppilication extends Application {
+public class FMCAppilication extends MultiDexApplication {
 
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
