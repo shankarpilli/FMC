@@ -214,7 +214,7 @@ public class HomeActivity extends BaseActivity {
                 Uri selectedImageUri = data.getData( );
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
-                HomeFragment.getInstance().updateProfilePic(getRealPathFromURI(selectedImageUri));
+                HomeFragment.getInstance().updateProfilePic(selectedImgPath);
             }
 
         } else if (requestCode == Constants.FROM_HOME_GALLERY_ID) {
