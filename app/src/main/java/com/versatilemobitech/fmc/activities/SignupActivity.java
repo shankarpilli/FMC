@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -415,13 +416,13 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImageUri = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
-                    String selectedImgPath = ImageUtility.saveBitmap(SignupActivity.this, bitmap);
+                    //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                    // selectedImgPath = ImageUtility.saveBitmap(SignupActivity.this, bitmap);
                     Intent intent = new Intent(SignupActivity.this, CropActivity.class);
-                    intent.putExtra("image_path", selectedImgPath);
+                    intent.putExtra("image_path", getRealPathFromURI(selectedImageUri));
                     intent.putExtra("from", "RegistrationActivity");
                     startActivity(intent);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -430,6 +431,16 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
+    public String getRealPathFromURI(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        @SuppressWarnings("deprecation")
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 
     public void showSelectPhotoDialog() {
         final Dialog dialogShare = new Dialog(this);
