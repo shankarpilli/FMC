@@ -4,6 +4,7 @@ package com.versatilemobitech.fmc.activities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -210,9 +211,10 @@ public class HomeActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.FROM_HOME_CAMERA_ID) {
             if (resultCode == Activity.RESULT_OK) {
+                Uri selectedImageUri = data.getData( );
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
-                HomeFragment.getInstance().updateProfilePic(selectedImgPath);
+                HomeFragment.getInstance().updateProfilePic(getRealPathFromURI(selectedImageUri));
             }
 
         } else if (requestCode == Constants.FROM_HOME_GALLERY_ID) {
@@ -221,16 +223,25 @@ public class HomeActivity extends BaseActivity {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                     String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
-                    HomeFragment.getInstance().updateProfilePic(selectedImgPath);
+                    HomeFragment.getInstance().updateProfilePic(getRealPathFromURI(selectedImageUri));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
+    public String getRealPathFromURI(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        @SuppressWarnings("deprecation")
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 
     @Override
     public void onBackPressed() {
