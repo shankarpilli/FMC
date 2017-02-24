@@ -3,26 +3,34 @@ package com.versatilemobitech.fmc.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
+import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
+import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
+import com.versatilemobitech.fmc.models.HistoryModel;
+import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.parsers.HistoryParser;
+import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Utility;
+
+import java.util.LinkedHashMap;
 
 /**
  * Created by Shankar Pilli on 11/06/2016
  */
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements IAsyncCaller {
 
     public static final String TAG = "HistoryFragment";
     private HomeActivity mParent;
     private View rootView;
 
-    private LinearLayout ll_history;
+    private TextView txt_history;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,16 +50,47 @@ public class HistoryFragment extends Fragment {
     }
 
     private void initUI() {
-        ll_history = (LinearLayout) rootView.findViewById(R.id.ll_history);
+        txt_history = (TextView) rootView.findViewById(R.id.txt_history);
+        getHistoryData();
+    }
 
-        for (int i = 0; i < 10; i++) {
-            LinearLayout layout_list_header = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.
-                    history_item, null);
-            TextView txt_header = (TextView) layout_list_header.findViewById(R.id.txt_header);
-            TextView txt_description = (TextView) layout_list_header.findViewById(R.id.txt_description);
-            txt_description.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
-            txt_header.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
-            ll_history.addView(layout_list_header);
+    private void getHistoryData() {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+
+        HistoryParser mHistoryParser = new HistoryParser();
+        if (Utility.isNetworkAvailable(mParent)) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
+                    R.string.please_wait), true,
+                    APIConstants.HISTORY, paramMap,
+                    APIConstants.REQUEST_TYPE.GET, this, mHistoryParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    mParent,
+                    mParent.getResources().getString(
+                            R.string.no_internet_msg),
+                    mParent.getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
         }
     }
+
+
+    @Override
+    public void onComplete(Model model) {
+        if (model != null) {
+            if (model.isStatus()) {
+                if (model instanceof HistoryModel) {
+                    HistoryModel mHistoryModel = (HistoryModel) model;
+                    setHistory(mHistoryModel);
+                }
+            }
+        }
+    }
+
+    private void setHistory(HistoryModel mHistoryModel) {
+        txt_history.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
+        txt_history.setText(Html.fromHtml(mHistoryModel.getHistory_text()));
+    }
+
 }
