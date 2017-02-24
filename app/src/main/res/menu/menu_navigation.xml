@@ -26,6 +26,10 @@
             android:icon="@drawable/awards_icon"
             android:title="Awards" />
         <item
+            android:id="@+id/csr"
+            android:icon="@drawable/ic_perm_media_white_24dp"
+            android:title="CSR" />
+        <item
             android:id="@+id/gallery"
             android:icon="@drawable/icon_from_gallery"
             android:title="Gallery" />

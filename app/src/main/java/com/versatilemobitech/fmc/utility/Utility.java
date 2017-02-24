@@ -501,7 +501,7 @@ public class Utility {
         return Typeface.createFromAsset(context.getAssets(), "matireal_icons_regular.ttf");
     }
 
-    public static Typeface setTypeCambriaBoldRegular(Context context) {
+    public static Typeface setTypeRobotoBoldRegular(Context context) {
         return Typeface.createFromAsset(context.getAssets(), "Roboto-Bold.ttf");
     }
 

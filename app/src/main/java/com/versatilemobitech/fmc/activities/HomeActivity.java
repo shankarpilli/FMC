@@ -31,6 +31,7 @@ import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.customviews.CustomTypefaceSpan;
 import com.versatilemobitech.fmc.fragments.AwardsFragment;
+import com.versatilemobitech.fmc.fragments.CSRFragment;
 import com.versatilemobitech.fmc.fragments.ChangePasswordFragment;
 import com.versatilemobitech.fmc.fragments.ContactsUsFragment;
 import com.versatilemobitech.fmc.fragments.EditorialsFragment;
@@ -64,11 +65,11 @@ public class HomeActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         Menu m = navigationView.getMenu();
-        for (int i=0;i<m.size();i++) {
+        for (int i = 0; i < m.size(); i++) {
             MenuItem mi = m.getItem(i);
             SubMenu subMenu = mi.getSubMenu();
-            if (subMenu!=null && subMenu.size() >0 ) {
-                for (int j=0; j <subMenu.size();j++) {
+            if (subMenu != null && subMenu.size() > 0) {
+                for (int j = 0; j < subMenu.size(); j++) {
                     MenuItem subMenuItem = subMenu.getItem(j);
                     applyFontToMenuItem(subMenuItem);
                 }
@@ -112,6 +113,10 @@ public class HomeActivity extends BaseActivity {
                         Utility.navigateDashBoardFragment(new AwardsFragment(), AwardsFragment.TAG, null, HomeActivity.this);
                         drawerLayout.closeDrawers();
                         break;
+                    case R.id.csr:
+                        Utility.navigateDashBoardFragment(new CSRFragment(), CSRFragment.TAG, null, HomeActivity.this);
+                        drawerLayout.closeDrawers();
+                        break;
                     case R.id.gallery:
                         Utility.navigateDashBoardFragment(new GalleryFragment(), GalleryFragment.TAG, null, HomeActivity.this);
                         drawerLayout.closeDrawers();
@@ -151,7 +156,7 @@ public class HomeActivity extends BaseActivity {
         TextView txt_name = (TextView) header.findViewById(R.id.txt_name);
         TextView txt_user_designation = (TextView) header.findViewById(R.id.txt_user_designation);
 
-        txt_name.setTypeface(Utility.setTypeCambriaBoldRegular(this));
+        txt_name.setTypeface(Utility.setTypeRobotoBoldRegular(this));
         txt_name.setText(Utility.capitalizeFirstLetter(Utility.getSharedPrefStringData(HomeActivity.this, Constants.USER_NAME)));
         txt_user_designation.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         txt_user_designation.setText(Utility.getSharedPrefStringData(HomeActivity.this, Constants.COMPANY_NAME));
@@ -203,7 +208,7 @@ public class HomeActivity extends BaseActivity {
     private void applyFontToMenuItem(MenuItem mi) {
         Typeface font = Typeface.createFromAsset(getAssets(), "Roboto-Regular.ttf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
-        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
 
@@ -211,7 +216,7 @@ public class HomeActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.FROM_HOME_CAMERA_ID) {
             if (resultCode == Activity.RESULT_OK) {
-                Uri selectedImageUri = data.getData( );
+                Uri selectedImageUri = data.getData();
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
                 HomeFragment.getInstance().updateProfilePic(selectedImgPath);
@@ -234,7 +239,7 @@ public class HomeActivity extends BaseActivity {
 
 
     public String getRealPathFromURI(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         @SuppressWarnings("deprecation")
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         int column_index = cursor
@@ -284,10 +289,10 @@ public class HomeActivity extends BaseActivity {
         TextView tv_yes = (TextView) dialogEventConfirmation.findViewById(R.id.tv_yes);
         TextView tv_no = (TextView) dialogEventConfirmation.findViewById(R.id.tv_no);
 
-        if(mFrom.equals("logOut")){
+        if (mFrom.equals("logOut")) {
             txt_dialog_message.setTextSize(18);
             txt_dialog_message.setText("" + Utility.getResourcesString(this, R.string.are_you_sure_do_you_want_to_logout));
-        }else{
+        } else {
             txt_dialog_message.setText("" + Utility.getResourcesString(this, R.string.are_you_sure_do_you_want_to_exit));
         }
 
@@ -299,7 +304,7 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 dialogEventConfirmation.dismiss();
-                if(mFrom.equals("logOut")){
+                if (mFrom.equals("logOut")) {
                     Utility.setSharedPrefStringData(HomeActivity.this, Constants.USER_ID, "");
                     Utility.setSharedPrefStringData(HomeActivity.this, Constants.LOGIN_NAME, "");
                     Utility.setSharedPrefStringData(HomeActivity.this, Constants.LOGIN_PASSWORD, "");

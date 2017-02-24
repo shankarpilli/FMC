@@ -4,8 +4,6 @@ package com.versatilemobitech.fmc.fragments;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,8 +20,6 @@ import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.designs.MaterialDialog;
 import com.versatilemobitech.fmc.permissions.Permissions;
 import com.versatilemobitech.fmc.utility.Utility;
-
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -144,7 +140,7 @@ public class ContactsUsFragment extends Fragment {
         tv_share.setTypeface(Utility.setTypeFaceRobotoRegular(getActivity()));
 
         TextView tv_follow_us = (TextView) rootView.findViewById(R.id.tv_follow_us);
-        tv_follow_us.setTypeface(Utility.setTypeCambriaBoldRegular(getActivity()));
+        tv_follow_us.setTypeface(Utility.setTypeRobotoBoldRegular(getActivity()));
 
         ImageView iv_yogi = (ImageView) rootView.findViewById(R.id.iv_logo);
         ImageView iv_address = (ImageView) rootView.findViewById(R.id.iv_address);

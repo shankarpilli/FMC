@@ -18,7 +18,9 @@ public class APIConstants {
     public static final String REGISTRATION_URL = BASE_URL + "registration";
     public static final String LOGIN_URL = BASE_URL + "login";
     public static final String PHOTO_ALBUMS = BASE_URL + "photoalbums/"/*{page number}*/;
+    public static final String CSR_CATEGORY = BASE_URL + "csrcategory/"/*{page number}*/;
     public static final String PHOTO_GALLERY = BASE_URL + "photogallery/"/*{album id}/{page number}*/;
+    public static final String CSR_GALLERY = BASE_URL + "csrgallery/"/*{album id}/{page number}*/;
     public static final String EVENTS = BASE_URL + "events/"/*{page number}/user_id*/;
     public static final String GET_POSTS = BASE_URL + "posts/"/*{page number}/user_id*/;
     public static final String GET_EDITORIAL = BASE_URL + "editorials/"/*{page number}*/;
