@@ -18,11 +18,11 @@
         <LinearLayout
             android:id="@+id/ll_like_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50dp"
+            android:layout_height="@dimen/_40dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/_15dp"
-            android:paddingStart="@dimen/_15dp">
+            android:paddingLeft="@dimen/_10dp"
+            android:paddingStart="@dimen/_10dp">
 
             <TextView
                 android:id="@+id/txt_recently_liked"
@@ -54,6 +54,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_5dp"
             android:layout_marginStart="@dimen/_5dp"
+            android:layout_marginTop="@dimen/_1dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/_3dp">
@@ -68,8 +69,8 @@
                 android:layout_width="@dimen/_0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/_10dp"
-                android:layout_marginStart="@dimen/_10dp"
+                android:layout_marginLeft="@dimen/_7dp"
+                android:layout_marginStart="@dimen/_7dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -77,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="top"
                     android:orientation="horizontal">
 
                     <TextView
@@ -86,15 +88,16 @@
                         android:layout_marginEnd="@dimen/_5dp"
                         android:layout_marginRight="@dimen/_5dp"
                         android:layout_marginTop="@dimen/_5dp"
+                        android:gravity="top"
                         android:text="@string/your_name"
-                        android:textColor="@color/light_black"
+                        android:textColor="@color/text_color"
                         android:textSize="@dimen/_18sp" />
 
                     <TextView
                         android:id="@+id/txt_company"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_3dp"
+                        android:layout_marginTop="@dimen/_5dp"
                         android:text="@string/company_name"
                         android:textColor="@color/light_orange"
                         android:textSize="@dimen/_18sp"
@@ -105,9 +108,10 @@
                     android:id="@+id/txt_sub_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4dp"
                     android:text="@string/company_name"
                     android:textColor="@color/company_name"
-                    android:textSize="@dimen/_18sp" />
+                    android:textSize="@dimen/_16sp" />
 
                 <TextView
                     android:id="@+id/txt_time_date"
@@ -127,8 +131,8 @@
             android:layout_marginLeft="@dimen/_12dp"
             android:layout_marginStart="@dimen/_12dp"
             android:layout_marginTop="@dimen/_3dp"
-            android:textColor="@color/post_text_color"
-            android:textSize="@dimen/_18sp" />
+            android:textColor="@color/company_name"
+            android:textSize="@dimen/_17sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,14 +170,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0 likes"
-                    android:textColor="@color/like_comment_color"
-                    android:textSize="@dimen/_18sp" />
+                    android:textColor="@color/likes_color"
+                    android:textSize="@dimen/_17sp" />
 
                 <View
-                    android:layout_width="@dimen/_10dp"
-                    android:layout_height="@dimen/_10dp"
-                    android:layout_marginLeft="@dimen/_10dp"
-                    android:layout_marginRight="@dimen/_10dp"
+                    android:layout_width="@dimen/_8dp"
+                    android:layout_height="@dimen/_8dp"
+                    android:layout_marginLeft="@dimen/_8dp"
+                    android:layout_marginRight="@dimen/_8dp"
                     android:background="@drawable/dot" />
 
                 <TextView
@@ -181,8 +185,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0 Comments"
-                    android:textColor="@color/like_comment_color"
-                    android:textSize="@dimen/_18sp" />
+                    android:textColor="@color/likes_color"
+                    android:textSize="@dimen/_17sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -193,11 +197,11 @@
             android:layout_marginEnd="@dimen/_12dp"
             android:layout_marginLeft="@dimen/_12dp"
             android:layout_marginStart="@dimen/_12dp"
-            android:background="@color/gray" />
+            android:background="@color/svThumbColor" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_55dp"
+            android:layout_height="@dimen/_45dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="horizontal"
@@ -220,8 +224,8 @@
                     android:text="@string/comment_icon"
                     android:textSize="@dimen/_18sp" />-->
                 <ImageView
-                    android:layout_width="@dimen/_22dp"
-                    android:layout_height="@dimen/_22dp"
+                    android:layout_width="@dimen/_20dp"
+                    android:layout_height="@dimen/_20dp"
                     android:src="@drawable/like_icon" />
 
                 <TextView
@@ -254,8 +258,8 @@
                     android:text="@string/comment_icon"
                     android:textSize="@dimen/_18sp" />-->
                 <ImageView
-                    android:layout_width="@dimen/_22dp"
-                    android:layout_height="@dimen/_22dp"
+                    android:layout_width="@dimen/_20dp"
+                    android:layout_height="@dimen/_20dp"
                     android:src="@drawable/comment_icon" />
 
                 <TextView
@@ -287,8 +291,8 @@
                     android:text="@string/share_icon"
                     android:textSize="@dimen/_18sp" />-->
                 <ImageView
-                    android:layout_width="@dimen/_22dp"
-                    android:layout_height="@dimen/_22dp"
+                    android:layout_width="@dimen/_20dp"
+                    android:layout_height="@dimen/_20dp"
                     android:src="@drawable/share_icon" />
 
                 <TextView

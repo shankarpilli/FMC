@@ -104,15 +104,15 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
             //mHomeItemHolder.txt_share_icon = (TextView) convertView.findViewById(R.id.txt_share_icon);
             //mHomeItemHolder.txt_comment_icon = (TextView) convertView.findViewById(R.id.txt_comment_icon);
 
-            mHomeItemHolder.txt_name.setTypeface(Utility.setTypeCambriaBoldRegular(mContext));
+            mHomeItemHolder.txt_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
             mHomeItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_sub_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_post_message.setTypeface(Utility.setTypeRobotoLight(mContext));
+            mHomeItemHolder.txt_sub_name.setTypeface(Utility.setTypeRobotoLight(mContext));
             mHomeItemHolder.txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
 
-            mHomeItemHolder.txt_total_comments.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_total_likes.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_total_comments.setTypeface(Utility.setTypeRobotoLight(mContext));
+            mHomeItemHolder.txt_total_likes.setTypeface(Utility.setTypeRobotoLight(mContext));
             mHomeItemHolder.txt_comment.setTypeface(Utility.setTypeRobotoLight(mContext));
             mHomeItemHolder.txt_share.setTypeface(Utility.setTypeRobotoLight(mContext));
 
@@ -150,7 +150,7 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
 
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getProfile_pic()))
             Picasso.with(mContext)
-                    .load(mHomeDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(10, 1))
+                    .load(mHomeDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(5, 1))
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(mHomeItemHolder.post_image);
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()) && (mHomeDataModel.getPost_image().contains(".jpg") || mHomeDataModel.getPost_image().contains(".png"))) {

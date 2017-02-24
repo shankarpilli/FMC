@@ -22,17 +22,19 @@
 
     <color name="very_dark_gray">#444444</color>
     <color name="dialogBgColor">#55000000</color>
-    <color name="svThumbColor">#26111111</color>
+    <color name="svThumbColor">#eaeaea</color>
     <color name="dialogTxtDefaultColor">#000000</color>
     <color name="btnDefaultColor">#000000</color>
     <color name="dialogAccept">#1E88E5</color>
     <color name="theme_color">#0000ee</color>
     <color name="light_black">#242424</color>
-    <color name="company_name">#747474</color>
+    <color name="company_name">#515151</color>
     <color name="post_text_color">#333333</color>
     <color name="background_home">#e5e9ec</color>
     <color name="like_color">#636363</color>
     <color name="recent_like_color">#5b5b5b</color>
     <color name="like_this_color">#747474</color>
     <color name="like_comment_color">#606060</color>
+    <color name="text_color">#414141</color>
+    <color name="likes_color">#848484</color>
 </resources>
