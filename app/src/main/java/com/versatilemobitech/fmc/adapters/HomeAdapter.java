@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.isseiaoki.simplecropview.util.Utils;
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
@@ -156,6 +158,9 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()) && (mHomeDataModel.getPost_image().contains(".jpg") || mHomeDataModel.getPost_image().contains(".png"))) {
             mHomeItemHolder.image_data.setVisibility(View.VISIBLE);
             mHomeItemHolder.image_doc.setVisibility(View.GONE);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Utility.getDeviceWidth(dashboardActivity),
+                    Utility.getDeviceWidth(dashboardActivity));
+            mHomeItemHolder.image_data.setLayoutParams(params);
             Picasso.with(mContext)
                     .load(mHomeDataModel.getPost_image())
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))

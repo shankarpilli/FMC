@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "742324111507",
-    "firebase_url": "https://fm-council.firebaseio.com",
-    "project_id": "fm-council",
-    "storage_bucket": "fm-council.appspot.com"
+    "project_number": "833268000022",
+    "firebase_url": "https://fm-councial.firebaseio.com",
+    "project_id": "fm-councial",
+    "storage_bucket": "fm-councial.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:742324111507:android:554b3153abcf99ae",
+        "mobilesdk_app_id": "1:833268000022:android:554b3153abcf99ae",
         "android_client_info": {
           "package_name": "com.versatilemobitech.fmc"
         }
       },
       "oauth_client": [
         {
-          "client_id": "742324111507-il06vt4d1khsse6r0qnidp5e0mhdnocj.apps.googleusercontent.com",
+          "client_id": "833268000022-354asl3vb92os52b7bankda7q7gdl1k7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA3l15eDFVnKumtbruBVGoe5Q7YttYdYKs"
+          "current_key": "AIzaSyBGd1WxqS7ZAJyn9e4GJDgwk4elGb7EFXE"
         }
       ],
       "services": {
