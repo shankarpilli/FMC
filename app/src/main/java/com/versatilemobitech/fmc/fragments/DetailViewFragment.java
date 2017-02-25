@@ -112,13 +112,13 @@ public class DetailViewFragment extends Fragment implements IAsyncCaller, View.O
         txt_name.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
         txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        txt_post_message.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        txt_sub_name.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
+        txt_post_message.setTypeface(Utility.setTypeRobotoLight(mParent));
+        txt_sub_name.setTypeface(Utility.setTypeRobotoLight(mParent));
         txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
 
         // txt_total_comments.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        txt_comment.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
-        txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mParent));
+        txt_comment.setTypeface(Utility.setTypeRobotoLight(mParent));
+        txt_share.setTypeface(Utility.setTypeRobotoLight(mParent));
 
         //txt_share_icon.setTypeface(Utility.setTypeFace_matirealicons(mParent));
         //txt_comment_icon.setTypeface(Utility.setTypeFace_matirealicons(mParent));
