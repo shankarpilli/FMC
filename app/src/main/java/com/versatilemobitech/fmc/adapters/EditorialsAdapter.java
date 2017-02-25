@@ -1,6 +1,7 @@
 package com.versatilemobitech.fmc.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,12 +26,13 @@ public class EditorialsAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private ArrayList<EditorialsModel> editorialsModels;
-
+    private Typeface mTypefaceRobotoRegular;
 
     public EditorialsAdapter(Context context, ArrayList<EditorialsModel> editorialsModels) {
         mContext = context;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.editorialsModels = editorialsModels;
+        mTypefaceRobotoRegular = Utility.setTypeFaceRobotoRegular(mContext);
     }
 
 
@@ -61,8 +63,8 @@ public class EditorialsAdapter extends BaseAdapter {
             mEditorialsItemHolder.txt_your_name = (TextView) convertView.findViewById(R.id.txt_your_name);
             mEditorialsItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
             mEditorialsItemHolder.img_editorials = (ImageView) convertView.findViewById(R.id.img_editorials);
-            mEditorialsItemHolder.txt_your_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mEditorialsItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mEditorialsItemHolder.txt_your_name.setTypeface(mTypefaceRobotoRegular);
+            mEditorialsItemHolder.txt_time_date.setTypeface(mTypefaceRobotoRegular);
             convertView.setTag(mEditorialsItemHolder);
         } else {
             mEditorialsItemHolder = (EditorialsItemHolder) convertView.getTag();
@@ -71,14 +73,14 @@ public class EditorialsAdapter extends BaseAdapter {
         EditorialsModel editorialsModel = (EditorialsModel) getItem(position);
 
 
-        mEditorialsItemHolder.txt_your_name.setText(editorialsModel.getBook_name());
-        mEditorialsItemHolder.txt_time_date.setText(editorialsModel.getBook_description());
+        mEditorialsItemHolder.txt_your_name.setText(Utility.capitalizeFirstLetter(editorialsModel.getBook_name()));
+        mEditorialsItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(editorialsModel.getBook_description()));
 
         if (!Utility.isValueNullOrEmpty(editorialsModel.getBig_Image()))
-        Picasso.with(mContext)
-                .load(editorialsModel.getBig_Image())
-                .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
-                .into(mEditorialsItemHolder.img_editorials);
+            Picasso.with(mContext)
+                    .load(editorialsModel.getBig_Image())
+                    .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
+                    .into(mEditorialsItemHolder.img_editorials);
 
         return convertView;
     }

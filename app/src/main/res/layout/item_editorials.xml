@@ -20,41 +20,41 @@
             android:layout_marginTop="@dimen/_5dp"
             android:src="@drawable/folder_icon" />
 
+        <View
+            android:layout_width="@dimen/_1dp"
+            android:layout_marginTop="@dimen/_5dp"
+            android:layout_marginBottom="@dimen/_5dp"
+            android:layout_height="match_parent"
+            android:background="@color/dialogBgColor" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_100dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_5dp"
             android:layout_marginStart="@dimen/_5dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <View
-                android:layout_width="@dimen/_1dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_5dp"
-                android:layout_marginLeft="@dimen/_2dp"
-                android:layout_marginRight="@dimen/_5dp"
-                android:layout_marginTop="@dimen/_5dp"
-                android:background="#CABBBBBB" />
-          <!--   <TextView
-                 android:id="@+id/txt_your_name"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="@dimen/_5dp"
-                 android:text="@string/first_name"
-                 android:visibility="gone"
-                 android:textColor="@color/blackColor"
-                 android:textSize="@dimen/_18sp" />-->
 
-             <TextView
-                 android:id="@+id/txt_company"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="@dimen/_5dp"
-                 android:visibility="gone"
-                 android:text="@string/company_name"
-                 android:textColor="@color/gray"
-                 android:textSize="@dimen/_14sp" />
+            <!--   <TextView
+                   android:id="@+id/txt_your_name"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="@dimen/_5dp"
+                   android:text="@string/first_name"
+                   android:visibility="gone"
+                   android:textColor="@color/blackColor"
+                   android:textSize="@dimen/_18sp" />-->
+
+            <TextView
+                android:id="@+id/txt_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5dp"
+                android:text="@string/company_name"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_14sp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,6 +71,7 @@
                     android:text="@string/first_name"
                     android:textColor="@color/blackColor"
                     android:textSize="@dimen/_16sp" />
+
                 <TextView
                     android:id="@+id/txt_time_date"
                     android:layout_width="wrap_content"
@@ -82,13 +83,13 @@
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_14sp" />
 
-               <!-- <ImageView
-                    android:layout_width="@dimen/_50dp"
-                    android:layout_height="@dimen/_50dp"
-                    android:layout_gravity="right"
-                    android:layout_marginLeft="@dimen/_5dp"
-                    android:layout_marginTop="@dimen/_5dp"
-                    android:src="@drawable/edit_pdf_icon" />-->
+                <!-- <ImageView
+                     android:layout_width="@dimen/_50dp"
+                     android:layout_height="@dimen/_50dp"
+                     android:layout_gravity="right"
+                     android:layout_marginLeft="@dimen/_5dp"
+                     android:layout_marginTop="@dimen/_5dp"
+                     android:src="@drawable/edit_pdf_icon" />-->
 
             </LinearLayout>
 
