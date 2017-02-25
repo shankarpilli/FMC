@@ -32,4 +32,7 @@ public class Constants {
 
     public static final String KEY_FCM_TOKEN = "KEY_FCM_TOKEN";
     public static final String KEY_TOKEN_RECEIVER = "KEY_TOKEN_RECEIVER";
+
+    public static String DIRECTORY = "FMC";
+    public static String DOCS = "Files";
 }

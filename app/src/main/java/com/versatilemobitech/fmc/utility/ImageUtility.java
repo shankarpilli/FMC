@@ -227,7 +227,7 @@ public class ImageUtility {
     public static String saveBitmap(Context context, Bitmap finalBitmap) {
 
         String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/.FMC");
+        File myDir = new File(root + "/FMC");
         if (myDir.exists()) {
             boolean statusFolder = myDir.delete();
             Log.v("FOLDER:--", "FOLDER STATUS:" + statusFolder);

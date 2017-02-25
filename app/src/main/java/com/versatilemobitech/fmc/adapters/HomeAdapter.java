@@ -2,16 +2,23 @@ package com.versatilemobitech.fmc.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.isseiaoki.simplecropview.util.Utils;
@@ -33,6 +40,13 @@ import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -84,6 +98,7 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
             mHomeItemHolder = new HomeItemHolder();
             mHomeItemHolder.post_image = (ImageView) convertView.findViewById(R.id.post_image);
             mHomeItemHolder.image_doc = (ImageView) convertView.findViewById(R.id.image_doc);
+            mHomeItemHolder.doc_progressBar_image = (ProgressBar) convertView.findViewById(R.id.doc_progressBar_image);
             mHomeItemHolder.image_data = (ImageView) convertView.findViewById(R.id.image_data);
             mHomeItemHolder.txt_name = (TextView) convertView.findViewById(R.id.txt_name);
             mHomeItemHolder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);
@@ -158,6 +173,7 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()) && (mHomeDataModel.getPost_image().contains(".jpg") || mHomeDataModel.getPost_image().contains(".png"))) {
             mHomeItemHolder.image_data.setVisibility(View.VISIBLE);
             mHomeItemHolder.image_doc.setVisibility(View.GONE);
+            mHomeItemHolder.doc_progressBar_image.setVisibility(View.GONE);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Utility.getDeviceWidth(dashboardActivity),
                     Utility.getDeviceWidth(dashboardActivity));
             mHomeItemHolder.image_data.setLayoutParams(params);
@@ -168,11 +184,13 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
         } else if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_doc()) && mHomeDataModel.getDoc_extension().equalsIgnoreCase("pdf")) {
             mHomeItemHolder.image_data.setVisibility(View.GONE);
             mHomeItemHolder.image_doc.setVisibility(View.VISIBLE);
+            //mHomeItemHolder.doc_progressBar_image.setVisibility(View.VISIBLE);
             mHomeItemHolder.image_doc.setImageDrawable(Utility.getDrawable(mContext, R.drawable.pdf_image));
         } else if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_doc()) && (mHomeDataModel.getDoc_extension().equalsIgnoreCase("doc")
                 || mHomeDataModel.getDoc_extension().equalsIgnoreCase("docx"))) {
             mHomeItemHolder.image_data.setVisibility(View.GONE);
             mHomeItemHolder.image_doc.setVisibility(View.VISIBLE);
+            //mHomeItemHolder.doc_progressBar_image.setVisibility(View.VISIBLE);
             mHomeItemHolder.image_doc.setImageDrawable(Utility.getDrawable(mContext, R.drawable.doc_image));
         } else {
             mHomeItemHolder.image_data.setVisibility(View.GONE);
@@ -195,13 +213,21 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
 
 
         mHomeItemHolder.image_doc.setTag(position);
+        final HomeItemHolder finalMHomeItemHolder = mHomeItemHolder;
         mHomeItemHolder.image_doc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int tagPosition = (int) view.getTag();
                 Bundle bundle = new Bundle();
                 bundle.putString("file_url", homeDataModels.get(tagPosition).getPost_doc());
-                Utility.navigateDashBoardFragment(new WebViewFragment(), WebViewFragment.TAG, bundle, dashboardActivity);
+                String mFileName = homeDataModels.get(tagPosition).getPost_doc().replace("http://facilitymanagementcouncil.com/admin/uploads/postfiles/", "");
+                //Utility.navigateDashBoardFragment(new WebViewFragment(), WebViewFragment.TAG, bundle, dashboardActivity);
+                /*File temp_file = new File(homeDataModels.get(tagPosition).getPost_doc());
+                Intent intent = new Intent();
+                intent.setAction(android.content.Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(temp_file), getMimeType(temp_file.getAbsolutePath()));
+                mContext.startActivity(intent);*/
+                new DownloadFileFromURL(mFileName, finalMHomeItemHolder.doc_progressBar_image).execute(homeDataModels.get(tagPosition).getPost_doc());
             }
         });
 
@@ -326,5 +352,113 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
         private TextView txt_recently_liked;
         private TextView txt_likes_this;
         private View view_like_line;
+
+        private ProgressBar doc_progressBar_image;
     }
+
+    private String getMimeType(String url) {
+        String parts[] = url.split("\\.");
+        String extension = parts[parts.length - 1];
+        String type = null;
+        if (extension != null) {
+            MimeTypeMap mime = MimeTypeMap.getSingleton();
+            type = mime.getMimeTypeFromExtension(extension);
+        }
+        return type;
+    }
+
+
+    private class DownloadFileFromURL extends AsyncTask<String, String, String> {
+
+        private String mUrl = "";
+        private String mFileName = "";
+        private String filenameOutput;
+        private File audioFileOutput;
+        private ProgressBar mProgressBar;
+
+        DownloadFileFromURL(String mFileName, ProgressBar mProgressBar) {
+            this.mProgressBar = mProgressBar;
+            this.mFileName = mFileName;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(String... f_url) {
+            int count;
+            try {
+                URL url = new URL(f_url[0]);
+                mUrl = f_url[0];
+                URLConnection connection = url.openConnection();
+                connection.connect();
+
+                // getting file length
+                int lengthOfFile = connection.getContentLength();
+
+                // input stream to read file - with 8k buffer
+                InputStream input = new BufferedInputStream(url.openStream(), 8192);
+
+                File DIRECTORY = new File(Environment.getExternalStorageDirectory() + "/" + Constants.DIRECTORY/*+"/"+CommonSettings.FOLDER_MEDIA*/);
+                if (!DIRECTORY.exists()) {
+                    DIRECTORY.mkdir();
+                }
+                File FOLDER = null;
+                String strDir;
+                if (url.toString().endsWith(".doc") || url.toString().endsWith(".docx")) {
+                    strDir = Environment.getExternalStorageDirectory() + "/" + Constants.DIRECTORY + "/" + Constants.DOCS;
+                    FOLDER = new File(strDir);
+                    filenameOutput = mFileName;
+                }
+                if (FOLDER != null && !FOLDER.exists()) {
+                    FOLDER.mkdir();
+                }
+                audioFileOutput = new File(FOLDER, filenameOutput);
+                // Output stream to write file
+                OutputStream output = new FileOutputStream(audioFileOutput);
+
+                byte data[] = new byte[1024];
+                long total = 0;
+                while ((count = input.read(data)) != -1) {
+                    if (!isCancelled()) {
+                        total += count;
+                        publishProgress("" + (int) ((total * 100) / lengthOfFile));
+                        output.write(data, 0, count);
+                    }
+                }
+                // flushing output
+                output.flush();
+                output.close();
+                input.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Utility.showLog("Error: ", e.getMessage());
+            }
+
+            return null;
+        }
+
+        protected void onProgressUpdate(String... progress) {
+            /*mProgressBar.setText("" + Integer.parseInt(progress[0]), mContext.getResources().getColor(R.color.bright_orange));*/
+            mProgressBar.setProgress(Integer.parseInt(progress[0]));
+        }
+
+        @Override
+        protected void onPostExecute(String file_url) {
+            String mfilePath;
+            mfilePath = Environment.getExternalStorageDirectory() + "/" + Constants.DIRECTORY + "/" + Constants.DOCS + "/" + filenameOutput;
+            Utility.showLog("file_url", "" + file_url);
+            File temp_file = new File(mfilePath);
+            Intent intent = new Intent();
+            intent.setAction(android.content.Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(temp_file), getMimeType(temp_file.getAbsolutePath()));
+            mContext.startActivity(intent);
+            mProgressBar.setVisibility(View.GONE);
+        }
+    }
+
 }
