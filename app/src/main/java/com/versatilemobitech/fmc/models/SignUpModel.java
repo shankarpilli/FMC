@@ -1,10 +1,12 @@
 package com.versatilemobitech.fmc.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Shankar on 10/25/2016.
  */
 
-public class SignUpModel extends Model {
+public class SignUpModel extends Model implements Serializable {
 
     private String username;
     private String password;

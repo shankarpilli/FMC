@@ -200,7 +200,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         if (Utility.isNetworkAvailable(getActivity())) {
             ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mParent, Utility.getResourcesString(mParent,
                     R.string.please_wait), true,
-                    APIConstants.GET_POSTS + mPageNumber, paramMap,
+                    APIConstants.GET_POSTS + mPageNumber + "/" + Utility.getSharedPrefStringData(getActivity(), Constants.USER_ID), paramMap,
                     APIConstants.REQUEST_TYPE.GET, this, mGetPostsParser);
             Utility.execute(serverIntractorAsync);
         } else {
@@ -676,7 +676,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         ll_file_layout.setVisibility(View.GONE);
         txt_close.setVisibility(View.GONE);
 
-        if (dialogCompleted.isShowing()){
+        if (dialogCompleted.isShowing()) {
             dialogCompleted.cancel();
         }
     }

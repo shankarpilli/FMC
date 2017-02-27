@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -185,6 +186,51 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
             Permissions.getInstance().setActivity(this);
             CheckForPermissions(this, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
+
+        cb_hyd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    cb_pune.setChecked(false);
+                    cb_chennai.setChecked(false);
+                    cb_bangalore.setChecked(false);
+                    //cb_hyd.setChecked(true);
+                }
+            }
+        });
+
+        cb_pune.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    cb_hyd.setChecked(false);
+                    cb_chennai.setChecked(false);
+                    cb_bangalore.setChecked(false);
+                }
+            }
+        });
+
+        cb_bangalore.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    cb_hyd.setChecked(false);
+                    cb_chennai.setChecked(false);
+                    cb_pune.setChecked(false);
+                }
+            }
+        });
+
+        cb_chennai.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    cb_bangalore.setChecked(false);
+                    cb_hyd.setChecked(false);
+                    cb_pune.setChecked(false);
+                }
+            }
+        });
     }
 
     private void CheckForPermissions(final Context mContext, final String... mPermisons) {
@@ -255,13 +301,13 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                             extension = edt_profile_pic.getText().toString().substring(i + 1);
                         }
                         paramMap.put("file_extension", extension);
-                        if (cb_hyd.isChecked() != true) {
+                        if (cb_hyd.isChecked() == true) {
                             paramMap.put("interested_location", "Hyderabad");
-                        } else if (cb_pune.isChecked() != true) {
+                        } else if (cb_pune.isChecked() == true) {
                             paramMap.put("interested_location", "Pune");
-                        } else if (cb_chennai.isChecked() != true) {
+                        } else if (cb_chennai.isChecked() == true) {
                             paramMap.put("interested_location", "Chennai");
-                        } else if (cb_bangalore.isChecked() != true) {
+                        } else if (cb_bangalore.isChecked() == true) {
                             paramMap.put("interested_location", "Bangalore");
                         }
                         SignUpParser mParser = new SignUpParser();
@@ -296,9 +342,6 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         } else if (Utility.isValueNullOrEmpty(edt_last_name.getText().toString().trim())) {
             Utility.setSnackBarEnglish(SignupActivity.this, edt_last_name, "Please enter last name");
             edt_last_name.requestFocus();
-        } else if (Utility.isValueNullOrEmpty(edt_company.getText().toString().trim())) {
-            Utility.setSnackBarEnglish(SignupActivity.this, edt_company, "Please enter company name");
-            edt_company.requestFocus();
         } else if (Utility.isValueNullOrEmpty(edt_company.getText().toString().trim())) {
             Utility.setSnackBarEnglish(SignupActivity.this, edt_company, "Please enter company name");
             edt_company.requestFocus();
@@ -359,6 +402,25 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
                     Utility.setSharedPrefStringData(this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP, "done");
                     Utility.setSharedPrefStringData(context, Constants.COMPANY_NAME, mSignUpModel.getCompany_name());
                     Utility.setSharedPrefStringData(context, Constants.PROFILE_PIC, mSignUpModel.getProfile_pic());
+
+                    Utility.setSharedPrefStringData(context, Constants.FIRST_NAME, edt_first_name.getText().toString());
+                    Utility.setSharedPrefStringData(context, Constants.LAST_NAME, edt_last_name.getText().toString());
+                    Utility.setSharedPrefStringData(context, Constants.BUSINESS_MAIL_ID, edt_business_mail.getText().toString());
+                    Utility.setSharedPrefStringData(context, Constants.PERSONAL_MAIL_ID, edt_personal_mail.getText().toString());
+                    Utility.setSharedPrefStringData(context, Constants.CONTACT, edt_contact.getText().toString());
+                    Utility.setSharedPrefStringData(context, Constants.ALTERNATE, edt_alternate.getText().toString());
+                    Utility.setSharedPrefStringData(context, Constants.CURRENT_LOCATION, edt_location.getText().toString());
+
+                    if (cb_hyd.isChecked() != true) {
+                        Utility.setSharedPrefStringData(context, Constants.INTERESTED_LOCATION, "Hyderabad");
+                    } else if (cb_pune.isChecked() != true) {
+                        Utility.setSharedPrefStringData(context, Constants.INTERESTED_LOCATION, "Pune");
+                    } else if (cb_chennai.isChecked() != true) {
+                        Utility.setSharedPrefStringData(context, Constants.INTERESTED_LOCATION, "Chennai");
+                    } else if (cb_bangalore.isChecked() != true) {
+                        Utility.setSharedPrefStringData(context, Constants.INTERESTED_LOCATION, "Bangalore");
+                    }
+
                     Utility.setSharedPrefStringData(context, Constants.USER_NAME, Utility.capitalizeFirstLetter(mSignUpModel.getFirst_name()) + " " +
                             Utility.capitalizeFirstLetter(mSignUpModel.getLast_name()));
                     /*Intent mIntentSignup = new Intent(SignupActivity.this, HomeActivity.class);
@@ -433,7 +495,7 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
 
 
     public String getRealPathFromURI(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         @SuppressWarnings("deprecation")
         Cursor cursor = managedQuery(uri, projection, null, null, null);
         int column_index = cursor

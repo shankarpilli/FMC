@@ -36,6 +36,7 @@ public class APIConstants {
     public static final String CHANGE_PASSWORD = BASE_URL + "changepassword"/*{page number}*/;
     public static final String POST_LIKE = BASE_URL + "postlike"/*{page number}*/;
     public static final String HISTORY = BASE_URL + "history/1"/*{page number}*/;
+    public static final String EDIT_PROFILE = BASE_URL + "editprofile"/*{page number}*/;
 
 
 }

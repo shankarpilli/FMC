@@ -34,6 +34,7 @@ import com.versatilemobitech.fmc.fragments.AwardsFragment;
 import com.versatilemobitech.fmc.fragments.CSRFragment;
 import com.versatilemobitech.fmc.fragments.ChangePasswordFragment;
 import com.versatilemobitech.fmc.fragments.ContactsUsFragment;
+import com.versatilemobitech.fmc.fragments.EditProfileFragment;
 import com.versatilemobitech.fmc.fragments.EditorialsFragment;
 import com.versatilemobitech.fmc.fragments.EventsFragment;
 import com.versatilemobitech.fmc.fragments.GalleryFragment;
@@ -160,7 +161,8 @@ public class HomeActivity extends BaseActivity {
         tv_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Utility.navigateDashBoardFragment(new EditProfileFragment(), EditProfileFragment.TAG, null, HomeActivity.this);
+                drawerLayout.closeDrawers();
             }
         });
 
@@ -231,6 +233,14 @@ public class HomeActivity extends BaseActivity {
                 HomeFragment.getInstance().updateProfilePic(selectedImgPath);
             }
 
+        } else if (requestCode == Constants.FROM_EDIT_CAMERA_ID) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri selectedImageUri = data.getData();
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
+                EditProfileFragment.getInstance().updateProfilePic(selectedImgPath);
+            }
+
         } else if (requestCode == Constants.FROM_HOME_GALLERY_ID) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImageUri = data.getData();
@@ -238,6 +248,17 @@ public class HomeActivity extends BaseActivity {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                     String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
                     HomeFragment.getInstance().updateProfilePic(getRealPathFromURI(selectedImageUri));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (requestCode == Constants.FROM_EDIT_GALLERY_ID) {
+            if (resultCode == Activity.RESULT_OK) {
+                Uri selectedImageUri = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                    String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
+                    EditProfileFragment.getInstance().updateProfilePic(getRealPathFromURI(selectedImageUri));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

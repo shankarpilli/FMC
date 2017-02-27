@@ -165,6 +165,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     Utility.setSharedPrefStringData(context, Constants.COMPANY_NAME, loginModel.getCompany_name());
                     Utility.setSharedPrefStringData(context, Constants.PROFILE_PIC, loginModel.getProfile_pic());
                     Utility.setSharedPrefStringData(context, Constants.USER_NAME, loginModel.getUser_name());
+
+                    Utility.setSharedPrefStringData(context, Constants.FIRST_NAME, loginModel.getFirst_name());
+                    Utility.setSharedPrefStringData(context, Constants.LAST_NAME, loginModel.getLast_name());
+                    Utility.setSharedPrefStringData(context, Constants.BUSINESS_MAIL_ID, loginModel.getBusiness_mail());
+                    Utility.setSharedPrefStringData(context, Constants.PERSONAL_MAIL_ID, loginModel.getPersonal_mail());
+                    Utility.setSharedPrefStringData(context, Constants.CONTACT, loginModel.getContact());
+                    Utility.setSharedPrefStringData(context, Constants.ALTERNATE, loginModel.getAlternate());
+                    Utility.setSharedPrefStringData(context, Constants.CURRENT_LOCATION, loginModel.getCurrent_location());
+                    Utility.setSharedPrefStringData(context, Constants.INTERESTED_LOCATION, loginModel.getInterested_location());
+
                     Intent mIntentSignup = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(mIntentSignup);
                     finish();

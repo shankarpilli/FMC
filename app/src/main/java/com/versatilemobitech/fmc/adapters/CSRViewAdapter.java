@@ -66,6 +66,7 @@ public class CSRViewAdapter extends BaseAdapter {
 
         Picasso.with(mContext)
                 .load(mGalleryViewModel.getImage_path())
+                .skipMemoryCache()
                 .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                 .into(mGalleryViewHolder.iv_item_gallery);
 

@@ -69,6 +69,7 @@ public class GalleryFolderAdapter extends BaseAdapter {
 
         Picasso.with(mContext)
                 .load(leftMenuModel.getAlbum_image_path())
+                .skipMemoryCache()
                 .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                 .into(mGalleryFolderHolder.iv_gallery_item);
         return convertView;

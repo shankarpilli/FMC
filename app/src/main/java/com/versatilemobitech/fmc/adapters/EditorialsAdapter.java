@@ -76,9 +76,9 @@ public class EditorialsAdapter extends BaseAdapter {
         mEditorialsItemHolder.txt_your_name.setText(Utility.capitalizeFirstLetter(editorialsModel.getBook_name()));
         mEditorialsItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(editorialsModel.getBook_description()));
 
-        if (!Utility.isValueNullOrEmpty(editorialsModel.getBig_Image()))
+        if (!Utility.isValueNullOrEmpty(editorialsModel.getSmall_Image()))
             Picasso.with(mContext)
-                    .load(editorialsModel.getBig_Image())
+                    .load(editorialsModel.getSmall_Image())
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(mEditorialsItemHolder.img_editorials);
 
