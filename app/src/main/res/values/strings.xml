@@ -47,6 +47,7 @@
     <string name="member_directory">Member Directory</string>
     <string name="vendor_partners">Business Enablers</string>
     <string name="awards">Awards</string>
+    <string name="edit_profile">Edit Profile</string>
     <string name="csr">CSR</string>
     <string name="gallery">Gallery</string>
     <string name="editorials">Editorials</string>
@@ -104,6 +105,7 @@
     <string name="share_icon">&#xE895;</string>
     <string name="comment_icon">&#xE0CB;</string>
     <string name="delete_icon">&#xE92B;</string>
+    <string name="edit_icon">&#xf040;</string>
     <string name="txt_accept">Accept</string>
     <string name="no_posts_in_home">No Posts In Home</string>
     <string name="no_more_data_to_display">No more data to display</string>
@@ -121,5 +123,8 @@
     <string name="txt_contact_us">Contact us</string>
     <string name="phone_number">040 64557484</string>
     <string name="contact_address"> 202, 2nd floor, Shashirekha apartment, thirumalghery, thirumalghery X roads, Secundrabad, TS 500015</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

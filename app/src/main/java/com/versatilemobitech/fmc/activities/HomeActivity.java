@@ -155,8 +155,17 @@ public class HomeActivity extends BaseActivity {
                     .transform(new CircleTransform()).into(img_user_image);
         TextView txt_name = (TextView) header.findViewById(R.id.txt_name);
         TextView txt_user_designation = (TextView) header.findViewById(R.id.txt_user_designation);
+        TextView tv_edit = (TextView) header.findViewById(R.id.tv_edit);
+
+        tv_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         txt_name.setTypeface(Utility.setTypeRobotoBoldRegular(this));
+        tv_edit.setTypeface(Utility.setTypeFace_fontawesome(this));
         txt_name.setText(Utility.capitalizeFirstLetter(Utility.getSharedPrefStringData(HomeActivity.this, Constants.USER_NAME)));
         txt_user_designation.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         txt_user_designation.setText(Utility.getSharedPrefStringData(HomeActivity.this, Constants.COMPANY_NAME));

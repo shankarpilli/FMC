@@ -37,4 +37,6 @@
     <color name="like_comment_color">#606060</color>
     <color name="text_color">#414141</color>
     <color name="likes_color">#848484</color>
+
+    <color name="background_lang">#ececec</color>
 </resources>
