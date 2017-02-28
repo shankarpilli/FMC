@@ -349,6 +349,18 @@ public class HomeActivity extends BaseActivity {
                     Utility.setSharedPrefStringData(HomeActivity.this, Constants.PREF_KEY_IS_APP_SIGNIN_OR_SIGNUP, "");
                     Utility.setSharedPrefStringData(HomeActivity.this, Constants.USER_KEY, "");
                     Utility.setSharedPrefStringData(HomeActivity.this, Constants.COMPANY_NAME, "");
+
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.FIRST_NAME, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.LAST_NAME, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.BUSINESS_MAIL_ID, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.PERSONAL_MAIL_ID, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.CONTACT, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.ALTERNATE, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.CURRENT_LOCATION, "");
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.INTERESTED_LOCATION, "");
+
+                    Utility.setSharedPrefStringData(HomeActivity.this, Constants.DEVICE_TOKEN, "");
+
                     Intent mIntent = new Intent(HomeActivity.this, LoginActivity.class);
                     startActivity(mIntent);
                 }

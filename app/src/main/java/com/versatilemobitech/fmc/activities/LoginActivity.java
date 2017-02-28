@@ -15,7 +15,9 @@ import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.models.LoginModel;
 import com.versatilemobitech.fmc.models.Model;
+import com.versatilemobitech.fmc.models.PushNotificationModel;
 import com.versatilemobitech.fmc.parsers.LoginParser;
+import com.versatilemobitech.fmc.parsers.PushNotificationParser;
 import com.versatilemobitech.fmc.utility.APIConstants;
 import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
@@ -175,13 +177,43 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     Utility.setSharedPrefStringData(context, Constants.CURRENT_LOCATION, loginModel.getCurrent_location());
                     Utility.setSharedPrefStringData(context, Constants.INTERESTED_LOCATION, loginModel.getInterested_location());
 
-                    Intent mIntentSignup = new Intent(LoginActivity.this, HomeActivity.class);
+                    /*Intent mIntentSignup = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(mIntentSignup);
+                    finish();*/
+
+                    sendPushDeviceInfo();
+                } else if (model instanceof PushNotificationModel) {
+                    Intent mIntentSignUp = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(mIntentSignUp);
                     finish();
                 }
             } else {
                 Utility.showToastMessage(LoginActivity.this, "Invalid User name (or) Password");
             }
+        }
+    }
+
+    private void sendPushDeviceInfo() {
+        LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
+        paramMap.put("device_os", "Android");
+        paramMap.put("device_id", Utility.getSharedPrefStringData(this, Constants.DEVICE_TOKEN));
+        paramMap.put("user_id", Utility.getSharedPrefStringData(this, Constants.USER_ID));
+        PushNotificationParser pushNotificationParser = new PushNotificationParser();
+
+        if (Utility.isNetworkAvailable(context)) {
+            ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(context, Utility.getResourcesString(context,
+                    R.string.please_wait), true,
+                    APIConstants.DEVICE_ID, paramMap,
+                    APIConstants.REQUEST_TYPE.POST, this, pushNotificationParser);
+            Utility.execute(serverIntractorAsync);
+        } else {
+            Utility.showSettingDialog(
+                    context,
+                    context.getResources().getString(
+                            R.string.no_internet_msg),
+                    context.getResources().getString(
+                            R.string.no_internet_title),
+                    Utility.NO_INTERNET_CONNECTION).show();
         }
     }
 }
