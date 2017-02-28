@@ -49,4 +49,6 @@ public class Constants {
     public static final String ALTERNATE = "ALTERNATE";
     public static final String CURRENT_LOCATION = "CURRENT_LOCATION";
     public static final String INTERESTED_LOCATION = "INTERESTED_LOCATION";
+
+    public static final String POST_ID = "POST_ID";
 }

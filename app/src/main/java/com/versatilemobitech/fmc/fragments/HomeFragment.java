@@ -103,6 +103,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     private Dialog dialogCompleted;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    private String postID = "";
 
     private static IUpdateSelectedPic iUpdateSelectedPic;
 
@@ -115,6 +116,10 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         super.onCreate(savedInstanceState);
         mParent = (HomeActivity) getActivity();
         iUpdateSelectedPic = this;
+        Bundle bundle = getArguments();
+        if (bundle.containsKey(Constants.POST_ID)) {
+            postID = bundle.getString(Constants.POST_ID);
+        }
     }
 
     @Override
@@ -147,6 +152,12 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         if (Utility.isMarshmallowOS()) {
             Permissions.getInstance().setActivity(getActivity());
             CheckForPermissions(getActivity(), Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
+        }
+
+        if (postID != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("post_id", postID);
+            Utility.navigateDashBoardFragment(new DetailViewFragment(), DetailViewFragment.TAG, bundle, mParent);
         }
 
     }

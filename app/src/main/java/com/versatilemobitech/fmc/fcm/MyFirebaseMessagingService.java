@@ -10,13 +10,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.activities.HomeActivity;
 import com.versatilemobitech.fmc.activities.SplashActivity;
+import com.versatilemobitech.fmc.utility.Constants;
 import com.versatilemobitech.fmc.utility.Utility;
+
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -29,33 +36,61 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
-
+    // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        // [START_EXCLUDE]
+        // There are two types of messages data messages and notification messages. Data messages are handled
+        // here in onMessageReceived whether the app is in the foreground or background. Data messages are the type
+        // traditionally used with GCM. Notification messages are only received here in onMessageReceived when the app
+        // is in the foreground. When the app is in the background an automatically generated notification is displayed.
+        // When the user taps on the notification they are returned to the app. Messages containing both notification
+        // and data payloads are treated as notification messages. The Firebase console always sends notification
+        // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
+        // [END_EXCLUDE]
 
-        Map<String, String> params = remoteMessage.getData();
-        if (params != null && params.size() > 0) {
-            Utility.showLog("dataChat", "<><>" + params);
-            Utility.showLog(TAG, "From: " + remoteMessage.getFrom());
-            Utility.showLog(TAG, "Notification Message Body: " + params.get("message"));
+        // TODO(developer): Handle FCM messages here.
+        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
+        Log.d(TAG, "From: " + remoteMessage.getFrom());
+
+        // Check if message contains a data payload.
+        if (remoteMessage.getData().size() > 0) {
+            Log.e(TAG, "Message data payload: " + remoteMessage.getData());
+            JSONObject jsonObject = new JSONObject(remoteMessage.getData());
+            if (jsonObject.has("message")) {
+                sendNotification(jsonObject.optString("message"), jsonObject.optString("id"));
+            }
         }
-    }
 
-    @Override
-    public void zzm(Intent intent) {
-        Intent launchIntent = new Intent(this, SplashActivity.class);
-        launchIntent.setAction(Intent.ACTION_MAIN);
-        launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* R    equest code */, launchIntent,
+        // Check if message contains a notification payload.
+        if (remoteMessage.getNotification() != null) {
+            Log.e(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+        }
+
+        // Also if you intend on generating your own notifications as a result of a received FCM
+        // message, here is where that should be initiated. See sendNotification method below.
+    }
+    // [END receive_message]
+
+    /**
+     * Create and show a simple notification containing the received FCM message.
+     *
+     * @param messageBody FCM message body received.
+     */
+    private void sendNotification(String messageBody, String postId) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra(Constants.POST_ID, postId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
-        Bitmap rawBitmap = BitmapFactory.decodeResource(getResources(),
-                R.mipmap.ic_launcher);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.notification)
-                .setLargeIcon(rawBitmap)
-                .setContentTitle(getApplicationContext().getResources().getString(R.string.app_name))
-                .setContentText(intent.getStringExtra("gcm.notification.body"))
+                .setSmallIcon(R.drawable.fmc_push_notification)
+                .setContentTitle("FCM Message")
+                .setContentText(messageBody)
                 .setAutoCancel(true)
+                .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =

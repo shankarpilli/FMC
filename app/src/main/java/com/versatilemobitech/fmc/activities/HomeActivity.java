@@ -62,12 +62,19 @@ public class HomeActivity extends BaseActivity {
     public static TextView txt_user_designation;
     public static ImageView img_user_image;
 
+    private String postId = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if (getIntent() != null) {
+            postId = getIntent().getStringExtra(Constants.POST_ID);
+        }
+
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         Menu m = navigationView.getMenu();
         for (int i = 0; i < m.size(); i++) {
@@ -88,7 +95,9 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void initNavigationDrawer() {
-        Utility.navigateDashBoardFragment(new HomeFragment(), HomeFragment.TAG, null, HomeActivity.this);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.POST_ID, postId);
+        Utility.navigateDashBoardFragment(new HomeFragment(), HomeFragment.TAG, bundle, HomeActivity.this);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
