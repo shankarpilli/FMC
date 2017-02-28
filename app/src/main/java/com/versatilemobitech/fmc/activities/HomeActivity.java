@@ -57,8 +57,9 @@ public class HomeActivity extends BaseActivity {
     public Dialog progressDialog;
     private static long back_pressed;
 
-    public  static TextView txt_name;
-    public  static TextView txt_user_designation;
+    public static TextView txt_name;
+    public static TextView txt_user_designation;
+    public static ImageView img_user_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,9 +152,9 @@ public class HomeActivity extends BaseActivity {
         });
 
         View header = navigationView.getHeaderView(0);
-        ImageView img_user_image = (ImageView) header.findViewById(R.id.img_user_image);
+        img_user_image = (ImageView) header.findViewById(R.id.img_user_image);
         if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC)))
-            Picasso.with(this).load(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC)).
+            Picasso.with(this).load(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC)).skipMemoryCache().
                     placeholder(Utility.getDrawable(this, R.drawable.avatar_image))
                     .transform(new CircleTransform()).into(img_user_image);
         txt_name = (TextView) header.findViewById(R.id.txt_name);
@@ -238,10 +239,12 @@ public class HomeActivity extends BaseActivity {
 
         } else if (requestCode == Constants.FROM_EDIT_CAMERA_ID) {
             if (resultCode == Activity.RESULT_OK) {
-                Uri selectedImageUri = data.getData();
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                 String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
-                EditProfileFragment.getInstance().updateProfilePic(selectedImgPath);
+                Intent intent = new Intent(HomeActivity.this, CropActivity.class);
+                intent.putExtra("image_path", selectedImgPath);
+                intent.putExtra("from", "EditProfileFragment");
+                startActivity(intent);
             }
 
         } else if (requestCode == Constants.FROM_HOME_GALLERY_ID) {
@@ -259,10 +262,11 @@ public class HomeActivity extends BaseActivity {
             if (resultCode == Activity.RESULT_OK) {
                 Uri selectedImageUri = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
-                    String selectedImgPath = ImageUtility.saveBitmap(HomeActivity.this, bitmap);
-                    EditProfileFragment.getInstance().updateProfilePic(getRealPathFromURI(selectedImageUri));
-                } catch (IOException e) {
+                    Intent intent = new Intent(HomeActivity.this, CropActivity.class);
+                    intent.putExtra("image_path", getRealPathFromURI(selectedImageUri));
+                    intent.putExtra("from", "EditProfileFragment");
+                    startActivity(intent);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

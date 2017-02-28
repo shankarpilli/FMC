@@ -24,16 +24,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
-import com.versatilemobitech.fmc.activities.SignupActivity;
 import com.versatilemobitech.fmc.asynctask.IAsyncCaller;
 import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
-import com.versatilemobitech.fmc.interfaces.IUpdateSelectedPic;
+import com.versatilemobitech.fmc.interfaces.IUpdateEditProfilePic;
+import com.versatilemobitech.fmc.interfaces.IUpdateProfilePic;
 import com.versatilemobitech.fmc.models.Model;
 import com.versatilemobitech.fmc.models.SignUpModel;
 import com.versatilemobitech.fmc.parsers.SignUpParser;
@@ -48,7 +47,7 @@ import java.util.LinkedHashMap;
 /**
  * Created by Shankar Pilli
  */
-public class EditProfileFragment extends Fragment implements View.OnClickListener, IAsyncCaller, IUpdateSelectedPic {
+public class EditProfileFragment extends Fragment implements View.OnClickListener, IAsyncCaller, IUpdateEditProfilePic {
 
     public static final String TAG = "EditProfileFragment";
     private HomeActivity mParent;
@@ -105,22 +104,20 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     private Typeface mTypefaceFontAwesome;
 
     private boolean mImageChanged = false;
-    private String mChangedPicString = "";
-    private String mImgpath;
     private String mEncodedImage;
     private String mImgpathExtenstion;
 
-    private static IUpdateSelectedPic iUpdateSelectedPic;
+    private static IUpdateEditProfilePic iUpdateEditProfilePic;
 
-    public static IUpdateSelectedPic getInstance() {
-        return iUpdateSelectedPic;
+    public static IUpdateEditProfilePic getInstance() {
+        return iUpdateEditProfilePic;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mParent = (HomeActivity) getActivity();
-        iUpdateSelectedPic = this;
+        iUpdateEditProfilePic = this;
     }
 
     @Override
@@ -318,7 +315,12 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             paramMap.put("company_name", edt_company_name.getText().toString());
             if (mImageChanged) {
                 paramMap.put("profile_pic", mEncodedImage);
-                paramMap.put("file_extension", mImgpathExtenstion);
+                String extension = "";
+                int i = mImgpathExtenstion.lastIndexOf('.');
+                if (i > 0) {
+                    extension = mImgpathExtenstion.substring(i + 1);
+                }
+                paramMap.put("file_extension", extension);
             }
             paramMap.put("business_email_id", edt_business_email_id.getText().toString());
             //paramMap.put("personal_email_id", edt_personal_mail.getText().toString());
@@ -425,6 +427,12 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         Utility.setSharedPrefStringData(mParent, Constants.ALTERNATE, edt_alternate.getText().toString());
         Utility.setSharedPrefStringData(mParent, Constants.CURRENT_LOCATION, edt_location_icon.getText().toString());
         Utility.setSharedPrefStringData(mParent, Constants.INTERESTED_LOCATION, mSignUpModel.getInterested_location());
+        Utility.setSharedPrefStringData(mParent, Constants.PROFILE_PIC, mSignUpModel.getProfile_pic());
+
+        if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(mParent, Constants.PROFILE_PIC)))
+            Picasso.with(mParent).load(Utility.getSharedPrefStringData(mParent, Constants.PROFILE_PIC)).skipMemoryCache().
+                    placeholder(Utility.getDrawable(mParent, R.drawable.avatar_image))
+                    .transform(new CircleTransform()).into(img_user_image);
 
         Utility.showToastMessage(getActivity(), "Profile Edited Successfully");
         mParent.onBackPressed();
@@ -485,32 +493,20 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
-    public void updateProfilePic(String path) {
-        mImageChanged = true;
-        mChangedPicString = path;
-
-        Bitmap bitmapImage = BitmapFactory.decodeFile(path);
-        int nh = (int) (bitmapImage.getHeight() * (512.0 / bitmapImage.getWidth()));
-        Bitmap scaled = Bitmap.createScaledBitmap(bitmapImage, 512, nh, true);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        scaled.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
-        byte[] b = baos.toByteArray();
-        mEncodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-
-        mImgpathExtenstion = "";
-        int i = path.lastIndexOf('.');
-        if (i > 0) {
-            mImgpathExtenstion = path.substring(i + 1);
+    public void updateProfilePic(String base, String path, Bitmap bitmap) {
+        if (bitmap != null) {
+            mImageChanged = true;
+            mEncodedImage = base;
+            mImgpathExtenstion = path;
+            if (!Utility.isValueNullOrEmpty(base)) {
+                if (bitmap != null) {
+                    //img_user_image.setImageBitmap(bitmap);
+                    if (!Utility.isValueNullOrEmpty(path))
+                        Picasso.with(getActivity()).load(new File(path)).
+                                placeholder(Utility.getDrawable(getActivity(), R.drawable.avatar_image))
+                                .transform(new CircleTransform()).into(img_user_image);
+                }
+            }
         }
-    }
-
-    @Override
-    public void updateDoc(File path) {
-
-    }
-
-    @Override
-    public void updatePdf(File path) {
-
     }
 }

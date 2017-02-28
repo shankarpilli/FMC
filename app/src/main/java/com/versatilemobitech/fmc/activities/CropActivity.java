@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.isseiaoki.simplecropview.CropImageView;
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.fragments.EditProfileFragment;
 import com.versatilemobitech.fmc.utility.Utility;
 
 import java.io.ByteArrayOutputStream;
@@ -76,6 +77,8 @@ public class CropActivity extends BaseActivity implements View.OnClickListener {
 
                 if (mForm.equalsIgnoreCase("RegistrationActivity")) {
                     SignupActivity.getInstance().updateProfilePic(temp, imagePath);
+                } else if (mForm.equalsIgnoreCase("EditProfileFragment")) {
+                    EditProfileFragment.getInstance().updateProfilePic(temp, imagePath, bitmap);
                 }
                 finish();
             }
