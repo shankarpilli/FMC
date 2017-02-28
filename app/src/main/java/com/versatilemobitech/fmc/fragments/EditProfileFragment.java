@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
@@ -405,10 +406,28 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
             if (model.isStatus()) {
                 if (model instanceof SignUpModel) {
                     SignUpModel mSignUpModel = (SignUpModel) model;
-                    Utility.showLog("Updated", "Updated" + mSignUpModel.getCompany_name());
+                    saveUpdatedData(mSignUpModel);
                 }
             }
         }
+    }
+
+    private void saveUpdatedData(SignUpModel mSignUpModel) {
+        Utility.setSharedPrefStringData(mParent, Constants.FIRST_NAME, edt_first_name.getText().toString());
+        Utility.setSharedPrefStringData(mParent, Constants.LAST_NAME, edt_last_name.getText().toString());
+        Utility.setSharedPrefStringData(mParent, Constants.COMPANY_NAME, edt_company_name.getText().toString());
+        HomeActivity.txt_name.setText("" + Utility.capitalizeFirstLetter(edt_first_name.getText().toString()) + " "
+                + Utility.capitalizeFirstLetter(edt_last_name.getText().toString()));
+        HomeActivity.txt_user_designation.setText("" + Utility.capitalizeFirstLetter(edt_company_name.getText().toString()));
+        Utility.setSharedPrefStringData(mParent, Constants.BUSINESS_MAIL_ID, edt_business_email_id.getText().toString());
+        //Utility.setSharedPrefStringData(mParent, Constants.PERSONAL_MAIL_ID, edt_personal_mail.getText().toString());
+        Utility.setSharedPrefStringData(mParent, Constants.CONTACT, edt_contact.getText().toString());
+        Utility.setSharedPrefStringData(mParent, Constants.ALTERNATE, edt_alternate.getText().toString());
+        Utility.setSharedPrefStringData(mParent, Constants.CURRENT_LOCATION, edt_location_icon.getText().toString());
+        Utility.setSharedPrefStringData(mParent, Constants.INTERESTED_LOCATION, mSignUpModel.getInterested_location());
+
+        Utility.showToastMessage(getActivity(), "Profile Edited Successfully");
+        mParent.onBackPressed();
     }
 
     public void showSelectPhotoDialog() {

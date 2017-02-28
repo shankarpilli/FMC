@@ -57,6 +57,8 @@ public class HomeActivity extends BaseActivity {
     public Dialog progressDialog;
     private static long back_pressed;
 
+    public  static TextView txt_name;
+    public  static TextView txt_user_designation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,8 +156,8 @@ public class HomeActivity extends BaseActivity {
             Picasso.with(this).load(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC)).
                     placeholder(Utility.getDrawable(this, R.drawable.avatar_image))
                     .transform(new CircleTransform()).into(img_user_image);
-        TextView txt_name = (TextView) header.findViewById(R.id.txt_name);
-        TextView txt_user_designation = (TextView) header.findViewById(R.id.txt_user_designation);
+        txt_name = (TextView) header.findViewById(R.id.txt_name);
+        txt_user_designation = (TextView) header.findViewById(R.id.txt_user_designation);
         TextView tv_edit = (TextView) header.findViewById(R.id.tv_edit);
 
         tv_edit.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +170,8 @@ public class HomeActivity extends BaseActivity {
 
         txt_name.setTypeface(Utility.setTypeRobotoBoldRegular(this));
         tv_edit.setTypeface(Utility.setTypeFace_fontawesome(this));
-        txt_name.setText(Utility.capitalizeFirstLetter(Utility.getSharedPrefStringData(HomeActivity.this, Constants.USER_NAME)));
+        txt_name.setText(Utility.capitalizeFirstLetter(Utility.getSharedPrefStringData(HomeActivity.this, Constants.FIRST_NAME)) + " "
+                + Utility.capitalizeFirstLetter(Utility.getSharedPrefStringData(HomeActivity.this, Constants.LAST_NAME)));
         txt_user_designation.setTypeface(Utility.setTypeFaceRobotoRegular(this));
         txt_user_designation.setText(Utility.getSharedPrefStringData(HomeActivity.this, Constants.COMPANY_NAME));
 
