@@ -1,6 +1,7 @@
 package com.versatilemobitech.fmc.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +31,17 @@ public class MembersAdapter extends BaseAdapter implements Filterable {
     private ValueFilter valueFilter;
     private ArrayList<MembersModel> membersModels;
 
+    private Typeface mRobotoRegularTypeface;
+    private Typeface mRobotoLightTypeface;
+
     public MembersAdapter(Context context, ArrayList<MembersModel> _MembersModel) {
         super();
         this.context = context;
         this._MembersModel = _MembersModel;
         membersModels = _MembersModel;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mRobotoRegularTypeface = Utility.setTypeFaceRobotoRegular(context);
+        mRobotoLightTypeface = Utility.setTypeRobotoLight(context);
         getFilter();
     }
 
@@ -69,8 +75,8 @@ public class MembersAdapter extends BaseAdapter implements Filterable {
             holder.txt_your_name = (TextView) convertView.findViewById(R.id.txt_your_name);
             holder.txt_company = (TextView) convertView.findViewById(R.id.txt_company);
             holder.img_member = (ImageView) convertView.findViewById(R.id.img_member);
-            holder.txt_your_name.setTypeface(Utility.setTypeFaceRobotoRegular(context));
-            holder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(context));
+            holder.txt_your_name.setTypeface(mRobotoRegularTypeface);
+            holder.txt_company.setTypeface(mRobotoLightTypeface);
             convertView.setTag(holder);
         } else
             holder = (MembersItemHolder) convertView.getTag();
