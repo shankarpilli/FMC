@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
@@ -429,10 +430,10 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
         Utility.setSharedPrefStringData(mParent, Constants.INTERESTED_LOCATION, mSignUpModel.getInterested_location());
         Utility.setSharedPrefStringData(mParent, Constants.PROFILE_PIC, mSignUpModel.getProfile_pic());
 
-        if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(mParent, Constants.PROFILE_PIC)))
-            Picasso.with(mParent).load(Utility.getSharedPrefStringData(mParent, Constants.PROFILE_PIC)).skipMemoryCache().
+        if (!Utility.isValueNullOrEmpty(mSignUpModel.getProfile_pic()))
+            Picasso.with(mParent).load(mSignUpModel.getProfile_pic()).memoryPolicy(MemoryPolicy.NO_CACHE).
                     placeholder(Utility.getDrawable(mParent, R.drawable.avatar_image))
-                    .transform(new CircleTransform()).into(img_user_image);
+                    .transform(new CircleTransform()).into(HomeActivity.img_user_image);
 
         Utility.showToastMessage(getActivity(), "Profile Edited Successfully");
         mParent.onBackPressed();

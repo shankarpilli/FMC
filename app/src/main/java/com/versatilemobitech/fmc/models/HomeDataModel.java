@@ -17,7 +17,9 @@ public class HomeDataModel extends Model {
     private String company_name;
     private String profile_pic;
     private int comments_count;
+    private int likes_count;
     private String datetime;
+    private int already_liked;
 
     public String getPost_text() {
         return post_text;
@@ -129,5 +131,21 @@ public class HomeDataModel extends Model {
 
     public void setRecently_liked(String recently_liked) {
         this.recently_liked = recently_liked;
+    }
+
+    public int getLikes_count() {
+        return likes_count;
+    }
+
+    public void setLikes_count(int likes_count) {
+        this.likes_count = likes_count;
+    }
+
+    public int getAlready_liked() {
+        return already_liked;
+    }
+
+    public void setAlready_liked(int already_liked) {
+        this.already_liked = already_liked;
     }
 }

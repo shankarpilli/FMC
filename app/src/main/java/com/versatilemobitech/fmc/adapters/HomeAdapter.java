@@ -205,10 +205,10 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
             mHomeItemHolder.txt_total_comments.setText("" + mHomeDataModel.getComments_count() + " comments");
         }
 
-        if (mHomeDataModel.getPost_like() == 1) {
-            mHomeItemHolder.txt_total_likes.setText("" + mHomeDataModel.getPost_like() + " like");
+        if (mHomeDataModel.getLikes_count() == 1) {
+            mHomeItemHolder.txt_total_likes.setText("" + mHomeDataModel.getLikes_count() + " like");
         } else {
-            mHomeItemHolder.txt_total_likes.setText("" + mHomeDataModel.getPost_like() + " likes");
+            mHomeItemHolder.txt_total_likes.setText("" + mHomeDataModel.getLikes_count() + " likes");
         }
 
 
@@ -268,7 +268,10 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
                 int position = (int) view.getId();
                 mCurrentLikePosition = position;
                 String mStringId = homeDataModels.get(position).getPost_id();
-                postLike(mStringId);
+                if (homeDataModels.get(position).getAlready_liked() == 0)
+                    postLike(mStringId);
+                else
+                    Utility.showToastMessage(mContext, Utility.getResourcesString(mContext, R.string.you_have_already_liked_this_post));
             }
         });
 
@@ -321,14 +324,14 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
                     Utility.showToastMessage(mContext, postLikeModel.getMessage());
                     Utility.showLog("Log", "" + mCurrentLikePosition);
                     HomeDataModel homeDataModel = homeDataModels.get(mCurrentLikePosition);
-                    homeDataModel.setPost_like(homeDataModel.getPost_like() + 1);
+                    homeDataModel.setLikes_count(homeDataModel.getLikes_count() + 1);
+                    homeDataModel.setAlready_liked(homeDataModel.getAlready_liked() + 1);
                     homeDataModels.set(mCurrentLikePosition, homeDataModel);
                     notifyDataSetChanged();
                 }
             }
         }
     }
-
 
     private class HomeItemHolder {
         private ImageView post_image;

@@ -48,6 +48,8 @@ public class GetPostsParser implements Parser {
                         mHomeDataModel.setDoc_extension(mObj.optString("doc_extension"));
                         mHomeDataModel.setPost_image(mObj.optString("post_image"));
                         mHomeDataModel.setComments_count(mObj.optInt("comments_count"));
+                        mHomeDataModel.setLikes_count(mObj.optInt("likes_count"));
+                        mHomeDataModel.setAlready_liked(mObj.optInt("already_liked"));
                         mHomeDataModel.setDatetime(mObj.optString("datetime"));
                         /*JSONArray jsonCommentsArray = mObj.optJSONArray("comments");
                         ArrayList<GetPostsCommentModel> mGetPostsCommentModelList = new ArrayList<>();
