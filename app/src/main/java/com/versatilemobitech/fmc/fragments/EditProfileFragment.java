@@ -177,7 +177,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
     }
 
     private void setTypeface() {
-        mTypefaceRobot = Utility.setTypeFaceRobotoRegular(getActivity());
+        mTypefaceRobot = Utility.setTypeRobotoLight(getActivity());
         mTypefaceFontAwesome = Utility.setTypeFace_fontawesome(getActivity());
 
         edt_first_name.setTypeface(mTypefaceRobot);
@@ -437,6 +437,7 @@ public class EditProfileFragment extends Fragment implements View.OnClickListene
 
         Utility.showToastMessage(getActivity(), "Profile Edited Successfully");
         mParent.onBackPressed();
+        HomeFragment.getInstanceNew().updateProfilePic();
     }
 
     public void showSelectPhotoDialog() {

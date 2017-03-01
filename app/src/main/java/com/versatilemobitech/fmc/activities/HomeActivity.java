@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
@@ -163,8 +164,11 @@ public class HomeActivity extends BaseActivity {
 
         View header = navigationView.getHeaderView(0);
         img_user_image = (ImageView) header.findViewById(R.id.img_user_image);
+        Utility.showLog("Data", Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC));
         if (!Utility.isValueNullOrEmpty(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC)))
-            Picasso.with(this).load(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC)).memoryPolicy(MemoryPolicy.NO_CACHE).
+            Picasso.with(this).load(Utility.getSharedPrefStringData(this, Constants.PROFILE_PIC))
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
+                    .networkPolicy(NetworkPolicy.NO_CACHE).
                     placeholder(Utility.getDrawable(this, R.drawable.avatar_image))
                     .transform(new CircleTransform()).into(img_user_image);
         txt_name = (TextView) header.findViewById(R.id.txt_name);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.isseiaoki.simplecropview.util.Utils;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.activities.HomeActivity;
@@ -62,12 +64,17 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
     private Fragment fragment;
     private int mCurrentLikePosition = -1;
 
+    private Typeface mTypeFaceRobotoRegular;
+    private Typeface mTypeFaceRobotoLight;
+
     public HomeAdapter(HomeActivity dashboardActivity, Context context, Fragment fragment, ArrayList<HomeDataModel> homeDataModels) {
         mContext = context;
         this.dashboardActivity = dashboardActivity;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.homeDataModels = homeDataModels;
         this.fragment = fragment;
+        this.mTypeFaceRobotoRegular = Utility.setTypeFaceRobotoRegular(mContext);
+        this.mTypeFaceRobotoLight = Utility.setTypeRobotoLight(mContext);
     }
 
 
@@ -121,20 +128,20 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
             //mHomeItemHolder.txt_share_icon = (TextView) convertView.findViewById(R.id.txt_share_icon);
             //mHomeItemHolder.txt_comment_icon = (TextView) convertView.findViewById(R.id.txt_comment_icon);
 
-            mHomeItemHolder.txt_name.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_company.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_time_date.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_post_message.setTypeface(Utility.setTypeRobotoLight(mContext));
-            mHomeItemHolder.txt_sub_name.setTypeface(Utility.setTypeRobotoLight(mContext));
-            mHomeItemHolder.txt_share.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
+            mHomeItemHolder.txt_name.setTypeface(mTypeFaceRobotoRegular);
+            mHomeItemHolder.txt_company.setTypeface(mTypeFaceRobotoRegular);
+            mHomeItemHolder.txt_time_date.setTypeface(mTypeFaceRobotoRegular);
+            mHomeItemHolder.txt_post_message.setTypeface(mTypeFaceRobotoLight);
+            mHomeItemHolder.txt_sub_name.setTypeface(mTypeFaceRobotoLight);
+            mHomeItemHolder.txt_share.setTypeface(mTypeFaceRobotoRegular);
 
-            mHomeItemHolder.txt_total_comments.setTypeface(Utility.setTypeRobotoLight(mContext));
-            mHomeItemHolder.txt_total_likes.setTypeface(Utility.setTypeRobotoLight(mContext));
-            mHomeItemHolder.txt_comment.setTypeface(Utility.setTypeRobotoLight(mContext));
-            mHomeItemHolder.txt_share.setTypeface(Utility.setTypeRobotoLight(mContext));
+            mHomeItemHolder.txt_total_comments.setTypeface(mTypeFaceRobotoLight);
+            mHomeItemHolder.txt_total_likes.setTypeface(mTypeFaceRobotoLight);
+            mHomeItemHolder.txt_comment.setTypeface(mTypeFaceRobotoLight);
+            mHomeItemHolder.txt_share.setTypeface(mTypeFaceRobotoLight);
 
-            mHomeItemHolder.txt_recently_liked.setTypeface(Utility.setTypeFaceRobotoRegular(mContext));
-            mHomeItemHolder.txt_likes_this.setTypeface(Utility.setTypeRobotoLight(mContext));
+            mHomeItemHolder.txt_recently_liked.setTypeface(mTypeFaceRobotoRegular);
+            mHomeItemHolder.txt_likes_this.setTypeface(mTypeFaceRobotoLight);
 
             //mHomeItemHolder.txt_share_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
             //mHomeItemHolder.txt_comment_icon.setTypeface(Utility.setTypeFace_matirealicons(mContext));
@@ -167,7 +174,9 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
 
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getProfile_pic()))
             Picasso.with(mContext)
-                    .load(mHomeDataModel.getProfile_pic()).transform(new RoundedCornersTransformation(5, 1))
+                    .load(mHomeDataModel.getProfile_pic())
+                    .transform(new RoundedCornersTransformation(5, 1))
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(mHomeItemHolder.post_image);
         if (!Utility.isValueNullOrEmpty(mHomeDataModel.getPost_image()) && (mHomeDataModel.getPost_image().contains(".jpg") || mHomeDataModel.getPost_image().contains(".png"))) {
@@ -260,7 +269,7 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
             }
         });
 
-        mHomeItemHolder.txt_like.setTypeface(Utility.setTypeRobotoLight(mContext));
+        mHomeItemHolder.txt_like.setTypeface(mTypeFaceRobotoLight);
         mHomeItemHolder.ll_like.setId(position);
         mHomeItemHolder.ll_like.setOnClickListener(new View.OnClickListener() {
             @Override

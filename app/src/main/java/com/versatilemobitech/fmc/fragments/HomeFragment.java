@@ -36,6 +36,7 @@ import com.versatilemobitech.fmc.asynctask.ServerIntractorAsync;
 import com.versatilemobitech.fmc.customviews.CircleTransform;
 import com.versatilemobitech.fmc.customviews.RoundedCornersTransformation;
 import com.versatilemobitech.fmc.designs.MaterialDialog;
+import com.versatilemobitech.fmc.interfaces.IUpdatePostPic;
 import com.versatilemobitech.fmc.interfaces.IUpdateSelectedPic;
 import com.versatilemobitech.fmc.models.GetPostsModel;
 import com.versatilemobitech.fmc.models.HomeDataModel;
@@ -61,7 +62,7 @@ import java.util.LinkedHashMap;
  * Created by Shankar Pilli on 11/06/2016
  */
 public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener,
-        IUpdateSelectedPic, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+        IUpdateSelectedPic,IUpdatePostPic, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static final String TAG = "HomeFragment";
     private HomeActivity mParent;
@@ -106,9 +107,14 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     private String postID = "";
 
     private static IUpdateSelectedPic iUpdateSelectedPic;
+    private static IUpdatePostPic iUpdatePostPic;
 
     public static IUpdateSelectedPic getInstance() {
         return iUpdateSelectedPic;
+    }
+
+    public static IUpdatePostPic getInstanceNew() {
+        return iUpdatePostPic;
     }
 
     @Override
@@ -116,6 +122,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         super.onCreate(savedInstanceState);
         mParent = (HomeActivity) getActivity();
         iUpdateSelectedPic = this;
+        iUpdatePostPic = this;
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey(Constants.POST_ID)) {
             postID = bundle.getString(Constants.POST_ID);
@@ -690,5 +697,15 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         if (dialogCompleted.isShowing()) {
             dialogCompleted.cancel();
         }
+    }
+
+    @Override
+    public void updateProfilePic() {
+        homeDataModels = null;
+        homeAdapter = null;
+        list_view.setAdapter(null);
+        endScroll = false;
+        mPageNumber = 1;
+        getHomeFeeds("1");
     }
 }
