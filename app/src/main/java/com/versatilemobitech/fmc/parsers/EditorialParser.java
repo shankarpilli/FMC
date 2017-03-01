@@ -26,14 +26,15 @@ public class EditorialParser implements Parser {
                 mEditorialsModel.setMessage(jsonObject.optString("msg"));
 
                 mEditorialsModel.setTotal_number_of_posts(jsonObject.optString("total_number_of_posts"));
-                if(jsonObject.has("books_details")){
+                if (jsonObject.has("books_details")) {
                     JSONArray mArray = jsonObject.getJSONArray("books_details");
                     ArrayList<EditorialsModel> mEditorialsModelList = new ArrayList<>();
-                    for(int i = 0;i<mArray.length();i++){
+                    for (int i = 0; i < mArray.length(); i++) {
                         JSONObject mJObj = (JSONObject) mArray.get(i);
                         EditorialsModel mEditorialsModelItem = new EditorialsModel();
 
                         mEditorialsModelItem.setBook_name(mJObj.optString("book_name"));
+                        mEditorialsModelItem.setAuthor(mJObj.optString("author"));
                         mEditorialsModelItem.setBook_path(mJObj.optString("book_path"));
                         mEditorialsModelItem.setBook_description(mJObj.optString("book_description"));
                         mEditorialsModelItem.setBig_Image(mJObj.optString("book_image"));

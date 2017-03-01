@@ -12,6 +12,7 @@ public class EditorialsModel extends Model {
     private String book_description;
     private String book_image;
     private String source;
+    private String author;
     private String Small_Image;
     private String Big_Image;
     private String book_id;
@@ -96,5 +97,13 @@ public class EditorialsModel extends Model {
 
     public void setTotal_number_of_posts(String total_number_of_posts) {
         this.total_number_of_posts = total_number_of_posts;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

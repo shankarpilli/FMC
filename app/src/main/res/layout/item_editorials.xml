@@ -72,6 +72,15 @@
                     android:textSize="@dimen/_16sp" />
 
                 <TextView
+                    android:id="@+id/txt_author_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5dp"
+                    android:text="@string/author_name"
+                    android:textColor="@color/blackColor"
+                    android:textSize="@dimen/_16sp" />
+
+                <TextView
                     android:id="@+id/txt_time_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

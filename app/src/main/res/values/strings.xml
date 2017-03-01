@@ -130,5 +130,6 @@
     <string name="save">Save</string>
     <string name="you_have_already_liked_this_post">You have already liked this post</string>
     <string name="camera_icon">&#xf030;</string>
+    <string name="author_name">Author Name</string>
 
 </resources>

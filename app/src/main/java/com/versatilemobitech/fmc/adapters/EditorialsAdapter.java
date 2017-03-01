@@ -61,6 +61,7 @@ public class EditorialsAdapter extends BaseAdapter {
                     null);
             mEditorialsItemHolder = new EditorialsItemHolder();
             mEditorialsItemHolder.txt_your_name = (TextView) convertView.findViewById(R.id.txt_your_name);
+            mEditorialsItemHolder.txt_author_name = (TextView) convertView.findViewById(R.id.txt_author_name);
             mEditorialsItemHolder.txt_time_date = (TextView) convertView.findViewById(R.id.txt_time_date);
             mEditorialsItemHolder.img_editorials = (ImageView) convertView.findViewById(R.id.img_editorials);
             mEditorialsItemHolder.txt_your_name.setTypeface(mTypefaceRobotoRegular);
@@ -74,6 +75,7 @@ public class EditorialsAdapter extends BaseAdapter {
 
 
         mEditorialsItemHolder.txt_your_name.setText(Utility.capitalizeFirstLetter(editorialsModel.getBook_name()));
+        mEditorialsItemHolder.txt_author_name.setText(Utility.capitalizeFirstLetter(editorialsModel.getAuthor()));
         mEditorialsItemHolder.txt_time_date.setText(Utility.capitalizeFirstLetter(editorialsModel.getBook_description()));
 
         if (!Utility.isValueNullOrEmpty(editorialsModel.getSmall_Image()))
@@ -88,6 +90,7 @@ public class EditorialsAdapter extends BaseAdapter {
 
     private class EditorialsItemHolder {
         private TextView txt_your_name;
+        private TextView txt_author_name;
         /*private TextView txt_company;*/
         private TextView txt_time_date;
         private ImageView img_editorials;
