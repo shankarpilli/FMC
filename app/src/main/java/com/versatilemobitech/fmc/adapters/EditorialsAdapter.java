@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.models.EditorialsModel;
@@ -80,7 +81,7 @@ public class EditorialsAdapter extends BaseAdapter {
 
         if (!Utility.isValueNullOrEmpty(editorialsModel.getSmall_Image()))
             Picasso.with(mContext)
-                    .load(editorialsModel.getSmall_Image())
+                    .load(editorialsModel.getSmall_Image()).memoryPolicy(MemoryPolicy.NO_CACHE)
                     .placeholder(Utility.getDrawable(mContext, R.drawable.folder_icon))
                     .into(mEditorialsItemHolder.img_editorials);
 

@@ -1,5 +1,6 @@
 package com.versatilemobitech.fmc.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
+import com.versatilemobitech.fmc.customviews.TouchImageView;
 import com.versatilemobitech.fmc.models.CSRViewModel;
 import com.versatilemobitech.fmc.utility.Utility;
 
@@ -70,6 +72,7 @@ public class CSRImageViewPagerAdapter extends PagerAdapter {
                 view, false);
         assert imageLayout != null;
         ImageView image = (ImageView) imageLayout.findViewById(R.id.image);
+        image.setTag(mImageGallerySerializableList.get(position).getImage_path());
         TextView tv_date = (TextView) imageLayout.findViewById(R.id.tv_date);
         TextView tv_title = (TextView) imageLayout.findViewById(R.id.tv_title);
         TextView tv_description = (TextView) imageLayout.findViewById(R.id.tv_description);
@@ -82,8 +85,25 @@ public class CSRImageViewPagerAdapter extends PagerAdapter {
         tv_title.setTypeface(Utility.setTypeRobotoBoldRegular(parent));
         tv_description.setTypeface(Utility.setTypeFaceRobotoRegular(parent));
 
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = (String) view.getTag();
+                showFitDialog(url, parent);
+            }
+        });
         view.addView(imageLayout, 0);
         return imageLayout;
     }
 
+    public void showFitDialog(String url, Context context) {
+        Dialog dialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.dialog_fitcenter);
+        dialog.setCanceledOnTouchOutside(false);
+        TouchImageView imageView = (TouchImageView) dialog.findViewById(R.id.imageView);
+        //dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Utility.UILpicLoading(imageView, url, null, R.drawable.folder_icon);
+        dialog.show();
+        //imageView.
+    }
 }
