@@ -117,7 +117,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         mParent = (HomeActivity) getActivity();
         iUpdateSelectedPic = this;
         Bundle bundle = getArguments();
-        if (bundle.containsKey(Constants.POST_ID)) {
+        if (bundle != null && bundle.containsKey(Constants.POST_ID)) {
             postID = bundle.getString(Constants.POST_ID);
         }
     }
@@ -154,7 +154,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
             CheckForPermissions(getActivity(), Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
-        if (postID != null) {
+        if (!Utility.isValueNullOrEmpty(postID)) {
             Bundle bundle = new Bundle();
             bundle.putString("post_id", postID);
             Utility.navigateDashBoardFragment(new DetailViewFragment(), DetailViewFragment.TAG, bundle, mParent);

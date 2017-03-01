@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.versatilemobitech.fmc.R;
 import com.versatilemobitech.fmc.customviews.TouchImageView;
@@ -23,10 +24,12 @@ public class ImageViewPagerAdapter extends PagerAdapter {
 
     private LayoutInflater mLayoutInflater;
     private List<GalleryViewModel> mImageGallerySerializableList;
+    private Context context;
 
 
     public ImageViewPagerAdapter(Context parent, List<GalleryViewModel> stringList) {
         this.mImageGallerySerializableList = stringList;
+        this.context = parent;
         mLayoutInflater = (LayoutInflater) parent.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         try {
             RelativeLayout.LayoutParams mLayoutParams = new RelativeLayout.LayoutParams(100, 170);
@@ -67,7 +70,10 @@ public class ImageViewPagerAdapter extends PagerAdapter {
                 view, false);
         assert imageLayout != null;
         TouchImageView imageView = (TouchImageView) imageLayout.findViewById(R.id.imageView);
+        TextView tv_title = (TextView) imageLayout.findViewById(R.id.tv_title);
         Utility.UILpicLoading(imageView, mImageGallerySerializableList.get(position).getImage_path(), null, R.drawable.folder_icon);
+        tv_title.setText(mImageGallerySerializableList.get(position).getImage_title());
+        tv_title.setTypeface(Utility.setTypeFaceRobotoRegular(context));
         view.addView(imageLayout, 0);
         return imageLayout;
     }

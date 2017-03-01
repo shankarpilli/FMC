@@ -9,6 +9,7 @@ public class GalleryViewModel extends Model {
     private String total_number_of_posts;
 
     private String image_path;
+    private String image_title;
     private String photo_id;
 
     ArrayList<GalleryViewModel> mList;
@@ -43,5 +44,13 @@ public class GalleryViewModel extends Model {
 
     public void setmList(ArrayList<GalleryViewModel> mList) {
         this.mList = mList;
+    }
+
+    public String getImage_title() {
+        return image_title;
+    }
+
+    public void setImage_title(String image_title) {
+        this.image_title = image_title;
     }
 }

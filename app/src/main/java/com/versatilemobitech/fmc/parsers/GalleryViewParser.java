@@ -34,6 +34,7 @@ public class GalleryViewParser implements Parser {
                         GalleryViewModel mmGalleryViewModel = new GalleryViewModel();
 
                         mmGalleryViewModel.setImage_path(mObj.optString("image_path"));
+                        mmGalleryViewModel.setImage_title(mObj.optString("image_title"));
                         mmGalleryViewModel.setPhoto_id(mObj.optString("photo_id"));
                         mList.add(mmGalleryViewModel);
                     }
