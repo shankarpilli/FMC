@@ -64,6 +64,7 @@ public class HomeActivity extends BaseActivity {
     public static ImageView img_user_image;
 
     private String postId = "";
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class HomeActivity extends BaseActivity {
 
         if (getIntent() != null) {
             postId = getIntent().getStringExtra(Constants.POST_ID);
+            type = getIntent().getStringExtra(Constants.TYPE);
         }
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -98,6 +100,7 @@ public class HomeActivity extends BaseActivity {
     public void initNavigationDrawer() {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.POST_ID, postId);
+        bundle.putString(Constants.TYPE, type);
         Utility.navigateDashBoardFragment(new HomeFragment(), HomeFragment.TAG, bundle, HomeActivity.this);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

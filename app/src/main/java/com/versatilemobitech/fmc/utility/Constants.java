@@ -51,4 +51,5 @@ public class Constants {
     public static final String INTERESTED_LOCATION = "INTERESTED_LOCATION";
 
     public static final String POST_ID = "POST_ID";
+    public static final String TYPE = "TYPE";
 }

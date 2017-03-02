@@ -62,7 +62,7 @@ import java.util.LinkedHashMap;
  * Created by Shankar Pilli on 11/06/2016
  */
 public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.OnScrollListener,
-        IUpdateSelectedPic,IUpdatePostPic, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+        IUpdateSelectedPic, IUpdatePostPic, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static final String TAG = "HomeFragment";
     private HomeActivity mParent;
@@ -105,6 +105,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private String postID = "";
+    private String type = "";
 
     private static IUpdateSelectedPic iUpdateSelectedPic;
     private static IUpdatePostPic iUpdatePostPic;
@@ -126,6 +127,7 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey(Constants.POST_ID)) {
             postID = bundle.getString(Constants.POST_ID);
+            type = bundle.getString(Constants.TYPE);
         }
     }
 
@@ -161,10 +163,42 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
             CheckForPermissions(getActivity(), Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
-        if (!Utility.isValueNullOrEmpty(postID)) {
-            Bundle bundle = new Bundle();
-            bundle.putString("post_id", postID);
-            Utility.navigateDashBoardFragment(new DetailViewFragment(), DetailViewFragment.TAG, bundle, mParent);
+        if (!Utility.isValueNullOrEmpty(type)) {
+            switch (type) {
+                case "1":
+                    //Awards
+                    break;
+                case "2":
+                    //CSR
+                    break;
+                case "3":
+                    //Editorials
+                    break;
+                case "4":
+                    //Events
+                    break;
+                case "5":
+                    //Business enablers
+                    break;
+                case "6":
+                    if (!Utility.isValueNullOrEmpty(postID)) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("post_id", postID);
+                        Utility.navigateDashBoardFragment(new DetailViewFragment(), DetailViewFragment.TAG, bundle, mParent);
+                    }
+                    //Gallery
+                    break;
+                case "7":
+                    if (!Utility.isValueNullOrEmpty(postID)) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("post_id", postID);
+                        Utility.navigateDashBoardFragment(new DetailViewFragment(), DetailViewFragment.TAG, bundle, mParent);
+                    }
+                    break;
+                default:
+
+                    break;
+            }
         }
 
     }

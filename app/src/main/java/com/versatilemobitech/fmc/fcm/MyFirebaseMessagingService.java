@@ -58,7 +58,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "Message data payload: " + remoteMessage.getData());
             JSONObject jsonObject = new JSONObject(remoteMessage.getData());
             if (jsonObject.has("message")) {
-                sendNotification(jsonObject.optString("message"), jsonObject.optString("id"));
+                sendNotification(jsonObject.optString("message"), jsonObject.optString("id"), jsonObject.optString("type"));
             }
         }
 
@@ -77,9 +77,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
-    private void sendNotification(String messageBody, String postId) {
+    private void sendNotification(String messageBody, String postId, String type) {
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra(Constants.POST_ID, postId);
+        intent.putExtra(Constants.TYPE, type);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
