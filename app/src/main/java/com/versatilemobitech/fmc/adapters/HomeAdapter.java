@@ -291,7 +291,7 @@ public class HomeAdapter extends BaseAdapter implements IAsyncCaller {
         LinkedHashMap<String, String> paramMap = new LinkedHashMap<>();
         paramMap.put("user_id", Utility.getSharedPrefStringData(mContext, Constants.USER_ID));
         paramMap.put("post_id", post_id);
-        paramMap.put("like", "1");
+        paramMap.put("post_like", "1");
         PostLikeParser postLikeParser = new PostLikeParser();
         if (Utility.isNetworkAvailable(mContext)) {
             ServerIntractorAsync serverIntractorAsync = new ServerIntractorAsync(mContext, Utility.getResourcesString(mContext,
