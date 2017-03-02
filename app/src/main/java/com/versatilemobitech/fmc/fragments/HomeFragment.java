@@ -163,28 +163,44 @@ public class HomeFragment extends Fragment implements IAsyncCaller, AbsListView.
             CheckForPermissions(getActivity(), Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
         }
 
+        Utility.showLog("type", "" + type);
+        Utility.showLog("postID", "" + postID);
+
         if (!Utility.isValueNullOrEmpty(type)) {
             switch (type) {
                 case "1":
                     //Awards
+                    Utility.navigateDashBoardFragment(new AwardsFragment(), AwardsFragment.TAG, null, mParent);
                     break;
                 case "2":
                     //CSR
+                    if (!Utility.isValueNullOrEmpty(postID)) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("position", 1);
+                        bundle.putString("albumId", postID);
+                        bundle.putString("albumName", "CSR");
+                        Utility.navigateDashBoardFragment(new CSRViewFragment(), CSRViewFragment.TAG, bundle, mParent);
+                    }
                     break;
                 case "3":
                     //Editorials
+                    Utility.navigateDashBoardFragment(new EditorialsFragment(), EditorialsFragment.TAG, null, mParent);
                     break;
                 case "4":
                     //Events
+                    Utility.navigateDashBoardFragment(new EventsFragment(), EventsFragment.TAG, null, mParent);
                     break;
                 case "5":
+                    Utility.navigateDashBoardFragment(new VendorPartnersFragment(), VendorPartnersFragment.TAG, null, mParent);
                     //Business enablers
                     break;
                 case "6":
                     if (!Utility.isValueNullOrEmpty(postID)) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("post_id", postID);
-                        Utility.navigateDashBoardFragment(new DetailViewFragment(), DetailViewFragment.TAG, bundle, mParent);
+                        bundle.putInt("position", 1);
+                        bundle.putString("albumId", postID);
+                        bundle.putString("albumName", "Photo album");
+                        Utility.navigateDashBoardFragment(new GalleryViewFragment(), GalleryViewFragment.TAG, bundle, mParent);
                     }
                     //Gallery
                     break;
